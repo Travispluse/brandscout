@@ -6,9 +6,9 @@ const spec = {
     title: "BrandScout API",
     description: "Check domain and social media username availability for any brand name. Designed for developers, AI agents, and automation.",
     version: "1.0.0",
-    contact: { url: "https://brandscout.dev" },
+    contact: { url: "https://brandscout.net" },
   },
-  servers: [{ url: "https://brandscout.dev", description: "Production" }],
+  servers: [{ url: "https://brandscout.net", description: "Production" }],
   paths: {
     "/api/v1/check": {
       get: {
@@ -81,6 +81,61 @@ const spec = {
             },
           },
           suggestions: { type: "array", items: { type: "string" }, description: "Alternative brand name suggestions" },
+          analysis: {
+            type: "object",
+            description: "Detailed brand name analysis",
+            properties: {
+              pronunciation: {
+                type: "object",
+                properties: {
+                  rating: { type: "string", enum: ["Easy to pronounce", "Moderate", "Tricky to pronounce"] },
+                  details: { type: "array", items: { type: "string" } },
+                },
+              },
+              nameStrength: {
+                type: "object",
+                properties: {
+                  badge: { type: "string", enum: ["Strong Name", "Good Name", "Needs Work"] },
+                  score: { type: "number", description: "Name quality score 0-100" },
+                  reasons: { type: "array", items: { type: "string" } },
+                },
+              },
+              sentiment: {
+                type: "object",
+                properties: {
+                  rating: { type: "string", enum: ["Positive associations", "Neutral", "⚠️ Potential negative associations"] },
+                  details: { type: "array", items: { type: "string" } },
+                },
+              },
+              trademarkRisk: {
+                type: "object",
+                properties: {
+                  level: { type: "string", enum: ["Low", "Medium", "High"] },
+                  warnings: { type: "array", items: { type: "string" } },
+                  searchUrl: { type: "string", description: "USPTO trademark search URL" },
+                },
+              },
+              scoreBreakdown: {
+                type: "object",
+                properties: {
+                  domainScore: { type: "number" },
+                  platformScore: { type: "number" },
+                  readabilityScore: { type: "number" },
+                  lengthScore: { type: "number" },
+                  tips: { type: "array", items: { type: "string" } },
+                },
+              },
+              market: {
+                type: "object",
+                properties: {
+                  nicheDemand: { type: "string", enum: ["High Demand Niche", "Moderate", "Low Competition — Great Opportunity!"] },
+                  marketOpportunity: { type: "string", enum: ["High", "Medium", "Low"] },
+                  explanation: { type: "string" },
+                  demandScore: { type: "number", description: "Competition score 0-100 (higher = more competitive)" },
+                },
+              },
+            },
+          },
         },
       },
     },

@@ -10,11 +10,11 @@ export async function GET() {
     auth: { type: "none" },
     api: {
       type: "openapi",
-      url: "https://brandscout.dev/api/openapi.json",
+      url: "https://brandscout.net/api/openapi.json",
     },
-    logo_url: "https://brandscout.dev/favicon.ico",
-    contact_email: "hello@brandscout.dev",
-    legal_info_url: "https://brandscout.dev",
+    logo_url: "https://brandscout.net/favicon.ico",
+    contact_email: "hello@brandscout.net",
+    legal_info_url: "https://brandscout.net",
   }, {
     headers: {
       "Access-Control-Allow-Origin": "*",

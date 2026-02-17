@@ -5,6 +5,8 @@ import { checkAllUsernames, PLATFORMS } from "@/lib/username-check";
 import { calculateScore } from "@/lib/scoring";
 import { generateSuggestions } from "@/lib/suggestions";
 import { rateLimit } from "@/lib/rate-limit";
+import { analyzePronunciation, analyzeNameStrength, analyzeSentiment, analyzeTrademarkRisk, getScoreBreakdown } from "@/lib/name-analysis";
+import { analyzeMarket } from "@/lib/market-analysis";
 
 function corsHeaders() {
   return {
@@ -56,14 +58,46 @@ async function handleCheck(query: string, tldFilter?: string[], platformFilter?:
 
   const description_for_ai = generateAIDescription(value, domainResults, usernameResults);
 
+  // Name analysis
+  const pronunciation = analyzePronunciation(value);
+  const nameStrength = analyzeNameStrength(value);
+  const sentiment = analyzeSentiment(value);
+  const trademarkRisk = analyzeTrademarkRisk(value);
+  const scoreBreakdown = getScoreBreakdown(domainResults, usernameResults, value);
+  const market = analyzeMarket(domainResults, usernameResults);
+
   return {
     query,
     name: value,
     score,
     description_for_ai,
-    domains: domainResults.map(({ domain, tld, status }) => ({ domain, tld, status })),
-    usernames: usernameResults.map(({ platform, username, status, profileUrl }) => ({ platform, username, status, profileUrl })),
+    domains: domainResults.map(({ domain, tld, status, source }) => ({ domain, tld, status, source })),
+    usernames: usernameResults.map(({ platform, username, status, profileUrl, confidence }) => ({ platform, username, status, profileUrl, confidence })),
     suggestions,
+    analysis: {
+      pronunciation: { rating: pronunciation.rating, details: pronunciation.details },
+      nameStrength: { badge: nameStrength.badge, score: nameStrength.score, reasons: nameStrength.reasons },
+      sentiment: { rating: sentiment.rating, details: sentiment.details },
+      trademarkRisk: { level: trademarkRisk.level, warnings: trademarkRisk.warnings, searchUrl: trademarkRisk.searchUrl },
+      scoreBreakdown: {
+        domainAvailable: scoreBreakdown.domainAvailable,
+        domainTotal: scoreBreakdown.domainTotal,
+        domainPercent: scoreBreakdown.domainPercent,
+        platformAvailable: scoreBreakdown.platformAvailable,
+        platformTotal: scoreBreakdown.platformTotal,
+        platformPercent: scoreBreakdown.platformPercent,
+        readabilityRating: scoreBreakdown.readabilityRating,
+        lengthRating: scoreBreakdown.lengthRating,
+        lengthChars: scoreBreakdown.lengthChars,
+        tips: scoreBreakdown.tips,
+      },
+      market: {
+        nicheDemand: market.nicheDemand,
+        marketOpportunity: market.marketOpportunity,
+        explanation: market.explanation,
+        demandScore: market.demandScore,
+      },
+    },
   };
 }
 
