@@ -21,6 +21,68 @@ function StatusDot({ status }: { status: string }) {
   return <span className={`inline-block w-2.5 h-2.5 rounded-full ${color}`} title={status} />;
 }
 
+function AdvancedSearch({ onProcess, disabled }: { onProcess: (names: string[]) => void; disabled: boolean }) {
+  const [open, setOpen] = useState(false);
+  const [pattern, setPattern] = useState("");
+  const [mode, setMode] = useState<"wildcard" | "pattern" | "keyword">("wildcard");
+  const [preview, setPreview] = useState<string[]>([]);
+
+  const handlePreview = () => {
+    let names: string[] = [];
+    if (mode === "wildcard") names = expandWildcard(pattern);
+    else if (mode === "pattern") names = expandPattern(pattern);
+    else names = parseMultiKeyword(pattern);
+    setPreview(names.slice(0, 20));
+  };
+
+  return (
+    <Card className="rounded-xl mb-8">
+      <CardHeader>
+        <button onClick={() => setOpen(!open)} className="text-left w-full">
+          <CardTitle className="text-lg flex items-center gap-2">
+            🔬 Advanced Search {open ? "▾" : "▸"}
+          </CardTitle>
+        </button>
+      </CardHeader>
+      {open && (
+        <CardContent className="space-y-4">
+          <div className="flex gap-2">
+            {(["wildcard", "pattern", "keyword"] as const).map(m => (
+              <button key={m} onClick={() => setMode(m)} className={`text-xs px-3 py-1.5 rounded-lg ${mode === m ? "bg-foreground text-background" : "bg-surface text-muted-foreground"}`}>
+                {m === "wildcard" ? "Wildcard (*)" : m === "pattern" ? "Pattern (??)" : "AND/OR"}
+              </button>
+            ))}
+          </div>
+          <p className="text-xs text-muted-foreground">
+            {mode === "wildcard" && 'Use * for any characters: "my*app" → myapp, mycoolapp, mybestapp...'}
+            {mode === "pattern" && 'Use ? for single characters: "??tech" → aatech, abtech...'}
+            {mode === "keyword" && 'Use AND/OR/+: "tech AND hub", "cool OR awesome + brand"'}
+          </p>
+          <div className="flex gap-2">
+            <input
+              value={pattern}
+              onChange={e => setPattern(e.target.value)}
+              placeholder={mode === "wildcard" ? "my*app" : mode === "pattern" ? "??tech" : "cool OR awesome + brand"}
+              className="flex-1 px-3 py-2 text-sm rounded-lg bg-surface border border-border"
+            />
+            <Button size="sm" onClick={handlePreview} className="rounded-lg">Preview</Button>
+          </div>
+          {preview.length > 0 && (
+            <div>
+              <div className="flex flex-wrap gap-1.5 mb-3">
+                {preview.map(n => <Badge key={n} variant="secondary" className="font-mono text-xs">{n}</Badge>)}
+              </div>
+              <Button size="sm" onClick={() => onProcess(preview)} disabled={disabled} className="rounded-lg">
+                Check All ({preview.length})
+              </Button>
+            </div>
+          )}
+        </CardContent>
+      )}
+    </Card>
+  );
+}
+
 export default function BulkPage() {
   const [results, setResults] = useState<BulkResult[]>([]);
   const [processing, setProcessing] = useState(false);

@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { updateStats } from "@/lib/achievements";
 
 interface CompareResult {
   name: string;
@@ -87,6 +88,7 @@ export default function ComparePage() {
 
     setResults(allResults);
     setLoading(false);
+    try { updateStats({ usedCompare: true }); } catch { /* ignore */ }
   };
 
   const maxScore = Math.max(...results.map(r => r.score), 0);

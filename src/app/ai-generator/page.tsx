@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 
 import { generateNicheIdeas } from "@/lib/name-analysis";
+import { updateStats } from "@/lib/achievements";
 
 type Tab = "names" | "taglines" | "niches";
 type Vibe = "professional" | "playful" | "techy" | "minimal";
@@ -182,6 +183,7 @@ export default function AIGeneratorPage() {
     const keywords = keywordsInput.split(",").map(k => k.trim()).filter(Boolean);
     if (keywords.length === 0) return;
     setGeneratedNames(generateNames(keywords, vibe));
+    try { updateStats({ usedGenerator: true }); } catch { /* ignore */ }
   };
 
   const handleGenerateTaglines = () => {

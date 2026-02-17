@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { getStreak, getUnlocked, ACHIEVEMENTS } from "@/lib/achievements";
 
 interface UsageStats {
   totalSearches: number;
@@ -91,6 +92,14 @@ export default function DashboardPage() {
         <div className="p-6 rounded-xl border border-border bg-card">
           <p className="text-sm text-muted-foreground">API Calls</p>
           <p className="text-3xl font-bold mt-1">{usage.apiCalls}</p>
+        </div>
+        <div className="p-6 rounded-xl border border-border bg-card">
+          <p className="text-sm text-muted-foreground">Search Streak</p>
+          <p className="text-3xl font-bold mt-1">🔥 {getStreak().count} day{getStreak().count !== 1 ? "s" : ""}</p>
+        </div>
+        <div className="p-6 rounded-xl border border-border bg-card">
+          <p className="text-sm text-muted-foreground">Achievements</p>
+          <p className="text-3xl font-bold mt-1"><a href="/achievements" className="hover:underline">🏆 {getUnlocked().length}/{ACHIEVEMENTS.length}</a></p>
         </div>
       </div>
 
