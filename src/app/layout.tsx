@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeToggle } from "@/components/theme-toggle";
 import "./globals.css";
 
 const siteUrl = "https://brandscout.net";
@@ -33,7 +35,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
@@ -41,24 +43,33 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="antialiased min-h-screen">
-        <header className="border-b border-border">
-          <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-            <a href="/" className="text-xl font-semibold tracking-tight">
-              BrandScout
-            </a>
-            <nav className="flex gap-6 text-sm text-muted-foreground">
-              <a href="/" className="hover:text-foreground transition-colors">Search</a>
-              <a href="/blog" className="hover:text-foreground transition-colors">Blog</a>
-              <a href="/docs" className="hover:text-foreground transition-colors">API</a>
-            </nav>
-          </div>
-        </header>
-        <main>{children}</main>
-        <footer className="border-t border-border mt-16">
-          <div className="max-w-4xl mx-auto px-4 py-6 text-center text-sm text-muted-foreground">
-            © {new Date().getFullYear()} BrandScout. Free & open source.
-          </div>
-        </footer>
+        <ThemeProvider>
+          <header className="border-b border-border">
+            <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+              <a href="/" className="text-xl font-semibold tracking-tight">
+                BrandScout
+              </a>
+              <div className="flex items-center gap-4">
+                <nav className="flex gap-6 text-sm text-muted-foreground">
+                  <a href="/" className="hover:text-foreground transition-colors">Search</a>
+                  <a href="/blog" className="hover:text-foreground transition-colors">Blog</a>
+                  <a href="/docs" className="hover:text-foreground transition-colors">API</a>
+                </nav>
+                <ThemeToggle />
+              </div>
+            </div>
+          </header>
+          <main>{children}</main>
+          <footer className="border-t border-border mt-16">
+            <div className="max-w-4xl mx-auto px-4 py-6 flex flex-col items-center gap-2 text-sm text-muted-foreground">
+              <div className="flex gap-4">
+                <a href="/terms" className="hover:text-foreground transition-colors">Terms of Service</a>
+                <a href="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</a>
+              </div>
+              <p>© {new Date().getFullYear()} BrandScout. Free & open source.</p>
+            </div>
+          </footer>
+        </ThemeProvider>
       </body>
     </html>
   );

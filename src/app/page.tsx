@@ -1,14 +1,54 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { SearchForm, type SearchResults, type SearchFormHandle } from "@/components/search-form";
 import { ResultsView } from "@/components/results-view";
+import { ResultsSkeleton } from "@/components/ui/skeleton";
 import { SeoContent, HomeJsonLd } from "@/components/seo-content";
 
-export default function Home() {
+function HomeContent() {
   const [results, setResults] = useState<SearchResults | null>(null);
   const [loading, setLoading] = useState(false);
   const searchRef = useRef<SearchFormHandle>(null);
+  const searchParams = useSearchParams();
+
+  // Auto-search from URL param
+  useEffect(() => {
+    const q = searchParams.get("q");
+    if (q && searchRef.current) {
+      searchRef.current.searchFor(q);
+    }
+  }, [searchParams]);
+
+  // Keyboard shortcut: "/" to focus search
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "/" && !["INPUT", "TEXTAREA"].includes((e.target as HTMLElement)?.tagName)) {
+        e.preventDefault();
+        searchRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, []);
+
+  const handleResults = (data: SearchResults) => {
+    setResults(data);
+    // Save to search history
+    try {
+      const history = JSON.parse(localStorage.getItem("brandscout-history") || "[]");
+      const entry = { query: data.query, score: data.score, timestamp: Date.now() };
+      const filtered = history.filter((h: { query: string }) => h.query !== data.query);
+      filtered.unshift(entry);
+      localStorage.setItem("brandscout-history", JSON.stringify(filtered.slice(0, 10)));
+    } catch { /* ignore */ }
+
+    // Update URL
+    const url = new URL(window.location.href);
+    url.searchParams.set("q", data.query);
+    window.history.replaceState({}, "", url.toString());
+  };
 
   return (
     <div className="flex flex-col items-center px-4">
@@ -24,13 +64,12 @@ export default function Home() {
             </p>
           </div>
         )}
-        <SearchForm ref={searchRef} onResults={setResults} onLoading={setLoading} />
+        <SearchForm ref={searchRef} onResults={handleResults} onLoading={setLoading} />
       </div>
 
       {loading && (
-        <div className="mt-16 flex flex-col items-center gap-3">
-          <div className="w-8 h-8 border-2 border-foreground border-t-transparent rounded-full animate-spin" />
-          <p className="text-sm text-muted-foreground">Checking availability across platforms...</p>
+        <div className="mt-8 w-full flex justify-center pb-16">
+          <ResultsSkeleton />
         </div>
       )}
 
@@ -42,5 +81,13 @@ export default function Home() {
 
       {!results && !loading && <SeoContent />}
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense>
+      <HomeContent />
+    </Suspense>
   );
 }
