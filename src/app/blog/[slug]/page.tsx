@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { TableOfContents } from "@/components/table-of-contents";
 import { NewsletterSignup } from "@/components/newsletter-signup";
+import { AuthorProfile } from "@/components/author-profile";
 
 type Params = Promise<{ slug: string }>;
 
@@ -52,7 +53,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
     datePublished: post.date,
     description: post.excerpt,
     url: `https://brandscout.net/blog/${slug}`,
-    author: { "@type": "Organization", name: "BrandScout" },
+    author: { "@type": "Organization", name: "BrandScout Team", url: "https://brandscout.net" },
   };
 
   return (
@@ -77,6 +78,8 @@ export default async function BlogPostPage({ params }: { params: Params }) {
           <div className="prose prose-neutral max-w-none [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mt-8 [&_h2]:mb-3 [&_h3]:text-lg [&_h3]:font-medium [&_h3]:mt-6 [&_h3]:mb-2 [&_p]:mb-4 [&_p]:leading-relaxed [&_ul]:mb-4 [&_ul]:pl-5 [&_li]:mb-1 [&_strong]:font-semibold [&_ol]:mb-4 [&_ol]:pl-5 [&_h2]:scroll-mt-20 [&_h3]:scroll-mt-20">
             <MDXRemote source={post.content} />
           </div>
+          <hr className="my-8 border-border" />
+          <AuthorProfile />
           <hr className="my-8 border-border" />
           <NewsletterSignup />
           <hr className="my-8 border-border" />

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { TextSizeToggle } from "@/components/text-size-toggle";
 import { CookieConsent } from "@/components/cookie-consent";
 import "./globals.css";
 
@@ -61,11 +62,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 BrandScout
               </a>
               <div className="flex items-center gap-4">
-                <nav className="flex gap-6 text-sm text-muted-foreground">
+                <nav className="flex gap-4 text-sm text-muted-foreground flex-wrap">
                   <a href="/" className="hover:text-foreground transition-colors">Search</a>
+                  <a href="/ai-generator" className="hover:text-foreground transition-colors">Generator</a>
+                  <a href="/compare" className="hover:text-foreground transition-colors">Compare</a>
+                  <a href="/bulk" className="hover:text-foreground transition-colors">Bulk</a>
+                  <a href="/saved" className="hover:text-foreground transition-colors">Saved</a>
                   <a href="/blog" className="hover:text-foreground transition-colors">Blog</a>
                   <a href="/docs" className="hover:text-foreground transition-colors">API</a>
+                  <a href="/tools" className="hover:text-foreground transition-colors">Tools</a>
+                  <a href="/dashboard" className="hover:text-foreground transition-colors">Dashboard</a>
                 </nav>
+                <TextSizeToggle />
                 <ThemeToggle />
               </div>
             </div>
@@ -77,6 +85,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <a href="/terms" className="hover:text-foreground transition-colors">Terms of Service</a>
                 <a href="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</a>
                 <a href="/newsletter" className="hover:text-foreground transition-colors">Newsletter</a>
+                <a href="/help" className="hover:text-foreground transition-colors">Help</a>
+                <a href="/glossary" className="hover:text-foreground transition-colors">Glossary</a>
+                <a href="/editorial-policy" className="hover:text-foreground transition-colors">Editorial Policy</a>
+                <a href="/privacy-settings" className="hover:text-foreground transition-colors">Privacy Settings</a>
               </div>
               <p>© {new Date().getFullYear()} BrandScout. Free & open source.</p>
             </div>

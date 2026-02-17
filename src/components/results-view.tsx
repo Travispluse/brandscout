@@ -136,6 +136,162 @@ function ShareButtons({ query }: { query: string }) {
   );
 }
 
+function FavoriteButton({ data }: { data: SearchResults }) {
+  const [isFav, setIsFav] = useState(false);
+
+  useState(() => {
+    try {
+      const favs = JSON.parse(localStorage.getItem("brandscout-favorites") || "[]");
+      setIsFav(favs.some((f: { query: string }) => f.query === data.query));
+    } catch { /* ignore */ }
+  });
+
+  const toggle = () => {
+    try {
+      const favs = JSON.parse(localStorage.getItem("brandscout-favorites") || "[]");
+      if (isFav) {
+        const updated = favs.filter((f: { query: string }) => f.query !== data.query);
+        localStorage.setItem("brandscout-favorites", JSON.stringify(updated));
+        setIsFav(false);
+      } else {
+        favs.unshift({ query: data.query, score: data.score, dateSaved: new Date().toISOString() });
+        localStorage.setItem("brandscout-favorites", JSON.stringify(favs));
+        setIsFav(true);
+      }
+    } catch { /* ignore */ }
+  };
+
+  return (
+    <button onClick={toggle} className="p-2 rounded-lg hover:bg-surface transition-colors" aria-label={isFav ? "Remove from favorites" : "Save to favorites"} title={isFav ? "Remove from favorites" : "Save to favorites"}>
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill={isFav ? "#dc2626" : "none"} stroke={isFav ? "#dc2626" : "currentColor"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+    </button>
+  );
+}
+
+function ReadabilityBadge({ name }: { name: string }) {
+  const vowels = (name.match(/[aeiou]/gi) || []).length;
+  const consonants = (name.match(/[bcdfghjklmnpqrstvwxyz]/gi) || []).length;
+  const ratio = vowels / (name.length || 1);
+  // Count syllables (rough)
+  const syllables = name.replace(/[^a-zA-Z]/g, "").replace(/e$/i, "").match(/[aeiou]+/gi)?.length || 1;
+  // Check for consonant clusters (hard to pronounce)
+  const clusters = (name.match(/[bcdfghjklmnpqrstvwxyz]{3,}/gi) || []).length;
+
+  let label = "Easy to say";
+  let color = "bg-success text-white";
+  if (clusters > 1 || syllables > 4 || ratio < 0.15) {
+    label = "Complex";
+    color = "bg-destructive text-white";
+  } else if (clusters > 0 || syllables > 3 || ratio < 0.25 || ratio > 0.65) {
+    label = "Moderate";
+    color = "bg-yellow-500 text-white";
+  }
+
+  return <span className={`inline-flex items-center text-xs px-2 py-0.5 rounded-full font-medium ${color}`}>{label}</span>;
+}
+
+function LengthBadge({ name }: { name: string }) {
+  const len = name.length;
+  let label: string;
+  let color: string;
+  if (len <= 4) { label = `Short (${len})`; color = "text-yellow-500"; }
+  else if (len <= 10) { label = `Perfect (${len})`; color = "text-success"; }
+  else if (len <= 14) { label = `Good (${len})`; color = "text-foreground"; }
+  else { label = `Long (${len})`; color = "text-destructive"; }
+
+  return <span className={`text-xs font-medium ${color}`}>{label}</span>;
+}
+
+function DownloadCardButton({ data }: { data: SearchResults }) {
+  const generate = () => {
+    const canvas = document.createElement("canvas");
+    canvas.width = 800;
+    canvas.height = 420;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    // Background
+    ctx.fillStyle = "#111827";
+    ctx.fillRect(0, 0, 800, 420);
+
+    // Brand name
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "bold 42px Inter, sans-serif";
+    ctx.fillText(data.query, 40, 80);
+
+    // Score circle
+    const cx = 700, cy = 70, r = 40;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.strokeStyle = "#374151";
+    ctx.lineWidth = 6;
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, -Math.PI / 2, -Math.PI / 2 + (data.score / 100) * Math.PI * 2);
+    ctx.strokeStyle = data.score >= 70 ? "#16a34a" : data.score >= 40 ? "#ca8a04" : "#dc2626";
+    ctx.lineWidth = 6;
+    ctx.stroke();
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "bold 24px Inter, sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText(`${data.score}`, cx, cy + 8);
+    ctx.textAlign = "left";
+
+    // Domains
+    ctx.fillStyle = "#9ca3af";
+    ctx.font = "14px Inter, sans-serif";
+    ctx.fillText("DOMAINS", 40, 140);
+    let y = 165;
+    for (const d of data.domains.slice(0, 6)) {
+      ctx.fillStyle = d.status === "available" ? "#16a34a" : d.status === "taken" ? "#dc2626" : "#6b7280";
+      ctx.font = "14px Inter, sans-serif";
+      ctx.fillText(`${d.status === "available" ? "✓" : d.status === "taken" ? "✗" : "?"} ${d.domain}`, 40, y);
+      y += 22;
+    }
+
+    // Usernames
+    ctx.fillStyle = "#9ca3af";
+    ctx.font = "14px Inter, sans-serif";
+    ctx.fillText("USERNAMES", 400, 140);
+    y = 165;
+    for (const u of data.usernames.slice(0, 6)) {
+      ctx.fillStyle = u.status === "available" ? "#16a34a" : u.status === "taken" ? "#dc2626" : "#6b7280";
+      ctx.font = "14px Inter, sans-serif";
+      ctx.fillText(`${u.status === "available" ? "✓" : u.status === "taken" ? "✗" : "?"} ${u.platform}`, 400, y);
+      y += 22;
+    }
+
+    // Branding
+    ctx.fillStyle = "#6b7280";
+    ctx.font = "12px Inter, sans-serif";
+    ctx.fillText("BrandScout.net — Free Brand Name Checker", 40, 400);
+
+    const url = canvas.toDataURL("image/png");
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `brandscout-${data.name}.png`;
+    a.click();
+  };
+
+  return (
+    <Button variant="outline" size="sm" onClick={generate} className="rounded-lg">
+      Download as Image
+    </Button>
+  );
+}
+
+function PrintPDFButton({ data }: { data: SearchResults }) {
+  const handlePrint = () => {
+    window.print();
+  };
+
+  return (
+    <Button variant="outline" size="sm" onClick={handlePrint} className="rounded-lg" data-print-hide>
+      Export PDF
+    </Button>
+  );
+}
+
 export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults; onSearchSuggestion?: (name: string) => void }) {
   const [domainFilter, setDomainFilter] = useState<StatusFilter>("all");
   const [usernameFilter, setUsernameFilter] = useState<StatusFilter>("all");
@@ -228,17 +384,26 @@ export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults;
             <span className="absolute -top-1 -right-1"><InfoTooltip text="Score is based on 40% platform availability, 30% domain quality, 20% readability, 10% length" /></span>
           </div>
           <div className="flex-1">
-            <h2 className="text-2xl font-semibold">{data.query}</h2>
-            <p className="text-muted-foreground text-sm mt-1">
-              Parsed as {data.type}: <span className="font-mono">{data.name}</span>
-            </p>
-            <div className="flex gap-2 mt-3">
+            <div className="flex items-center gap-2">
+              <h2 className="text-2xl font-semibold">{data.query}</h2>
+              <FavoriteButton data={data} />
+            </div>
+            <div className="flex items-center gap-3 mt-1">
+              <p className="text-muted-foreground text-sm">
+                Parsed as {data.type}: <span className="font-mono">{data.name}</span>
+              </p>
+              <ReadabilityBadge name={data.name} />
+              <LengthBadge name={data.name} />
+            </div>
+            <div className="flex gap-2 mt-3 flex-wrap">
               <Button variant="outline" size="sm" onClick={() => handleExport("csv")} className="rounded-lg">
                 Export CSV
               </Button>
               <Button variant="outline" size="sm" onClick={() => handleExport("txt")} className="rounded-lg">
                 Export TXT
               </Button>
+              <PrintPDFButton data={data} />
+              <DownloadCardButton data={data} />
             </div>
             <ShareButtons query={data.query} />
           </div>
