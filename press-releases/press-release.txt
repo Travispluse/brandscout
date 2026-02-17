@@ -1,0 +1,43 @@
+# PRESS RELEASE
+
+## BrandScout Launches Free Brand Name Availability Checker for Entrepreneurs
+
+**Sacramento, CA — February 17, 2026** — BrandScout (https://brandscout.net), a free web-based tool, has launched to help entrepreneurs, startups, and small business owners instantly check the availability of brand names across domains and social media platforms.
+
+### One Search, Complete Brand Availability
+
+BrandScout allows users to enter any business name or domain and instantly see availability across seven major domain extensions (.com, .net, .org, .co, .io, .ai, .app) and 20 social media platforms including Instagram, X/Twitter, TikTok, GitHub, LinkedIn, YouTube, Reddit, and more.
+
+"Choosing a brand name is one of the most important decisions for any new business," said the BrandScout team. "We built BrandScout so anyone can check domain and username availability in seconds — completely free, no signup required."
+
+### Key Features
+
+- **Domain Availability**: Real-time checks across 7 TLDs using RDAP and DNS lookup
+- **Username Checks**: Instant availability scanning across 20 major social platforms
+- **Brand Score**: A 0-100 score rating overall brand name availability
+- **AI Name Generator**: Client-side tool to brainstorm brand names by industry and style
+- **Name Analysis**: Pronunciation rating, trademark risk assessment, sentiment analysis, and readability scoring
+- **A/B Compare**: Side-by-side comparison of up to 5 brand names
+- **Bulk Check**: Upload a CSV to check up to 25 names at once
+- **Free API**: Public REST API with OpenAPI spec for developers and AI agents
+- **Export Options**: Download results as CSV, TXT, PDF, or shareable image cards
+- **200+ Blog Posts**: Comprehensive guides on brand naming, domain strategy, and online presence
+
+### Free Forever
+
+BrandScout is completely free with no signup required, no usage limits, and no premium tiers. The tool is open source and available on GitHub.
+
+### About BrandScout
+
+BrandScout is a free brand name availability checking tool built for entrepreneurs, marketers, and developers. The platform helps users make informed branding decisions by providing instant availability data across domains and social media platforms.
+
+**Website**: https://brandscout.net
+**API Documentation**: https://brandscout.net/docs
+**GitHub**: https://github.com/Travispluse/brandscout
+
+### Media Contact
+Orbit Studios LLC
+Email: hello@brandscout.net
+Website: https://brandscout.net
+
+###
