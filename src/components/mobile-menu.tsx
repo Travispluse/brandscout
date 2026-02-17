@@ -41,16 +41,26 @@ export function MobileMenu() {
       </button>
 
       {open && (
-        <div className="fixed inset-0 z-[100]">
-          {/* Backdrop */}
+        <>
+          {/* Backdrop - full screen overlay */}
           <div 
-            className="absolute inset-0 bg-black/50"
+            style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, backgroundColor: "rgba(0,0,0,0.5)", zIndex: 9998 }}
             onClick={() => setOpen(false)}
           />
-          {/* Menu panel */}
-          <div className="absolute top-0 right-0 h-full w-72 bg-background border-l border-border shadow-2xl flex flex-col">
+          {/* Menu panel - inline styles to guarantee iOS Safari rendering */}
+          <div style={{
+            position: "fixed",
+            top: 0,
+            right: 0,
+            width: "280px",
+            height: "100vh",
+            height: "100dvh" as any,
+            zIndex: 9999,
+            display: "flex",
+            flexDirection: "column" as const,
+          }} className="bg-background border-l border-border shadow-2xl">
             {/* Header */}
-            <div className="flex items-center justify-between px-4 py-3 border-b border-border">
+            <div className="flex items-center justify-between px-4 py-3 border-b border-border shrink-0">
               <span className="text-lg font-semibold">Menu</span>
               <button
                 onClick={() => setOpen(false)}
@@ -61,24 +71,24 @@ export function MobileMenu() {
               </button>
             </div>
             {/* Nav items */}
-            <nav className="flex-1 overflow-y-auto py-2">
+            <nav style={{ flex: 1, overflowY: "auto" }} className="py-2">
               {NAV_ITEMS.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="flex items-center px-5 py-3.5 text-[15px] text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                  className="block px-5 py-3.5 text-[15px] text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
                 >
                   {item.label}
                 </a>
               ))}
             </nav>
             {/* Footer */}
-            <div className="border-t border-border px-5 py-4 text-xs text-muted-foreground">
+            <div className="border-t border-border px-5 py-4 text-xs text-muted-foreground shrink-0">
               brandscout.net — Free forever
             </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );
