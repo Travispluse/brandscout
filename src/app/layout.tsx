@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { TextSizeToggle } from "@/components/text-size-toggle";
+// TextSizeToggle moved to dashboard/settings to reduce header clutter
 import { MobileMenu } from "@/components/mobile-menu";
 import { CookieConsent } from "@/components/cookie-consent";
 import { LeadCapturePopup } from "@/components/lead-capture";
@@ -62,24 +62,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             Skip to content
           </a>
           <header role="banner" className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md transition-shadow duration-300 supports-[backdrop-filter]:bg-background/60">
-            <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-              <a href="/" className="text-xl font-semibold tracking-tight">
+            <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+              <a href="/" className="text-xl font-semibold tracking-tight shrink-0">
                 BrandScout
               </a>
-              <div className="flex items-center gap-2 md:gap-4">
-                <nav aria-label="Main navigation" className="hidden md:flex gap-4 text-sm text-muted-foreground flex-wrap">
-                  <a href="/" className="hover:text-foreground transition-colors">Search</a>
-                  <a href="/ai-generator" className="hover:text-foreground transition-colors">Generator</a>
-                  <a href="/compare" className="hover:text-foreground transition-colors">Compare</a>
-                  <a href="/bulk" className="hover:text-foreground transition-colors">Bulk</a>
-                  <a href="/saved" className="hover:text-foreground transition-colors">Saved</a>
-                  <a href="/blog" className="hover:text-foreground transition-colors">Blog</a>
-                  <a href="/docs" className="hover:text-foreground transition-colors">API</a>
-                  <a href="/tools" className="hover:text-foreground transition-colors">Tools</a>
-                  <a href="/dashboard" className="hover:text-foreground transition-colors">Dashboard</a>
-                  <a href="/achievements" className="hover:text-foreground transition-colors">🏆</a>
-                </nav>
-                <TextSizeToggle />
+              {/* Desktop nav - only show core items, rest in Tools dropdown */}
+              <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-1 text-sm text-muted-foreground">
+                <a href="/" className="px-3 py-1.5 rounded-lg hover:text-foreground hover:bg-surface transition-colors">Search</a>
+                <a href="/ai-generator" className="px-3 py-1.5 rounded-lg hover:text-foreground hover:bg-surface transition-colors">Generator</a>
+                <a href="/compare" className="px-3 py-1.5 rounded-lg hover:text-foreground hover:bg-surface transition-colors">Compare</a>
+                <a href="/bulk" className="px-3 py-1.5 rounded-lg hover:text-foreground hover:bg-surface transition-colors">Bulk</a>
+                <a href="/blog" className="px-3 py-1.5 rounded-lg hover:text-foreground hover:bg-surface transition-colors">Blog</a>
+                <a href="/docs" className="px-3 py-1.5 rounded-lg hover:text-foreground hover:bg-surface transition-colors">API</a>
+                <a href="/tools" className="px-3 py-1.5 rounded-lg hover:text-foreground hover:bg-surface transition-colors">More</a>
+              </nav>
+              <div className="flex items-center gap-1">
                 <ThemeToggle />
                 <MobileMenu />
               </div>
