@@ -32,6 +32,9 @@ export const metadata: Metadata = {
       "Check domain and username availability across platforms instantly. Free forever, no signup.",
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
+  verification: {
+    google: "RmaV3xsilmb6rNZGyjBk9pPGBVu--aqIct0FPnxaX0E",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
