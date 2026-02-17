@@ -18,7 +18,18 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     title: post.title,
     description: post.excerpt,
     alternates: { canonical: `/blog/${slug}` },
-    openGraph: { title: post.title, description: post.excerpt, type: "article", publishedTime: post.date },
+    openGraph: {
+      title: `${post.title} | BrandScout`,
+      description: post.excerpt,
+      type: "article",
+      publishedTime: post.date,
+      siteName: "BrandScout",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${post.title} | BrandScout`,
+      description: post.excerpt,
+    },
   };
 }
 

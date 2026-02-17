@@ -1,6 +1,10 @@
 export const metadata = {
-  title: "API Documentation — BrandScout",
-  description: "BrandScout API documentation for developers and AI agents.",
+  title: "API Documentation | Developer & AI Integration Guide",
+  description: "BrandScout API documentation for developers and AI agents. Free REST API to check domain and username availability programmatically. OpenAPI spec included.",
+  openGraph: {
+    title: "API Documentation | BrandScout",
+    description: "Free REST API to check domain and username availability. Docs, examples, and OpenAPI spec for developers and AI agents.",
+  },
 };
 
 function CodeBlock({ children, title }: { children: string; title?: string }) {

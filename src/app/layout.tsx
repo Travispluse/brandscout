@@ -5,17 +5,18 @@ const siteUrl = "https://brandscout.net";
 
 export const metadata: Metadata = {
   title: {
-    default: "BrandScout — Check Domain & Username Availability Instantly | Free Tool",
-    template: "%s — BrandScout",
+    default: "BrandScout | Free Domain & Username Availability Checker",
+    template: "%s | BrandScout",
   },
   description:
-    "Free brand name availability checker. Instantly search domains (.com, .io, .ai) and social media usernames (Twitter, Instagram, GitHub) in one click. No signup required.",
+    "Check domain and social media username availability for your brand name instantly. Search .com, .net, .io, .ai domains and GitHub, Reddit, Twitch, Pinterest handles in one click. Free forever, no signup required.",
   metadataBase: new URL(siteUrl),
   alternates: { canonical: "/" },
+  keywords: ["brand name checker", "domain availability", "username checker", "social media handle check", "domain search", "brand name search", "free domain checker"],
   openGraph: {
-    title: "BrandScout — Check Domain & Username Availability Instantly",
+    title: "BrandScout | Free Domain & Username Availability Checker",
     description:
-      "Free tool to check domain and social media username availability for your brand name. Results in seconds.",
+      "Check domain and social media username availability for your brand name instantly. Free forever, no signup required.",
     url: siteUrl,
     siteName: "BrandScout",
     type: "website",
@@ -23,11 +24,11 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "BrandScout — Free Brand Name Availability Checker",
+    title: "BrandScout | Free Domain & Username Availability Checker",
     description:
-      "Check domain and username availability across platforms instantly. Free, no signup.",
+      "Check domain and username availability across platforms instantly. Free forever, no signup.",
   },
-  robots: { index: true, follow: true },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

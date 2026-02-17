@@ -3,9 +3,14 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Blog",
-  description: "Tips and guides on brand naming, domain strategy, and building your online presence.",
+  title: "Blog | Brand Naming Tips & Domain Strategy",
+  description: "Expert tips and guides on choosing the perfect brand name, domain strategy, and securing your online presence across platforms.",
   alternates: { canonical: "/blog" },
+  openGraph: {
+    title: "Blog | BrandScout",
+    description: "Expert tips and guides on brand naming, domain strategy, and building your online presence.",
+    type: "website",
+  },
 };
 
 export default function BlogPage() {
