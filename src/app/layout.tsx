@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-const siteUrl = "https://brandscout.app";
+const siteUrl = "https://brandscout.net";
 
 export const metadata: Metadata = {
   title: {

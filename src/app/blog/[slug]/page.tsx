@@ -37,7 +37,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
     headline: post.title,
     datePublished: post.date,
     description: post.excerpt,
-    url: `https://brandscout.app/blog/${slug}`,
+    url: `https://brandscout.net/blog/${slug}`,
     author: { "@type": "Organization", name: "BrandScout" },
   };
 

@@ -110,7 +110,7 @@ export function HomeJsonLd() {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     name: "BrandScout",
-    url: "https://brandscout.app",
+    url: "https://brandscout.net",
     description: "Free brand name availability checker for domains and social media usernames.",
     applicationCategory: "BusinessApplication",
     operatingSystem: "Any",
