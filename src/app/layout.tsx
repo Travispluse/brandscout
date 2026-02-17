@@ -1,9 +1,33 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+const siteUrl = "https://brandscout.app";
+
 export const metadata: Metadata = {
-  title: "BrandScout — Check Domain & Username Availability",
-  description: "Instantly check domain and social media username availability for your brand name.",
+  title: {
+    default: "BrandScout — Check Domain & Username Availability Instantly | Free Tool",
+    template: "%s — BrandScout",
+  },
+  description:
+    "Free brand name availability checker. Instantly search domains (.com, .io, .ai) and social media usernames (Twitter, Instagram, GitHub) in one click. No signup required.",
+  metadataBase: new URL(siteUrl),
+  alternates: { canonical: "/" },
+  openGraph: {
+    title: "BrandScout — Check Domain & Username Availability Instantly",
+    description:
+      "Free tool to check domain and social media username availability for your brand name. Results in seconds.",
+    url: siteUrl,
+    siteName: "BrandScout",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "BrandScout — Free Brand Name Availability Checker",
+    description:
+      "Check domain and username availability across platforms instantly. Free, no signup.",
+  },
+  robots: { index: true, follow: true },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

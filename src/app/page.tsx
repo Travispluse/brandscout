@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import { SearchForm, type SearchResults, type SearchFormHandle } from "@/components/search-form";
 import { ResultsView } from "@/components/results-view";
+import { SeoContent, HomeJsonLd } from "@/components/seo-content";
 
 export default function Home() {
   const [results, setResults] = useState<SearchResults | null>(null);
@@ -11,6 +12,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center px-4">
+      <HomeJsonLd />
       <div className={`flex flex-col items-center transition-all duration-500 ${results ? "pt-8" : "pt-32"}`}>
         {!results && (
           <div className="text-center mb-8">
@@ -37,6 +39,8 @@ export default function Home() {
           <ResultsView data={results} onSearchSuggestion={(name) => searchRef.current?.searchFor(name)} />
         </div>
       )}
+
+      {!results && !loading && <SeoContent />}
     </div>
   );
 }

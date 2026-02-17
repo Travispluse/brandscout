@@ -1,7 +1,12 @@
 import { getAllPosts } from "@/lib/blog";
 import Link from "next/link";
+import type { Metadata } from "next";
 
-export const metadata = { title: "Blog — BrandScout" };
+export const metadata: Metadata = {
+  title: "Blog",
+  description: "Tips and guides on brand naming, domain strategy, and building your online presence.",
+  alternates: { canonical: "/blog" },
+};
 
 export default function BlogPage() {
   const posts = getAllPosts();

@@ -89,6 +89,16 @@ export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults;
                 <div className="flex items-center gap-2">
                   <span className="text-xs text-muted-foreground">{d.source}</span>
                   <StatusBadge status={d.status} />
+                  {d.status === "available" && (
+                    <a
+                      href={`https://www.namecheap.com/domains/registration/results/?domain=${encodeURIComponent(d.domain)}`}
+                      target="_blank"
+                      rel="noopener"
+                      className="text-xs text-primary hover:underline whitespace-nowrap"
+                    >
+                      Register →
+                    </a>
+                  )}
                 </div>
               </div>
             ))}
@@ -142,6 +152,9 @@ export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults;
       {/* Disclaimer */}
       <p className="text-xs text-muted-foreground text-center px-4">
         Availability can change quickly. Some platforms restrict automated checks; statuses marked &ldquo;Unknown&rdquo; require manual confirmation.
+      </p>
+      <p className="text-xs text-muted-foreground/60 text-center px-4">
+        Registration links may earn us a small commission at no extra cost to you.
       </p>
     </div>
   );
