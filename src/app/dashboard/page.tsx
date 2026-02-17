@@ -111,6 +111,30 @@ export default function DashboardPage() {
         </div>
       </div>
 
+      {/* Most Searched Terms */}
+      <div className="p-6 rounded-xl border border-border bg-card mb-8">
+        <h2 className="text-lg font-semibold mb-4">Most Searched Terms</h2>
+        {(() => {
+          try {
+            const history: { query: string }[] = JSON.parse(typeof window !== "undefined" ? localStorage.getItem("brandscout-history") || "[]" : "[]");
+            const counts: Record<string, number> = {};
+            for (const h of history) { counts[h.query] = (counts[h.query] || 0) + 1; }
+            const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 10);
+            if (sorted.length === 0) return <p className="text-sm text-muted-foreground">No searches yet.</p>;
+            return (
+              <div className="space-y-2">
+                {sorted.map(([term, count]) => (
+                  <div key={term} className="flex items-center justify-between">
+                    <a href={`/?q=${encodeURIComponent(term)}`} className="text-sm font-mono hover:underline">{term}</a>
+                    <span className="text-xs text-muted-foreground">{count} search{count > 1 ? "es" : ""}</span>
+                  </div>
+                ))}
+              </div>
+            );
+          } catch { return <p className="text-sm text-muted-foreground">No data available.</p>; }
+        })()}
+      </div>
+
       {/* API Key */}
       <div className="p-6 rounded-xl border border-border bg-card mb-8">
         <h2 className="text-lg font-semibold mb-4">API Key</h2>

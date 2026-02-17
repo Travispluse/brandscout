@@ -6,7 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 
-type Tab = "names" | "taglines";
+import { generateNicheIdeas } from "@/lib/name-analysis";
+
+type Tab = "names" | "taglines" | "niches";
 type Vibe = "professional" | "playful" | "techy" | "minimal";
 
 const SUFFIXES = ["ify", "ly", "io", "hub", "lab", "scape", "nest", "mint", "forge", "craft", "wave", "pulse", "spark", "flux", "zen", "nova"];
@@ -167,6 +169,10 @@ export default function AIGeneratorPage() {
   const [vibe, setVibe] = useState<Vibe>("professional");
   const [generatedNames, setGeneratedNames] = useState<string[]>([]);
 
+  // Niche generator state
+  const [nicheIndustry, setNicheIndustry] = useState("");
+  const [nicheIdeas, setNicheIdeas] = useState<{ name: string; description: string }[]>([]);
+
   // Tagline generator state
   const [brandName, setBrandName] = useState("");
   const [tagIndustry, setTagIndustry] = useState("");
@@ -205,6 +211,12 @@ export default function AIGeneratorPage() {
           className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab === "taglines" ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"}`}
         >
           Tagline Generator
+        </button>
+        <button
+          onClick={() => setTab("niches")}
+          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab === "niches" ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"}`}
+        >
+          Niche Ideas
         </button>
       </div>
 
@@ -304,6 +316,48 @@ export default function AIGeneratorPage() {
                   {taglines.map((t, i) => (
                     <div key={i} className="py-2 px-3 rounded-lg bg-surface">
                       <p className="text-sm italic">&ldquo;{t}&rdquo;</p>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          )}
+        </div>
+      )}
+
+      {tab === "niches" && (
+        <div className="space-y-6">
+          <Card className="rounded-xl">
+            <CardHeader><CardTitle>Niche Business Idea Generator</CardTitle></CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <label className="text-sm font-medium mb-1 block">Industry or Interest Area</label>
+                <Input
+                  value={nicheIndustry}
+                  onChange={(e) => setNicheIndustry(e.target.value)}
+                  placeholder="e.g. Fitness, Coffee, AI, Photography"
+                  className="rounded-xl"
+                  aria-label="Industry or interest area"
+                />
+              </div>
+              <Button onClick={() => setNicheIdeas(generateNicheIdeas(nicheIndustry))} className="rounded-xl">Generate Niche Ideas</Button>
+            </CardContent>
+          </Card>
+
+          {nicheIdeas.length > 0 && (
+            <Card className="rounded-xl">
+              <CardHeader><CardTitle>Niche Ideas ({nicheIdeas.length})</CardTitle></CardHeader>
+              <CardContent>
+                <div className="grid gap-2">
+                  {nicheIdeas.map(idea => (
+                    <div key={idea.name} className="flex items-center justify-between py-2 px-3 rounded-lg bg-surface">
+                      <div>
+                        <span className="font-mono text-sm font-medium">{idea.name}</span>
+                        <p className="text-xs text-muted-foreground">{idea.description}</p>
+                      </div>
+                      <Button variant="outline" size="sm" className="rounded-lg text-xs" onClick={() => handleCheck(idea.name)}>
+                        Check Name
+                      </Button>
                     </div>
                   ))}
                 </div>

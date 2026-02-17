@@ -7,6 +7,18 @@ import { Button } from "@/components/ui/button";
 import type { SearchResults } from "@/components/search-form";
 import { exportCSV, exportTXT } from "@/lib/export";
 import { InfoTooltip } from "@/components/tooltip";
+import { generateStoryImage } from "@/lib/story-export";
+import { exportPPT } from "@/lib/ppt-export";
+import { createShareLink } from "@/lib/share-link";
+import { analyzeMarket } from "@/lib/market-analysis";
+import { trackSearch } from "@/lib/achievements";
+import {
+  analyzePronunciation,
+  analyzeNameStrength,
+  analyzeSentiment,
+  analyzeTrademarkRisk,
+  getScoreBreakdown,
+} from "@/lib/name-analysis";
 
 type StatusFilter = "all" | "available" | "taken" | "unknown";
 type DomainSort = "default" | "status" | "tld";
@@ -292,6 +304,269 @@ function PrintPDFButton({ data }: { data: SearchResults }) {
   );
 }
 
+// ====== Score Breakdown (Feature 92) ======
+function ScoreBreakdownSection({ data }: { data: SearchResults }) {
+  const [open, setOpen] = useState(false);
+  const breakdown = getScoreBreakdown(data.domains, data.usernames, data.name);
+
+  return (
+    <div className="mt-4">
+      <button
+        onClick={() => setOpen(!open)}
+        className="text-sm text-primary hover:underline flex items-center gap-1"
+        aria-expanded={open}
+        aria-controls="score-breakdown"
+      >
+        {open ? "▾" : "▸"} Score Breakdown
+      </button>
+      {open && (
+        <div id="score-breakdown" className="mt-3 space-y-2 text-sm bg-surface rounded-lg p-4">
+          <p>{breakdown.domainAvailable} of {breakdown.domainTotal} domains available ({breakdown.domainPercent}%)</p>
+          <p>{breakdown.platformAvailable} of {breakdown.platformTotal} platforms available ({breakdown.platformPercent}%)</p>
+          <p>Name readability: <span className="font-medium">{breakdown.readabilityRating}</span></p>
+          <p>Name length: {breakdown.lengthChars} chars — <span className="font-medium">{breakdown.lengthRating}</span></p>
+          {breakdown.tips.length > 0 && (
+            <div className="mt-2 pt-2 border-t border-border">
+              <p className="font-medium text-xs text-muted-foreground mb-1">💡 Tips</p>
+              {breakdown.tips.map((tip, i) => (
+                <p key={i} className="text-xs text-muted-foreground">• {tip}</p>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ====== Name Strength Badge (Feature 94) ======
+function NameStrengthBadge({ name }: { name: string }) {
+  const [showDetails, setShowDetails] = useState(false);
+  const analysis = analyzeNameStrength(name);
+  const color = analysis.badge === "Strong Name" ? "bg-success text-white" : analysis.badge === "Good Name" ? "bg-yellow-500 text-white" : "bg-destructive text-white";
+
+  return (
+    <span className="relative inline-flex">
+      <button
+        onClick={() => setShowDetails(!showDetails)}
+        className={`inline-flex items-center text-xs px-2 py-0.5 rounded-full font-medium cursor-pointer ${color}`}
+        aria-label={`Name strength: ${analysis.badge}`}
+      >
+        {analysis.badge}
+      </button>
+      {showDetails && (
+        <div className="absolute top-full left-0 mt-1 bg-card border border-border rounded-lg p-3 shadow-lg z-10 w-56">
+          {analysis.reasons.map((r, i) => (
+            <p key={i} className="text-xs text-muted-foreground">• {r}</p>
+          ))}
+        </div>
+      )}
+    </span>
+  );
+}
+
+// ====== Pronunciation Badge (Feature 152) ======
+function PronunciationBadge({ name }: { name: string }) {
+  const [showDetails, setShowDetails] = useState(false);
+  const analysis = analyzePronunciation(name);
+  const color = analysis.rating === "Easy to pronounce" ? "bg-success text-white" : analysis.rating === "Moderate" ? "bg-yellow-500 text-white" : "bg-destructive text-white";
+
+  return (
+    <span className="relative inline-flex">
+      <button
+        onClick={() => setShowDetails(!showDetails)}
+        className={`inline-flex items-center text-xs px-2 py-0.5 rounded-full font-medium cursor-pointer ${color}`}
+        aria-label={`Pronunciation: ${analysis.rating}`}
+      >
+        🗣 {analysis.rating}
+      </button>
+      {showDetails && (
+        <div className="absolute top-full left-0 mt-1 bg-card border border-border rounded-lg p-3 shadow-lg z-10 w-56">
+          {analysis.details.map((d, i) => (
+            <p key={i} className="text-xs text-muted-foreground">• {d}</p>
+          ))}
+        </div>
+      )}
+    </span>
+  );
+}
+
+// ====== Sentiment Badge (Feature 151) ======
+function SentimentBadge({ name }: { name: string }) {
+  const analysis = analyzeSentiment(name);
+  const color = analysis.rating === "Positive associations" ? "text-success" : analysis.rating === "Neutral" ? "text-muted-foreground" : "text-destructive";
+
+  return (
+    <span className={`text-xs font-medium ${color}`} title={analysis.details[0]}>
+      {analysis.rating}
+    </span>
+  );
+}
+
+// ====== Trademark Risk (Feature 153) ======
+function TrademarkRiskSection({ name }: { name: string }) {
+  const analysis = analyzeTrademarkRisk(name);
+  const color = analysis.level === "Low" ? "text-success" : analysis.level === "Medium" ? "text-yellow-500" : "text-destructive";
+
+  return (
+    <div className="p-4 rounded-lg bg-surface">
+      <div className="flex items-center gap-2 mb-2">
+        <span className="text-sm font-medium">⚖️ Trademark Risk: <span className={color}>{analysis.level}</span></span>
+      </div>
+      {analysis.warnings.map((w, i) => (
+        <p key={i} className="text-xs text-muted-foreground">• {w}</p>
+      ))}
+      <a
+        href={analysis.searchUrl}
+        target="_blank"
+        rel="noopener"
+        className="inline-flex items-center gap-1 text-xs text-primary hover:underline mt-2"
+        aria-label="Search USPTO trademark database"
+      >
+        Search USPTO Database →
+      </a>
+    </div>
+  );
+}
+
+// ====== LinkedIn Snippet Generator (Feature 178) ======
+function LinkedInSnippetButton({ data }: { data: SearchResults }) {
+  const [copied, setCopied] = useState(false);
+
+  const generateSnippet = () => {
+    const domainAvail = data.domains.find(d => d.tld === ".com");
+    const domainStatus = domainAvail ? (domainAvail.status === "available" ? "available ✅" : "taken ❌") : "unknown";
+    const socialAvail = data.usernames.filter(u => u.status === "available").length;
+    const socialTotal = data.usernames.length;
+
+    const snippet = `I just checked the availability of "${data.query}" using BrandScout 🔍
+
+Domain: ${data.name}.com is ${domainStatus}
+Social handles: ${socialAvail}/${socialTotal} available
+Score: ${data.score}/100
+
+Check your brand name at brandscout.net`;
+
+    navigator.clipboard.writeText(snippet);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <Button variant="outline" size="sm" onClick={generateSnippet} className="rounded-lg text-xs" aria-label="Generate LinkedIn post and copy to clipboard">
+      {copied ? "Copied!" : "📋 LinkedIn Post"}
+    </Button>
+  );
+}
+
+// ====== Share Link Button ======
+function ShareLinkButton({ data }: { data: SearchResults }) {
+  const [copied, setCopied] = useState(false);
+  const handleShare = () => {
+    const link = createShareLink(data);
+    navigator.clipboard.writeText(link);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+  return (
+    <Button variant="outline" size="sm" onClick={handleShare} className="rounded-lg">
+      {copied ? "Link Copied!" : "🔗 Share Link"}
+    </Button>
+  );
+}
+
+// ====== Competitor Brand Heatmap (Feature 167) ======
+function AvailabilityHeatmap({ domains, usernames }: { domains: { domain: string; status: string }[]; usernames: { platform: string; status: string }[] }) {
+  const items = [
+    ...domains.map(d => ({ label: d.domain, status: d.status })),
+    ...usernames.map(u => ({ label: u.platform, status: u.status })),
+  ];
+  return (
+    <Card className="rounded-xl">
+      <CardHeader>
+        <CardTitle className="text-lg">Availability Heatmap</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="flex flex-wrap gap-1.5">
+          {items.map((item, i) => (
+            <div
+              key={i}
+              className={`px-2 py-1 rounded text-xs font-medium ${
+                item.status === "available" ? "bg-green-500/20 text-green-400 border border-green-500/30" :
+                item.status === "taken" ? "bg-red-500/20 text-red-400 border border-red-500/30" :
+                "bg-gray-500/20 text-gray-400 border border-gray-500/30"
+              }`}
+              title={`${item.label}: ${item.status}`}
+            >
+              {item.label}
+            </div>
+          ))}
+        </div>
+        <div className="flex gap-4 mt-3 text-xs text-muted-foreground">
+          <span className="flex items-center gap-1"><span className="w-3 h-3 rounded bg-green-500/40 inline-block" /> Available</span>
+          <span className="flex items-center gap-1"><span className="w-3 h-3 rounded bg-red-500/40 inline-block" /> Taken</span>
+          <span className="flex items-center gap-1"><span className="w-3 h-3 rounded bg-gray-500/40 inline-block" /> Unknown</span>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+// ====== Market Analysis (Features 168-169) ======
+function MarketAnalysisCard({ domains, usernames }: { domains: { status: string }[]; usernames: { status: string }[] }) {
+  const analysis = analyzeMarket(domains, usernames);
+  const color = analysis.marketOpportunity === "High" ? "text-green-400" : analysis.marketOpportunity === "Medium" ? "text-yellow-400" : "text-red-400";
+  return (
+    <Card className="rounded-xl">
+      <CardHeader>
+        <CardTitle className="text-lg">Market Analysis</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-3">
+        <div className="flex items-center gap-3">
+          <span className="text-sm font-medium">Niche Demand:</span>
+          <span className="text-sm">{analysis.nicheDemand}</span>
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="text-sm font-medium">Market Opportunity:</span>
+          <span className={`text-sm font-bold ${color}`}>{analysis.marketOpportunity}</span>
+        </div>
+        <p className="text-xs text-muted-foreground">{analysis.explanation}</p>
+      </CardContent>
+    </Card>
+  );
+}
+
+// ====== Registrar Dropdown (Feature 180) ======
+function RegistrarLinks({ domain }: { domain: string }) {
+  const [open, setOpen] = useState(false);
+  const registrars = [
+    { name: "Namecheap", url: `https://www.namecheap.com/domains/registration/results/?domain=${encodeURIComponent(domain)}` },
+    { name: "GoDaddy", url: `https://www.godaddy.com/domainsearch/find?domainToCheck=${encodeURIComponent(domain)}` },
+    { name: "Porkbun", url: `https://porkbun.com/checkout/search?q=${encodeURIComponent(domain)}` },
+    { name: "Cloudflare", url: `https://www.cloudflare.com/products/registrar/` },
+    { name: "Google/Squarespace", url: `https://domains.squarespace.com/` },
+  ];
+  return (
+    <span className="relative">
+      <button onClick={() => setOpen(!open)} className="text-xs text-primary hover:underline whitespace-nowrap">
+        Register ▾
+      </button>
+      {open && (
+        <div className="absolute right-0 top-full mt-1 bg-card border border-border rounded-lg shadow-lg z-20 w-40">
+          {registrars.map(r => (
+            <a key={r.name} href={r.url} target="_blank" rel="noopener" className="block px-3 py-2 text-xs hover:bg-surface transition-colors">
+              {r.name}
+            </a>
+          ))}
+          <a href="/registrars" className="block px-3 py-2 text-xs text-primary hover:bg-surface border-t border-border">
+            Compare all →
+          </a>
+        </div>
+      )}
+    </span>
+  );
+}
+
 export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults; onSearchSuggestion?: (name: string) => void }) {
   const [domainFilter, setDomainFilter] = useState<StatusFilter>("all");
   const [usernameFilter, setUsernameFilter] = useState<StatusFilter>("all");
@@ -394,7 +669,13 @@ export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults;
               </p>
               <ReadabilityBadge name={data.name} />
               <LengthBadge name={data.name} />
+              <NameStrengthBadge name={data.name} />
+              <PronunciationBadge name={data.name} />
             </div>
+            <div className="flex items-center gap-3 mt-1">
+              <SentimentBadge name={data.name} />
+            </div>
+            <ScoreBreakdownSection data={data} />
             <div className="flex gap-2 mt-3 flex-wrap">
               <Button variant="outline" size="sm" onClick={() => handleExport("csv")} className="rounded-lg">
                 Export CSV
@@ -404,6 +685,18 @@ export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults;
               </Button>
               <PrintPDFButton data={data} />
               <DownloadCardButton data={data} />
+              <LinkedInSnippetButton data={data} />
+              <Button variant="outline" size="sm" onClick={() => {
+                const avail = data.domains.filter(d => d.status === "available").length + data.usernames.filter(u => u.status === "available").length;
+                const taken = data.domains.filter(d => d.status === "taken").length + data.usernames.filter(u => u.status === "taken").length;
+                generateStoryImage({ brandName: data.query, score: data.score, availableCount: avail, takenCount: taken });
+              }} className="rounded-lg">
+                📱 Create Story
+              </Button>
+              <Button variant="outline" size="sm" onClick={() => exportPPT(data)} className="rounded-lg">
+                📊 Export PPT
+              </Button>
+              <ShareLinkButton data={data} />
             </div>
             <ShareButtons query={data.query} />
           </div>
@@ -439,14 +732,7 @@ export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults;
                   <StatusBadge status={d.status} />
                   {d.status === "unknown" && <RetryButton onRetry={() => retryDomain(d.domain)} />}
                   {d.status === "available" && (
-                    <a
-                      href={`https://www.namecheap.com/domains/registration/results/?domain=${encodeURIComponent(d.domain)}`}
-                      target="_blank"
-                      rel="noopener"
-                      className="text-xs text-primary hover:underline whitespace-nowrap"
-                    >
-                      Register →
-                    </a>
+                    <RegistrarLinks domain={d.domain} />
                   )}
                 </div>
               </div>
@@ -521,6 +807,22 @@ export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults;
           </CardContent>
         </Card>
       )}
+
+      {/* Availability Heatmap */}
+      <AvailabilityHeatmap domains={domains} usernames={usernames} />
+
+      {/* Market Analysis */}
+      <MarketAnalysisCard domains={domains} usernames={usernames} />
+
+      {/* Trademark Risk */}
+      <Card className="rounded-xl">
+        <CardHeader>
+          <CardTitle className="text-lg">Trademark Analysis</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <TrademarkRiskSection name={data.name} />
+        </CardContent>
+      </Card>
 
       {/* Disclaimer */}
       <p className="text-xs text-muted-foreground text-center px-4">

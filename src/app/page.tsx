@@ -7,6 +7,15 @@ import { hasCookieConsent } from "@/components/cookie-consent";
 import { ResultsView } from "@/components/results-view";
 import { ResultsSkeleton } from "@/components/ui/skeleton";
 import { SeoContent, HomeJsonLd } from "@/components/seo-content";
+import { trackSearch, ACHIEVEMENTS, getUnlocked } from "@/lib/achievements";
+
+function showToast(message: string) {
+  const el = document.createElement("div");
+  el.textContent = message;
+  el.style.cssText = "position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1e1040;color:#fff;padding:12px 24px;border-radius:12px;z-index:9999;font-size:14px;border:1px solid rgba(139,92,246,0.3);box-shadow:0 4px 20px rgba(0,0,0,0.3);animation:fadeIn 0.3s ease";
+  document.body.appendChild(el);
+  setTimeout(() => { el.style.opacity = "0"; el.style.transition = "opacity 0.3s"; setTimeout(() => el.remove(), 300); }, 3000);
+}
 
 function HomeContent() {
   const [results, setResults] = useState<SearchResults | null>(null);
@@ -46,6 +55,15 @@ function HomeContent() {
         localStorage.setItem("brandscout-history", JSON.stringify(filtered.slice(0, 10)));
       } catch { /* ignore */ }
     }
+
+    // Track achievements
+    try {
+      const newAchievements = trackSearch(data.score);
+      for (const id of newAchievements) {
+        const a = ACHIEVEMENTS.find(x => x.id === id);
+        if (a) showToast(`🏆 Achievement Unlocked: ${a.icon} ${a.name}`);
+      }
+    } catch { /* ignore */ }
 
     // Update URL
     const url = new URL(window.location.href);

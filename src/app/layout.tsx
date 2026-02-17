@@ -3,6 +3,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { TextSizeToggle } from "@/components/text-size-toggle";
 import { CookieConsent } from "@/components/cookie-consent";
+import { LeadCapturePopup } from "@/components/lead-capture";
 import "./globals.css";
 
 const siteUrl = "https://brandscout.net";
@@ -56,13 +57,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="antialiased min-h-screen">
         <ThemeProvider>
-          <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md transition-shadow duration-300 supports-[backdrop-filter]:bg-background/60">
+          <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:bg-foreground focus:text-background focus:px-4 focus:py-2 focus:rounded-lg">
+            Skip to content
+          </a>
+          <header role="banner" className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md transition-shadow duration-300 supports-[backdrop-filter]:bg-background/60">
             <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
               <a href="/" className="text-xl font-semibold tracking-tight">
                 BrandScout
               </a>
               <div className="flex items-center gap-4">
-                <nav className="flex gap-4 text-sm text-muted-foreground flex-wrap">
+                <nav aria-label="Main navigation" className="flex gap-4 text-sm text-muted-foreground flex-wrap">
                   <a href="/" className="hover:text-foreground transition-colors">Search</a>
                   <a href="/ai-generator" className="hover:text-foreground transition-colors">Generator</a>
                   <a href="/compare" className="hover:text-foreground transition-colors">Compare</a>
@@ -72,14 +76,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   <a href="/docs" className="hover:text-foreground transition-colors">API</a>
                   <a href="/tools" className="hover:text-foreground transition-colors">Tools</a>
                   <a href="/dashboard" className="hover:text-foreground transition-colors">Dashboard</a>
+                  <a href="/achievements" className="hover:text-foreground transition-colors">🏆</a>
                 </nav>
                 <TextSizeToggle />
                 <ThemeToggle />
               </div>
             </div>
           </header>
-          <main>{children}</main>
-          <footer className="border-t border-border mt-16">
+          <main id="main-content" role="main">{children}</main>
+          <footer role="contentinfo" className="border-t border-border mt-16">
             <div className="max-w-4xl mx-auto px-4 py-6 flex flex-col items-center gap-2 text-sm text-muted-foreground">
               <div className="flex gap-4">
                 <a href="/terms" className="hover:text-foreground transition-colors">Terms of Service</a>
@@ -94,6 +99,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
           </footer>
           <CookieConsent />
+          <LeadCapturePopup />
           <script dangerouslySetInnerHTML={{ __html: `if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js')}` }} />
         </ThemeProvider>
       </body>

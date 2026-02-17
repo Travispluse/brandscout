@@ -1,4 +1,5 @@
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { APISandbox } from "@/components/api-sandbox";
 
 export const metadata = {
   title: "API Documentation | Developer & AI Integration Guide",
@@ -56,6 +57,7 @@ export default function DocsPage() {
           <li><a href="#auth" className="hover:text-foreground">Authentication</a></li>
           <li><a href="#examples" className="hover:text-foreground">Examples</a></li>
           <li><a href="#openapi" className="hover:text-foreground">OpenAPI Spec</a></li>
+          <li><a href="#sandbox" className="hover:text-foreground">Try It</a></li>
           <li><a href="#errors" className="hover:text-foreground">Error Handling</a></li>
         </ul>
       </nav>
@@ -204,6 +206,13 @@ const data = await res.json();`}</CodeBlock>
             <code className="bg-muted px-1.5 py-0.5 rounded"><a href="/.well-known/ai-plugin.json" className="hover:underline">/.well-known/ai-plugin.json</a></code> — ChatGPT plugin manifest
           </li>
         </ul>
+      </Section>
+
+      <Section id="sandbox" title="Try It — API Sandbox">
+        <p className="text-muted-foreground text-sm mb-4">
+          Test the API right from your browser. Enter a brand name and see the raw JSON response.
+        </p>
+        <APISandbox />
       </Section>
 
       <Section id="errors" title="Error Handling">

@@ -4,6 +4,8 @@ import { useState, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { updateStats } from "@/lib/achievements";
+import { expandPattern, expandWildcard, parseMultiKeyword } from "@/lib/advanced-search";
 
 interface BulkResult {
   name: string;
@@ -61,6 +63,7 @@ export default function BulkPage() {
       setResults([...allResults]);
     }
     setProcessing(false);
+    try { updateStats({ usedBulk: true }); } catch { /* ignore */ }
   };
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -96,6 +99,8 @@ export default function BulkPage() {
     <div className="max-w-4xl mx-auto px-4 py-12">
       <h1 className="text-3xl font-bold tracking-tight mb-2">Bulk Check</h1>
       <p className="text-muted-foreground mb-8">Upload a CSV with brand names (one per row, max 25) and check them all at once.</p>
+
+      <AdvancedSearch onProcess={processNames} disabled={processing} />
 
       <Card className="rounded-xl mb-8">
         <CardContent className="py-8 flex flex-col items-center gap-4">
