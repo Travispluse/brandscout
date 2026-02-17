@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import type { SearchResults } from "@/components/search-form";
 import { exportCSV, exportTXT } from "@/lib/export";
+import { InfoTooltip } from "@/components/tooltip";
 
 type StatusFilter = "all" | "available" | "taken" | "unknown";
 type DomainSort = "default" | "status" | "tld";
@@ -222,7 +223,10 @@ export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults;
       {/* Score Summary */}
       <Card className="rounded-xl">
         <CardContent className="flex items-center gap-8 p-6">
-          <ScoreRing score={data.score} />
+          <div className="relative">
+            <ScoreRing score={data.score} />
+            <span className="absolute -top-1 -right-1"><InfoTooltip text="Score is based on 40% platform availability, 30% domain quality, 20% readability, 10% length" /></span>
+          </div>
           <div className="flex-1">
             <h2 className="text-2xl font-semibold">{data.query}</h2>
             <p className="text-muted-foreground text-sm mt-1">
@@ -245,7 +249,7 @@ export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults;
       <Card className="rounded-xl">
         <CardHeader>
           <div className="flex items-center justify-between flex-wrap gap-2">
-            <CardTitle className="text-lg">Domain Availability</CardTitle>
+            <CardTitle className="text-lg">Domain Availability<InfoTooltip text="Checked via RDAP and DNS lookup" /></CardTitle>
             <div className="flex items-center gap-3">
               <FilterBar value={domainFilter} onChange={setDomainFilter} />
               <select
@@ -293,7 +297,7 @@ export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults;
       <Card className="rounded-xl">
         <CardHeader>
           <div className="flex items-center justify-between flex-wrap gap-2">
-            <CardTitle className="text-lg">Username Availability</CardTitle>
+            <CardTitle className="text-lg">Username Availability<InfoTooltip text="Checked via HTTP profile detection. Unknown means the platform blocked our check." /></CardTitle>
             <div className="flex items-center gap-3">
               <FilterBar value={usernameFilter} onChange={setUsernameFilter} />
               <select

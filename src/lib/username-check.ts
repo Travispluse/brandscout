@@ -1,4 +1,5 @@
 import { smartFetch } from "./http-client";
+import { cache, usernameCacheKey, USERNAME_CACHE_TTL } from "./cache";
 
 export type UsernameStatus = "available" | "taken" | "unknown";
 
@@ -169,9 +170,13 @@ async function checkPlatform(platform: PlatformConfig, username: string): Promis
         ? `https://discord.com`
         : profileUrl;
 
+  const cKey = usernameCacheKey(platform.name, username);
+  const cached = cache.get<UsernameResult>(cKey);
+  if (cached) return cached;
+
   // Discord can't be checked
   if (platform.name === "Discord") {
-    return {
+    const r: UsernameResult = {
       platform: platform.name,
       username,
       status: "unknown",
@@ -179,6 +184,7 @@ async function checkPlatform(platform: PlatformConfig, username: string): Promis
       source: "skip",
       confidence: 0,
     };
+    return r;
   }
 
   try {
@@ -194,7 +200,7 @@ async function checkPlatform(platform: PlatformConfig, username: string): Promis
       result = defaultCheck([404])(res);
     }
 
-    return {
+    const r: UsernameResult = {
       platform: platform.name,
       username,
       status: result.status,
@@ -202,6 +208,8 @@ async function checkPlatform(platform: PlatformConfig, username: string): Promis
       source: "http",
       confidence: result.confidence,
     };
+    cache.set(cKey, r, USERNAME_CACHE_TTL);
+    return r;
   } catch {
     return {
       platform: platform.name,

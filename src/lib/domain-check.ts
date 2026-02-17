@@ -1,4 +1,5 @@
 import dns from "dns/promises";
+import { cache, domainCacheKey, DOMAIN_CACHE_TTL } from "./cache";
 
 const TLDS = [".com", ".net", ".org", ".co", ".io", ".ai", ".app"] as const;
 export type TLD = (typeof TLDS)[number];
@@ -39,6 +40,10 @@ async function checkDNS(domain: string): Promise<DomainStatus> {
 
 export async function checkDomain(name: string, tld: string): Promise<DomainResult> {
   const domain = `${name}${tld}`;
+  const cacheKey = domainCacheKey(domain);
+  const cached = cache.get<DomainResult>(cacheKey);
+  if (cached) return cached;
+
   let status = await checkRDAP(domain);
   let source = "rdap";
 
@@ -47,7 +52,9 @@ export async function checkDomain(name: string, tld: string): Promise<DomainResu
     source = status === "unknown" ? "fallback" : "dns";
   }
 
-  return { domain, tld, status, source };
+  const result = { domain, tld, status, source };
+  cache.set(cacheKey, result, DOMAIN_CACHE_TTL);
+  return result;
 }
 
 export async function checkAllDomains(name: string): Promise<DomainResult[]> {

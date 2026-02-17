@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { SearchForm, type SearchResults, type SearchFormHandle } from "@/components/search-form";
+import { hasCookieConsent } from "@/components/cookie-consent";
 import { ResultsView } from "@/components/results-view";
 import { ResultsSkeleton } from "@/components/ui/skeleton";
 import { SeoContent, HomeJsonLd } from "@/components/seo-content";
@@ -35,14 +36,16 @@ function HomeContent() {
 
   const handleResults = (data: SearchResults) => {
     setResults(data);
-    // Save to search history
-    try {
-      const history = JSON.parse(localStorage.getItem("brandscout-history") || "[]");
-      const entry = { query: data.query, score: data.score, timestamp: Date.now() };
-      const filtered = history.filter((h: { query: string }) => h.query !== data.query);
-      filtered.unshift(entry);
-      localStorage.setItem("brandscout-history", JSON.stringify(filtered.slice(0, 10)));
-    } catch { /* ignore */ }
+    // Save to search history (only if cookies accepted)
+    if (hasCookieConsent()) {
+      try {
+        const history = JSON.parse(localStorage.getItem("brandscout-history") || "[]");
+        const entry = { query: data.query, score: data.score, timestamp: Date.now() };
+        const filtered = history.filter((h: { query: string }) => h.query !== data.query);
+        filtered.unshift(entry);
+        localStorage.setItem("brandscout-history", JSON.stringify(filtered.slice(0, 10)));
+      } catch { /* ignore */ }
+    }
 
     // Update URL
     const url = new URL(window.location.href);

@@ -3,6 +3,9 @@
 import { useState, useCallback, useImperativeHandle, forwardRef, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Autocomplete } from "@/components/autocomplete";
+import { SpellSuggestion } from "@/components/spell-suggestion";
+import { hasCookieConsent } from "@/components/cookie-consent";
 
 interface SearchFormProps {
   onResults: (data: SearchResults) => void;
@@ -35,6 +38,7 @@ export const SearchForm = forwardRef<SearchFormHandle, SearchFormProps>(function
   const [query, setQuery] = useState("");
   const [error, setError] = useState("");
   const [showHistory, setShowHistory] = useState(false);
+  const [showAutocomplete, setShowAutocomplete] = useState(false);
   const [history, setHistory] = useState<HistoryEntry[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -88,9 +92,16 @@ export const SearchForm = forwardRef<SearchFormHandle, SearchFormProps>(function
     doSearch(query);
   };
 
+  const handleAutocompleteSelect = (value: string) => {
+    setQuery(value);
+    setShowAutocomplete(false);
+    doSearch(value);
+  };
+
   const handleFocus = () => {
     loadHistory();
     setShowHistory(true);
+    setShowAutocomplete(false);
     setHistoryIndex(-1);
   };
 
@@ -157,7 +168,7 @@ export const SearchForm = forwardRef<SearchFormHandle, SearchFormProps>(function
           <Input
             ref={inputRef}
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => { setQuery(e.target.value); setShowAutocomplete(true); setShowHistory(false); }}
             onFocus={handleFocus}
             onBlur={handleBlur}
             onKeyDown={handleKeyDown}
@@ -214,6 +225,14 @@ export const SearchForm = forwardRef<SearchFormHandle, SearchFormProps>(function
           ))}
         </div>
       )}
+
+      {/* Autocomplete Suggestions */}
+      {!showHistory && (
+        <Autocomplete query={query} onSelect={handleAutocompleteSelect} visible={showAutocomplete} />
+      )}
+
+      {/* Spell Suggestion */}
+      <SpellSuggestion query={query} onAccept={(corrected) => { setQuery(corrected); doSearch(corrected); }} />
 
       {error && <p className="text-error text-sm mt-2">{error}</p>}
     </div>

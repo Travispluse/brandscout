@@ -117,10 +117,38 @@ export function HomeJsonLd() {
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
   };
 
+  const howToJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: "How to Check Brand Name Availability",
+    description: "Check if your brand name is available as a domain and across social media platforms.",
+    step: [
+      {
+        "@type": "HowToStep",
+        position: 1,
+        name: "Enter your brand name",
+        text: "Type any word, phrase, or company name you're considering into the search box.",
+      },
+      {
+        "@type": "HowToStep",
+        position: 2,
+        name: "Review availability across domains and platforms",
+        text: "BrandScout checks domains (.com, .io, .ai…) and social media usernames in seconds and shows you a comprehensive report.",
+      },
+      {
+        "@type": "HowToStep",
+        position: 3,
+        name: "Export results or register available domains",
+        text: "Download your results as CSV or TXT, and register available domains directly through our partner links.",
+      },
+    ],
+  };
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }} />
     </>
   );
 }

@@ -1,3 +1,5 @@
+import { Breadcrumbs } from "@/components/breadcrumbs";
+
 export const metadata = {
   title: "API Documentation | Developer & AI Integration Guide",
   description: "BrandScout API documentation for developers and AI agents. Free REST API to check domain and username availability programmatically. OpenAPI spec included.",
@@ -36,6 +38,7 @@ export default function DocsPage() {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-10">
+      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "API Documentation" }]} />
       <h1 className="text-3xl font-bold mb-2">BrandScout API</h1>
       <p className="text-muted-foreground mb-8">
         Check domain and social media username availability for any brand name. Free, open, and AI-friendly.

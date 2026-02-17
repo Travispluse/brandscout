@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { CookieConsent } from "@/components/cookie-consent";
 import "./globals.css";
 
 const siteUrl = "https://brandscout.net";
@@ -41,10 +42,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#111827" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="BrandScout" />
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/icon.svg" />
       </head>
       <body className="antialiased min-h-screen">
         <ThemeProvider>
-          <header className="border-b border-border">
+          <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md transition-shadow duration-300 supports-[backdrop-filter]:bg-background/60">
             <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
               <a href="/" className="text-xl font-semibold tracking-tight">
                 BrandScout
@@ -65,10 +73,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <div className="flex gap-4">
                 <a href="/terms" className="hover:text-foreground transition-colors">Terms of Service</a>
                 <a href="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</a>
+                <a href="/newsletter" className="hover:text-foreground transition-colors">Newsletter</a>
               </div>
               <p>© {new Date().getFullYear()} BrandScout. Free & open source.</p>
             </div>
           </footer>
+          <CookieConsent />
+          <script dangerouslySetInnerHTML={{ __html: `if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js')}` }} />
         </ThemeProvider>
       </body>
     </html>

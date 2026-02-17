@@ -3,6 +3,9 @@ import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { TableOfContents } from "@/components/table-of-contents";
+import { NewsletterSignup } from "@/components/newsletter-signup";
 
 type Params = Promise<{ slug: string }>;
 
@@ -53,24 +56,37 @@ export default async function BlogPostPage({ params }: { params: Params }) {
   };
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-12">
+    <div className="max-w-4xl mx-auto px-4 py-12">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingJsonLd) }} />
-      <article>
-        <header className="mb-8">
-          <h1 className="text-3xl font-bold">{post.title}</h1>
-          <p className="text-sm text-muted-foreground mt-2">
-            {post.date} · {readingTime(post.content)} min read
+      <div className="max-w-2xl">
+        <Breadcrumbs items={[
+          { label: "Home", href: "/" },
+          { label: "Blog", href: "/blog" },
+          { label: post.title },
+        ]} />
+      </div>
+      <div className="flex gap-8 items-start">
+        <article className="max-w-2xl flex-1 min-w-0">
+          <header className="mb-8">
+            <h1 className="text-3xl font-bold">{post.title}</h1>
+            <p className="text-sm text-muted-foreground mt-2">
+              {post.date} · {readingTime(post.content)} min read
+            </p>
+          </header>
+          <TableOfContents content={post.content} mode="mobile" />
+          <div className="prose prose-neutral max-w-none [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mt-8 [&_h2]:mb-3 [&_h3]:text-lg [&_h3]:font-medium [&_h3]:mt-6 [&_h3]:mb-2 [&_p]:mb-4 [&_p]:leading-relaxed [&_ul]:mb-4 [&_ul]:pl-5 [&_li]:mb-1 [&_strong]:font-semibold [&_ol]:mb-4 [&_ol]:pl-5 [&_h2]:scroll-mt-20 [&_h3]:scroll-mt-20">
+            <MDXRemote source={post.content} />
+          </div>
+          <hr className="my-8 border-border" />
+          <NewsletterSignup />
+          <hr className="my-8 border-border" />
+          <p className="text-sm text-muted-foreground">
+            Ready to check your brand name?{" "}
+            <Link href="/" className="underline hover:text-foreground">Try BrandScout →</Link>
           </p>
-        </header>
-        <div className="prose prose-neutral max-w-none [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mt-8 [&_h2]:mb-3 [&_h3]:text-lg [&_h3]:font-medium [&_h3]:mt-6 [&_h3]:mb-2 [&_p]:mb-4 [&_p]:leading-relaxed [&_ul]:mb-4 [&_ul]:pl-5 [&_li]:mb-1 [&_strong]:font-semibold [&_ol]:mb-4 [&_ol]:pl-5">
-          <MDXRemote source={post.content} />
-        </div>
-        <hr className="my-8 border-border" />
-        <p className="text-sm text-muted-foreground">
-          Ready to check your brand name?{" "}
-          <Link href="/" className="underline hover:text-foreground">Try BrandScout →</Link>
-        </p>
-      </article>
+        </article>
+        <TableOfContents content={post.content} mode="desktop" />
+      </div>
     </div>
   );
 }
