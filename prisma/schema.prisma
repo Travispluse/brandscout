@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Search {
+  id         String      @id @default(cuid())
+  inputType  String
+  inputValue String
+  createdAt  DateTime    @default(now())
+  candidates Candidate[]
+}
+
+model Candidate {
+  id             String          @id @default(cuid())
+  searchId       String
+  text           String
+  score          Float           @default(0)
+  rank           Int             @default(0)
+  search         Search          @relation(fields: [searchId], references: [id], onDelete: Cascade)
+  domainChecks   DomainCheck[]
+  usernameChecks UsernameCheck[]
+}
+
+model DomainCheck {
+  id          String   @id @default(cuid())
+  candidateId String
+  domain      String
+  tld         String
+  status      String
+  checkedAt   DateTime @default(now())
+  source      String
+  candidate   Candidate @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+}
+
+model UsernameCheck {
+  id          String   @id @default(cuid())
+  candidateId String
+  platform    String
+  username    String
+  status      String
+  profileUrl  String?
+  checkedAt   DateTime @default(now())
+  source      String
+  confidence  Float    @default(0.5)
+  candidate   Candidate @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+}
