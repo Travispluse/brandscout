@@ -58,6 +58,8 @@ export const SearchForm = forwardRef<SearchFormHandle, SearchFormProps>(function
     setQuery(q);
     setError("");
     setShowHistory(false);
+    setShowAutocomplete(false);
+    inputRef.current?.blur();
     onLoading(true);
 
     try {
