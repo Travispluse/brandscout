@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import { SearchForm, type SearchResults } from "@/components/search-form";
+import { useState, useRef } from "react";
+import { SearchForm, type SearchResults, type SearchFormHandle } from "@/components/search-form";
 import { ResultsView } from "@/components/results-view";
 
 export default function Home() {
   const [results, setResults] = useState<SearchResults | null>(null);
   const [loading, setLoading] = useState(false);
+  const searchRef = useRef<SearchFormHandle>(null);
 
   return (
     <div className="flex flex-col items-center px-4">
@@ -21,7 +22,7 @@ export default function Home() {
             </p>
           </div>
         )}
-        <SearchForm onResults={setResults} onLoading={setLoading} />
+        <SearchForm ref={searchRef} onResults={setResults} onLoading={setLoading} />
       </div>
 
       {loading && (
@@ -33,7 +34,7 @@ export default function Home() {
 
       {results && !loading && (
         <div className="mt-8 w-full flex justify-center pb-16">
-          <ResultsView data={results} />
+          <ResultsView data={results} onSearchSuggestion={(name) => searchRef.current?.searchFor(name)} />
         </div>
       )}
     </div>

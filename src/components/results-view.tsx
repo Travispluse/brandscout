@@ -33,7 +33,7 @@ function ScoreRing({ score }: { score: number }) {
   );
 }
 
-export function ResultsView({ data }: { data: SearchResults }) {
+export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults; onSearchSuggestion?: (name: string) => void }) {
   const handleExport = (format: "csv" | "txt") => {
     const exportData = {
       query: data.query,
@@ -125,7 +125,12 @@ export function ResultsView({ data }: { data: SearchResults }) {
           <CardContent>
             <div className="flex flex-wrap gap-2">
               {data.suggestions.map((s) => (
-                <Badge key={s} variant="secondary" className="text-sm px-3 py-1 rounded-lg font-mono">
+                <Badge
+                  key={s}
+                  variant="secondary"
+                  className={`text-sm px-3 py-1 rounded-lg font-mono ${onSearchSuggestion ? "cursor-pointer hover:bg-foreground hover:text-background transition-colors" : ""}`}
+                  onClick={() => onSearchSuggestion?.(s)}
+                >
                   {s}
                 </Badge>
               ))}
