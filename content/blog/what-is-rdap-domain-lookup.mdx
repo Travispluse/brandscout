@@ -1,0 +1,102 @@
+---
+title: "What Is RDAP? The Modern Replacement for WHOIS Domain Lookup"
+date: "2026-02-16"
+excerpt: "RDAP is replacing WHOIS as the standard for domain registration lookups. Learn what it is, how it works, and what it means for your domains."
+---
+
+## WHOIS Is Being Retired
+
+For over 40 years, WHOIS has been the protocol for looking up domain registration information. Type "whois example.com" and you'd see who registered it, when, and how to contact them. But WHOIS was designed in a pre-internet era and is being replaced by RDAP — the Registration Data Access Protocol.
+
+## What Is RDAP?
+
+RDAP (Registration Data Access Protocol) is a modern, standardized protocol for accessing domain name registration data. It was developed by the IETF (Internet Engineering Task Force) to address the shortcomings of WHOIS.
+
+Think of RDAP as WHOIS 2.0 — same basic function (looking up domain info), but with modern architecture, security, and privacy features.
+
+## How RDAP Differs From WHOIS
+
+### Structured Data
+WHOIS returns plain text that's formatted differently by every registrar. Parsing it programmatically is a nightmare. RDAP returns structured JSON data with consistent formatting, making it easy to process automatically.
+
+### Built-In Privacy
+WHOIS was designed before internet privacy was a concern. All data was public by default. RDAP has access control built into the protocol — registrars can restrict sensitive information based on who's asking and why.
+
+### Authenticated Access
+WHOIS has no concept of user authentication. Anyone can query anything. RDAP supports authentication, allowing registrars to provide different levels of data access to different types of requesters (law enforcement vs general public).
+
+### Internationalization
+WHOIS struggles with non-ASCII characters. RDAP natively supports Unicode, making it work properly with internationalized domain names and contact information in non-Latin scripts.
+
+### Standardized Responses
+Every registrar's WHOIS output looks different. RDAP responses follow a standard format defined in RFCs 7480-7484, making it possible to build tools that work consistently across all registrars.
+
+## What RDAP Shows
+
+An RDAP lookup typically returns:
+
+- **Domain name** and registration status
+- **Registrar** name and contact information
+- **Registration dates** (created, updated, expires)
+- **Name servers** associated with the domain
+- **DNSSEC** status
+- **Registrant information** (may be redacted for privacy)
+- **Abuse contact** information
+
+The exact fields visible depend on the registrar's privacy policy and whether you're authenticated.
+
+## How to Use RDAP
+
+### Web-Based Lookup
+Several websites offer RDAP lookups:
+- rdap.org
+- Registration data lookup tools built into registrar websites
+- ICANN's RDAP lookup tool
+
+### Command Line
+```
+curl https://rdap.verisign.com/com/v1/domain/example.com
+```
+
+### Programmatic Access
+RDAP's JSON responses make it ideal for integration into applications, monitoring tools, and automated workflows.
+
+## What RDAP Means for Domain Owners
+
+### Better Privacy by Default
+Under RDAP, your personal registration data is more protected. Registrars are implementing tiered access — casual lookups see limited info, while verified parties (law enforcement, IP holders) can request more.
+
+### No Action Required
+The transition from WHOIS to RDAP happens at the registrar and registry level. Domain owners don't need to do anything — your domain registration data is automatically served via RDAP.
+
+### Privacy Protection Still Matters
+While RDAP has better privacy features than WHOIS, registrars still vary in how they implement access controls. Enabling domain privacy protection through your registrar remains good practice.
+
+## What RDAP Means for Brand Protection
+
+If you're monitoring for trademark infringement or domain squatting:
+
+- RDAP makes automated monitoring more reliable (structured data)
+- But privacy protections make it harder to identify domain registrants
+- You may need to file formal requests to unmask registrant data
+- Law enforcement and trademark holders can request authenticated access
+
+## The Transition Timeline
+
+- **2015-2019:** RDAP specification finalized and early adoption
+- **2019-2023:** ICANN mandated RDAP support for gTLD registries and registrars
+- **2024-2026:** WHOIS being phased out; RDAP becoming the primary protocol
+- **2027+:** Expected full deprecation of WHOIS for gTLDs
+
+Some ccTLDs are transitioning at their own pace.
+
+## Practical Takeaways
+
+1. **RDAP is not something you need to "switch to"** — it happens automatically
+2. **Your privacy settings still matter** — enable domain privacy at your registrar
+3. **If you build tools that query domain data**, migrate from WHOIS to RDAP APIs
+4. **Brand monitoring tools** should support RDAP for more reliable data
+
+## Protect Your Brand Across All Channels
+
+Domain lookup tools like RDAP help you research existing domains. But for checking whether your brand name is available across domains, social media, and trademarks, use [BrandScout](/) — one search covers all the platforms your brand needs.

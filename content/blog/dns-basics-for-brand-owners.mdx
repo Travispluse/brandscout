@@ -1,0 +1,124 @@
+---
+title: "DNS Basics for Brand Owners: What You Need to Know"
+date: "2026-02-16"
+excerpt: "DNS turns your domain name into a working website. Learn the DNS fundamentals every brand owner should understand to manage their online presence effectively."
+---
+
+## What Is DNS and Why Should You Care?
+
+DNS stands for Domain Name System. It's the internet's phone book — it translates human-readable domain names (yourbrand.com) into IP addresses (192.168.1.1) that computers use to find websites.
+
+As a brand owner, you don't need to become a DNS expert. But understanding the basics helps you manage your website, email, and online services without depending entirely on tech support.
+
+## How DNS Works (Simply)
+
+1. Someone types yourbrand.com into their browser
+2. Their computer asks a DNS server: "What's the IP address for yourbrand.com?"
+3. The DNS server responds with the IP address
+4. The browser connects to that IP address and loads your website
+
+This happens in milliseconds, thousands of times a day for every website on the internet.
+
+## Key DNS Records Every Brand Owner Should Know
+
+### A Record
+
+Points your domain to an IP address. This is the most fundamental record — it tells the internet where your website lives.
+
+**Example:** yourbrand.com → 104.21.55.123
+
+### CNAME Record
+
+Points a subdomain to another domain name. Commonly used for "www" and third-party services.
+
+**Example:** www.yourbrand.com → yourbrand.com
+
+### MX Record
+
+Directs email to your mail server. Without MX records, email sent to you@yourbrand.com won't arrive.
+
+**Example:** yourbrand.com → mail.google.com (for Google Workspace)
+
+### TXT Record
+
+Stores text information. Used for email authentication (SPF, DKIM, DMARC) and domain verification.
+
+**Example:** Proving to Google that you own yourbrand.com for Search Console.
+
+### NS Record
+
+Specifies which name servers are authoritative for your domain. Usually set automatically by your domain registrar.
+
+## Where to Manage Your DNS
+
+DNS can be managed at:
+
+1. **Your domain registrar** (GoDaddy, Namecheap, Google Domains)
+2. **A dedicated DNS provider** (Cloudflare, Route 53, DNSimple)
+3. **Your web host** (if they manage DNS for you)
+
+Many brand owners use Cloudflare for DNS because it's free, fast, and includes DDoS protection.
+
+## Common DNS Tasks for Brand Owners
+
+### Connecting Your Domain to a Website
+
+When you build a website on Squarespace, WordPress, or Shopify, you'll need to point your domain to their servers. This involves:
+
+1. Adding an A record or CNAME record provided by your website builder
+2. Waiting for propagation (usually under an hour, sometimes up to 48 hours)
+
+### Setting Up Email
+
+To use email with your custom domain (you@yourbrand.com):
+
+1. Add MX records from your email provider
+2. Add TXT records for SPF and DKIM authentication
+3. Verify the setup by sending a test email
+
+### Verifying Domain Ownership
+
+Services like Google Search Console and Facebook Business require you to prove you own your domain by adding a specific TXT record.
+
+## DNS Propagation
+
+When you change DNS records, the update doesn't happen instantly. DNS propagation — the time it takes for changes to spread across the internet — can take:
+
+- **Minutes** with providers like Cloudflare
+- **Up to 48 hours** in worst cases
+
+During propagation, some users may see the old site and others the new one. This is normal.
+
+## DNS Security Basics
+
+### DNSSEC
+
+DNS Security Extensions authenticate DNS responses, preventing attackers from redirecting your visitors to malicious sites. Enable DNSSEC through your registrar if available.
+
+### Lock Your Domain
+
+Enable registrar lock (clientTransferProhibited) to prevent unauthorized domain transfers. This is a basic but essential security measure.
+
+### Use Two-Factor Authentication
+
+Protect your registrar and DNS provider accounts with 2FA. If someone gains access to your DNS, they control your entire online presence.
+
+## DNS Mistakes to Avoid
+
+- **Deleting records you don't understand** — If you're unsure, don't delete it
+- **Long TTL values for records you change frequently** — Lower TTL means faster propagation
+- **Forgetting to update DNS when switching providers** — Your site goes down
+- **Not backing up DNS records** — Screenshot or export your records periodically
+
+## Your DNS Checklist
+
+- [ ] Domain registered and accessible
+- [ ] DNS managed by a reliable provider
+- [ ] A/CNAME records pointing to your website
+- [ ] MX records configured for email
+- [ ] SPF, DKIM, and DMARC records set up
+- [ ] DNSSEC enabled
+- [ ] Domain transfer lock enabled
+- [ ] 2FA on registrar account
+
+Before managing DNS, you need the right domain. Use [BrandScout](/) to find an available domain for your brand, then set up DNS to bring it to life.

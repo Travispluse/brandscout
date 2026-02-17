@@ -1,0 +1,175 @@
+---
+title: "Google Workspace for Brand Email: Complete Setup Guide"
+date: "2026-02-16"
+excerpt: "Google Workspace gives your brand a professional email address with Gmail's familiar interface. Follow this step-by-step guide to set it up correctly."
+---
+
+## Why Google Workspace for Your Brand
+
+Google Workspace (formerly G Suite) is the most popular business email solution for good reason. You get Gmail's powerful interface with your custom domain, plus Google Drive, Calendar, Meet, and Docs — everything a new brand needs to operate professionally.
+
+## Plans and Pricing
+
+### Business Starter ($7/user/month)
+
+- 30GB storage per user
+- Custom email (you@yourbrand.com)
+- Google Meet (100 participants)
+- Google Drive, Docs, Sheets, Slides
+
+**Best for:** Solo entrepreneurs and small teams.
+
+### Business Standard ($14/user/month)
+
+- 2TB storage per user
+- Recording in Google Meet
+- Shared drives for team storage
+
+**Best for:** Growing teams needing more storage and collaboration.
+
+### Business Plus ($22/user/month)
+
+- 5TB storage per user
+- Advanced security features
+- Vault for e-discovery and retention
+
+**Best for:** Businesses with compliance requirements.
+
+For most new brands, Business Starter is more than enough.
+
+## Step-by-Step Setup
+
+### 1. Sign Up
+
+Visit workspace.google.com and start a trial. You'll need:
+- Your business name
+- Number of employees
+- Your domain name (yourbrand.com)
+
+If you don't have a domain yet, check availability with [BrandScout](/) first.
+
+### 2. Verify Your Domain
+
+Google needs to confirm you own the domain. Options:
+- Add a TXT record to your DNS (most common)
+- Upload an HTML file to your website
+- Add a meta tag to your homepage
+
+The TXT record method is simplest. Google provides the exact record to add.
+
+### 3. Configure MX Records
+
+Replace your existing MX records with Google's:
+
+| Priority | Server |
+|----------|--------|
+| 1 | ASPMX.L.GOOGLE.COM |
+| 5 | ALT1.ASPMX.L.GOOGLE.COM |
+| 5 | ALT2.ASPMX.L.GOOGLE.COM |
+| 10 | ALT3.ASPMX.L.GOOGLE.COM |
+| 10 | ALT4.ASPMX.L.GOOGLE.COM |
+
+These tell email servers to deliver your mail to Google's servers.
+
+### 4. Set Up SPF
+
+Add this TXT record to your DNS:
+```
+v=spf1 include:_spf.google.com ~all
+```
+
+This authorizes Google to send email on behalf of your domain.
+
+### 5. Enable DKIM
+
+In the Google Admin Console:
+1. Go to Apps → Google Workspace → Gmail
+2. Click "Authenticate email"
+3. Generate a DKIM key
+4. Add the provided TXT record to your DNS
+5. Start authentication
+
+### 6. Configure DMARC
+
+Add a TXT record for _dmarc.yourbrand.com:
+```
+v=DMARC1; p=none; rua=mailto:dmarc@yourbrand.com
+```
+
+Start with `p=none` (monitor only) and move to `p=reject` once you've verified everything works.
+
+### 7. Create User Accounts
+
+In the Admin Console, add users. Each user gets:
+- An email address (name@yourbrand.com)
+- Access to all Google Workspace apps
+- Their own storage allocation
+
+## Essential Email Addresses to Create
+
+- **hello@ or info@** — General inquiries
+- **support@** — Customer service
+- **admin@** — Account management (keep private)
+- **yourname@** — Your personal business email
+
+Set up email aliases (free) for addresses that should forward to a real user.
+
+## Google Workspace Tips for Brand Owners
+
+### Custom Email Signatures
+
+Create a branded signature with:
+- Your name and title
+- Company name and logo
+- Phone number and website
+- Social media links
+
+Use Google Workspace's signature editor or a tool like WiseStamp.
+
+### Groups for Team Email
+
+Create Google Groups for shared addresses. support@yourbrand.com can deliver to multiple team members without needing separate accounts.
+
+### Drive for Brand Assets
+
+Use Google Drive to organize:
+- Brand guidelines and logos
+- Marketing materials
+- Contracts and proposals
+- Shared team resources
+
+### Calendar for Scheduling
+
+Set up a branded calendar for:
+- Client meetings
+- Content publishing schedules
+- Team meetings
+
+## Migrating From Gmail
+
+If you've been using a personal Gmail account:
+1. Set up Google Workspace with your domain
+2. Use the data migration tool to import old emails
+3. Update your email address with clients and services
+4. Set up forwarding from your old Gmail to your new address
+
+## Common Setup Mistakes
+
+- **Not waiting for DNS propagation** — MX record changes can take up to 48 hours
+- **Forgetting to set up SPF/DKIM** — Your emails may land in spam
+- **Using the wrong MX priority values** — Follow Google's exact specifications
+- **Not testing before announcing** — Send test emails to Gmail, Outlook, and Yahoo
+
+## Your Google Workspace Checklist
+
+- [ ] Account created and trial started
+- [ ] Domain verified
+- [ ] MX records configured
+- [ ] SPF record added
+- [ ] DKIM enabled and configured
+- [ ] DMARC record added
+- [ ] User accounts created
+- [ ] Email signatures set up
+- [ ] Test emails sent and verified
+
+Start with the right domain. Use [BrandScout](/) to find an available domain for your brand, then set up Google Workspace for professional email that builds credibility with every message you send.

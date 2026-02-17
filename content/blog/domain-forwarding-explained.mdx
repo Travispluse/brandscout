@@ -1,0 +1,126 @@
+---
+title: "Domain Forwarding Explained: When and How to Use It"
+date: "2026-02-16"
+excerpt: "Domain forwarding redirects visitors from one domain to another. Learn when to use it, the different types, and how it affects your brand and SEO."
+---
+
+## What Is Domain Forwarding?
+
+Domain forwarding (also called domain redirection) automatically sends visitors from one domain to another. If someone types olddomain.com into their browser, they're instantly taken to newdomain.com.
+
+It's like setting up mail forwarding when you move — messages sent to your old address arrive at your new one.
+
+## When to Use Domain Forwarding
+
+### After a Rebrand
+
+You changed your business name from "Swift Solutions" to "Meridian Group." Forward swiftsolutions.com to meridiangroup.com so existing customers and bookmarks still work.
+
+### Protecting Your Brand
+
+Register common misspellings and forward them to your main domain. If your brand is "Luminex," register "Luminnex.com" and "Luminecks.com" and forward them.
+
+### Multiple TLDs
+
+If you own yourbrand.com, yourbrand.co, and yourbrand.net, forward the alternatives to your primary .com domain.
+
+### Marketing Campaigns
+
+Use short, memorable domains for campaigns. "TryMeridian.com" can forward to meridiangroup.com/promo for a specific campaign.
+
+### Consolidating Properties
+
+If you have multiple websites, you might consolidate into one and forward the old domains.
+
+## Types of Domain Forwarding
+
+### 301 Redirect (Permanent)
+
+A 301 redirect tells search engines that the domain has permanently moved. This transfers SEO value (link equity) from the old domain to the new one.
+
+**Use when:** You've permanently moved to a new domain and want to pass SEO authority.
+
+### 302 Redirect (Temporary)
+
+A 302 redirect tells search engines the move is temporary. SEO value stays with the original domain.
+
+**Use when:** You're temporarily sending traffic elsewhere (during maintenance, seasonal campaigns).
+
+### URL Masking (Frame Forwarding)
+
+The forwarded domain stays in the browser's URL bar while displaying the destination site in a frame. The visitor sees olddomain.com but gets content from newdomain.com.
+
+**Use with caution:** URL masking can confuse search engines and cause SEO problems. It's generally not recommended.
+
+## How to Set Up Domain Forwarding
+
+### Through Your Registrar
+
+Most registrars (GoDaddy, Namecheap, Google Domains) offer forwarding in the domain management panel:
+
+1. Log into your registrar account
+2. Select the domain to forward
+3. Enter the destination URL
+4. Choose redirect type (301 or 302)
+5. Save and wait for DNS propagation
+
+### Through DNS (More Control)
+
+For more granular control, use DNS-level redirects:
+
+1. Point your domain to a web server or service
+2. Configure redirect rules on the server
+3. This allows path-level forwarding (olddomain.com/page → newdomain.com/specific-page)
+
+### Through Cloudflare
+
+If your DNS is on Cloudflare, use Page Rules:
+
+1. Add a page rule for the domain
+2. Set "Forwarding URL" with a 301 redirect
+3. Enter the destination URL
+
+## Domain Forwarding and SEO
+
+### 301 Redirects Pass Authority
+
+When you 301 redirect, search engines transfer most of the SEO value from the old domain to the new one. This includes:
+- Backlinks pointing to the old domain
+- Domain authority
+- Page rankings (gradually)
+
+### Keep Old Domains Registered
+
+Even after forwarding, keep paying for the old domain. If you let it expire, someone else can register it and potentially harm your brand.
+
+### Don't Chain Redirects
+
+Domain A → Domain B → Domain C creates a redirect chain. Each hop loses some SEO value and slows down the user experience. Redirect directly from A to C.
+
+## Common Domain Forwarding Mistakes
+
+- **Using 302 when you need 301** — Temporary redirects don't pass SEO authority
+- **Forgetting subdomains** — Forward www.olddomain.com too, not just olddomain.com
+- **Not forwarding email** — Domain forwarding only handles web traffic. Set up separate email forwarding.
+- **Letting old domains expire** — Someone else can grab them and redirect to malicious content
+
+## Path Forwarding
+
+Advanced forwarding can preserve URL paths:
+
+- olddomain.com/about → newdomain.com/about
+- olddomain.com/blog/post-title → newdomain.com/blog/post-title
+
+This is important for SEO because search engines have indexed specific pages, not just the root domain. Most registrar-level forwarding only redirects to the root. For path forwarding, you'll need DNS-level or server-level configuration.
+
+## Your Domain Forwarding Checklist
+
+- [ ] Forwarding type selected (301 for permanent, 302 for temporary)
+- [ ] Redirect configured at registrar or DNS level
+- [ ] Subdomains included in forwarding rules
+- [ ] Path forwarding set up if needed
+- [ ] Email forwarding configured separately
+- [ ] Old domain registration maintained
+- [ ] Tested from multiple browsers and locations
+
+Managing multiple domains starts with finding the right primary domain. Use [BrandScout](/) to verify availability for your brand name, then set up forwarding for any additional domains you register.

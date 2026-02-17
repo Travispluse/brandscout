@@ -1,0 +1,171 @@
+---
+title: "Analytics Setup for New Brands: Measure What Matters"
+date: "2026-02-16"
+excerpt: "You can't improve what you don't measure. Learn how to set up analytics correctly for your new brand website so you make data-driven decisions from day one."
+---
+
+## Why Analytics From Day One
+
+Every visitor to your new website tells a story: where they came from, what they looked at, and whether they took action. Without analytics, you're guessing. With analytics, you're making informed decisions about content, marketing, and product development.
+
+## Google Analytics 4 (GA4) Setup
+
+GA4 is the current version of Google Analytics. It's free and the industry standard for website analytics.
+
+### Step 1: Create a Google Analytics Account
+
+1. Go to analytics.google.com
+2. Click "Start measuring"
+3. Enter your account name (your brand name)
+4. Configure data sharing settings
+5. Click Next
+
+### Step 2: Create a Property
+
+1. Enter your property name (your website name)
+2. Set your time zone and currency
+3. Answer the business questions
+4. Accept the terms of service
+
+### Step 3: Set Up a Data Stream
+
+1. Select "Web" as your platform
+2. Enter your website URL
+3. Name your stream
+4. Click "Create stream"
+
+### Step 4: Install the Tracking Code
+
+GA4 gives you a Measurement ID (G-XXXXXXXXXX). Install it on your site:
+
+**Website builders:**
+- **Squarespace:** Settings → Advanced → External API Keys → Google Analytics ID
+- **WordPress:** Use a plugin like Site Kit by Google or manually add to your theme
+- **Shopify:** Online Store → Preferences → Google Analytics
+- **Webflow:** Project Settings → Integrations → Google Analytics
+
+**Manual installation:** Add the Google tag (gtag.js) snippet to every page's head section.
+
+### Step 5: Verify Installation
+
+1. Visit your website in a new browser tab
+2. In GA4, go to Reports → Realtime
+3. You should see yourself as an active user
+
+## Essential GA4 Configuration
+
+### Set Up Conversions
+
+Conversions track the actions that matter most to your business:
+
+- Form submissions
+- Product purchases
+- Newsletter signups
+- Phone calls
+- Button clicks
+
+In GA4, mark key events as conversions in Admin → Events.
+
+### Configure Enhanced Measurement
+
+GA4 automatically tracks:
+- Page views
+- Scrolls
+- Outbound clicks
+- Site search
+- Video engagement
+- File downloads
+
+Enable all of these in Admin → Data Streams → Enhanced Measurement.
+
+### Exclude Internal Traffic
+
+Filter out your own visits to keep data clean:
+
+1. Go to Admin → Data Streams → your stream
+2. Configure Tag Settings → Define internal traffic
+3. Add your IP address
+4. Create a data filter to exclude internal traffic
+
+### Link Google Search Console
+
+Connect GSC to GA4 for combined search and behavior data:
+
+1. Go to Admin → Product Links → Search Console Links
+2. Select your Search Console property
+3. Link them together
+
+## Other Analytics Tools to Consider
+
+### Google Tag Manager (GTM)
+
+**What it does:** Manages all your tracking codes in one place — GA4, Facebook Pixel, LinkedIn, etc.
+
+**Why use it:** Adding and updating tracking codes without editing your website's code. Essential once you're running multiple marketing channels.
+
+### Microsoft Clarity
+
+**Cost:** Free
+**What it does:** Session recordings and heatmaps showing how visitors interact with your pages.
+
+**Why use it:** See exactly where people click, how far they scroll, and where they get confused. Invaluable for improving your website.
+
+### Plausible or Fathom
+
+**Cost:** Starting at $9/month
+**What they do:** Privacy-focused analytics alternatives to Google Analytics.
+
+**Why use them:** If you prefer not to send data to Google, these tools provide essential metrics without cookies.
+
+## Key Metrics for New Brands
+
+Focus on these metrics initially:
+
+### Traffic Metrics
+- **Users:** How many unique visitors?
+- **Sessions:** How many total visits?
+- **Traffic sources:** Where do visitors come from?
+
+### Engagement Metrics
+- **Engagement rate:** Percentage of engaged sessions (replaced bounce rate)
+- **Average engagement time:** How long do visitors actively interact?
+- **Pages per session:** How deep do visitors explore?
+
+### Conversion Metrics
+- **Conversion rate:** What percentage of visitors take your desired action?
+- **Conversion sources:** Which channels drive the most conversions?
+
+## Building a Dashboard
+
+Create a simple dashboard you check weekly:
+
+1. **Traffic overview** — Users, sessions, new vs. returning
+2. **Top traffic sources** — Organic, direct, social, referral
+3. **Top pages** — Which content performs best?
+4. **Conversions** — How many goal completions?
+5. **Device breakdown** — Mobile vs. desktop
+
+In GA4, use the "Library" section to customize your reports.
+
+## Common Analytics Mistakes
+
+- **Not filtering internal traffic** — Your own visits skew the data
+- **Tracking everything but analyzing nothing** — Focus on actionable metrics
+- **Making decisions on too little data** — Wait for statistical significance
+- **Ignoring mobile** — Check mobile behavior separately
+- **Not setting up conversions** — Traffic without goals is vanity metrics
+
+## Your Analytics Setup Checklist
+
+- [ ] GA4 account and property created
+- [ ] Tracking code installed on all pages
+- [ ] Installation verified with Realtime report
+- [ ] Conversions configured for key actions
+- [ ] Enhanced measurement enabled
+- [ ] Internal traffic filtered
+- [ ] Google Search Console linked
+- [ ] Google Tag Manager set up (optional but recommended)
+- [ ] Microsoft Clarity installed (optional but valuable)
+- [ ] Weekly review routine established
+
+Analytics starts with having a website, and a website starts with a domain. Use [BrandScout](/) to find an available domain for your brand, build your site, and set up analytics to measure your growth from the very first visitor.

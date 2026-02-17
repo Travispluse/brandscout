@@ -1,0 +1,213 @@
+---
+title: "Schema Markup for Local Business: Get Rich Results in Google"
+date: "2026-02-16"
+excerpt: "Schema markup helps Google understand your business and display rich results. Learn how to add local business schema to boost your search visibility."
+---
+
+## What Is Schema Markup?
+
+Schema markup is structured data you add to your website's code that helps search engines understand your content. For local businesses, it tells Google your business name, address, phone number, hours, reviews, and more — in a format machines can read.
+
+The result: rich search results that stand out with star ratings, business hours, and other details directly in Google.
+
+## Why Local Businesses Need Schema
+
+### Rich Results
+
+With schema markup, your Google listing can display:
+- Star ratings from reviews
+- Business hours (including if you're currently open)
+- Price ranges
+- Phone number (click-to-call on mobile)
+- Address with map link
+
+These enhanced listings get significantly more clicks than plain blue links.
+
+### Knowledge Panel Enhancement
+
+Schema helps Google build your Knowledge Panel — the information box that appears on the right side of search results when someone searches your business name.
+
+### Voice Search Optimization
+
+When someone asks Google Assistant or Alexa about your business, structured data provides the answers. "What time does [business] close?" pulls from your schema markup.
+
+## Essential Local Business Schema
+
+### LocalBusiness Schema
+
+The core schema type for any local business:
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Your Brand Name",
+  "description": "Brief description of your business",
+  "url": "https://yourbrand.com",
+  "telephone": "+1-555-123-4567",
+  "email": "hello@yourbrand.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "123 Main Street",
+    "addressLocality": "Sacramento",
+    "addressRegion": "CA",
+    "postalCode": "95814",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 38.5816,
+    "longitude": -121.4944
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "09:00",
+      "closes": "17:00"
+    }
+  ],
+  "image": "https://yourbrand.com/images/storefront.jpg",
+  "priceRange": "$$"
+}
+```
+
+### Use Specific Business Types
+
+Instead of generic "LocalBusiness," use a more specific type:
+
+- Restaurant
+- Dentist
+- Plumber
+- RealEstateAgent
+- AutoRepair
+- BarberShop
+- BeautySalon
+
+Specific types enable additional properties and richer results.
+
+## Additional Schema Types to Add
+
+### Review/AggregateRating
+
+Display star ratings in search results:
+
+```json
+"aggregateRating": {
+  "@type": "AggregateRating",
+  "ratingValue": "4.8",
+  "reviewCount": "127"
+}
+```
+
+**Important:** Only use this if you have real reviews on your site. Fake ratings violate Google's guidelines and can result in penalties.
+
+### FAQ Schema
+
+If your page has frequently asked questions:
+
+```json
+{
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What are your hours?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We're open Monday through Friday, 9 AM to 5 PM."
+      }
+    }
+  ]
+}
+```
+
+FAQ schema can earn your page expandable question-and-answer sections in search results.
+
+### Service Schema
+
+List specific services you offer:
+
+```json
+"hasOfferCatalog": {
+  "@type": "OfferCatalog",
+  "name": "Services",
+  "itemListElement": [
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Teeth Cleaning",
+        "description": "Professional dental cleaning service"
+      }
+    }
+  ]
+}
+```
+
+## How to Add Schema to Your Website
+
+### JSON-LD (Recommended)
+
+Add a script tag in your page's head or body:
+
+```html
+<script type="application/ld+json">
+{
+  // Your schema here
+}
+</script>
+```
+
+JSON-LD is Google's preferred format because it's separate from your HTML content.
+
+### WordPress Plugins
+
+If you're on WordPress, plugins simplify schema:
+- **Yoast SEO** — Adds basic schema automatically
+- **Rank Math** — Comprehensive schema support
+- **Schema Pro** — Dedicated schema plugin
+
+### Website Builders
+
+- **Squarespace:** Adds basic business schema automatically
+- **Wix:** Has a structured data section in SEO settings
+- **Shopify:** Product schema is built-in; local business needs manual addition
+
+## Testing Your Schema
+
+### Google Rich Results Test
+
+Visit search.google.com/test/rich-results and enter your URL. It shows:
+- Which schema types it found
+- Whether they're valid
+- Which rich results you're eligible for
+
+### Schema Markup Validator
+
+Visit validator.schema.org to check your JSON-LD syntax.
+
+### Google Search Console
+
+The Enhancements section shows schema-related issues across your entire site.
+
+## Common Schema Mistakes
+
+- **Mismatched data** — Your schema says you're open until 9 PM but your website says 8 PM
+- **Using review schema without real reviews** — Google penalizes fake structured data
+- **Forgetting to update** — Changed your hours? Update the schema too
+- **Invalid JSON** — A missing comma breaks the entire block
+
+## Your Local Business Schema Checklist
+
+- [ ] LocalBusiness (or specific type) schema added
+- [ ] NAP (Name, Address, Phone) matches Google Business Profile exactly
+- [ ] Opening hours specified
+- [ ] Geo coordinates included
+- [ ] Image URL included
+- [ ] Tested with Rich Results Test
+- [ ] AggregateRating added (if you have real reviews)
+- [ ] FAQ schema on relevant pages
+- [ ] Service schema for your offerings
+
+Schema markup helps Google showcase your brand in search. But first, you need a brand. Use [BrandScout](/) to find an available name and domain, then add schema to make your business stand out in search results.

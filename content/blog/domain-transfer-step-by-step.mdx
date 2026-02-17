@@ -1,0 +1,103 @@
+---
+title: "Domain Transfer Step by Step: Move Your Domain Without Downtime"
+date: "2026-02-16"
+excerpt: "A complete step-by-step guide to transferring your domain between registrars safely, including how to avoid downtime and common transfer issues."
+---
+
+# Domain Transfer Step by Step: Move Your Domain Without Downtime
+
+Transferring a domain between registrars sounds intimidating, but it's a straightforward process once you understand the steps. Whether you're consolidating domains, switching to a better registrar, or completing a purchase, this guide walks you through it.
+
+## Why Transfer a Domain?
+
+Common reasons to transfer include:
+
+- **Better pricing** — Your current registrar charges too much for renewals
+- **Consolidation** — You want all domains under one account
+- **Better tools** — Another registrar offers superior DNS management, SSL, or support
+- **Completed purchase** — You bought a domain and need to move it to your registrar
+
+## Before You Start
+
+### Check Transfer Eligibility
+
+Domains cannot be transferred if they:
+
+- Were registered or transferred within the last 60 days (ICANN rule)
+- Are within 60 days of a WHOIS contact change (some registrars)
+- Are expired (must renew first)
+- Have a registrar lock enabled (must unlock)
+- Are in certain extensions that have different rules (.uk, some ccTLDs)
+
+### Prepare Your DNS Records
+
+Document your current DNS settings — A records, CNAME records, MX records, TXT records. While DNS usually transfers smoothly, having a backup prevents issues.
+
+## Step-by-Step Transfer Process
+
+### Step 1: Unlock the Domain
+
+Log into your current registrar and disable the domain lock (also called "registrar lock" or "transfer lock"). This is usually in domain settings.
+
+### Step 2: Get the Authorization Code
+
+Request an EPP code (also called auth code or transfer key) from your current registrar. This code proves you own the domain and authorizes the transfer. Most registrars display it in your dashboard; some email it to you.
+
+### Step 3: Initiate the Transfer at Your New Registrar
+
+Go to your new registrar's transfer page, enter your domain name, and provide the authorization code. You'll typically pay for one year of registration as part of the transfer.
+
+### Step 4: Verify the Transfer Request
+
+Both the current and new registrar will send confirmation emails to the domain's admin contact. Approve the transfer from both sides to speed things up.
+
+### Step 5: Wait for Processing
+
+Transfers typically take 5-7 days. Some registrars process faster if both parties approve promptly. During this time, your website and email continue working normally — DNS settings carry over.
+
+### Step 6: Verify Completion
+
+Once complete, your domain will appear in your new registrar's dashboard. Verify that all DNS records transferred correctly and that your website resolves properly.
+
+## Avoiding Downtime
+
+The biggest fear during transfers is website downtime. Here's how to prevent it:
+
+- **Don't change nameservers during transfer** — Wait until the transfer completes
+- **Keep your old hosting active** — Don't cancel until you've verified everything works at the new registrar
+- **Lower TTL values before transfer** — Set DNS TTL to 300 seconds (5 minutes) a day before transferring, so changes propagate quickly
+- **Test after transfer** — Use tools like dig or whatsmydns.net to verify DNS resolution
+
+## Common Issues and Fixes
+
+### Transfer Rejected
+
+Usually caused by a locked domain or wrong auth code. Double-check both and try again.
+
+### No Confirmation Email
+
+Check spam folders. If the WHOIS email is outdated, update it at your current registrar first (note: this may trigger a 60-day transfer lock with some registrars).
+
+### Transfer Stuck in Pending
+
+Some registrars hold transfers for the full 5-day period. Contact your old registrar and ask them to release it early.
+
+### DNS Not Working After Transfer
+
+Your DNS records may not have carried over automatically. Manually re-enter them at your new registrar.
+
+## Special Cases
+
+### Transferring Within the Same Registrar
+
+Moving between accounts at the same registrar (like two GoDaddy accounts) is usually simpler — often just an account change request without an auth code.
+
+### Country-Code Domain Transfers
+
+ccTLDs like .uk, .de, and .au have their own transfer procedures that may differ from the standard process. Check the specific registry's requirements.
+
+## Get Your Brand Foundation Right
+
+If you're transferring domains as part of building a brand, make sure your name works everywhere it needs to. Domains are just one piece of the puzzle.
+
+Try [BrandScout](/) to check your brand name's availability across domains and social media platforms in one search.

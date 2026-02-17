@@ -1,0 +1,154 @@
+---
+title: "Google Search Console Setup: A Step-by-Step Guide for New Brands"
+date: "2026-02-16"
+excerpt: "Google Search Console is essential for understanding how Google sees your website. Follow this step-by-step guide to set it up correctly for your brand."
+---
+
+## What Is Google Search Console?
+
+Google Search Console (GSC) is a free tool from Google that shows you how your website performs in Google Search. It tells you what keywords bring traffic, which pages are indexed, and any issues preventing your site from ranking.
+
+For new brands, it's the most important free SEO tool you'll set up.
+
+## What Google Search Console Shows You
+
+- **Search performance:** Keywords, clicks, impressions, average position
+- **Index coverage:** Which pages Google has indexed and which it hasn't
+- **Mobile usability:** Whether your site works well on mobile devices
+- **Core Web Vitals:** Page speed and user experience metrics
+- **Links:** Who links to your site and your internal linking structure
+- **Security issues:** If Google detects malware or hacking
+
+## Step-by-Step Setup
+
+### Step 1: Create a Google Account
+
+If you don't already have one, create a Google account at accounts.google.com.
+
+### Step 2: Go to Search Console
+
+Visit search.google.com/search-console and click "Start Now."
+
+### Step 3: Add Your Property
+
+You'll see two options:
+
+**Domain property (recommended):** Covers all subdomains and protocols (http, https, www, non-www). Requires DNS verification.
+
+**URL prefix property:** Covers only the exact URL you enter. Offers multiple verification methods.
+
+For most brands, choose Domain property. Enter yourbrand.com (without https:// or www).
+
+### Step 4: Verify Ownership
+
+For domain properties, you'll need to add a TXT record to your DNS:
+
+1. Copy the TXT record Google provides
+2. Go to your DNS provider (Cloudflare, your registrar, etc.)
+3. Add a new TXT record with the value Google gave you
+4. Wait for DNS propagation (minutes to hours)
+5. Click "Verify" in Search Console
+
+For URL prefix properties, you can also verify via:
+- HTML file upload
+- HTML meta tag
+- Google Analytics
+- Google Tag Manager
+
+### Step 5: Submit Your Sitemap
+
+Once verified:
+1. Go to Sitemaps in the left menu
+2. Enter your sitemap URL (usually yourbrand.com/sitemap.xml)
+3. Click Submit
+
+This tells Google about all the pages on your site.
+
+## Understanding the Dashboard
+
+### Performance Report
+
+The most valuable section. It shows:
+
+- **Queries:** What people searched for to find your site
+- **Pages:** Which of your pages appear in search results
+- **Countries:** Where your traffic comes from
+- **Devices:** Desktop vs. mobile vs. tablet
+- **Dates:** Performance over time
+
+Filter and compare data to find trends and opportunities.
+
+### Index Coverage Report
+
+Shows the status of your pages:
+
+- **Valid:** Pages Google has indexed
+- **Valid with warnings:** Indexed but with potential issues
+- **Excluded:** Pages Google chose not to index (and why)
+- **Error:** Pages Google couldn't index
+
+Check this weekly to catch issues early.
+
+### URL Inspection Tool
+
+Enter any URL from your site to see:
+- Whether it's indexed
+- When it was last crawled
+- Any issues Google found
+- Mobile usability status
+
+Use this to troubleshoot specific pages that aren't ranking.
+
+## Key Actions for New Brands
+
+### Request Indexing
+
+After publishing new content, use the URL Inspection tool to request indexing. This doesn't guarantee immediate indexing, but it puts your page in the crawl queue.
+
+### Fix Coverage Errors
+
+If pages show errors in the Coverage report, fix the underlying issues:
+- **404 errors:** Create redirects or fix broken links
+- **Soft 404s:** Add meaningful content to thin pages
+- **Server errors:** Check with your hosting provider
+- **Blocked by robots.txt:** Update your robots.txt file
+
+### Monitor Core Web Vitals
+
+GSC shows your Core Web Vitals scores:
+- **LCP (Largest Contentful Paint):** Page loading speed
+- **INP (Interaction to Next Paint):** Interactivity responsiveness
+- **CLS (Cumulative Layout Shift):** Visual stability
+
+Aim for "Good" status on all three.
+
+### Review Links
+
+The Links report shows:
+- External links pointing to your site
+- Your most linked pages
+- Top linking sites
+- Internal linking structure
+
+Use this to understand your link profile and identify linking opportunities.
+
+## Common Search Console Mistakes
+
+- **Not verifying immediately** — Set up GSC as soon as your domain is live
+- **Ignoring the Coverage report** — Indexing issues silently hurt your rankings
+- **Not submitting a sitemap** — Google can find pages without one, but a sitemap speeds things up
+- **Checking too often** — Data takes two to three days to appear. Don't check hourly.
+- **Only looking at clicks** — Impressions and position trends matter too
+
+## Your Search Console Checklist
+
+- [ ] Google account created
+- [ ] Property added (domain preferred)
+- [ ] Ownership verified via DNS
+- [ ] Sitemap submitted
+- [ ] Initial crawl reviewed
+- [ ] Coverage errors addressed
+- [ ] Core Web Vitals checked
+- [ ] Weekly review routine established
+
+To set up Google Search Console, you need a live website on your own domain. Use [BrandScout](/) to find an available domain, launch your site, then connect GSC to start understanding your search performance.

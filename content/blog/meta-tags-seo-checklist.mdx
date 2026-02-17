@@ -1,0 +1,167 @@
+---
+title: "Meta Tags SEO Checklist: Every Tag Your Brand Website Needs"
+date: "2026-02-16"
+excerpt: "Meta tags tell search engines and social platforms about your pages. Use this complete checklist to ensure your brand website has all the essential meta tags."
+---
+
+## What Are Meta Tags?
+
+Meta tags are HTML elements in your page's head section that provide information about the page to search engines and social media platforms. They're invisible to visitors but crucial for SEO and how your content appears when shared.
+
+## Essential Meta Tags for Every Page
+
+### Title Tag
+
+The most important meta tag for SEO. It appears in search results as the clickable headline.
+
+```html
+<title>Handmade Leather Wallets | YourBrand</title>
+```
+
+**Best practices:**
+- 50–60 characters (longer titles get truncated)
+- Include your primary keyword
+- Make it compelling — this is your search result headline
+- Include your brand name (usually at the end)
+- Unique for every page
+
+### Meta Description
+
+The summary text below the title in search results.
+
+```html
+<meta name="description" content="Shop handcrafted full-grain leather wallets. Free shipping on orders over $50. Made in the USA.">
+```
+
+**Best practices:**
+- 150–160 characters
+- Include primary and secondary keywords naturally
+- Include a call to action
+- Accurately describe the page content
+- Unique for every page
+
+### Viewport Tag
+
+Essential for mobile responsiveness.
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1">
+```
+
+Every modern website needs this. Without it, your site won't display correctly on mobile devices, and Google's mobile-first indexing will penalize you.
+
+### Charset Declaration
+
+Defines the character encoding.
+
+```html
+<meta charset="UTF-8">
+```
+
+Standard on all modern websites. Ensures special characters display correctly.
+
+## Open Graph Tags (Social Sharing)
+
+When someone shares your page on Facebook, LinkedIn, or other platforms, Open Graph tags control what appears.
+
+```html
+<meta property="og:title" content="Handmade Leather Wallets | YourBrand">
+<meta property="og:description" content="Handcrafted full-grain leather wallets. Made in the USA.">
+<meta property="og:image" content="https://yourbrand.com/images/wallet-hero.jpg">
+<meta property="og:url" content="https://yourbrand.com/wallets">
+<meta property="og:type" content="website">
+```
+
+**Best practices:**
+- og:image should be at least 1200x630 pixels
+- og:title can differ from your SEO title (optimize for social appeal)
+- og:description can be more conversational than your meta description
+
+## Twitter Card Tags
+
+Control how your content appears when shared on Twitter/X.
+
+```html
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Handmade Leather Wallets | YourBrand">
+<meta name="twitter:description" content="Handcrafted full-grain leather wallets. Made in the USA.">
+<meta name="twitter:image" content="https://yourbrand.com/images/wallet-hero.jpg">
+```
+
+Use "summary_large_image" for prominent image display or "summary" for a smaller card.
+
+## Robots Meta Tag
+
+Controls how search engines interact with your page.
+
+```html
+<meta name="robots" content="index, follow">
+```
+
+**Common values:**
+- `index, follow` — Index this page and follow its links (default)
+- `noindex, follow` — Don't index but follow links
+- `index, nofollow` — Index but don't follow links
+- `noindex, nofollow` — Don't index or follow
+
+Use noindex for pages you don't want in search results (thank you pages, internal tools, staging sites).
+
+## Canonical Tag
+
+Tells search engines which version of a page is the "original" to prevent duplicate content issues.
+
+```html
+<link rel="canonical" href="https://yourbrand.com/wallets">
+```
+
+**When to use:**
+- Your page is accessible at multiple URLs
+- You have similar content across pages
+- You syndicate content to other sites
+
+## Language and Region Tags
+
+For multilingual or multi-region sites.
+
+```html
+<html lang="en">
+<link rel="alternate" hreflang="en" href="https://yourbrand.com/wallets">
+<link rel="alternate" hreflang="es" href="https://yourbrand.com/es/wallets">
+```
+
+## Tags You Don't Need
+
+### Keywords Meta Tag
+
+```html
+<meta name="keywords" content="...">
+```
+
+Google has ignored this tag since 2009. Don't waste time on it.
+
+### Author Meta Tag
+
+Not a ranking factor. Include author information in your schema markup instead.
+
+## Testing Your Meta Tags
+
+- **Google Rich Results Test** (search.google.com/test/rich-results) — Preview how Google sees your page
+- **Facebook Sharing Debugger** (developers.facebook.com/tools/debug) — Preview Facebook shares
+- **Twitter Card Validator** (cards-dev.twitter.com/validator) — Preview Twitter shares
+
+## Your Meta Tags Checklist
+
+For every page on your site:
+
+- [ ] Title tag (50–60 characters, unique, keyword-included)
+- [ ] Meta description (150–160 characters, unique, compelling)
+- [ ] Viewport tag
+- [ ] Charset declaration
+- [ ] Open Graph tags (title, description, image, URL, type)
+- [ ] Twitter Card tags
+- [ ] Canonical tag
+- [ ] Robots meta tag (if non-default needed)
+- [ ] Language tag
+- [ ] Tested with validation tools
+
+Great SEO starts with a strong domain. Use [BrandScout](/) to find an available domain for your brand, then optimize every page with the right meta tags.

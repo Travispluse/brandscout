@@ -1,0 +1,155 @@
+---
+title: "Page Speed for New Websites: Load Fast From Launch Day"
+date: "2026-02-16"
+excerpt: "Slow websites lose visitors and rankings. Learn how to optimize your new brand website for speed with practical, actionable techniques."
+---
+
+## Speed Is Not Optional
+
+Every second your website takes to load costs you:
+
+- **Visitors:** 53% of mobile users leave after three seconds
+- **Revenue:** Amazon found that every 100ms of latency cost 1% in sales
+- **Rankings:** Google uses Core Web Vitals (including speed) as ranking factors
+
+A new website has no excuse for being slow. Get it right from the start.
+
+## Measuring Your Page Speed
+
+### Google PageSpeed Insights
+
+Visit pagespeed.web.dev and enter your URL. You'll get:
+- A performance score (0–100)
+- Core Web Vitals metrics
+- Specific recommendations for improvement
+
+### Core Web Vitals Explained
+
+**LCP (Largest Contentful Paint):** How long until the main content is visible. Target: under 2.5 seconds.
+
+**INP (Interaction to Next Paint):** How responsive your page is to user input. Target: under 200 milliseconds.
+
+**CLS (Cumulative Layout Shift):** How much the page layout shifts during loading. Target: under 0.1.
+
+### Other Testing Tools
+
+- **GTmetrix** — Detailed performance analysis with waterfall charts
+- **WebPageTest** — Advanced testing from multiple locations
+- **Chrome DevTools** — Built into your browser for real-time analysis
+
+## Image Optimization
+
+Images are usually the biggest files on a webpage. Optimize them aggressively:
+
+### Use Modern Formats
+
+- **WebP** — 25-35% smaller than JPEG at equivalent quality. Supported by all modern browsers.
+- **AVIF** — Even smaller than WebP but less universally supported. Use with WebP fallback.
+
+### Compress Before Uploading
+
+Use tools like:
+- **Squoosh.app** — Google's free image compression tool
+- **TinyPNG** — Batch compression for PNG and JPEG
+- **ImageOptim** — Desktop app for Mac
+
+### Specify Dimensions
+
+Always include width and height attributes on image tags. This prevents layout shifts (improving CLS).
+
+### Lazy Load Images
+
+Only load images when they scroll into view. Most modern browsers support native lazy loading:
+
+```html
+<img src="photo.webp" loading="lazy" alt="Description">
+```
+
+### Responsive Images
+
+Serve different image sizes based on the viewer's screen:
+
+```html
+<img srcset="photo-400.webp 400w, photo-800.webp 800w, photo-1200.webp 1200w" sizes="(max-width: 600px) 400px, 800px" src="photo-800.webp" alt="Description">
+```
+
+## Minimize CSS and JavaScript
+
+### Remove Unused Code
+
+New websites built with frameworks or templates often include CSS and JavaScript for features you don't use. Audit and remove what's unnecessary.
+
+### Minify Files
+
+Minification removes whitespace, comments, and shortens variable names:
+- Use build tools like Vite, Webpack, or esbuild
+- Most website builders handle this automatically
+
+### Defer Non-Critical JavaScript
+
+Scripts that don't affect the initial page load should use the `defer` or `async` attribute:
+
+```html
+<script src="analytics.js" defer></script>
+```
+
+### Critical CSS
+
+Inline the CSS needed for above-the-fold content directly in the HTML. Load the rest asynchronously.
+
+## Hosting and Server Optimization
+
+### Choose Fast Hosting
+
+Your hosting provider directly impacts speed. For new brands:
+- Static hosts (Netlify, Vercel, Cloudflare Pages) are extremely fast
+- Managed WordPress hosts (Kinsta, WP Engine) are optimized for WordPress
+- Avoid the cheapest shared hosting plans — they're usually slow
+
+### Use a CDN
+
+A CDN serves your content from servers closest to the visitor. Cloudflare's free plan includes CDN functionality.
+
+### Enable Compression
+
+Gzip or Brotli compression reduces file sizes during transfer. Most modern hosts and CDNs enable this by default.
+
+### Enable Browser Caching
+
+Set cache headers so returning visitors load assets from their browser cache instead of downloading them again.
+
+## Font Optimization
+
+Custom fonts can significantly slow page loads:
+
+- **Limit font weights** — Load only the weights you use (e.g., 400 and 700)
+- **Use font-display: swap** — Shows text immediately with a fallback font while the custom font loads
+- **Prefer variable fonts** — One file covers multiple weights
+- **Self-host fonts** — Faster than loading from Google Fonts in many cases
+
+## Quick Wins for Maximum Impact
+
+If you're overwhelmed, focus on these five changes for the biggest speed improvement:
+
+1. **Compress and convert images to WebP**
+2. **Enable a CDN (Cloudflare free tier)**
+3. **Lazy load images below the fold**
+4. **Defer non-critical JavaScript**
+5. **Choose fast hosting**
+
+These five optimizations alone can take a slow site from a 40 PageSpeed score to 80+.
+
+## Your Page Speed Checklist
+
+- [ ] PageSpeed Insights score above 90
+- [ ] All Core Web Vitals in "Good" range
+- [ ] Images optimized (WebP, compressed, lazy loaded)
+- [ ] CSS and JavaScript minified
+- [ ] Non-critical scripts deferred
+- [ ] CDN enabled
+- [ ] Compression enabled (Gzip or Brotli)
+- [ ] Browser caching configured
+- [ ] Fonts optimized
+- [ ] Tested on mobile and desktop
+
+A fast website starts with the right foundation. Use [BrandScout](/) to secure your domain, then build a site that loads in under two seconds.
