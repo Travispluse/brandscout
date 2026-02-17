@@ -24,6 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <nav className="flex gap-6 text-sm text-muted-foreground">
               <a href="/" className="hover:text-foreground transition-colors">Search</a>
               <a href="/blog" className="hover:text-foreground transition-colors">Blog</a>
+              <a href="/docs" className="hover:text-foreground transition-colors">API</a>
             </nav>
           </div>
         </header>
