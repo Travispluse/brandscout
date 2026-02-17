@@ -201,7 +201,7 @@ export default function AIGeneratorPage() {
       <p className="text-muted-foreground mb-8">Generate brand names and taglines instantly — no AI API needed, runs entirely in your browser.</p>
 
       {/* Tabs */}
-      <div className="flex gap-1 mb-8 bg-surface rounded-xl p-1 w-fit">
+      <div className="flex gap-1 mb-8 bg-surface rounded-xl p-1 w-full sm:w-fit overflow-x-auto">
         <button
           onClick={() => setTab("names")}
           className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab === "names" ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"}`}

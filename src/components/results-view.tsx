@@ -84,12 +84,12 @@ function FilterBar({ value, onChange }: { value: StatusFilter; onChange: (v: Sta
   ];
 
   return (
-    <div className="flex gap-1">
+    <div className="flex gap-1 flex-wrap">
       {filters.map((f) => (
         <button
           key={f.value}
           onClick={() => onChange(f.value)}
-          className={`text-xs px-2.5 py-1 rounded-lg transition-colors ${
+          className={`text-xs px-2.5 py-1.5 rounded-lg transition-colors min-h-[44px] sm:min-h-0 ${
             value === f.value
               ? "bg-foreground text-background"
               : "bg-surface text-muted-foreground hover:text-foreground"
@@ -487,7 +487,7 @@ function AvailabilityHeatmap({ domains, usernames }: { domains: { domain: string
         <CardTitle className="text-lg">Availability Heatmap</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap gap-1.5 overflow-x-auto">
           {items.map((item, i) => (
             <div
               key={i}
@@ -653,18 +653,18 @@ export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults;
     <div className="space-y-6 w-full max-w-4xl">
       {/* Score Summary */}
       <Card className="rounded-xl">
-        <CardContent className="flex items-center gap-8 p-6">
-          <div className="relative">
+        <CardContent className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-8 p-4 sm:p-6">
+          <div className="relative shrink-0">
             <ScoreRing score={data.score} />
             <span className="absolute -top-1 -right-1"><InfoTooltip text="Score is based on 40% platform availability, 30% domain quality, 20% readability, 10% length" /></span>
           </div>
-          <div className="flex-1">
-            <div className="flex items-center gap-2">
-              <h2 className="text-2xl font-semibold">{data.query}</h2>
+          <div className="flex-1 min-w-0 w-full">
+            <div className="flex items-center gap-2 flex-wrap">
+              <h2 className="text-xl sm:text-2xl font-semibold break-all">{data.query}</h2>
               <FavoriteButton data={data} />
             </div>
-            <div className="flex items-center gap-3 mt-1">
-              <p className="text-muted-foreground text-sm">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-1">
+              <p className="text-muted-foreground text-sm break-all">
                 Parsed as {data.type}: <span className="font-mono">{data.name}</span>
               </p>
               <ReadabilityBadge name={data.name} />
@@ -677,10 +677,10 @@ export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults;
             </div>
             <ScoreBreakdownSection data={data} />
             <div className="flex gap-2 mt-3 flex-wrap">
-              <Button variant="outline" size="sm" onClick={() => handleExport("csv")} className="rounded-lg">
+              <Button variant="outline" size="sm" onClick={() => handleExport("csv")} className="rounded-lg text-xs sm:text-sm min-h-[44px] min-w-[44px]">
                 Export CSV
               </Button>
-              <Button variant="outline" size="sm" onClick={() => handleExport("txt")} className="rounded-lg">
+              <Button variant="outline" size="sm" onClick={() => handleExport("txt")} className="rounded-lg text-xs sm:text-sm min-h-[44px] min-w-[44px]">
                 Export TXT
               </Button>
               <PrintPDFButton data={data} />
@@ -690,10 +690,10 @@ export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults;
                 const avail = data.domains.filter(d => d.status === "available").length + data.usernames.filter(u => u.status === "available").length;
                 const taken = data.domains.filter(d => d.status === "taken").length + data.usernames.filter(u => u.status === "taken").length;
                 generateStoryImage({ brandName: data.query, score: data.score, availableCount: avail, takenCount: taken });
-              }} className="rounded-lg">
+              }} className="rounded-lg text-xs sm:text-sm min-h-[44px]">
                 📱 Create Story
               </Button>
-              <Button variant="outline" size="sm" onClick={() => exportPPT(data)} className="rounded-lg">
+              <Button variant="outline" size="sm" onClick={() => exportPPT(data)} className="rounded-lg text-xs sm:text-sm min-h-[44px]">
                 📊 Export PPT
               </Button>
               <ShareLinkButton data={data} />
@@ -708,7 +708,7 @@ export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults;
         <CardHeader>
           <div className="flex items-center justify-between flex-wrap gap-2">
             <CardTitle className="text-lg">Domain Availability<InfoTooltip text="Checked via RDAP and DNS lookup" /></CardTitle>
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3">
               <FilterBar value={domainFilter} onChange={setDomainFilter} />
               <select
                 value={domainSort}
@@ -725,10 +725,10 @@ export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults;
         <CardContent>
           <div className="grid gap-2">
             {filteredDomains.map((d) => (
-              <div key={d.tld} className="flex items-center justify-between py-2 px-3 rounded-lg bg-surface">
-                <span className="font-mono text-sm">{d.domain}</span>
-                <div className="flex items-center gap-2">
-                  <span className="text-xs text-muted-foreground">{d.source}</span>
+              <div key={d.tld} className="flex flex-wrap items-center justify-between gap-2 py-2 px-3 rounded-lg bg-surface">
+                <span className="font-mono text-sm break-all">{d.domain}</span>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="text-xs text-muted-foreground hidden sm:inline">{d.source}</span>
                   <StatusBadge status={d.status} />
                   {d.status === "unknown" && <RetryButton onRetry={() => retryDomain(d.domain)} />}
                   {d.status === "available" && (
@@ -749,7 +749,7 @@ export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults;
         <CardHeader>
           <div className="flex items-center justify-between flex-wrap gap-2">
             <CardTitle className="text-lg">Username Availability<InfoTooltip text="Checked via HTTP profile detection. Unknown means the platform blocked our check." /></CardTitle>
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3">
               <FilterBar value={usernameFilter} onChange={setUsernameFilter} />
               <select
                 value={usernameSort}
@@ -767,10 +767,10 @@ export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults;
         <CardContent>
           <div className="grid gap-2">
             {filteredUsernames.map((u) => (
-              <div key={u.platform} className="flex items-center justify-between py-2 px-3 rounded-lg bg-surface">
-                <div>
+              <div key={u.platform} className="flex flex-wrap items-center justify-between gap-2 py-2 px-3 rounded-lg bg-surface">
+                <div className="min-w-0">
                   <span className="font-medium text-sm">{u.platform}</span>
-                  <span className="text-muted-foreground text-xs ml-2">@{u.username}</span>
+                  <span className="text-muted-foreground text-xs ml-2 break-all">@{u.username}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <StatusBadge status={u.status} />

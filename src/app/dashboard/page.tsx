@@ -80,7 +80,7 @@ export default function DashboardPage() {
       <h1 className="text-3xl font-bold mb-8">Dashboard</h1>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
         <div className="p-6 rounded-xl border border-border bg-card">
           <p className="text-sm text-muted-foreground">Total Searches</p>
           <p className="text-3xl font-bold mt-1">{usage.totalSearches}</p>

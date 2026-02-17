@@ -136,7 +136,7 @@ export default function ComparePage() {
                   {r.error && <Badge variant="destructive">{r.error}</Badge>}
                 </div>
                 <ScoreBar score={r.score} isWinner={r.score === maxScore && maxScore > 0} />
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-4 text-sm">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mt-4 text-sm">
                   <div>
                     <span className="text-muted-foreground">.com</span>
                     <p className={`font-medium ${r.comStatus === "available" ? "text-success" : r.comStatus === "taken" ? "text-destructive" : "text-muted-foreground"}`}>

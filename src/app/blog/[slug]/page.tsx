@@ -66,10 +66,10 @@ export default async function BlogPostPage({ params }: { params: Params }) {
           { label: post.title },
         ]} />
       </div>
-      <div className="flex gap-8 items-start">
+      <div className="flex flex-col lg:flex-row gap-8 items-start">
         <article className="max-w-2xl flex-1 min-w-0">
           <header className="mb-8">
-            <h1 className="text-3xl font-bold">{post.title}</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold">{post.title}</h1>
             <p className="text-sm text-muted-foreground mt-2">
               {post.date} · {readingTime(post.content)} min read
             </p>

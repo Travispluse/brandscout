@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { TextSizeToggle } from "@/components/text-size-toggle";
+import { MobileMenu } from "@/components/mobile-menu";
 import { CookieConsent } from "@/components/cookie-consent";
 import { LeadCapturePopup } from "@/components/lead-capture";
 import "./globals.css";
@@ -65,8 +66,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <a href="/" className="text-xl font-semibold tracking-tight">
                 BrandScout
               </a>
-              <div className="flex items-center gap-4">
-                <nav aria-label="Main navigation" className="flex gap-4 text-sm text-muted-foreground flex-wrap">
+              <div className="flex items-center gap-2 md:gap-4">
+                <nav aria-label="Main navigation" className="hidden md:flex gap-4 text-sm text-muted-foreground flex-wrap">
                   <a href="/" className="hover:text-foreground transition-colors">Search</a>
                   <a href="/ai-generator" className="hover:text-foreground transition-colors">Generator</a>
                   <a href="/compare" className="hover:text-foreground transition-colors">Compare</a>
@@ -80,13 +81,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </nav>
                 <TextSizeToggle />
                 <ThemeToggle />
+                <MobileMenu />
               </div>
             </div>
           </header>
           <main id="main-content" role="main">{children}</main>
           <footer role="contentinfo" className="border-t border-border mt-16">
             <div className="max-w-4xl mx-auto px-4 py-6 flex flex-col items-center gap-2 text-sm text-muted-foreground">
-              <div className="flex gap-4">
+              <div className="flex flex-wrap justify-center gap-x-4 gap-y-2">
                 <a href="/terms" className="hover:text-foreground transition-colors">Terms of Service</a>
                 <a href="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</a>
                 <a href="/newsletter" className="hover:text-foreground transition-colors">Newsletter</a>

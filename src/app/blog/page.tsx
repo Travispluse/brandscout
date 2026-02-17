@@ -22,7 +22,7 @@ export default function BlogPage() {
       <h1 className="text-3xl font-bold mb-4">Blog</h1>
 
       {/* Category Links */}
-      <div className="flex flex-wrap gap-2 mb-8">
+      <div className="flex gap-2 mb-8 overflow-x-auto pb-2 flex-nowrap sm:flex-wrap">
         {Object.entries(CATEGORIES).map(([slug, cat]) => (
           <Link
             key={slug}
