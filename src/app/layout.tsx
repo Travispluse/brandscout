@@ -101,6 +101,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <a href="/editorial-policy" className="hover:text-foreground transition-colors">Editorial Policy</a>
                 <a href="/privacy-settings" className="hover:text-foreground transition-colors">Privacy Settings</a>
               </div>
+              <p className="mt-1">Need a full SEO audit? Try <a href="https://auditmysite.app" target="_blank" rel="noopener" className="underline hover:text-foreground transition-colors">AuditMySite.app</a></p>
               <p>© {new Date().getFullYear()} BrandScout. Free & open source.</p>
             </div>
           </footer>
