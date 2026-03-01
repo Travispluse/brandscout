@@ -1,4 +1,4 @@
-import { getPostsByCategory, CATEGORIES } from "@/lib/blog";
+import { getPostsByCategoryAsync, CATEGORIES } from "@/lib/blog";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -26,7 +26,7 @@ export default async function CategoryPage({ params }: { params: Params }) {
   const cat = CATEGORIES[category];
   if (!cat) notFound();
 
-  const posts = getPostsByCategory(category);
+  const posts = await getPostsByCategoryAsync(category);
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-12">

@@ -1,4 +1,4 @@
-import { getPost, getAllPosts } from "@/lib/blog";
+import { getPostAsync, getAllPostsAsync } from "@/lib/blog";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
@@ -8,15 +8,20 @@ import { TableOfContents } from "@/components/table-of-contents";
 import { NewsletterSignup } from "@/components/newsletter-signup";
 import { AuthorProfile } from "@/components/author-profile";
 
+export const revalidate = 60; // ISR: revalidate every 60 seconds
+export const dynamicParams = true; // Allow dynamic slugs not in generateStaticParams
+
 type Params = Promise<{ slug: string }>;
 
 export async function generateStaticParams() {
-  return getAllPosts().map((p) => ({ slug: p.slug }));
+  // Generate the most recent 50 posts at build time, rest on-demand
+  const posts = await getAllPostsAsync();
+  return posts.slice(0, 50).map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPost(slug);
+  const post = await getPostAsync(slug);
   if (!post) return { title: "Not Found" };
   return {
     title: post.title,
@@ -43,7 +48,7 @@ function readingTime(text: string) {
 
 export default async function BlogPostPage({ params }: { params: Params }) {
   const { slug } = await params;
-  const post = getPost(slug);
+  const post = await getPostAsync(slug);
   if (!post) notFound();
 
   const blogPostingJsonLd = {

@@ -1,7 +1,9 @@
-import { getAllPosts, CATEGORIES } from "@/lib/blog";
+import { getAllPostsAsync, CATEGORIES } from "@/lib/blog";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { NewsletterSignup } from "@/components/newsletter-signup";
+
+export const revalidate = 60; // ISR: revalidate every 60 seconds
 
 export const metadata: Metadata = {
   title: "Blog | Brand Naming Tips & Domain Strategy",
@@ -14,8 +16,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BlogPage() {
-  const posts = getAllPosts();
+export default async function BlogPage() {
+  const posts = await getAllPostsAsync();
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-12">
