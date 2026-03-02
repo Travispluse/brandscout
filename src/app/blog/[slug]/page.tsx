@@ -62,6 +62,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
   };
 
   return (
+    <div className="min-h-screen bg-white">
     <div className="max-w-4xl mx-auto px-4 py-12">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingJsonLd) }} />
       <div className="max-w-2xl">
@@ -75,7 +76,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
         <article className="max-w-2xl flex-1 min-w-0">
           <header className="mb-8">
             <h1 className="text-2xl sm:text-3xl font-bold">{post.title}</h1>
-            <p className="text-sm text-muted-foreground mt-2">
+            <p className="text-sm text-gray-500 mt-2">
               {post.date} · {readingTime(post.content)} min read
             </p>
           </header>
@@ -83,18 +84,19 @@ export default async function BlogPostPage({ params }: { params: Params }) {
           <div className="prose prose-neutral max-w-none [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mt-8 [&_h2]:mb-3 [&_h3]:text-lg [&_h3]:font-medium [&_h3]:mt-6 [&_h3]:mb-2 [&_p]:mb-4 [&_p]:leading-relaxed [&_ul]:mb-4 [&_ul]:pl-5 [&_li]:mb-1 [&_strong]:font-semibold [&_ol]:mb-4 [&_ol]:pl-5 [&_h2]:scroll-mt-20 [&_h3]:scroll-mt-20">
             <MDXRemote source={post.content} />
           </div>
-          <hr className="my-8 border-border" />
+          <hr className="my-8 border-gray-200" />
           <AuthorProfile />
-          <hr className="my-8 border-border" />
+          <hr className="my-8 border-gray-200" />
           <NewsletterSignup />
-          <hr className="my-8 border-border" />
-          <p className="text-sm text-muted-foreground">
+          <hr className="my-8 border-gray-200" />
+          <p className="text-sm text-gray-500">
             Ready to check your brand name?{" "}
-            <Link href="/" className="underline hover:text-foreground">Try BrandScout →</Link>
+            <Link href="/" className="underline hover:text-gray-900">Try BrandScout →</Link>
           </p>
         </article>
         <TableOfContents content={post.content} mode="desktop" />
       </div>
+    </div>
     </div>
   );
 }

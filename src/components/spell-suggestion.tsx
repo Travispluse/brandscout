@@ -17,12 +17,12 @@ export function SpellSuggestion({ query, onAccept }: { query: string; onAccept: 
   if (!suggestion) return null;
 
   return (
-    <p className="text-sm text-muted-foreground mt-1">
+    <p className="text-sm text-gray-500 mt-1">
       Did you mean:{" "}
       <button
         type="button"
         onClick={() => onAccept(suggestion)}
-        className="text-primary underline hover:text-foreground transition-colors font-medium"
+        className="text-gray-900 underline hover:text-gray-900 transition-colors font-medium"
       >
         {suggestion}
       </button>

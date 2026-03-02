@@ -50,18 +50,18 @@ export default function ToolsPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
       <h1 className="text-3xl font-bold mb-2">Branding Tools</h1>
-      <p className="text-muted-foreground mb-8">Everything you need to research, plan, and launch your brand — all free.</p>
+      <p className="text-gray-500 mb-8">Everything you need to research, plan, and launch your brand — all free.</p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {tools.map((tool) => (
           <Link
             key={tool.href}
             href={tool.href}
-            className="p-6 rounded-xl border border-border bg-card hover:border-foreground/20 transition-colors group"
+            className="p-6 rounded-xl border border-gray-200 bg-white hover:border-foreground/20 transition-colors group"
           >
             <span className="text-3xl mb-3 block">{tool.icon}</span>
-            <h2 className="text-lg font-semibold mb-1 group-hover:text-foreground transition-colors">{tool.title}</h2>
-            <p className="text-sm text-muted-foreground leading-relaxed">{tool.description}</p>
+            <h2 className="text-lg font-semibold mb-1 group-hover:text-gray-900 transition-colors">{tool.title}</h2>
+            <p className="text-sm text-gray-500 leading-relaxed">{tool.description}</p>
           </Link>
         ))}
       </div>

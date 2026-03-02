@@ -26,15 +26,15 @@ export function APISandbox() {
   };
 
   return (
-    <div className="rounded-xl border border-border overflow-hidden">
-      <div className="bg-muted px-4 py-3 flex items-center gap-2">
+    <div className="rounded-xl border border-gray-200 overflow-hidden">
+      <div className="bg-gray-100 px-4 py-3 flex items-center gap-2">
         <span className="bg-emerald-500/10 text-emerald-600 px-2 py-0.5 rounded text-xs font-mono">GET</span>
-        <span className="text-sm font-mono text-muted-foreground">/api/v1/check?q=</span>
+        <span className="text-sm font-mono text-gray-500">/api/v1/check?q=</span>
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="flex-1 px-2 py-1 text-sm rounded border border-border bg-background font-mono"
+          className="flex-1 px-2 py-1 text-sm rounded border border-gray-200 bg-white font-mono"
           placeholder="brandname"
           aria-label="Brand name to check"
           onKeyDown={(e) => e.key === "Enter" && handleSubmit()}

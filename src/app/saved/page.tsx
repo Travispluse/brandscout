@@ -106,12 +106,12 @@ export default function SavedPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
       <h1 className="text-3xl font-bold tracking-tight mb-2">Saved Searches</h1>
-      <p className="text-muted-foreground mb-8">Your favorited brand name searches. Toggle &quot;Watch&quot; to auto-recheck availability on each visit.</p>
+      <p className="text-gray-500 mb-8">Your favorited brand name searches. Toggle &quot;Watch&quot; to auto-recheck availability on each visit.</p>
 
       {saved.length === 0 ? (
         <Card className="rounded-xl">
           <CardContent className="py-12 text-center">
-            <p className="text-muted-foreground">No saved searches yet. Click the heart icon on any result to save it.</p>
+            <p className="text-gray-500">No saved searches yet. Click the heart icon on any result to save it.</p>
           </CardContent>
         </Card>
       ) : (
@@ -127,7 +127,7 @@ export default function SavedPage() {
                   <div>
                     <div className="flex items-center gap-2">
                       <a href={`/?q=${encodeURIComponent(s.query)}`} className="font-semibold text-lg hover:underline">{s.query}</a>
-                      {isChecking && <span className="text-xs text-muted-foreground animate-pulse">Checking...</span>}
+                      {isChecking && <span className="text-xs text-gray-500 animate-pulse">Checking...</span>}
                       {ws?.changed === "improved" && !isChecking && (
                         <span className="text-xs text-success font-medium" title={`Score went from ${ws.previousScore} to ${ws.lastScore}`}>▲ Improved</span>
                       )}
@@ -139,16 +139,16 @@ export default function SavedPage() {
                       <span className="text-sm font-medium" style={{ color: s.score >= 70 ? "#16a34a" : s.score >= 40 ? "#ca8a04" : "#dc2626" }}>
                         Score: {s.score}/100
                       </span>
-                      <span className="text-xs text-muted-foreground">Saved {new Date(s.dateSaved).toLocaleDateString()}</span>
+                      <span className="text-xs text-gray-500">Saved {new Date(s.dateSaved).toLocaleDateString()}</span>
                       {ws?.lastChecked && (
-                        <span className="text-xs text-muted-foreground">Last checked: {new Date(ws.lastChecked).toLocaleTimeString()}</span>
+                        <span className="text-xs text-gray-500">Last checked: {new Date(ws.lastChecked).toLocaleTimeString()}</span>
                       )}
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => toggleWatch(s.query)}
-                      className={`px-3 py-1.5 text-xs rounded-lg border transition-colors ${isWatched ? "bg-primary text-primary-foreground border-primary" : "border-border hover:bg-surface"}`}
+                      className={`px-3 py-1.5 text-xs rounded-lg border transition-colors ${isWatched ? "bg-primary text-gray-900-foreground border-primary" : "border-gray-200 hover:bg-gray-50"}`}
                       aria-label={isWatched ? "Stop watching" : "Watch for changes"}
                       title={isWatched ? "Stop watching" : "Watch for changes"}
                     >
@@ -157,7 +157,7 @@ export default function SavedPage() {
                     <a href={`/?q=${encodeURIComponent(s.query)}`}>
                       <Button variant="outline" size="sm" className="rounded-lg">Re-search</Button>
                     </a>
-                    <button onClick={() => remove(s.query)} className="p-2 text-muted-foreground hover:text-destructive transition-colors" aria-label="Remove from saved">
+                    <button onClick={() => remove(s.query)} className="p-2 text-gray-500 hover:text-destructive transition-colors" aria-label="Remove from saved">
                       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                     </button>
                   </div>

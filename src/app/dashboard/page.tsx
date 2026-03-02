@@ -81,47 +81,47 @@ export default function DashboardPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
-        <div className="p-6 rounded-xl border border-border bg-card">
-          <p className="text-sm text-muted-foreground">Total Searches</p>
+        <div className="p-6 rounded-xl border border-gray-200 bg-white">
+          <p className="text-sm text-gray-500">Total Searches</p>
           <p className="text-3xl font-bold mt-1">{usage.totalSearches}</p>
         </div>
-        <div className="p-6 rounded-xl border border-border bg-card">
-          <p className="text-sm text-muted-foreground">Searches Today</p>
+        <div className="p-6 rounded-xl border border-gray-200 bg-white">
+          <p className="text-sm text-gray-500">Searches Today</p>
           <p className="text-3xl font-bold mt-1">{todaySearches}</p>
         </div>
-        <div className="p-6 rounded-xl border border-border bg-card">
-          <p className="text-sm text-muted-foreground">API Calls</p>
+        <div className="p-6 rounded-xl border border-gray-200 bg-white">
+          <p className="text-sm text-gray-500">API Calls</p>
           <p className="text-3xl font-bold mt-1">{usage.apiCalls}</p>
         </div>
-        <div className="p-6 rounded-xl border border-border bg-card">
-          <p className="text-sm text-muted-foreground">Search Streak</p>
+        <div className="p-6 rounded-xl border border-gray-200 bg-white">
+          <p className="text-sm text-gray-500">Search Streak</p>
           <p className="text-3xl font-bold mt-1">🔥 {getStreak().count} day{getStreak().count !== 1 ? "s" : ""}</p>
         </div>
-        <div className="p-6 rounded-xl border border-border bg-card">
-          <p className="text-sm text-muted-foreground">Achievements</p>
+        <div className="p-6 rounded-xl border border-gray-200 bg-white">
+          <p className="text-sm text-gray-500">Achievements</p>
           <p className="text-3xl font-bold mt-1"><a href="/achievements" className="hover:underline">🏆 {getUnlocked().length}/{ACHIEVEMENTS.length}</a></p>
         </div>
       </div>
 
       {/* Chart */}
-      <div className="p-6 rounded-xl border border-border bg-card mb-8">
+      <div className="p-6 rounded-xl border border-gray-200 bg-white mb-8">
         <h2 className="text-lg font-semibold mb-4">Last 7 Days</h2>
         <div className="flex items-end gap-2 h-32">
           {last7.map((d) => (
             <div key={d.date} className="flex-1 flex flex-col items-center gap-1">
-              <span className="text-xs text-muted-foreground">{d.count}</span>
+              <span className="text-xs text-gray-500">{d.count}</span>
               <div
                 className="w-full rounded-t bg-foreground/20 transition-all"
                 style={{ height: `${(d.count / maxCount) * 100}%`, minHeight: d.count > 0 ? "4px" : "1px" }}
               />
-              <span className="text-xs text-muted-foreground">{d.date}</span>
+              <span className="text-xs text-gray-500">{d.date}</span>
             </div>
           ))}
         </div>
       </div>
 
       {/* Most Searched Terms */}
-      <div className="p-6 rounded-xl border border-border bg-card mb-8">
+      <div className="p-6 rounded-xl border border-gray-200 bg-white mb-8">
         <h2 className="text-lg font-semibold mb-4">Most Searched Terms</h2>
         {(() => {
           try {
@@ -129,31 +129,31 @@ export default function DashboardPage() {
             const counts: Record<string, number> = {};
             for (const h of history) { counts[h.query] = (counts[h.query] || 0) + 1; }
             const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 10);
-            if (sorted.length === 0) return <p className="text-sm text-muted-foreground">No searches yet.</p>;
+            if (sorted.length === 0) return <p className="text-sm text-gray-500">No searches yet.</p>;
             return (
               <div className="space-y-2">
                 {sorted.map(([term, count]) => (
                   <div key={term} className="flex items-center justify-between">
                     <a href={`/?q=${encodeURIComponent(term)}`} className="text-sm font-mono hover:underline">{term}</a>
-                    <span className="text-xs text-muted-foreground">{count} search{count > 1 ? "es" : ""}</span>
+                    <span className="text-xs text-gray-500">{count} search{count > 1 ? "es" : ""}</span>
                   </div>
                 ))}
               </div>
             );
-          } catch { return <p className="text-sm text-muted-foreground">No data available.</p>; }
+          } catch { return <p className="text-sm text-gray-500">No data available.</p>; }
         })()}
       </div>
 
       {/* API Key */}
-      <div className="p-6 rounded-xl border border-border bg-card mb-8">
+      <div className="p-6 rounded-xl border border-gray-200 bg-white mb-8">
         <h2 className="text-lg font-semibold mb-4">API Key</h2>
         {apiKey ? (
           <div className="flex items-center gap-2">
-            <code className="flex-1 bg-surface px-3 py-2 rounded text-sm font-mono break-all">{apiKey}</code>
-            <button onClick={copyKey} className="px-3 py-2 text-sm rounded-lg border border-border hover:bg-surface transition-colors">
+            <code className="flex-1 bg-gray-50 px-3 py-2 rounded text-sm font-mono break-all">{apiKey}</code>
+            <button onClick={copyKey} className="px-3 py-2 text-sm rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
               {copied ? "Copied!" : "Copy"}
             </button>
-            <button onClick={generateKey} className="px-3 py-2 text-sm rounded-lg border border-border hover:bg-surface transition-colors">
+            <button onClick={generateKey} className="px-3 py-2 text-sm rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
               Regenerate
             </button>
           </div>
@@ -165,46 +165,46 @@ export default function DashboardPage() {
       </div>
 
       {/* Brand Settings */}
-      <div className="p-6 rounded-xl border border-border bg-card">
+      <div className="p-6 rounded-xl border border-gray-200 bg-white">
         <h2 className="text-lg font-semibold mb-4">Report Branding</h2>
         <div className="space-y-4">
           <div>
-            <label className="block text-sm text-muted-foreground mb-1">Company Name</label>
+            <label className="block text-sm text-gray-500 mb-1">Company Name</label>
             <input
               type="text"
               value={brand.companyName}
               onChange={(e) => setBrand({ ...brand, companyName: e.target.value })}
-              className="w-full px-3 py-2 rounded-lg border border-border bg-background text-sm"
+              className="w-full px-3 py-2 rounded-lg border border-gray-200 bg-white text-sm"
               placeholder="Your Company"
             />
           </div>
           <div>
-            <label className="block text-sm text-muted-foreground mb-1">Logo URL</label>
+            <label className="block text-sm text-gray-500 mb-1">Logo URL</label>
             <input
               type="url"
               value={brand.logoUrl}
               onChange={(e) => setBrand({ ...brand, logoUrl: e.target.value })}
-              className="w-full px-3 py-2 rounded-lg border border-border bg-background text-sm"
+              className="w-full px-3 py-2 rounded-lg border border-gray-200 bg-white text-sm"
               placeholder="https://example.com/logo.png"
             />
           </div>
           <div className="flex gap-4">
             <div className="flex-1">
-              <label className="block text-sm text-muted-foreground mb-1">Primary Color</label>
+              <label className="block text-sm text-gray-500 mb-1">Primary Color</label>
               <input
                 type="color"
                 value={brand.primaryColor}
                 onChange={(e) => setBrand({ ...brand, primaryColor: e.target.value })}
-                className="w-full h-10 rounded border border-border cursor-pointer"
+                className="w-full h-10 rounded border border-gray-200 cursor-pointer"
               />
             </div>
             <div className="flex-1">
-              <label className="block text-sm text-muted-foreground mb-1">Secondary Color</label>
+              <label className="block text-sm text-gray-500 mb-1">Secondary Color</label>
               <input
                 type="color"
                 value={brand.secondaryColor}
                 onChange={(e) => setBrand({ ...brand, secondaryColor: e.target.value })}
-                className="w-full h-10 rounded border border-border cursor-pointer"
+                className="w-full h-10 rounded border border-gray-200 cursor-pointer"
               />
             </div>
           </div>

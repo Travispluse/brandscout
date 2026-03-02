@@ -33,7 +33,7 @@ export function SeoContent() {
       {/* What is BrandScout */}
       <div>
         <h2 className="text-2xl font-bold mb-3">Free Brand Name Availability Checker</h2>
-        <p className="text-muted-foreground">
+        <p className="text-gray-500">
           BrandScout lets you instantly check whether a brand name is available as a domain and across
           major social media platforms — all in one search. No signup, no limits, completely free.
         </p>
@@ -54,7 +54,7 @@ export function SeoContent() {
               </span>
               <div>
                 <p className="font-semibold">{item.title}</p>
-                <p className="text-muted-foreground">{item.desc}</p>
+                <p className="text-gray-500">{item.desc}</p>
               </div>
             </li>
           ))}
@@ -68,23 +68,23 @@ export function SeoContent() {
           {faqs.map((faq) => (
             <div key={faq.q}>
               <dt className="font-semibold">{faq.q}</dt>
-              <dd className="text-muted-foreground mt-1">{faq.a}</dd>
+              <dd className="text-gray-500 mt-1">{faq.a}</dd>
             </div>
           ))}
         </dl>
       </div>
 
       {/* Internal links */}
-      <div className="text-muted-foreground space-y-1">
+      <div className="text-gray-500 space-y-1">
         <p>Learn more on our blog:</p>
         <ul className="list-disc pl-5 space-y-1">
           <li>
-            <Link href="/blog/choosing-a-brand-name" className="underline hover:text-foreground">
+            <Link href="/blog/choosing-a-brand-name" className="underline hover:text-gray-900">
               How to Choose the Perfect Brand Name in 2026
             </Link>
           </li>
           <li>
-            <Link href="/blog/domain-extensions-guide" className="underline hover:text-foreground">
+            <Link href="/blog/domain-extensions-guide" className="underline hover:text-gray-900">
               Domain Extensions Explained: .com vs .io vs .ai
             </Link>
           </li>

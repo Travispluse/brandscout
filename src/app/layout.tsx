@@ -42,7 +42,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="light" suppressHydrationWarning>
       <head>
         {/* Google Analytics */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-G2EKY15D8R" />
@@ -63,25 +63,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/icon.svg" />
       </head>
-      <body className="antialiased min-h-screen">
+      <body className="antialiased min-h-screen bg-white text-gray-900">
         <ThemeProvider>
           <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:bg-foreground focus:text-background focus:px-4 focus:py-2 focus:rounded-lg">
             Skip to content
           </a>
-          <header role="banner" className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md transition-shadow duration-300 supports-[backdrop-filter]:bg-background/60">
+          <header role="banner" className="sticky top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur-md transition-shadow duration-300 supports-[backdrop-filter]:bg-white/60">
             <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
               <a href="/" className="text-xl font-semibold tracking-tight shrink-0">
                 BrandScout
               </a>
               {/* Desktop nav - only show core items, rest in Tools dropdown */}
-              <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-1 text-sm text-muted-foreground">
-                <a href="/" className="px-3 py-1.5 rounded-lg hover:text-foreground hover:bg-surface transition-colors">Search</a>
-                <a href="/ai-generator" className="px-3 py-1.5 rounded-lg hover:text-foreground hover:bg-surface transition-colors">Generator</a>
-                <a href="/compare" className="px-3 py-1.5 rounded-lg hover:text-foreground hover:bg-surface transition-colors">Compare</a>
-                <a href="/bulk" className="px-3 py-1.5 rounded-lg hover:text-foreground hover:bg-surface transition-colors">Bulk</a>
-                <a href="/blog" className="px-3 py-1.5 rounded-lg hover:text-foreground hover:bg-surface transition-colors">Blog</a>
-                <a href="/docs" className="px-3 py-1.5 rounded-lg hover:text-foreground hover:bg-surface transition-colors">API</a>
-                <a href="/tools" className="px-3 py-1.5 rounded-lg hover:text-foreground hover:bg-surface transition-colors">More</a>
+              <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-1 text-sm text-gray-500">
+                <a href="/" className="px-3 py-1.5 rounded-lg hover:text-gray-900 hover:bg-gray-50 transition-colors">Search</a>
+                <a href="/ai-generator" className="px-3 py-1.5 rounded-lg hover:text-gray-900 hover:bg-gray-50 transition-colors">Generator</a>
+                <a href="/compare" className="px-3 py-1.5 rounded-lg hover:text-gray-900 hover:bg-gray-50 transition-colors">Compare</a>
+                <a href="/bulk" className="px-3 py-1.5 rounded-lg hover:text-gray-900 hover:bg-gray-50 transition-colors">Bulk</a>
+                <a href="/blog" className="px-3 py-1.5 rounded-lg hover:text-gray-900 hover:bg-gray-50 transition-colors">Blog</a>
+                <a href="/docs" className="px-3 py-1.5 rounded-lg hover:text-gray-900 hover:bg-gray-50 transition-colors">API</a>
+                <a href="/tools" className="px-3 py-1.5 rounded-lg hover:text-gray-900 hover:bg-gray-50 transition-colors">More</a>
               </nav>
               <div className="flex items-center gap-1">
                 <MobileMenu />
@@ -89,18 +89,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
           </header>
           <main id="main-content" role="main">{children}</main>
-          <footer role="contentinfo" className="border-t border-border mt-16">
-            <div className="max-w-4xl mx-auto px-4 py-6 flex flex-col items-center gap-2 text-sm text-muted-foreground">
+          <footer role="contentinfo" className="border-t border-gray-200 mt-16">
+            <div className="max-w-4xl mx-auto px-4 py-6 flex flex-col items-center gap-2 text-sm text-gray-500">
               <div className="flex flex-wrap justify-center gap-x-4 gap-y-2">
-                <a href="/terms" className="hover:text-foreground transition-colors">Terms of Service</a>
-                <a href="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</a>
-                <a href="/newsletter" className="hover:text-foreground transition-colors">Newsletter</a>
-                <a href="/help" className="hover:text-foreground transition-colors">Help</a>
-                <a href="/glossary" className="hover:text-foreground transition-colors">Glossary</a>
-                <a href="/editorial-policy" className="hover:text-foreground transition-colors">Editorial Policy</a>
-                <a href="/privacy-settings" className="hover:text-foreground transition-colors">Privacy Settings</a>
+                <a href="/terms" className="hover:text-gray-900 transition-colors">Terms of Service</a>
+                <a href="/privacy" className="hover:text-gray-900 transition-colors">Privacy Policy</a>
+                <a href="/newsletter" className="hover:text-gray-900 transition-colors">Newsletter</a>
+                <a href="/help" className="hover:text-gray-900 transition-colors">Help</a>
+                <a href="/glossary" className="hover:text-gray-900 transition-colors">Glossary</a>
+                <a href="/editorial-policy" className="hover:text-gray-900 transition-colors">Editorial Policy</a>
+                <a href="/privacy-settings" className="hover:text-gray-900 transition-colors">Privacy Settings</a>
               </div>
-              <p className="mt-1">Need a full SEO audit? Try <a href="https://auditmysite.app" target="_blank" rel="noopener" className="underline hover:text-foreground transition-colors">AuditMySite.app</a></p>
+              <p className="mt-1">Need a full SEO audit? Try <a href="https://auditmysite.app" target="_blank" rel="noopener" className="underline hover:text-gray-900 transition-colors">AuditMySite.app</a></p>
               <p>© {new Date().getFullYear()} BrandScout. Free & open source.</p>
             </div>
           </footer>

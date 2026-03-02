@@ -54,12 +54,12 @@ export function TableOfContents({ content, mode = "both" }: { content: string; m
       {(mode === "both" || mode === "mobile") && <div className="lg:hidden mb-4">
         <button
           onClick={() => setOpen(!open)}
-          className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1"
+          className="text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors flex items-center gap-1"
         >
           <span>{open ? "▾" : "▸"}</span> Table of Contents
         </button>
         {open && (
-          <nav className="mt-2 pl-2 border-l-2 border-border space-y-1">
+          <nav className="mt-2 pl-2 border-l-2 border-gray-200 space-y-1">
             {headings.map((h) => (
               <a
                 key={h.id}
@@ -67,7 +67,7 @@ export function TableOfContents({ content, mode = "both" }: { content: string; m
                 onClick={() => setOpen(false)}
                 className={`block text-sm py-0.5 transition-colors ${
                   h.level === 3 ? "pl-3" : ""
-                } ${activeId === h.id ? "text-foreground font-medium" : "text-muted-foreground hover:text-foreground"}`}
+                } ${activeId === h.id ? "text-gray-900 font-medium" : "text-gray-500 hover:text-gray-900"}`}
               >
                 {h.text}
               </a>
@@ -77,15 +77,15 @@ export function TableOfContents({ content, mode = "both" }: { content: string; m
       </div>}
 
       {/* Desktop sticky sidebar */}
-      {(mode === "both" || mode === "desktop") && <nav className="hidden lg:block sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto w-56 shrink-0 pl-6 border-l border-border space-y-1">
-        <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">On this page</p>
+      {(mode === "both" || mode === "desktop") && <nav className="hidden lg:block sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto w-56 shrink-0 pl-6 border-l border-gray-200 space-y-1">
+        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">On this page</p>
         {headings.map((h) => (
           <a
             key={h.id}
             href={`#${h.id}`}
             className={`block text-sm py-0.5 transition-colors ${
               h.level === 3 ? "pl-3" : ""
-            } ${activeId === h.id ? "text-foreground font-medium" : "text-muted-foreground hover:text-foreground"}`}
+            } ${activeId === h.id ? "text-gray-900 font-medium" : "text-gray-500 hover:text-gray-900"}`}
           >
             {h.text}
           </a>

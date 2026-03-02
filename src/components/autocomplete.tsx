@@ -39,9 +39,9 @@ export function Autocomplete({ query, onSelect, visible }: AutocompleteProps) {
   if (suggestions.length === 0) return null;
 
   return (
-    <div className="absolute top-full left-0 right-0 mt-1 bg-card border border-border rounded-xl shadow-lg z-40 overflow-hidden">
-      <div className="px-3 py-1.5 border-b border-border">
-        <span className="text-xs text-muted-foreground font-medium">Suggestions</span>
+    <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-xl shadow-lg z-40 overflow-hidden">
+      <div className="px-3 py-1.5 border-b border-gray-200">
+        <span className="text-xs text-gray-500 font-medium">Suggestions</span>
       </div>
       {suggestions.map((s, i) => (
         <button
@@ -49,8 +49,8 @@ export function Autocomplete({ query, onSelect, visible }: AutocompleteProps) {
           type="button"
           onMouseDown={(e) => { e.preventDefault(); onSelect(s); }}
           onMouseEnter={() => setSelectedIndex(i)}
-          className={`w-full text-left px-3 py-2 text-sm font-mono hover:bg-surface transition-colors ${
-            i === selectedIndex ? "bg-surface" : ""
+          className={`w-full text-left px-3 py-2 text-sm font-mono hover:bg-gray-50 transition-colors ${
+            i === selectedIndex ? "bg-gray-50" : ""
           }`}
         >
           {s}

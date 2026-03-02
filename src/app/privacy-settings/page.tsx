@@ -41,7 +41,7 @@ export default function PrivacySettingsPage() {
   return (
     <div className="max-w-2xl mx-auto px-4 py-12">
       <h1 className="text-3xl font-bold mb-2">Privacy Settings</h1>
-      <p className="text-muted-foreground mb-8">View, export, or delete all data BrandScout stores in your browser. No data is stored on our servers.</p>
+      <p className="text-gray-500 mb-8">View, export, or delete all data BrandScout stores in your browser. No data is stored on our servers.</p>
 
       {/* Actions */}
       <div className="flex gap-3 mb-8">
@@ -66,7 +66,7 @@ export default function PrivacySettingsPage() {
             <button onClick={deleteAll} className="px-3 py-1.5 rounded-lg bg-red-500 text-white text-sm hover:bg-red-600 transition-colors">
               Yes, Delete Everything
             </button>
-            <button onClick={() => setShowConfirm(false)} className="px-3 py-1.5 rounded-lg border border-border text-sm hover:bg-surface transition-colors">
+            <button onClick={() => setShowConfirm(false)} className="px-3 py-1.5 rounded-lg border border-gray-200 text-sm hover:bg-gray-50 transition-colors">
               Cancel
             </button>
           </div>
@@ -77,15 +77,15 @@ export default function PrivacySettingsPage() {
       <div className="space-y-3">
         <h2 className="text-lg font-semibold">Stored Data ({keys.length} items)</h2>
         {keys.length === 0 ? (
-          <p className="text-sm text-muted-foreground py-4">No BrandScout data found in your browser.</p>
+          <p className="text-sm text-gray-500 py-4">No BrandScout data found in your browser.</p>
         ) : (
           keys.map(key => {
             let display = data[key];
             try { display = JSON.stringify(JSON.parse(display), null, 2); } catch {}
             return (
-              <div key={key} className="p-4 rounded-lg border border-border bg-card">
+              <div key={key} className="p-4 rounded-lg border border-gray-200 bg-white">
                 <p className="text-sm font-medium mb-1 font-mono">{key}</p>
-                <pre className="text-xs text-muted-foreground overflow-x-auto max-h-32 overflow-y-auto whitespace-pre-wrap">{display}</pre>
+                <pre className="text-xs text-gray-500 overflow-x-auto max-h-32 overflow-y-auto whitespace-pre-wrap">{display}</pre>
               </div>
             );
           })

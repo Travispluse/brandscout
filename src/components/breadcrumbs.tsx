@@ -20,16 +20,16 @@ export function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <nav aria-label="Breadcrumb" className="text-sm text-muted-foreground mb-4">
+      <nav aria-label="Breadcrumb" className="text-sm text-gray-500 mb-4">
         {items.map((item, i) => (
           <span key={i}>
             {i > 0 && <span className="mx-1.5">›</span>}
             {item.href ? (
-              <Link href={item.href} className="hover:text-foreground transition-colors">
+              <Link href={item.href} className="hover:text-gray-900 transition-colors">
                 {item.label}
               </Link>
             ) : (
-              <span className="text-foreground">{item.label}</span>
+              <span className="text-gray-900">{item.label}</span>
             )}
           </span>
         ))}

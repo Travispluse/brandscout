@@ -24,15 +24,15 @@ export function CookieConsent() {
   if (!show) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-[100] bg-card border-t border-border px-4 py-3 shadow-lg">
+    <div className="fixed bottom-0 left-0 right-0 z-[100] bg-white border-t border-gray-200 px-4 py-3 shadow-lg">
       <div className="max-w-4xl mx-auto flex items-center justify-between gap-4 flex-wrap">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-gray-500">
           We use cookies to improve your experience and store search history locally.
         </p>
         <div className="flex gap-2">
           <button
             onClick={decline}
-            className="text-sm px-3 py-1.5 rounded-lg border border-border hover:bg-surface transition-colors"
+            className="text-sm px-3 py-1.5 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
           >
             Decline
           </button>

@@ -27,7 +27,7 @@ export function TextSizeToggle() {
   return (
     <button
       onClick={toggle}
-      className="p-2 rounded-lg hover:bg-surface transition-colors text-muted-foreground hover:text-foreground text-sm font-bold"
+      className="p-2 rounded-lg hover:bg-gray-50 transition-colors text-gray-500 hover:text-gray-900 text-sm font-bold"
       aria-label={large ? "Normal text size" : "Large text size"}
       title={large ? "Normal text" : "Large text"}
     >

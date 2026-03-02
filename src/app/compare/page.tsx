@@ -24,7 +24,7 @@ function ScoreBar({ score, isWinner }: { score: number; isWinner: boolean }) {
   const color = score >= 70 ? "#16a34a" : score >= 40 ? "#ca8a04" : "#dc2626";
   return (
     <div className="flex items-center gap-2">
-      <div className="flex-1 bg-surface rounded-full h-3 overflow-hidden">
+      <div className="flex-1 bg-gray-50 rounded-full h-3 overflow-hidden">
         <div className="h-full rounded-full transition-all duration-700" style={{ width: `${score}%`, backgroundColor: color }} />
       </div>
       <span className="text-lg font-bold" style={{ color }}>{score}</span>
@@ -96,7 +96,7 @@ export default function ComparePage() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
       <h1 className="text-3xl font-bold tracking-tight mb-2">A/B Name Tester</h1>
-      <p className="text-muted-foreground mb-8">Compare 2–5 brand names side by side to find the best one.</p>
+      <p className="text-gray-500 mb-8">Compare 2–5 brand names side by side to find the best one.</p>
 
       <Card className="rounded-xl mb-8">
         <CardContent className="py-6 space-y-3">
@@ -109,7 +109,7 @@ export default function ComparePage() {
                 className="rounded-xl"
               />
               {inputs.length > 2 && (
-                <button onClick={() => removeInput(i)} className="text-muted-foreground hover:text-foreground px-2">
+                <button onClick={() => removeInput(i)} className="text-gray-500 hover:text-gray-900 px-2">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                 </button>
               )}
@@ -138,23 +138,23 @@ export default function ComparePage() {
                 <ScoreBar score={r.score} isWinner={r.score === maxScore && maxScore > 0} />
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mt-4 text-sm">
                   <div>
-                    <span className="text-muted-foreground">.com</span>
-                    <p className={`font-medium ${r.comStatus === "available" ? "text-success" : r.comStatus === "taken" ? "text-destructive" : "text-muted-foreground"}`}>
+                    <span className="text-gray-500">.com</span>
+                    <p className={`font-medium ${r.comStatus === "available" ? "text-success" : r.comStatus === "taken" ? "text-destructive" : "text-gray-500"}`}>
                       {r.comStatus}
                     </p>
                   </div>
                   <div>
-                    <span className="text-muted-foreground">.net</span>
-                    <p className={`font-medium ${r.netStatus === "available" ? "text-success" : r.netStatus === "taken" ? "text-destructive" : "text-muted-foreground"}`}>
+                    <span className="text-gray-500">.net</span>
+                    <p className={`font-medium ${r.netStatus === "available" ? "text-success" : r.netStatus === "taken" ? "text-destructive" : "text-gray-500"}`}>
                       {r.netStatus}
                     </p>
                   </div>
                   <div>
-                    <span className="text-muted-foreground">Domains</span>
+                    <span className="text-gray-500">Domains</span>
                     <p className="font-medium">{r.availableDomains}/{r.totalDomains} available</p>
                   </div>
                   <div>
-                    <span className="text-muted-foreground">Usernames</span>
+                    <span className="text-gray-500">Usernames</span>
                     <p className="font-medium">{r.availableUsernames}/{r.totalUsernames} available</p>
                   </div>
                 </div>

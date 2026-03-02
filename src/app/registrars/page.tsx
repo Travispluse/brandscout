@@ -42,7 +42,7 @@ export default function RegistrarsPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-2">Domain Registrar Comparison</h1>
-      <p className="text-muted-foreground mb-8">Compare the best domain registrars to find the right fit for your brand.</p>
+      <p className="text-gray-500 mb-8">Compare the best domain registrars to find the right fit for your brand.</p>
 
       <div className="space-y-6">
         {registrars.map((r) => (
@@ -50,7 +50,7 @@ export default function RegistrarsPage() {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle className="text-xl">{r.name}</CardTitle>
-                <span className="text-sm text-muted-foreground">{r.priceRange}</span>
+                <span className="text-sm text-gray-500">{r.priceRange}</span>
               </div>
             </CardHeader>
             <CardContent>
@@ -58,17 +58,17 @@ export default function RegistrarsPage() {
                 <div>
                   <h3 className="text-sm font-semibold text-success mb-2">✓ Pros</h3>
                   <ul className="text-sm space-y-1">
-                    {r.pros.map((p) => <li key={p} className="text-muted-foreground">• {p}</li>)}
+                    {r.pros.map((p) => <li key={p} className="text-gray-500">• {p}</li>)}
                   </ul>
                 </div>
                 <div>
                   <h3 className="text-sm font-semibold text-destructive mb-2">✗ Cons</h3>
                   <ul className="text-sm space-y-1">
-                    {r.cons.map((c) => <li key={c} className="text-muted-foreground">• {c}</li>)}
+                    {r.cons.map((c) => <li key={c} className="text-gray-500">• {c}</li>)}
                   </ul>
                 </div>
               </div>
-              <a href={r.url} target="_blank" rel="noopener" className="inline-block mt-4 text-sm text-primary hover:underline">
+              <a href={r.url} target="_blank" rel="noopener" className="inline-block mt-4 text-sm text-gray-900 hover:underline">
                 Visit {r.name} →
               </a>
             </CardContent>

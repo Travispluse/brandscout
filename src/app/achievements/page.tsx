@@ -22,7 +22,7 @@ export default function AchievementsPage() {
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-3xl font-bold">Achievements</h1>
-          <p className="text-muted-foreground mt-1">
+          <p className="text-gray-500 mt-1">
             {unlocked.length} of {ACHIEVEMENTS.length} unlocked
           </p>
         </div>
@@ -41,9 +41,9 @@ export default function AchievementsPage() {
               <CardContent className="p-6 text-center">
                 <div className="text-4xl mb-3">{a.icon}</div>
                 <h3 className="font-semibold text-lg">{a.name}</h3>
-                <p className="text-sm text-muted-foreground mt-1">{a.description}</p>
+                <p className="text-sm text-gray-500 mt-1">{a.description}</p>
                 {isUnlocked && (
-                  <span className="inline-block mt-2 text-xs text-primary font-medium">✓ Unlocked</span>
+                  <span className="inline-block mt-2 text-xs text-gray-900 font-medium">✓ Unlocked</span>
                 )}
               </CardContent>
             </Card>

@@ -80,7 +80,7 @@ function HomeContent() {
             <h1 className="text-4xl font-bold tracking-tight mb-3">
               Is your brand name available?
             </h1>
-            <p className="text-muted-foreground text-lg max-w-md">
+            <p className="text-gray-500 text-lg max-w-md">
               Check domain and social media availability instantly. Free, no signup required.
             </p>
           </div>

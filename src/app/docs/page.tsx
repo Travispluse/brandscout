@@ -12,9 +12,9 @@ export const metadata = {
 
 function CodeBlock({ children, title }: { children: string; title?: string }) {
   return (
-    <div className="rounded-lg border border-border overflow-hidden">
+    <div className="rounded-lg border border-gray-200 overflow-hidden">
       {title && (
-        <div className="bg-muted px-4 py-2 text-xs font-medium text-muted-foreground border-b border-border">
+        <div className="bg-gray-100 px-4 py-2 text-xs font-medium text-gray-500 border-b border-gray-200">
           {title}
         </div>
       )}
@@ -41,32 +41,32 @@ export default function DocsPage() {
     <div className="max-w-4xl mx-auto px-4 py-10">
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "API Documentation" }]} />
       <h1 className="text-3xl font-bold mb-2">BrandScout API</h1>
-      <p className="text-muted-foreground mb-8">
+      <p className="text-gray-500 mb-8">
         Check domain and social media username availability for any brand name. Free, open, and AI-friendly.
       </p>
 
       {/* TOC */}
-      <nav className="mb-10 p-4 rounded-lg border border-border bg-muted/50">
+      <nav className="mb-10 p-4 rounded-lg border border-gray-200 bg-gray-100/50">
         <p className="font-medium mb-2 text-sm">On this page</p>
-        <ul className="text-sm space-y-1 text-muted-foreground">
-          <li><a href="#overview" className="hover:text-foreground">Overview</a></li>
-          <li><a href="#endpoints" className="hover:text-foreground">Endpoints</a></li>
-          <li><a href="#response" className="hover:text-foreground">Response Format</a></li>
-          <li><a href="#filtering" className="hover:text-foreground">Filtering</a></li>
-          <li><a href="#rate-limits" className="hover:text-foreground">Rate Limits</a></li>
-          <li><a href="#auth" className="hover:text-foreground">Authentication</a></li>
-          <li><a href="#examples" className="hover:text-foreground">Examples</a></li>
-          <li><a href="#openapi" className="hover:text-foreground">OpenAPI Spec</a></li>
-          <li><a href="#sandbox" className="hover:text-foreground">Try It</a></li>
-          <li><a href="#errors" className="hover:text-foreground">Error Handling</a></li>
+        <ul className="text-sm space-y-1 text-gray-500">
+          <li><a href="#overview" className="hover:text-gray-900">Overview</a></li>
+          <li><a href="#endpoints" className="hover:text-gray-900">Endpoints</a></li>
+          <li><a href="#response" className="hover:text-gray-900">Response Format</a></li>
+          <li><a href="#filtering" className="hover:text-gray-900">Filtering</a></li>
+          <li><a href="#rate-limits" className="hover:text-gray-900">Rate Limits</a></li>
+          <li><a href="#auth" className="hover:text-gray-900">Authentication</a></li>
+          <li><a href="#examples" className="hover:text-gray-900">Examples</a></li>
+          <li><a href="#openapi" className="hover:text-gray-900">OpenAPI Spec</a></li>
+          <li><a href="#sandbox" className="hover:text-gray-900">Try It</a></li>
+          <li><a href="#errors" className="hover:text-gray-900">Error Handling</a></li>
         </ul>
       </nav>
 
       <Section id="overview" title="Overview">
-        <p className="text-muted-foreground mb-2">
-          Base URL: <code className="bg-muted px-1.5 py-0.5 rounded text-sm">{baseUrl}</code>
+        <p className="text-gray-500 mb-2">
+          Base URL: <code className="bg-gray-100 px-1.5 py-0.5 rounded text-sm">{baseUrl}</code>
         </p>
-        <p className="text-muted-foreground">
+        <p className="text-gray-500">
           All responses are JSON. CORS is enabled for all origins. No authentication required (API key support coming soon).
         </p>
       </Section>
@@ -78,14 +78,14 @@ export default function DocsPage() {
               <span className="bg-emerald-500/10 text-emerald-600 px-2 py-0.5 rounded text-sm font-mono mr-2">GET</span>
               <code className="text-sm">/api/v1/check?q=brandname</code>
             </h3>
-            <p className="text-muted-foreground text-sm">Quick check via query parameter. Ideal for curl and AI agents.</p>
+            <p className="text-gray-500 text-sm">Quick check via query parameter. Ideal for curl and AI agents.</p>
           </div>
           <div>
             <h3 className="font-medium mb-2">
               <span className="bg-blue-500/10 text-blue-600 px-2 py-0.5 rounded text-sm font-mono mr-2">POST</span>
               <code className="text-sm">/api/v1/check</code>
             </h3>
-            <p className="text-muted-foreground text-sm mb-2">Check with JSON body.</p>
+            <p className="text-gray-500 text-sm mb-2">Check with JSON body.</p>
             <CodeBlock title="Request Body">{`{
   "query": "mybrandname"
 }`}</CodeBlock>
@@ -109,7 +109,7 @@ export default function DocsPage() {
   ],
   "suggestions": ["mybrandname_", "getmybrandname", "mybrandnamehq"]
 }`}</CodeBlock>
-        <div className="mt-4 text-sm text-muted-foreground space-y-1">
+        <div className="mt-4 text-sm text-gray-500 space-y-1">
           <p><strong>score</strong> — 0-100, higher means more available across domains & platforms</p>
           <p><strong>description_for_ai</strong> — Natural language summary for LLMs</p>
           <p><strong>status</strong> — <code>"available"</code>, <code>"taken"</code>, or <code>"unknown"</code></p>
@@ -117,7 +117,7 @@ export default function DocsPage() {
       </Section>
 
       <Section id="filtering" title="Filtering">
-        <p className="text-muted-foreground mb-3 text-sm">Filter results by TLD or platform using query parameters:</p>
+        <p className="text-gray-500 mb-3 text-sm">Filter results by TLD or platform using query parameters:</p>
         <CodeBlock title="Filter examples">{`# Only check .com and .io
 GET /api/v1/check?q=mybrand&tlds=com,io
 
@@ -126,21 +126,21 @@ GET /api/v1/check?q=mybrand&platforms=github,reddit
 
 # Combine filters
 GET /api/v1/check?q=mybrand&tlds=com&platforms=github`}</CodeBlock>
-        <div className="mt-3 text-sm text-muted-foreground">
+        <div className="mt-3 text-sm text-gray-500">
           <p><strong>Available TLDs:</strong> com, net, org, co, io, ai, app</p>
           <p><strong>Available platforms:</strong> GitHub, Reddit, Pinterest, Twitch, Medium, Vimeo</p>
         </div>
       </Section>
 
       <Section id="rate-limits" title="Rate Limits">
-        <p className="text-muted-foreground text-sm">
+        <p className="text-gray-500 text-sm">
           <strong>30 requests per minute</strong> per IP address. If exceeded, you&apos;ll receive a <code>429</code> response. No API key required.
         </p>
       </Section>
 
       <Section id="auth" title="Authentication">
-        <p className="text-muted-foreground text-sm">
-          Currently no authentication is required. You can optionally pass an <code className="bg-muted px-1 py-0.5 rounded">X-API-Key</code> header — it will be recognized in the future for higher rate limits.
+        <p className="text-gray-500 text-sm">
+          Currently no authentication is required. You can optionally pass an <code className="bg-gray-100 px-1 py-0.5 rounded">X-API-Key</code> header — it will be recognized in the future for higher rate limits.
         </p>
       </Section>
 
@@ -195,21 +195,21 @@ const data = await res.json();`}</CodeBlock>
       </Section>
 
       <Section id="openapi" title="OpenAPI Spec">
-        <p className="text-muted-foreground text-sm mb-3">
+        <p className="text-gray-500 text-sm mb-3">
           A full OpenAPI 3.0 spec is available for AI agents, ChatGPT plugins, and code generation:
         </p>
         <ul className="text-sm space-y-1">
           <li>
-            <code className="bg-muted px-1.5 py-0.5 rounded"><a href="/api/openapi.json" className="hover:underline">/api/openapi.json</a></code> — OpenAPI 3.0 spec
+            <code className="bg-gray-100 px-1.5 py-0.5 rounded"><a href="/api/openapi.json" className="hover:underline">/api/openapi.json</a></code> — OpenAPI 3.0 spec
           </li>
           <li>
-            <code className="bg-muted px-1.5 py-0.5 rounded"><a href="/.well-known/ai-plugin.json" className="hover:underline">/.well-known/ai-plugin.json</a></code> — ChatGPT plugin manifest
+            <code className="bg-gray-100 px-1.5 py-0.5 rounded"><a href="/.well-known/ai-plugin.json" className="hover:underline">/.well-known/ai-plugin.json</a></code> — ChatGPT plugin manifest
           </li>
         </ul>
       </Section>
 
       <Section id="sandbox" title="Try It — API Sandbox">
-        <p className="text-muted-foreground text-sm mb-4">
+        <p className="text-gray-500 text-sm mb-4">
           Test the API right from your browser. Enter a brand name and see the raw JSON response.
         </p>
         <APISandbox />

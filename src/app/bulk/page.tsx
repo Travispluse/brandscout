@@ -17,7 +17,7 @@ interface BulkResult {
 }
 
 function StatusDot({ status }: { status: string }) {
-  const color = status === "available" ? "bg-success" : status === "taken" ? "bg-destructive" : "bg-muted-foreground";
+  const color = status === "available" ? "bg-success" : status === "taken" ? "bg-destructive" : "bg-gray-100-foreground";
   return <span className={`inline-block w-2.5 h-2.5 rounded-full ${color}`} title={status} />;
 }
 
@@ -48,12 +48,12 @@ function AdvancedSearch({ onProcess, disabled }: { onProcess: (names: string[]) 
         <CardContent className="space-y-4">
           <div className="flex gap-2">
             {(["wildcard", "pattern", "keyword"] as const).map(m => (
-              <button key={m} onClick={() => setMode(m)} className={`text-xs px-3 py-1.5 rounded-lg ${mode === m ? "bg-foreground text-background" : "bg-surface text-muted-foreground"}`}>
+              <button key={m} onClick={() => setMode(m)} className={`text-xs px-3 py-1.5 rounded-lg ${mode === m ? "bg-foreground text-background" : "bg-gray-50 text-gray-500"}`}>
                 {m === "wildcard" ? "Wildcard (*)" : m === "pattern" ? "Pattern (??)" : "AND/OR"}
               </button>
             ))}
           </div>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-xs text-gray-500">
             {mode === "wildcard" && 'Use * for any characters: "my*app" → myapp, mycoolapp, mybestapp...'}
             {mode === "pattern" && 'Use ? for single characters: "??tech" → aatech, abtech...'}
             {mode === "keyword" && 'Use AND/OR/+: "tech AND hub", "cool OR awesome + brand"'}
@@ -63,7 +63,7 @@ function AdvancedSearch({ onProcess, disabled }: { onProcess: (names: string[]) 
               value={pattern}
               onChange={e => setPattern(e.target.value)}
               placeholder={mode === "wildcard" ? "my*app" : mode === "pattern" ? "??tech" : "cool OR awesome + brand"}
-              className="flex-1 px-3 py-2 text-sm rounded-lg bg-surface border border-border"
+              className="flex-1 px-3 py-2 text-sm rounded-lg bg-gray-50 border border-gray-200"
             />
             <Button size="sm" onClick={handlePreview} className="rounded-lg">Preview</Button>
           </div>
@@ -160,7 +160,7 @@ export default function BulkPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
       <h1 className="text-3xl font-bold tracking-tight mb-2">Bulk Check</h1>
-      <p className="text-muted-foreground mb-8">Upload a CSV with brand names (one per row, max 25) and check them all at once.</p>
+      <p className="text-gray-500 mb-8">Upload a CSV with brand names (one per row, max 25) and check them all at once.</p>
 
       <AdvancedSearch onProcess={processNames} disabled={processing} />
 
@@ -170,9 +170,9 @@ export default function BulkPage() {
           <Button onClick={() => fileRef.current?.click()} disabled={processing} className="rounded-xl">
             {processing ? `Processing ${progress.current}/${progress.total}...` : "Upload CSV"}
           </Button>
-          <p className="text-xs text-muted-foreground">One brand name per row. Max 25 names per upload.</p>
+          <p className="text-xs text-gray-500">One brand name per row. Max 25 names per upload.</p>
           {processing && (
-            <div className="w-full max-w-xs bg-surface rounded-full h-2 overflow-hidden">
+            <div className="w-full max-w-xs bg-gray-50 rounded-full h-2 overflow-hidden">
               <div className="bg-foreground h-full transition-all duration-300 rounded-full" style={{ width: `${(progress.current / progress.total) * 100}%` }} />
             </div>
           )}
@@ -191,7 +191,7 @@ export default function BulkPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="border-b border-border text-left">
+                  <tr className="border-b border-gray-200 text-left">
                     <th className="py-2 pr-4 font-medium">Name</th>
                     <th className="py-2 pr-4 font-medium">Score</th>
                     <th className="py-2 pr-4 font-medium">.com</th>
@@ -203,7 +203,7 @@ export default function BulkPage() {
                 </thead>
                 <tbody>
                   {results.map(r => (
-                    <tr key={r.name} className="border-b border-border/50">
+                    <tr key={r.name} className="border-b border-gray-200/50">
                       <td className="py-2 pr-4">
                         <a href={`/?q=${encodeURIComponent(r.name)}`} className="font-mono hover:underline">{r.name}</a>
                       </td>

@@ -60,14 +60,14 @@ export default function HelpPage() {
   return (
     <div className="max-w-2xl mx-auto px-4 py-12">
       <h1 className="text-3xl font-bold mb-2">Help Center</h1>
-      <p className="text-muted-foreground mb-6">Find answers to common questions about BrandScout.</p>
+      <p className="text-gray-500 mb-6">Find answers to common questions about BrandScout.</p>
 
       <input
         type="text"
         value={search}
         onChange={(e) => { setSearch(e.target.value); setOpenIndex(null); }}
         placeholder="Search help articles..."
-        className="w-full px-4 py-3 rounded-xl border border-border bg-background text-sm mb-8"
+        className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-sm mb-8"
       />
 
       {filteredCategories.map(cat => (
@@ -78,16 +78,16 @@ export default function HelpPage() {
               const globalIndex = faqs.indexOf(faq);
               const isOpen = openIndex === globalIndex;
               return (
-                <div key={globalIndex} className="border border-border rounded-lg overflow-hidden">
+                <div key={globalIndex} className="border border-gray-200 rounded-lg overflow-hidden">
                   <button
                     onClick={() => setOpenIndex(isOpen ? null : globalIndex)}
-                    className="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium hover:bg-surface transition-colors"
+                    className="w-full flex items-center justify-between px-4 py-3 text-left text-sm font-medium hover:bg-gray-50 transition-colors"
                   >
                     <span>{faq.question}</span>
-                    <span className="text-muted-foreground ml-2 shrink-0">{isOpen ? "−" : "+"}</span>
+                    <span className="text-gray-500 ml-2 shrink-0">{isOpen ? "−" : "+"}</span>
                   </button>
                   {isOpen && (
-                    <div className="px-4 pb-3 text-sm text-muted-foreground leading-relaxed">
+                    <div className="px-4 pb-3 text-sm text-gray-500 leading-relaxed">
                       {faq.answer}
                     </div>
                   )}
@@ -99,7 +99,7 @@ export default function HelpPage() {
       ))}
 
       {filtered.length === 0 && (
-        <p className="text-center text-muted-foreground py-8">No results found for &quot;{search}&quot;</p>
+        <p className="text-center text-gray-500 py-8">No results found for &quot;{search}&quot;</p>
       )}
     </div>
   );

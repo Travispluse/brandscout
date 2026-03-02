@@ -27,24 +27,24 @@ export function NewsletterSignup() {
 
   if (submitted) {
     return (
-      <div className="bg-surface rounded-xl p-6 text-center">
+      <div className="bg-gray-50 rounded-xl p-6 text-center">
         <p className="text-success font-medium">🎉 You&apos;re subscribed!</p>
-        <p className="text-sm text-muted-foreground mt-1">We&apos;ll send you brand naming tips soon.</p>
+        <p className="text-sm text-gray-500 mt-1">We&apos;ll send you brand naming tips soon.</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-surface rounded-xl p-6">
+    <div className="bg-gray-50 rounded-xl p-6">
       <h3 className="font-semibold text-lg mb-1">Get brand naming tips in your inbox</h3>
-      <p className="text-sm text-muted-foreground mb-4">Join our newsletter for expert branding advice.</p>
+      <p className="text-sm text-gray-500 mb-4">Join our newsletter for expert branding advice.</p>
       <form onSubmit={handleSubmit} className="flex gap-2">
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="you@example.com"
-          className="flex-1 h-10 px-3 rounded-lg border border-border bg-background text-sm"
+          className="flex-1 h-10 px-3 rounded-lg border border-gray-200 bg-white text-sm"
         />
         <button
           type="submit"

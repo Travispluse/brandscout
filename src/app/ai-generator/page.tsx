@@ -198,25 +198,25 @@ export default function AIGeneratorPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
       <h1 className="text-3xl font-bold tracking-tight mb-2">AI Brand Generator</h1>
-      <p className="text-muted-foreground mb-8">Generate brand names and taglines instantly — no AI API needed, runs entirely in your browser.</p>
+      <p className="text-gray-500 mb-8">Generate brand names and taglines instantly — no AI API needed, runs entirely in your browser.</p>
 
       {/* Tabs */}
-      <div className="flex gap-1 mb-8 bg-surface rounded-xl p-1 w-full sm:w-fit overflow-x-auto">
+      <div className="flex gap-1 mb-8 bg-gray-50 rounded-xl p-1 w-full sm:w-fit overflow-x-auto">
         <button
           onClick={() => setTab("names")}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab === "names" ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"}`}
+          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab === "names" ? "bg-foreground text-background" : "text-gray-500 hover:text-gray-900"}`}
         >
           Name Generator
         </button>
         <button
           onClick={() => setTab("taglines")}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab === "taglines" ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"}`}
+          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab === "taglines" ? "bg-foreground text-background" : "text-gray-500 hover:text-gray-900"}`}
         >
           Tagline Generator
         </button>
         <button
           onClick={() => setTab("niches")}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab === "niches" ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"}`}
+          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${tab === "niches" ? "bg-foreground text-background" : "text-gray-500 hover:text-gray-900"}`}
         >
           Niche Ideas
         </button>
@@ -252,7 +252,7 @@ export default function AIGeneratorPage() {
                     <button
                       key={v}
                       onClick={() => setVibe(v)}
-                      className={`px-3 py-1.5 rounded-lg text-sm capitalize transition-colors ${vibe === v ? "bg-foreground text-background" : "bg-surface text-muted-foreground hover:text-foreground border border-border"}`}
+                      className={`px-3 py-1.5 rounded-lg text-sm capitalize transition-colors ${vibe === v ? "bg-foreground text-background" : "bg-gray-50 text-gray-500 hover:text-gray-900 border border-gray-200"}`}
                     >
                       {v}
                     </button>
@@ -269,7 +269,7 @@ export default function AIGeneratorPage() {
               <CardContent>
                 <div className="grid gap-2">
                   {generatedNames.map(name => (
-                    <div key={name} className="flex items-center justify-between py-2 px-3 rounded-lg bg-surface">
+                    <div key={name} className="flex items-center justify-between py-2 px-3 rounded-lg bg-gray-50">
                       <span className="font-mono text-sm font-medium">{name}</span>
                       <Button variant="outline" size="sm" className="rounded-lg text-xs" onClick={() => handleCheck(name)}>
                         Check Availability
@@ -316,7 +316,7 @@ export default function AIGeneratorPage() {
               <CardContent>
                 <div className="grid gap-2">
                   {taglines.map((t, i) => (
-                    <div key={i} className="py-2 px-3 rounded-lg bg-surface">
+                    <div key={i} className="py-2 px-3 rounded-lg bg-gray-50">
                       <p className="text-sm italic">&ldquo;{t}&rdquo;</p>
                     </div>
                   ))}
@@ -352,10 +352,10 @@ export default function AIGeneratorPage() {
               <CardContent>
                 <div className="grid gap-2">
                   {nicheIdeas.map(idea => (
-                    <div key={idea.name} className="flex items-center justify-between py-2 px-3 rounded-lg bg-surface">
+                    <div key={idea.name} className="flex items-center justify-between py-2 px-3 rounded-lg bg-gray-50">
                       <div>
                         <span className="font-mono text-sm font-medium">{idea.name}</span>
-                        <p className="text-xs text-muted-foreground">{idea.description}</p>
+                        <p className="text-xs text-gray-500">{idea.description}</p>
                       </div>
                       <Button variant="outline" size="sm" className="rounded-lg text-xs" onClick={() => handleCheck(idea.name)}>
                         Check Name

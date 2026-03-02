@@ -8,14 +8,14 @@ export function AuthorProfile() {
   };
 
   return (
-    <div className="flex items-start gap-4 p-4 rounded-xl border border-border bg-card">
+    <div className="flex items-start gap-4 p-4 rounded-xl border border-gray-200 bg-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="w-12 h-12 rounded-full bg-foreground/10 flex items-center justify-center text-xl shrink-0">
         🔍
       </div>
       <div>
         <p className="font-semibold text-sm">BrandScout Team</p>
-        <p className="text-xs text-muted-foreground leading-relaxed mt-1">
+        <p className="text-xs text-gray-500 leading-relaxed mt-1">
           The BrandScout team researches and writes about brand naming, domain strategy, and digital identity. 
           Our goal is to help entrepreneurs and businesses find the perfect name and secure their online presence.
         </p>

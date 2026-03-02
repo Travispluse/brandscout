@@ -63,7 +63,7 @@ function RetryButton({ onRetry }: { onRetry: () => void }) {
   return (
     <button
       onClick={handleRetry}
-      className="text-xs text-muted-foreground hover:text-foreground transition-colors ml-2"
+      className="text-xs text-gray-500 hover:text-gray-900 transition-colors ml-2"
       title="Retry check"
     >
       {loading ? (
@@ -92,7 +92,7 @@ function FilterBar({ value, onChange }: { value: StatusFilter; onChange: (v: Sta
           className={`text-xs px-2.5 py-1.5 rounded-lg transition-colors min-h-[44px] sm:min-h-0 ${
             value === f.value
               ? "bg-foreground text-background"
-              : "bg-surface text-muted-foreground hover:text-foreground"
+              : "bg-gray-50 text-gray-500 hover:text-gray-900"
           }`}
         >
           {f.label}
@@ -124,7 +124,7 @@ function ShareButtons({ query }: { query: string }) {
         href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`}
         target="_blank"
         rel="noopener"
-        className="inline-flex items-center gap-1 text-xs px-3 py-1.5 rounded-lg border border-border hover:bg-surface transition-colors"
+        className="inline-flex items-center gap-1 text-xs px-3 py-1.5 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
       >
         Share on X
       </a>
@@ -132,7 +132,7 @@ function ShareButtons({ query }: { query: string }) {
         href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
         target="_blank"
         rel="noopener"
-        className="inline-flex items-center gap-1 text-xs px-3 py-1.5 rounded-lg border border-border hover:bg-surface transition-colors"
+        className="inline-flex items-center gap-1 text-xs px-3 py-1.5 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
       >
         LinkedIn
       </a>
@@ -140,7 +140,7 @@ function ShareButtons({ query }: { query: string }) {
         href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
         target="_blank"
         rel="noopener"
-        className="inline-flex items-center gap-1 text-xs px-3 py-1.5 rounded-lg border border-border hover:bg-surface transition-colors"
+        className="inline-flex items-center gap-1 text-xs px-3 py-1.5 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
       >
         Facebook
       </a>
@@ -174,7 +174,7 @@ function FavoriteButton({ data }: { data: SearchResults }) {
   };
 
   return (
-    <button onClick={toggle} className="p-2 rounded-lg hover:bg-surface transition-colors" aria-label={isFav ? "Remove from favorites" : "Save to favorites"} title={isFav ? "Remove from favorites" : "Save to favorites"}>
+    <button onClick={toggle} className="p-2 rounded-lg hover:bg-gray-50 transition-colors" aria-label={isFav ? "Remove from favorites" : "Save to favorites"} title={isFav ? "Remove from favorites" : "Save to favorites"}>
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill={isFav ? "#dc2626" : "none"} stroke={isFav ? "#dc2626" : "currentColor"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
     </button>
   );
@@ -208,7 +208,7 @@ function LengthBadge({ name }: { name: string }) {
   let color: string;
   if (len <= 4) { label = `Short (${len})`; color = "text-yellow-500"; }
   else if (len <= 10) { label = `Perfect (${len})`; color = "text-success"; }
-  else if (len <= 14) { label = `Good (${len})`; color = "text-foreground"; }
+  else if (len <= 14) { label = `Good (${len})`; color = "text-gray-900"; }
   else { label = `Long (${len})`; color = "text-destructive"; }
 
   return <span className={`text-xs font-medium ${color}`}>{label}</span>;
@@ -313,23 +313,23 @@ function ScoreBreakdownSection({ data }: { data: SearchResults }) {
     <div className="mt-4">
       <button
         onClick={() => setOpen(!open)}
-        className="text-sm text-primary hover:underline flex items-center gap-1"
+        className="text-sm text-gray-900 hover:underline flex items-center gap-1"
         aria-expanded={open}
         aria-controls="score-breakdown"
       >
         {open ? "▾" : "▸"} Score Breakdown
       </button>
       {open && (
-        <div id="score-breakdown" className="mt-3 space-y-2 text-sm bg-surface rounded-lg p-4">
+        <div id="score-breakdown" className="mt-3 space-y-2 text-sm bg-gray-50 rounded-lg p-4">
           <p>{breakdown.domainAvailable} of {breakdown.domainTotal} domains available ({breakdown.domainPercent}%)</p>
           <p>{breakdown.platformAvailable} of {breakdown.platformTotal} platforms available ({breakdown.platformPercent}%)</p>
           <p>Name readability: <span className="font-medium">{breakdown.readabilityRating}</span></p>
           <p>Name length: {breakdown.lengthChars} chars — <span className="font-medium">{breakdown.lengthRating}</span></p>
           {breakdown.tips.length > 0 && (
-            <div className="mt-2 pt-2 border-t border-border">
-              <p className="font-medium text-xs text-muted-foreground mb-1">💡 Tips</p>
+            <div className="mt-2 pt-2 border-t border-gray-200">
+              <p className="font-medium text-xs text-gray-500 mb-1">💡 Tips</p>
               {breakdown.tips.map((tip, i) => (
-                <p key={i} className="text-xs text-muted-foreground">• {tip}</p>
+                <p key={i} className="text-xs text-gray-500">• {tip}</p>
               ))}
             </div>
           )}
@@ -355,9 +355,9 @@ function NameStrengthBadge({ name }: { name: string }) {
         {analysis.badge}
       </button>
       {showDetails && (
-        <div className="absolute top-full left-0 mt-1 bg-card border border-border rounded-lg p-3 shadow-lg z-10 w-56">
+        <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg p-3 shadow-lg z-10 w-56">
           {analysis.reasons.map((r, i) => (
-            <p key={i} className="text-xs text-muted-foreground">• {r}</p>
+            <p key={i} className="text-xs text-gray-500">• {r}</p>
           ))}
         </div>
       )}
@@ -381,9 +381,9 @@ function PronunciationBadge({ name }: { name: string }) {
         🗣 {analysis.rating}
       </button>
       {showDetails && (
-        <div className="absolute top-full left-0 mt-1 bg-card border border-border rounded-lg p-3 shadow-lg z-10 w-56">
+        <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg p-3 shadow-lg z-10 w-56">
           {analysis.details.map((d, i) => (
-            <p key={i} className="text-xs text-muted-foreground">• {d}</p>
+            <p key={i} className="text-xs text-gray-500">• {d}</p>
           ))}
         </div>
       )}
@@ -394,7 +394,7 @@ function PronunciationBadge({ name }: { name: string }) {
 // ====== Sentiment Badge (Feature 151) ======
 function SentimentBadge({ name }: { name: string }) {
   const analysis = analyzeSentiment(name);
-  const color = analysis.rating === "Positive associations" ? "text-success" : analysis.rating === "Neutral" ? "text-muted-foreground" : "text-destructive";
+  const color = analysis.rating === "Positive associations" ? "text-success" : analysis.rating === "Neutral" ? "text-gray-500" : "text-destructive";
 
   return (
     <span className={`text-xs font-medium ${color}`} title={analysis.details[0]}>
@@ -409,18 +409,18 @@ function TrademarkRiskSection({ name }: { name: string }) {
   const color = analysis.level === "Low" ? "text-success" : analysis.level === "Medium" ? "text-yellow-500" : "text-destructive";
 
   return (
-    <div className="p-4 rounded-lg bg-surface">
+    <div className="p-4 rounded-lg bg-gray-50">
       <div className="flex items-center gap-2 mb-2">
         <span className="text-sm font-medium">⚖️ Trademark Risk: <span className={color}>{analysis.level}</span></span>
       </div>
       {analysis.warnings.map((w, i) => (
-        <p key={i} className="text-xs text-muted-foreground">• {w}</p>
+        <p key={i} className="text-xs text-gray-500">• {w}</p>
       ))}
       <a
         href={analysis.searchUrl}
         target="_blank"
         rel="noopener"
-        className="inline-flex items-center gap-1 text-xs text-primary hover:underline mt-2"
+        className="inline-flex items-center gap-1 text-xs text-gray-900 hover:underline mt-2"
         aria-label="Search USPTO trademark database"
       >
         Search USPTO Database →
@@ -502,7 +502,7 @@ function AvailabilityHeatmap({ domains, usernames }: { domains: { domain: string
             </div>
           ))}
         </div>
-        <div className="flex gap-4 mt-3 text-xs text-muted-foreground">
+        <div className="flex gap-4 mt-3 text-xs text-gray-500">
           <span className="flex items-center gap-1"><span className="w-3 h-3 rounded bg-green-500/40 inline-block" /> Available</span>
           <span className="flex items-center gap-1"><span className="w-3 h-3 rounded bg-red-500/40 inline-block" /> Taken</span>
           <span className="flex items-center gap-1"><span className="w-3 h-3 rounded bg-gray-500/40 inline-block" /> Unknown</span>
@@ -530,7 +530,7 @@ function MarketAnalysisCard({ domains, usernames }: { domains: { status: string 
           <span className="text-sm font-medium">Market Opportunity:</span>
           <span className={`text-sm font-bold ${color}`}>{analysis.marketOpportunity}</span>
         </div>
-        <p className="text-xs text-muted-foreground">{analysis.explanation}</p>
+        <p className="text-xs text-gray-500">{analysis.explanation}</p>
       </CardContent>
     </Card>
   );
@@ -548,17 +548,17 @@ function RegistrarLinks({ domain }: { domain: string }) {
   ];
   return (
     <span className="relative">
-      <button onClick={() => setOpen(!open)} className="text-xs text-primary hover:underline whitespace-nowrap">
+      <button onClick={() => setOpen(!open)} className="text-xs text-gray-900 hover:underline whitespace-nowrap">
         Register ▾
       </button>
       {open && (
-        <div className="absolute right-0 top-full mt-1 bg-card border border-border rounded-lg shadow-lg z-20 w-40">
+        <div className="absolute right-0 top-full mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-20 w-40">
           {registrars.map(r => (
-            <a key={r.name} href={r.url} target="_blank" rel="noopener" className="block px-3 py-2 text-xs hover:bg-surface transition-colors">
+            <a key={r.name} href={r.url} target="_blank" rel="noopener" className="block px-3 py-2 text-xs hover:bg-gray-50 transition-colors">
               {r.name}
             </a>
           ))}
-          <a href="/registrars" className="block px-3 py-2 text-xs text-primary hover:bg-surface border-t border-border">
+          <a href="/registrars" className="block px-3 py-2 text-xs text-gray-900 hover:bg-gray-50 border-t border-gray-200">
             Compare all →
           </a>
         </div>
@@ -664,7 +664,7 @@ export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults;
               <FavoriteButton data={data} />
             </div>
             <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-1">
-              <p className="text-muted-foreground text-sm break-all">
+              <p className="text-gray-500 text-sm break-all">
                 Parsed as {data.type}: <span className="font-mono">{data.name}</span>
               </p>
               <ReadabilityBadge name={data.name} />
@@ -713,7 +713,7 @@ export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults;
               <select
                 value={domainSort}
                 onChange={(e) => setDomainSort(e.target.value as DomainSort)}
-                className="text-xs bg-surface border border-border rounded-lg px-2 py-1"
+                className="text-xs bg-gray-50 border border-gray-200 rounded-lg px-2 py-1"
               >
                 <option value="default">Default</option>
                 <option value="status">By Status</option>
@@ -725,10 +725,10 @@ export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults;
         <CardContent>
           <div className="grid gap-2">
             {filteredDomains.map((d) => (
-              <div key={d.tld} className="flex flex-wrap items-center justify-between gap-2 py-2 px-3 rounded-lg bg-surface">
+              <div key={d.tld} className="flex flex-wrap items-center justify-between gap-2 py-2 px-3 rounded-lg bg-gray-50">
                 <span className="font-mono text-sm break-all">{d.domain}</span>
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span className="text-xs text-muted-foreground hidden sm:inline">{d.source}</span>
+                  <span className="text-xs text-gray-500 hidden sm:inline">{d.source}</span>
                   <StatusBadge status={d.status} />
                   {d.status === "unknown" && <RetryButton onRetry={() => retryDomain(d.domain)} />}
                   {d.status === "available" && (
@@ -738,7 +738,7 @@ export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults;
               </div>
             ))}
             {filteredDomains.length === 0 && (
-              <p className="text-sm text-muted-foreground text-center py-4">No domains match this filter.</p>
+              <p className="text-sm text-gray-500 text-center py-4">No domains match this filter.</p>
             )}
           </div>
         </CardContent>
@@ -754,7 +754,7 @@ export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults;
               <select
                 value={usernameSort}
                 onChange={(e) => setUsernameSort(e.target.value as UsernameSort)}
-                className="text-xs bg-surface border border-border rounded-lg px-2 py-1"
+                className="text-xs bg-gray-50 border border-gray-200 rounded-lg px-2 py-1"
               >
                 <option value="default">Default</option>
                 <option value="status">By Status</option>
@@ -767,10 +767,10 @@ export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults;
         <CardContent>
           <div className="grid gap-2">
             {filteredUsernames.map((u) => (
-              <div key={u.platform} className="flex flex-wrap items-center justify-between gap-2 py-2 px-3 rounded-lg bg-surface">
+              <div key={u.platform} className="flex flex-wrap items-center justify-between gap-2 py-2 px-3 rounded-lg bg-gray-50">
                 <div className="min-w-0">
                   <span className="font-medium text-sm">{u.platform}</span>
-                  <span className="text-muted-foreground text-xs ml-2 break-all">@{u.username}</span>
+                  <span className="text-gray-500 text-xs ml-2 break-all">@{u.username}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <StatusBadge status={u.status} />
@@ -779,7 +779,7 @@ export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults;
               </div>
             ))}
             {filteredUsernames.length === 0 && (
-              <p className="text-sm text-muted-foreground text-center py-4">No usernames match this filter.</p>
+              <p className="text-sm text-gray-500 text-center py-4">No usernames match this filter.</p>
             )}
           </div>
         </CardContent>
@@ -825,10 +825,10 @@ export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults;
       </Card>
 
       {/* Disclaimer */}
-      <p className="text-xs text-muted-foreground text-center px-4">
+      <p className="text-xs text-gray-500 text-center px-4">
         Availability can change quickly. Some platforms restrict automated checks; statuses marked &ldquo;Unknown&rdquo; require manual confirmation.
       </p>
-      <p className="text-xs text-muted-foreground/60 text-center px-4">
+      <p className="text-xs text-gray-500/60 text-center px-4">
         Registration links may earn us a small commission at no extra cost to you.
       </p>
     </div>

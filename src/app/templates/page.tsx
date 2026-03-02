@@ -245,23 +245,23 @@ export default function TemplatesPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
       <h1 className="text-3xl font-bold mb-2">Content Templates</h1>
-      <p className="text-muted-foreground mb-8">Professional templates to streamline your branding process. Download and customize for your needs.</p>
+      <p className="text-gray-500 mb-8">Professional templates to streamline your branding process. Download and customize for your needs.</p>
 
       <div className="grid gap-4">
         {templates.map((t) => (
-          <div key={t.id} className="p-6 rounded-xl border border-border bg-card hover:border-foreground/20 transition-colors">
+          <div key={t.id} className="p-6 rounded-xl border border-gray-200 bg-white hover:border-foreground/20 transition-colors">
             <div className="flex items-start gap-4">
               <span className="text-3xl">{t.icon}</span>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-1">
                   <h2 className="text-lg font-semibold">{t.title}</h2>
-                  <span className="text-xs px-2 py-0.5 rounded-full bg-foreground/10 text-muted-foreground font-mono">{t.format}</span>
+                  <span className="text-xs px-2 py-0.5 rounded-full bg-foreground/10 text-gray-500 font-mono">{t.format}</span>
                 </div>
-                <p className="text-sm text-muted-foreground mb-3">{t.description}</p>
+                <p className="text-sm text-gray-500 mb-3">{t.description}</p>
                 <div className="flex gap-2">
                   <button
                     onClick={() => setPreview(preview === t.id ? null : t.id)}
-                    className="text-sm px-3 py-1.5 rounded-lg border border-border hover:bg-surface transition-colors"
+                    className="text-sm px-3 py-1.5 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors"
                   >
                     {preview === t.id ? "Hide Preview" : "Preview"}
                   </button>
@@ -275,7 +275,7 @@ export default function TemplatesPage() {
               </div>
             </div>
             {preview === t.id && (
-              <pre className="mt-4 p-4 rounded-lg bg-surface text-xs overflow-x-auto max-h-64 overflow-y-auto whitespace-pre-wrap font-mono border border-border">
+              <pre className="mt-4 p-4 rounded-lg bg-gray-50 text-xs overflow-x-auto max-h-64 overflow-y-auto whitespace-pre-wrap font-mono border border-gray-200">
                 {t.content}
               </pre>
             )}

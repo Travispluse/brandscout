@@ -83,12 +83,12 @@ export default function GlossaryPage() {
     <div className="max-w-4xl mx-auto px-4 py-12">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <h1 className="text-3xl font-bold mb-2">Branding Glossary</h1>
-      <p className="text-muted-foreground mb-6">50+ essential terms for branding, domains, DNS, SEO, and social media — explained simply.</p>
+      <p className="text-gray-500 mb-6">50+ essential terms for branding, domains, DNS, SEO, and social media — explained simply.</p>
 
       {/* Letter Navigation */}
       <nav className="flex flex-wrap gap-1 mb-8">
         {letters.map(l => (
-          <a key={l} href={`#letter-${l}`} className="px-2 py-1 text-sm rounded hover:bg-surface transition-colors font-medium">{l}</a>
+          <a key={l} href={`#letter-${l}`} className="px-2 py-1 text-sm rounded hover:bg-gray-50 transition-colors font-medium">{l}</a>
         ))}
       </nav>
 
@@ -97,12 +97,12 @@ export default function GlossaryPage() {
         const group = terms.filter(t => t.term[0].toUpperCase() === letter);
         return (
           <section key={letter} id={`letter-${letter}`} className="mb-8">
-            <h2 className="text-xl font-bold mb-3 text-foreground/70">{letter}</h2>
+            <h2 className="text-xl font-bold mb-3 text-gray-900/70">{letter}</h2>
             <div className="space-y-4">
               {group.map(t => (
                 <div key={t.id} id={t.id} className="scroll-mt-20">
                   <h3 className="font-semibold">{t.term}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{t.definition}</p>
+                  <p className="text-sm text-gray-500 leading-relaxed">{t.definition}</p>
                 </div>
               ))}
             </div>
