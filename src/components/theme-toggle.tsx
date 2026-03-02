@@ -4,7 +4,7 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
 const themes = ["light", "dark", "high-contrast"] as const;
-const labels: Record<string, string> = { light: "Light", dark: "Dark", "high-contrast": "High Contrast" };
+const labels: Record<string, string> = { light: "Light", "Dark", "high-contrast": "High Contrast" };
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();

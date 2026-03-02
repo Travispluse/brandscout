@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
-import { ThemeToggle } from "@/components/theme-toggle";
+// Theme toggle removed — white mode only
 // TextSizeToggle moved to dashboard/settings to reduce header clutter
 import { MobileMenu } from "@/components/mobile-menu";
 import { CookieConsent } from "@/components/cookie-consent";
@@ -84,7 +84,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <a href="/tools" className="px-3 py-1.5 rounded-lg hover:text-foreground hover:bg-surface transition-colors">More</a>
               </nav>
               <div className="flex items-center gap-1">
-                <ThemeToggle />
                 <MobileMenu />
               </div>
             </div>
