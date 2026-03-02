@@ -75,10 +75,16 @@ export default async function BlogPostPage({ params }: { params: Params }) {
       <div className="flex flex-col lg:flex-row gap-8 items-start">
         <article className="max-w-2xl flex-1 min-w-0">
           <header className="mb-8">
-            <h1 className="text-2xl sm:text-3xl font-bold">{post.title}</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{post.title}</h1>
             <p className="text-sm text-gray-500 mt-2">
               {post.date} · {readingTime(post.content)} min read
             </p>
+            {post.image_url && (
+              <div className="mt-6 rounded-xl overflow-hidden border border-gray-200">
+                <img src={post.image_url} alt={post.title.replace(/\s*\|.*$/, "")}
+                  className="w-full h-56 sm:h-72 object-cover" loading="eager" />
+              </div>
+            )}
           </header>
           <TableOfContents content={post.content} mode="mobile" />
           <div className="prose prose-neutral max-w-none [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mt-8 [&_h2]:mb-3 [&_h3]:text-lg [&_h3]:font-medium [&_h3]:mt-6 [&_h3]:mb-2 [&_p]:mb-4 [&_p]:leading-relaxed [&_ul]:mb-4 [&_ul]:pl-5 [&_li]:mb-1 [&_strong]:font-semibold [&_ol]:mb-4 [&_ol]:pl-5 [&_h2]:scroll-mt-20 [&_h3]:scroll-mt-20">

@@ -8,6 +8,8 @@ export interface BlogPost {
   excerpt: string;
   content: string;
   category: string;
+  image_url: string;
+  reading_time: string;
 }
 
 interface ApiPost {
@@ -19,6 +21,7 @@ interface ApiPost {
   category: string;
   tags: string;
   reading_time: string;
+  image_url: string;
 }
 
 function mapPost(p: ApiPost): BlogPost {
@@ -29,6 +32,8 @@ function mapPost(p: ApiPost): BlogPost {
     excerpt: p.description,
     content: p.content,
     category: p.category || "brand-naming",
+    image_url: p.image_url || "",
+    reading_time: p.reading_time || "",
   };
 }
 
