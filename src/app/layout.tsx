@@ -27,12 +27,21 @@ export const metadata: Metadata = {
     siteName: "BrandScout",
     type: "website",
     locale: "en_US",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1024,
+        height: 1024,
+        alt: "BrandScout — Check Brand Availability Instantly",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "BrandScout | Free Domain & Username Availability Checker",
     description:
       "Check domain and username availability across platforms instantly. Free forever, no signup.",
+    images: ["/og-image.png"],
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
   verification: {
