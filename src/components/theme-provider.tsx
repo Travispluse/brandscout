@@ -1,11 +1,5 @@
-"use client";
-
-import { ThemeProvider as NextThemesProvider } from "next-themes";
-
+// Light mode only — no theme switching needed.
+// Kept as a passthrough wrapper for backwards compatibility.
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  return (
-    <NextThemesProvider attribute="class" defaultTheme="light" forcedTheme="light" disableTransitionOnChange>
-      {children}
-    </NextThemesProvider>
-  );
+  return <>{children}</>;
 }
