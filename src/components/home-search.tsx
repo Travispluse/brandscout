@@ -69,17 +69,7 @@ function HomeSearchInner() {
 
   return (
     <div className="flex flex-col items-center px-4">
-      <div className={`flex flex-col items-center transition-all duration-500 ${results ? "pt-8" : "pt-32"}`}>
-        {!results && (
-          <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold tracking-tight mb-3">
-              Is your brand name available?
-            </h1>
-            <p className="text-gray-500 text-lg max-w-md">
-              Check domain and social media availability instantly. Free, no signup required.
-            </p>
-          </div>
-        )}
+      <div className={`flex flex-col items-center transition-all duration-500 ${results ? "pt-8" : ""}`}>
         <SearchForm ref={searchRef} onResults={handleResults} onLoading={setLoading} />
       </div>
 
