@@ -18,6 +18,12 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     title: `${cat.label} Articles`,
     description: cat.description,
     alternates: { canonical: `/blog/category/${category}` },
+    openGraph: {
+      title: `${cat.label} Articles | BrandScout`,
+      description: cat.description,
+      siteName: "BrandScout",
+      images: [{ url: "/og-image.png", width: 1024, height: 1024, alt: cat.label }],
+    },
   };
 }
 

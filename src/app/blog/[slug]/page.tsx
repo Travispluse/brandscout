@@ -23,21 +23,44 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { slug } = await params;
   const post = await getPostAsync(slug);
   if (!post) return { title: "Not Found" };
+  
+  // Generate description from content if excerpt is missing
+  const description = post.excerpt || post.content
+    ?.replace(/[#*\[\]()>`_~]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, 155) + '...' || `Read about ${post.title} on BrandScout.`;
+  
+  // Truncate title if too long (Ahrefs flags >60 chars)
+  const pageTitle = post.title.length > 60 
+    ? post.title.slice(0, 57) + '...' 
+    : post.title;
+  
   return {
-    title: post.title,
-    description: post.excerpt,
+    title: pageTitle,
+    description,
     alternates: { canonical: `/blog/${slug}` },
     openGraph: {
-      title: `${post.title} | BrandScout`,
-      description: post.excerpt,
+      title: `${pageTitle} | BrandScout`,
+      description,
       type: "article",
       publishedTime: post.date,
       siteName: "BrandScout",
+      url: `https://brandscout.net/blog/${slug}`,
+      images: [
+        {
+          url: post.image_url || "/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: pageTitle,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${post.title} | BrandScout`,
-      description: post.excerpt,
+      title: `${pageTitle} | BrandScout`,
+      description,
+      images: [post.image_url || "/og-image.png"],
     },
   };
 }
@@ -88,7 +111,10 @@ export default async function BlogPostPage({ params }: { params: Params }) {
           </header>
           <TableOfContents content={post.content} mode="mobile" />
           <div className="prose prose-neutral max-w-none [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mt-8 [&_h2]:mb-3 [&_h3]:text-lg [&_h3]:font-medium [&_h3]:mt-6 [&_h3]:mb-2 [&_p]:mb-4 [&_p]:leading-relaxed [&_ul]:mb-4 [&_ul]:pl-5 [&_li]:mb-1 [&_strong]:font-semibold [&_ol]:mb-4 [&_ol]:pl-5 [&_h2]:scroll-mt-20 [&_h3]:scroll-mt-20">
-            <MDXRemote source={post.content} />
+            <MDXRemote source={post.content} components={{
+              // Remap H1 in blog content to H2 (page already has an H1)
+              h1: (props: React.ComponentProps<"h2">) => <h2 className="text-2xl font-bold mt-8 mb-4" {...props} />,
+            }} />
           </div>
           <hr className="my-8 border-gray-200" />
           <AuthorProfile />
