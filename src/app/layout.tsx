@@ -108,6 +108,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <a href="/glossary" className="hover:text-gray-900 transition-colors">Glossary</a>
                 <a href="/editorial-policy" className="hover:text-gray-900 transition-colors">Editorial Policy</a>
                 <a href="/privacy-settings" className="hover:text-gray-900 transition-colors">Privacy Settings</a>
+                <a href="/feed" className="hover:text-gray-900 transition-colors">RSS Feed</a>
+                <a href="/sitemap.xml" className="hover:text-gray-900 transition-colors">Sitemap</a>
               </div>
               <p className="mt-1">Need a full SEO audit? Try <a href="https://auditmysite.app" target="_blank" rel="noopener" className="underline hover:text-gray-900 transition-colors">AuditMySite.app</a></p>
               <p>© {new Date().getFullYear()} BrandScout. Free & open source.</p>
