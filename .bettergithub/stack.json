@@ -1,0 +1,11 @@
+{
+  "summary": "TypeScript Next.js app using Prisma with SQLite, Tailwind CSS, shadcn/ui, RDAP/DNS checks, social profile checks, and an external blog API.",
+  "language": "TypeScript",
+  "framework": "Next.js 16",
+  "runtime": "Node.js 20.9+",
+  "package_manager": "npm",
+  "database": "SQLite via Prisma",
+  "hosting": "unknown",
+  "key_services": ["RDAP.org", "DNS", "social profile HTTP checks", "Zenith Digital blog API"],
+  "analyzed_at": "2026-05-21"
+}
