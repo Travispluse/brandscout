@@ -6,7 +6,7 @@ import { SearchForm, type SearchResults, type SearchFormHandle } from "@/compone
 import { hasCookieConsent } from "@/components/cookie-consent";
 import { ResultsView } from "@/components/results-view";
 import { ResultsSkeleton } from "@/components/ui/skeleton";
-import { trackSearch, ACHIEVEMENTS, getUnlocked } from "@/lib/achievements";
+import { trackSearch, ACHIEVEMENTS } from "@/lib/achievements";
 
 function showToast(message: string) {
   const el = document.createElement("div");
@@ -69,7 +69,7 @@ function HomeSearchInner() {
 
   return (
     <div className="flex flex-col items-center px-4">
-      <div className={`flex flex-col items-center transition-all duration-500 ${results ? "pt-8" : ""}`}>
+      <div className={`flex w-full flex-col items-center transition-all duration-500 ${results ? "pt-8" : ""}`}>
         <SearchForm ref={searchRef} onResults={handleResults} onLoading={setLoading} />
       </div>
 

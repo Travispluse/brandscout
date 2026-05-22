@@ -1,5 +1,10 @@
+import fs from "node:fs/promises";
+import path from "node:path";
+import matter from "gray-matter";
+
 const API_URL = process.env.BLOG_API_URL || "https://blog-api.zenith-digital.workers.dev";
 const SITE = "brandscout";
+const CONTENT_DIR = path.join(process.cwd(), "content", "blog");
 
 export interface BlogPost {
   slug: string;
@@ -24,6 +29,16 @@ interface ApiPost {
   image_url: string;
 }
 
+interface LocalPostFrontmatter {
+  title?: string;
+  date?: string;
+  excerpt?: string;
+  description?: string;
+  category?: string;
+  image_url?: string;
+  reading_time?: string;
+}
+
 function mapPost(p: ApiPost): BlogPost {
   return {
     slug: p.slug,
@@ -37,6 +52,52 @@ function mapPost(p: ApiPost): BlogPost {
   };
 }
 
+function estimateReadingTime(content: string): string {
+  const words = content.trim().split(/\s+/).filter(Boolean).length;
+  return `${Math.max(1, Math.round(words / 230))} min read`;
+}
+
+async function getLocalPosts(): Promise<BlogPost[]> {
+  try {
+    const files = await fs.readdir(CONTENT_DIR);
+    const posts = await Promise.all(
+      files
+        .filter((file) => file.endsWith(".mdx"))
+        .map(async (file) => {
+          const slug = file.replace(/\.mdx$/, "");
+          const raw = await fs.readFile(path.join(CONTENT_DIR, file), "utf8");
+          const { data, content } = matter(raw);
+          const frontmatter = data as LocalPostFrontmatter;
+
+          return {
+            slug,
+            title: frontmatter.title || slug.replace(/-/g, " "),
+            date: frontmatter.date || "",
+            excerpt: frontmatter.excerpt || frontmatter.description || "",
+            content,
+            category: frontmatter.category || "brand-naming",
+            image_url: frontmatter.image_url || "",
+            reading_time: frontmatter.reading_time || estimateReadingTime(content),
+          };
+        })
+    );
+
+    return posts.sort((a, b) => b.date.localeCompare(a.date));
+  } catch (e) {
+    console.error("Local blog load error:", e);
+    return [];
+  }
+}
+
+function mergePosts(localPosts: BlogPost[], remotePosts: BlogPost[]): BlogPost[] {
+  const bySlug = new Map<string, BlogPost>();
+
+  for (const post of remotePosts) bySlug.set(post.slug, post);
+  for (const post of localPosts) bySlug.set(post.slug, post);
+
+  return Array.from(bySlug.values()).sort((a, b) => b.date.localeCompare(a.date));
+}
+
 // Cache for build-time / ISR
 let postsCache: BlogPost[] | null = null;
 let cacheTime = 0;
@@ -45,19 +106,23 @@ const CACHE_TTL = 60_000; // 1 minute
 async function fetchPosts(): Promise<BlogPost[]> {
   const now = Date.now();
   if (postsCache && now - cacheTime < CACHE_TTL) return postsCache;
+
+  const localPosts = await getLocalPosts();
   
   try {
     const res = await fetch(`${API_URL}/posts?site=${SITE}&limit=500`, { next: { revalidate: 60 } });
     if (!res.ok) throw new Error(`API error: ${res.status}`);
     const data = await res.json();
-    postsCache = (data.posts || []).map(mapPost);
+    postsCache = mergePosts(localPosts, (data.posts || []).map(mapPost));
     cacheTime = now;
     return postsCache!;
   } catch (e) {
     console.error("Blog API fetch error:", e);
     // Return cache even if stale
     if (postsCache) return postsCache;
-    return [];
+    postsCache = localPosts;
+    cacheTime = now;
+    return postsCache;
   }
 }
 
@@ -73,7 +138,14 @@ export async function getAllPostsAsync(): Promise<BlogPost[]> {
   return fetchPosts();
 }
 
+export async function getLocalPostsAsync(): Promise<BlogPost[]> {
+  return getLocalPosts();
+}
+
 export async function getPostAsync(slug: string): Promise<BlogPost | null> {
+  const localPost = (await getLocalPosts()).find((post) => post.slug === slug);
+  if (localPost) return localPost;
+
   try {
     const res = await fetch(`${API_URL}/posts/${SITE}/${slug}`, { next: { revalidate: 60 } });
     if (!res.ok) return null;

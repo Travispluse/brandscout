@@ -1,4 +1,4 @@
-import { getPostAsync, getAllPostsAsync } from "@/lib/blog";
+import { getPostAsync, getLocalPostsAsync } from "@/lib/blog";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
@@ -14,8 +14,8 @@ export const dynamicParams = true; // Allow dynamic slugs not in generateStaticP
 type Params = Promise<{ slug: string }>;
 
 export async function generateStaticParams() {
-  // Generate the most recent 50 posts at build time, rest on-demand
-  const posts = await getAllPostsAsync();
+  // Pre-render checked-in MDX posts. Remote API posts remain available on-demand.
+  const posts = await getLocalPostsAsync();
   return posts.slice(0, 50).map((p) => ({ slug: p.slug }));
 }
 
@@ -80,13 +80,36 @@ export default async function BlogPostPage({ params }: { params: Params }) {
     headline: post.title,
     datePublished: post.date,
     description: post.excerpt,
+    image: post.image_url || "/og-image.png",
     url: `https://brandscout.net/blog/${slug}`,
     author: { "@type": "Organization", name: "BrandScout Team", url: "https://brandscout.net" },
   };
 
   return (
     <div className="min-h-screen bg-white">
-    <div className="max-w-4xl mx-auto px-4 py-12">
+      <section className="relative overflow-hidden bg-gray-950 text-white">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-cover bg-center opacity-60"
+          style={{ backgroundImage: `url(${post.image_url || "/brandscout-hero.svg"})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-950/86 to-gray-950/30" />
+        <div className="relative mx-auto max-w-4xl px-4 py-16 sm:py-20">
+          <Link href="/blog" className="text-sm font-medium text-cyan-200 hover:text-white">
+            Blog
+          </Link>
+          <h1 className="mt-5 max-w-3xl text-3xl font-semibold sm:text-5xl">
+            {post.title}
+          </h1>
+          <p className="mt-4 text-sm text-gray-300">
+            {post.date} · {readingTime(post.content)} min read
+          </p>
+          {post.excerpt && (
+            <p className="mt-5 max-w-2xl text-base leading-7 text-gray-200">{post.excerpt}</p>
+          )}
+        </div>
+      </section>
+    <div className="max-w-4xl mx-auto px-4 py-10">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingJsonLd) }} />
       <div className="max-w-2xl">
         <Breadcrumbs items={[
@@ -97,18 +120,6 @@ export default async function BlogPostPage({ params }: { params: Params }) {
       </div>
       <div className="flex flex-col lg:flex-row gap-8 items-start">
         <article className="max-w-2xl flex-1 min-w-0">
-          <header className="mb-8">
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{post.title}</h1>
-            <p className="text-sm text-gray-500 mt-2">
-              {post.date} · {readingTime(post.content)} min read
-            </p>
-            {post.image_url && (
-              <div className="mt-6 rounded-xl overflow-hidden border border-gray-200">
-                <img src={post.image_url} alt={post.title.replace(/\s*\|.*$/, "")}
-                  className="w-full h-56 sm:h-72 object-cover" loading="eager" />
-              </div>
-            )}
-          </header>
           <TableOfContents content={post.content} mode="mobile" />
           <div className="prose prose-neutral max-w-none [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mt-8 [&_h2]:mb-3 [&_h3]:text-lg [&_h3]:font-medium [&_h3]:mt-6 [&_h3]:mb-2 [&_p]:mb-4 [&_p]:leading-relaxed [&_ul]:mb-4 [&_ul]:pl-5 [&_li]:mb-1 [&_strong]:font-semibold [&_ol]:mb-4 [&_ol]:pl-5 [&_h2]:scroll-mt-20 [&_h3]:scroll-mt-20">
             <MDXRemote source={post.content} components={{

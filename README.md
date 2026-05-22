@@ -39,6 +39,27 @@ Create `.env`:
 DATABASE_URL="file:./dev.db"
 ```
 
+## Daily Blog Automation
+
+The workflow in `.github/workflows/daily-blog.yml` runs once per day and can also be started manually from GitHub Actions. It generates a new local MDX article in `content/blog`, creates a hero image in `public/blog`, verifies `npm run build`, then commits the content back to the default branch.
+
+Required GitHub secret:
+```
+OPENAI_API_KEY
+```
+
+Optional GitHub variables:
+```
+OPENAI_TEXT_MODEL=gpt-5.2
+OPENAI_IMAGE_MODEL=gpt-image-1.5
+```
+
+Manual local checks:
+```bash
+npm run blog:generate:dry-run
+npm run blog:generate -- --topic="domain strategy for new service businesses"
+```
+
 ## No Paid APIs
 
 All checks use free, public methods:
