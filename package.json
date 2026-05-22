@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --webpack",
     "blog:generate": "node scripts/generate-daily-blog.mjs",
     "blog:generate:dry-run": "node scripts/generate-daily-blog.mjs --dry-run",
     "start": "next start",
