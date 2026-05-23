@@ -162,16 +162,21 @@ export function getPost(slug: string): BlogPost | null {
 }
 
 export const CATEGORIES: Record<string, { label: string; description: string }> = {
+  "naming-guides": { label: "Naming Guides", description: "Practical naming guides for startups, local businesses, and new brands." },
   "brand-naming": { label: "Brand Naming", description: "Tips and strategies for choosing the perfect brand name." },
   "domain-strategy": { label: "Domain Strategy", description: "Master domain selection, extensions, and acquisition." },
+  "domains": { label: "Domains", description: "Domain research, acquisition, valuation, and portfolio strategy." },
   "social-handles": { label: "Social Handles", description: "Secure consistent usernames across social platforms." },
   "business-legal": { label: "Business & Legal", description: "Trademarks, registration, and legal considerations." },
   "ecommerce": { label: "E-Commerce", description: "Branding strategies for online stores and marketplaces." },
   "industry-guides": { label: "Industry Guides", description: "Naming guides for specific industries and niches." },
   "technical": { label: "Technical", description: "APIs, SEO, DNS, and technical branding infrastructure." },
+  "brand-strategy": { label: "Brand Strategy", description: "Positioning, voice, identity, and launch strategy for growing brands." },
+  "branding": { label: "Branding", description: "Brand identity, trust, consistency, and digital presence guidance." },
   "branding-strategy": { label: "Branding Strategy", description: "Brand positioning, identity, and long-term strategy." },
   "growth-marketing": { label: "Growth & Marketing", description: "Marketing strategies to grow your brand presence." },
   "guides": { label: "Guides", description: "Step-by-step guides, checklists, and best practices." },
+  "startup-tips": { label: "Startup Tips", description: "Lean branding and naming advice for early-stage founders." },
   "advanced-domains": { label: "Advanced Domains", description: "Premium domains, investing, and advanced strategies." },
   "platform-guides": { label: "Platform Guides", description: "Guides for specific registrars and platforms." },
   "emerging-trends": { label: "Emerging Trends", description: "Future trends in branding, AI, and digital identity." },

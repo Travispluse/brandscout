@@ -8,6 +8,8 @@ import { TableOfContents } from "@/components/table-of-contents";
 import { NewsletterSignup } from "@/components/newsletter-signup";
 import { AuthorProfile } from "@/components/author-profile";
 
+const siteUrl = "https://brandscout.net";
+
 export const revalidate = 60; // ISR: revalidate every 60 seconds
 export const dynamicParams = true; // Allow dynamic slugs not in generateStaticParams
 
@@ -74,15 +76,21 @@ export default async function BlogPostPage({ params }: { params: Params }) {
   const post = await getPostAsync(slug);
   if (!post) notFound();
 
+  const postUrl = `${siteUrl}/blog/${slug}`;
+  const imageUrl = post.image_url?.startsWith("http")
+    ? post.image_url
+    : `${siteUrl}${post.image_url || "/og-image.png"}`;
+
   const blogPostingJsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.title,
     datePublished: post.date,
     description: post.excerpt,
-    image: post.image_url || "/og-image.png",
-    url: `https://brandscout.net/blog/${slug}`,
-    author: { "@type": "Organization", name: "BrandScout Team", url: "https://brandscout.net" },
+    image: imageUrl,
+    mainEntityOfPage: postUrl,
+    url: postUrl,
+    author: { "@type": "Organization", name: "BrandScout Team", url: siteUrl },
   };
 
   return (

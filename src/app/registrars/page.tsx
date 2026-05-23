@@ -1,4 +1,22 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Domain Registrar Comparison",
+  description: "Compare popular domain registrars by pricing, privacy, support, and brand-launch fit before buying your domain.",
+  alternates: { canonical: "/registrars" },
+  openGraph: {
+    title: "Domain Registrar Comparison | BrandScout",
+    description: "Compare popular domain registrars by pricing, privacy, support, and brand-launch fit.",
+    url: "/registrars",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Domain Registrar Comparison | BrandScout",
+    description: "Compare registrars before buying your brand domain.",
+  },
+};
 
 const registrars = [
   {

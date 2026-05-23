@@ -26,8 +26,8 @@ const LINK_MAP: Record<string, string> = {
   "premium domain": "/glossary#premium-domain",
   "ccTLD": "/glossary#cctld",
   "gTLD": "/glossary#gtld",
-  "name generator": "/",
-  "bulk check": "/",
+  "name generator": "/ai-generator",
+  "bulk check": "/bulk",
 };
 
 /**

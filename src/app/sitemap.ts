@@ -16,15 +16,10 @@ const staticPages = [
   { path: "/docs", priority: 0.5, changeFrequency: "monthly" as const },
   { path: "/help", priority: 0.5, changeFrequency: "monthly" as const },
   { path: "/registrars", priority: 0.5, changeFrequency: "monthly" as const },
-  { path: "/achievements", priority: 0.4, changeFrequency: "monthly" as const },
   { path: "/newsletter", priority: 0.4, changeFrequency: "monthly" as const },
-  { path: "/share", priority: 0.4, changeFrequency: "monthly" as const },
-  { path: "/dashboard", priority: 0.4, changeFrequency: "weekly" as const },
-  { path: "/saved", priority: 0.3, changeFrequency: "weekly" as const },
   { path: "/privacy", priority: 0.2, changeFrequency: "yearly" as const },
   { path: "/terms", priority: 0.2, changeFrequency: "yearly" as const },
   { path: "/editorial-policy", priority: 0.2, changeFrequency: "yearly" as const },
-  { path: "/privacy-settings", priority: 0.2, changeFrequency: "yearly" as const },
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

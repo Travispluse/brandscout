@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import type { Metadata } from "next";
 
 interface Template {
   id: string;
