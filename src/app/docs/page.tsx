@@ -4,6 +4,7 @@ import { APISandbox } from "@/components/api-sandbox";
 export const metadata = {
   title: "API Documentation | Developer & AI Integration Guide",
   description: "BrandScout API documentation for developers and AI agents. Free REST API to check domain and username availability programmatically. OpenAPI spec included.",
+  alternates: { canonical: "/docs" },
   openGraph: {
     title: "API Documentation | BrandScout",
     description: "Free REST API to check domain and username availability. Docs, examples, and OpenAPI spec for developers and AI agents.",
@@ -35,7 +36,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 }
 
 export default function DocsPage() {
-  const baseUrl = "https://brandscout.dev";
+  const baseUrl = "https://brandscout.net";
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-10">

@@ -4,6 +4,7 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description: "BrandScout Privacy Policy — how we handle your data when you use our free brand name availability checker.",
+  alternates: { canonical: "/privacy" },
 };
 
 export default function PrivacyPage() {

@@ -4,6 +4,7 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 export const metadata: Metadata = {
   title: "Terms of Service",
   description: "BrandScout Terms of Service — rules and guidelines for using our free brand name availability checker.",
+  alternates: { canonical: "/terms" },
 };
 
 export default function TermsPage() {
