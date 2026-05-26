@@ -52,6 +52,13 @@ function mapPost(p: ApiPost): BlogPost {
   };
 }
 
+function isPublishableRemotePost(p: ApiPost): boolean {
+  const title = (p.title || "").trim().toLowerCase();
+  const description = (p.description || "").trim().toLowerCase();
+
+  return title !== "test" && title !== "test post" && description !== "test" && description !== "test desc";
+}
+
 function estimateReadingTime(content: string): string {
   const words = content.trim().split(/\s+/).filter(Boolean).length;
   return `${Math.max(1, Math.round(words / 230))} min read`;
@@ -113,7 +120,7 @@ async function fetchPosts(): Promise<BlogPost[]> {
     const res = await fetch(`${API_URL}/posts?site=${SITE}&limit=500`, { next: { revalidate: 60 } });
     if (!res.ok) throw new Error(`API error: ${res.status}`);
     const data = await res.json();
-    postsCache = mergePosts(localPosts, (data.posts || []).map(mapPost));
+    postsCache = mergePosts(localPosts, (data.posts || []).filter(isPublishableRemotePost).map(mapPost));
     cacheTime = now;
     return postsCache!;
   } catch (e) {
@@ -150,6 +157,7 @@ export async function getPostAsync(slug: string): Promise<BlogPost | null> {
     const res = await fetch(`${API_URL}/posts/${SITE}/${slug}`, { next: { revalidate: 60 } });
     if (!res.ok) return null;
     const data = await res.json();
+    if (!isPublishableRemotePost(data)) return null;
     return mapPost(data);
   } catch {
     return null;
