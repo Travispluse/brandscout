@@ -5,6 +5,7 @@ import matter from "gray-matter";
 const API_URL = process.env.BLOG_API_URL || "https://blog-api.zenith-digital.workers.dev";
 const SITE = "brandscout";
 const CONTENT_DIR = path.join(process.cwd(), "content", "blog");
+const DEFAULT_BLOG_IMAGE = "/og-image.png";
 
 export interface BlogPost {
   slug: string;
@@ -47,7 +48,7 @@ function mapPost(p: ApiPost): BlogPost {
     excerpt: p.description,
     content: p.content,
     category: p.category || "brand-naming",
-    image_url: p.image_url || "",
+    image_url: p.image_url || DEFAULT_BLOG_IMAGE,
     reading_time: p.reading_time || "",
   };
 }
@@ -76,7 +77,7 @@ async function getLocalPosts(): Promise<BlogPost[]> {
             excerpt: frontmatter.excerpt || frontmatter.description || "",
             content,
             category: frontmatter.category || "brand-naming",
-            image_url: frontmatter.image_url || "",
+            image_url: frontmatter.image_url || DEFAULT_BLOG_IMAGE,
             reading_time: frontmatter.reading_time || estimateReadingTime(content),
           };
         })
