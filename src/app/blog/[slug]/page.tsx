@@ -8,10 +8,16 @@ import { TableOfContents } from "@/components/table-of-contents";
 import { NewsletterSignup } from "@/components/newsletter-signup";
 import { AuthorProfile } from "@/components/author-profile";
 
+const siteUrl = "https://brandscout.net";
+
 export const revalidate = 60; // ISR: revalidate every 60 seconds
 export const dynamicParams = true; // Allow dynamic slugs not in generateStaticParams
 
 type Params = Promise<{ slug: string }>;
+
+function absoluteUrl(url: string) {
+  return url.startsWith("http://") || url.startsWith("https://") ? url : `${siteUrl}${url}`;
+}
 
 export async function generateStaticParams() {
   // Pre-render checked-in MDX posts. Remote API posts remain available on-demand.
@@ -46,7 +52,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
       type: "article",
       publishedTime: post.date,
       siteName: "BrandScout",
-      url: `https://brandscout.net/blog/${slug}`,
+      url: `${siteUrl}/blog/${slug}`,
       images: [
         {
           url: post.image_url || "/og-image.png",
@@ -80,9 +86,9 @@ export default async function BlogPostPage({ params }: { params: Params }) {
     headline: post.title,
     datePublished: post.date,
     description: post.excerpt,
-    image: post.image_url || "/og-image.png",
-    url: `https://brandscout.net/blog/${slug}`,
-    author: { "@type": "Organization", name: "BrandScout Team", url: "https://brandscout.net" },
+    image: absoluteUrl(post.image_url || "/og-image.png"),
+    url: `${siteUrl}/blog/${slug}`,
+    author: { "@type": "Organization", name: "BrandScout Team", url: siteUrl },
   };
 
   return (

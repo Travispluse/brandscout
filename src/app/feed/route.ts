@@ -1,8 +1,7 @@
-import { getLocalPostsAsync } from "@/lib/blog";
+import { getAllPostsAsync } from "@/lib/blog";
 
 export const revalidate = 3600; // revalidate hourly
 
-const API_URL = process.env.BLOG_API_URL || "https://blog-api.zenith-digital.workers.dev";
 const SITE_URL = "https://brandscout.net";
 
 function escapeXml(value: string) {
@@ -14,8 +13,8 @@ function escapeXml(value: string) {
     .replace(/'/g, "&apos;");
 }
 
-async function getFallbackFeed() {
-  const posts = await getLocalPostsAsync();
+async function getFeed() {
+  const posts = await getAllPostsAsync();
   const items = posts
     .map((post) => {
       const url = `${SITE_URL}/blog/${post.slug}`;
@@ -36,16 +35,7 @@ async function getFallbackFeed() {
 }
 
 export async function GET() {
-  let xml: string;
-
-  try {
-    const res = await fetch(`${API_URL}/feed/brandscout`);
-    if (!res.ok) throw new Error(`Blog feed API error: ${res.status}`);
-    xml = await res.text();
-  } catch (error) {
-    console.error("Blog feed API fetch error:", error);
-    xml = await getFallbackFeed();
-  }
+  const xml = await getFeed();
 
   return new Response(xml, {
     headers: { 'Content-Type': 'application/rss+xml; charset=utf-8', 'Cache-Control': 'public, max-age=3600' },

@@ -38,6 +38,6 @@ export function createPageMetadata({
     },
     robots: index
       ? { index: true, follow: true, googleBot: { index: true, follow: true } }
-      : { index: false, follow: false, googleBot: { index: false, follow: false } },
+      : { index: false, follow: true, googleBot: { index: false, follow: true } },
   };
 }
