@@ -1,0 +1,299 @@
+---
+title: "Create a Brand Asset Handoff Sheet Before Launch"
+date: "2026-06-02"
+excerpt: "A practical way to keep domains, handles, email, analytics, and launch accounts under clear ownership before a new brand goes public."
+category: "branding-strategy"
+image_url: "/blog/brand-asset-handoff-sheet-before-launch-hero.png"
+---
+
+# Create a Brand Asset Handoff Sheet Before Launch
+
+The most fragile brand assets are often claimed by the fastest person in the room.
+
+Someone buys the domain from a personal registrar account because it is urgent. Someone else reserves the Instagram handle from their phone. A contractor creates the launch email address so the landing page can go live. The founder connects analytics through an old Gmail account. A designer uploads the first profile image and keeps the only login.
+
+None of those choices feel dangerous in the moment. They feel practical.
+
+The risk shows up later, when the team needs to update DNS, recover a locked social account, prove who owns the domain, renew a defensive URL, remove an agency from a profile, or answer a simple question: "Who actually controls this?"
+
+A brand asset handoff sheet prevents that mess.
+
+It is not a password dump, a legal file, or a full brand book. It is a plain operating record that says which launch assets exist, who owns them, where access lives, what has to renew, and what still needs cleanup before the brand is announced.
+
+If you have not claimed the core assets yet, start with the [24-hour brand name lockdown sprint](/blog/brand-name-lockdown-sprint). The handoff sheet starts right after that sprint, when the name has moved from "available" to "someone has created real accounts."
+
+## Separate Handoff From Proof
+
+Teams often confuse two useful records.
+
+The [brand name evidence file](/blog/brand-name-evidence-file) explains why the name is viable. It keeps the rationale, availability proof, search notes, risks, and launch-use rules in one place.
+
+The handoff sheet explains how the assets are controlled.
+
+Those jobs overlap, but they are not the same.
+
+| Record | Main question | Example detail |
+| --- | --- | --- |
+| Evidence file | Why did we choose this name? | Exact-name search was clean on June 2 |
+| Handoff sheet | Who controls the asset now? | Primary domain lives in company registrar account |
+| Evidence file | What risks did we accept? | Exact Instagram handle was taken |
+| Handoff sheet | How do we operate the workaround? | `@getnorthline` is stored in social password vault |
+
+The evidence file helps the team avoid relitigating the name. The handoff sheet helps the team avoid losing control of it.
+
+Keep them near each other, but do not force one document to do both jobs. A lawyer, founder, marketer, and operations lead may all read the evidence file. The handoff sheet needs to be maintained by whoever can actually update accounts, renew domains, and remove access.
+
+## List The Assets That Can Strand The Launch
+
+Start with assets that can block public launch if they disappear, expire, or sit in the wrong account.
+
+For most new brands, that list includes:
+
+- Primary domain.
+- Defensive domains or common misspellings.
+- DNS provider.
+- Email provider and admin account.
+- Main inboxes such as `hello@`, `support@`, and founder email.
+- Priority social handles.
+- LinkedIn company page.
+- GitHub organization or package namespace if relevant.
+- Analytics, Search Console, tag manager, and ad accounts.
+- Newsletter or community platform.
+- App store, marketplace, or profile accounts if the product needs them.
+
+Do not try to catalog every possible brand surface. Catalog the ones that could create confusion or stop launch work.
+
+A parked Pinterest handle for a B2B infrastructure tool may not matter this week. The primary domain, LinkedIn page, GitHub organization, and email admin definitely do.
+
+This is where the [social handle audit before launch](/blog/social-handle-audit-before-launch) helps. Use that audit to decide which platforms matter. Use the handoff sheet to record who controls the accounts that were actually claimed.
+
+## Use Company-Controlled Accounts
+
+The handoff sheet should reveal one uncomfortable truth quickly: which assets were created from personal accounts?
+
+That is normal during early naming work. It should not remain normal through launch.
+
+For each asset, ask:
+
+- Is this controlled by a company email address?
+- Is the login stored in the company password manager?
+- Is two-factor authentication enabled?
+- Is there a recovery email or phone number that the company controls?
+- Can at least two trusted people recover access if one person is unavailable?
+
+The answer does not need to be perfect on day one. It does need to be visible.
+
+For example:
+
+| Asset | Current state | Launch requirement |
+| --- | --- | --- |
+| `getnorthline.com` | Bought from founder's personal registrar | Transfer to company registrar account |
+| Instagram | Claimed from contractor phone | Move credentials into company vault |
+| LinkedIn | Created by founder profile | Add second admin before announcement |
+| Google Analytics | Connected through personal Gmail | Move to company-owned account |
+
+This is not about mistrusting the people who moved fast. It is about not making one person's inbox the single point of failure for the brand.
+
+## Track Owner, Operator, And Recovery Separately
+
+"Owner" is too vague by itself.
+
+A useful handoff sheet separates three roles:
+
+| Role | Meaning | Example |
+| --- | --- | --- |
+| Business owner | Person accountable for the asset | Head of operations |
+| Operator | Person allowed to make routine updates | Marketing lead |
+| Recovery holder | Person or account that can regain access | Company admin email |
+
+One person can fill more than one role at a tiny company, but the roles should still be named.
+
+This prevents common launch confusion:
+
+- The designer can update profile images, but does not own the account.
+- The agency can schedule posts, but cannot change recovery email.
+- The founder can approve domain purchases, but operations owns renewals.
+- Engineering can edit DNS, but cannot transfer the domain without approval.
+
+The distinction matters most when outside help is involved. Contractors often need temporary access. They should not become the permanent control layer for domains, social accounts, analytics, or email.
+
+## Build The Sheet Around Decisions, Not Passwords
+
+Do not put raw passwords in the handoff sheet.
+
+Use a password manager for secrets. Use the sheet to point to the right vault item, access group, or admin location.
+
+A practical table looks like this:
+
+| Field | Example |
+| --- | --- |
+| Asset | Primary domain |
+| URL or account | `getnorthline.com` |
+| Provider | Cloudflare Registrar |
+| Business owner | Ava |
+| Operator | Sam |
+| Login location | Company vault: Domains / Cloudflare |
+| 2FA status | Authenticator app, stored recovery codes |
+| Renewal or risk date | June 2, 2027 |
+| Public use rule | Approved for email and launch page |
+| Cleanup needed | Add second admin |
+
+The "public use rule" is more useful than it looks. A domain may be bought but not ready for public use. A handle may be claimed but intentionally quiet. A newsletter account may exist only for testing.
+
+Write that down so the team does not accidentally half-launch the brand through a bio link, test page, footer, email signature, or contractor portfolio.
+
+## Add Domain Details That Future You Will Need
+
+Domain handoff deserves more than a registrar name.
+
+Record the operational details someone will need when the launch is live and pressure is higher:
+
+- Registrar.
+- DNS provider.
+- Renewal date.
+- Auto-renew status.
+- Payment owner.
+- Transfer lock status.
+- WHOIS privacy status.
+- Nameservers.
+- Primary DNS records that affect website and email.
+- Defensive domains and redirect destinations.
+
+You do not need to copy every DNS record into a giant table if the DNS provider is the source of truth. But you should capture enough context that a new operator can understand what is normal.
+
+For example:
+
+| Domain | Purpose | Renewal | DNS note |
+| --- | --- | --- | --- |
+| `getnorthline.com` | Primary site and email | Auto-renew on | DNS in Cloudflare |
+| `northline.co` | Defensive redirect | Manual review before renewal | Redirects to primary |
+| `northlineapp.com` | Rejected modifier, parked | Do not renew unless product scope changes | No public use |
+
+This connects directly to the domain security work in [securing your domain from hijacking](/blog/securing-your-domain-from-hijacking), but the lens is different. The security guide explains how to protect the domain. The handoff sheet makes sure the right people know protection is actually in place.
+
+If you are still deciding whether a modified domain is the right public pattern, finish the [domain modifier strategy](/blog/domain-modifier-strategy) before this sheet becomes permanent. A handoff sheet should document the decision, not hide an unresolved naming problem.
+
+## Record Handle Patterns And Exceptions
+
+Social handles need the same operating clarity.
+
+The handoff sheet should show the intended public pattern:
+
+| Platform | Public handle | Status | Owner | Exception note |
+| --- | --- | --- | --- | --- |
+| LinkedIn | `/company/getnorthline` | Live, incomplete | Marketing | Needs banner |
+| X | `@getnorthline` | Claimed | Marketing | Keep quiet until launch |
+| Instagram | `@getnorthline` | Claimed | Marketing | Exact name taken |
+| TikTok | Not claimed | Deferred | Marketing | Not a year-one channel |
+| GitHub | `getnorthline` | Claimed | Engineering | Add org owners |
+
+The exception note prevents future drift. Six months later, someone will ask why the team did not use the exact name on Instagram or why TikTok was skipped. A short note is enough.
+
+This is especially important when the brand uses a modifier. If the public pattern is `getnorthline`, every new channel should start from that pattern unless someone has a specific reason to break it.
+
+Do not let the handoff sheet become a graveyard of empty profiles. It should help the team decide what is official, what is intentionally reserved, and what should be ignored.
+
+## Include Email, Analytics, And Search Tools
+
+New brands often treat email and analytics as technical setup, not brand assets.
+
+They are brand assets.
+
+Email controls customer trust. Analytics controls launch learning. Search tools control how quickly the team can see whether people are finding the brand.
+
+At minimum, record:
+
+- Email provider and admin owner.
+- Active inboxes and aliases.
+- SPF, DKIM, and DMARC status.
+- Search Console property owner.
+- Analytics property owner.
+- Tag manager or pixel owner.
+- Newsletter sender domain.
+- Support inbox or help desk owner.
+
+For launch, the sheet might say:
+
+| Asset | Status | Cleanup before announcement |
+| --- | --- | --- |
+| `hello@getnorthline.com` | Active | Add shared inbox owner |
+| SPF/DKIM | Configured | Send test to founder and support inbox |
+| Search Console | Verified | Submit sitemap after public launch |
+| Analytics | Installed | Confirm events after first traffic |
+| Newsletter | Draft account | Do not send until domain auth passes |
+
+This pairs well with [SEO basics for new domains](/blog/seo-basics-new-domains). SEO setup gets the site discoverable. The handoff sheet makes sure the access to maintain that setup is not trapped in one person's account.
+
+## Clean Up Agency And Contractor Access
+
+The best time to define contractor access is before the launch rush.
+
+Write down:
+
+- Who has temporary access.
+- Which accounts they can touch.
+- Whether they can add other users.
+- When their access should expire.
+- Who is responsible for removing it.
+
+For example:
+
+| Person or team | Access | Expiration | Owner |
+| --- | --- | --- | --- |
+| Launch designer | Social profile images folder | Launch day plus 7 days | Marketing |
+| SEO contractor | Search Console read-only | 30 days after launch | Growth |
+| Web agency | DNS edit access | Until cutover complete | Engineering |
+
+This is not heavy governance. It is basic cleanup.
+
+Without it, agencies and freelancers often remain attached to brand accounts long after their work is done. That may be harmless for a while, but it becomes a problem when someone changes jobs, loses a device, closes an agency account, or simply forgets what they created.
+
+## Run A 30-Minute Handoff Review
+
+Do the review before the public announcement, not after.
+
+Invite the people who control launch-critical surfaces: founder, operations, marketing, engineering, and any agency lead who created accounts.
+
+Open the sheet and ask:
+
+- Is every launch-critical asset listed?
+- Are any assets still owned by personal accounts?
+- Can two trusted people recover each important account?
+- Are renewals and payment owners documented?
+- Are public-use rules clear?
+- Are unused or rejected assets marked that way?
+- Are contractors limited to the access they need?
+
+Do not turn the review into a broad brand meeting. The name, category language, and launch copy should already have their own decisions. If category wording is still unstable, go back to the [category language sheet](/blog/category-language-sheet-before-launch) before publishing public profiles.
+
+The handoff review has one job: make sure the brand's first public footprint is under adult supervision.
+
+## Keep It Alive For The First Month
+
+The sheet should not be archived on launch day.
+
+For the first 30 days, update it when:
+
+- A new social profile goes live.
+- A domain redirect is added.
+- A support inbox changes owner.
+- Search Console or analytics gets a new admin.
+- A contractor's access is removed.
+- A renewal date changes.
+- A profile bio, link, or handle pattern changes.
+
+After that, fold the sheet into normal operations. Domain details may move into a domain inventory. Social access may move into a marketing operations doc. Security details may move into IT.
+
+That is fine. The launch handoff sheet has done its job when nothing important depends on memory.
+
+## A Strong Name Still Needs Clean Custody
+
+Brand work can feel abstract until it touches accounts.
+
+Then it becomes very concrete. Who owns the domain? Who can update the handle? Who gets the renewal notice? Who can recover the email admin? Who removes the agency after launch?
+
+Those questions are not glamorous, but they protect the brand more than another round of logo polish.
+
+Create the handoff sheet while the work is still fresh. Record the assets, owners, login locations, recovery paths, renewal dates, and public-use rules. Keep it close to the evidence file. Review it before announcement day.
+
+A new brand does not just need a good name. It needs clean custody of the assets that make the name real.
