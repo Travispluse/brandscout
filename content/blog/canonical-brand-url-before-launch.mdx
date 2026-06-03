@@ -1,0 +1,233 @@
+---
+title: "Set Your Canonical Brand URL Before Launch"
+date: "2026-06-03"
+excerpt: "A practical checklist for choosing the one public URL your new brand will use across domains, redirects, profiles, analytics, and launch copy."
+category: "seo"
+image_url: "/blog/canonical-brand-url-before-launch-hero.png"
+---
+
+# Set Your Canonical Brand URL Before Launch
+
+New brands often choose a name before they choose the exact web address the world should remember.
+
+That sounds harmless until the launch assets start spreading.
+
+The homepage says `brand.com`. The deck says `www.brand.com`. The founder's email signature says `getbrand.com`. The LinkedIn profile links to a temporary `brand.vercel.app` preview. A press draft uses the .co domain because someone copied it from an early spreadsheet. The sitemap uses one host while social bios use another. Every version technically works, but the brand starts its public life with a split signal.
+
+A canonical brand URL fixes that before it becomes cleanup.
+
+For a launch team, "canonical" means the one public web address you want customers, search engines, social profiles, partners, ads, email signatures, and internal docs to treat as official. It is not only a technical tag in HTML. It is a brand decision.
+
+If you are still securing the name, start with the [24-hour brand name lockdown sprint](/blog/brand-name-lockdown-sprint). This URL checklist starts after the likely name and primary domain are real enough that people are about to put them in public places.
+
+## Pick The One URL You Would Say Out Loud
+
+Start with the address you would confidently say on a sales call, podcast, investor intro, or support email.
+
+Write it as the full public URL:
+
+| Decision | Example |
+| --- | --- |
+| Protocol | `https://` |
+| Host | `brand.com` |
+| Subdomain choice | Apex domain, not `www` |
+| Public spelling | Lowercase, no hyphen workaround |
+| Default destination | Homepage or launch landing page |
+
+This seems basic, but it forces the team to stop speaking in fragments.
+
+"We own the domain" is not specific enough. Which domain? Which extension? Is the live site on the apex domain or the `www` host? Is the official launch URL the clean brand name or a modified version such as `getbrand.com`? Are you using a temporary waitlist URL or the permanent homepage?
+
+The exact answer matters because every later asset will copy it.
+
+If a customer hears the name once and searches for it later, the brand should not make them choose between variants. The canonical URL should be the address that best reinforces the name, domain, and category language you want people to remember.
+
+## Decide Apex Versus WWW Before Anyone Writes Copy
+
+For most new brands, either `brand.com` or `www.brand.com` can work. The problem is mixing both.
+
+Choose one public host, then make the other redirect cleanly to it.
+
+| Public choice | Usually feels like | Watch for |
+| --- | --- | --- |
+| `brand.com` | Short, modern, easy to say | Hosting provider must support apex records cleanly |
+| `www.brand.com` | Traditional, explicit website host | Longer in speech and launch graphics |
+
+There is no brand prize for arguing about this for a week. Pick the version your stack supports reliably, then enforce it.
+
+The practical test is simple:
+
+- Type the non-canonical version in a browser.
+- Confirm it lands on the canonical version.
+- Confirm the URL bar changes to the canonical version.
+- Confirm HTTP redirects to HTTPS.
+- Confirm the redirect is not a frame, mask, or parked registrar page.
+
+If you need the deeper redirect mechanics, the [domain forwarding explainer](/blog/domain-forwarding-explained) covers 301 redirects, 302 redirects, URL masking, path forwarding, and common mistakes. This article is narrower: choose the public address first, then make the technical setup obey it.
+
+## Treat A Modifier As Part Of The Public Address
+
+Many strong brand names do not get the exact .com on day one.
+
+That does not automatically kill the name. It does mean the modifier becomes part of the customer's first experience.
+
+`getnorthline.com`, `joinnorthline.com`, `usenorthline.com`, and `northlinehq.com` are not just domain workarounds. They are launch language. They show up in email, ads, social bios, screenshots, decks, invoices, and search results.
+
+If you are using a modifier, write the canonical URL into boring sentences:
+
+- "Visit `getnorthline.com`."
+- "Email us at `hello@getnorthline.com`."
+- "Follow `@getnorthline`."
+- "Search for Northline scheduling software."
+
+If those lines feel awkward, the modifier will not magically improve after launch.
+
+Before locking it, run the sentence tests in the [domain modifier strategy](/blog/domain-modifier-strategy). A modified URL can be a clean public pattern. It becomes risky when the team secretly treats it as temporary while customers are already learning it.
+
+## Redirect Every Alternate To The Same Place
+
+Once the canonical URL is chosen, every reasonable alternate should have a job.
+
+Most alternates should redirect to the canonical URL:
+
+| Alternate | Expected behavior |
+| --- | --- |
+| `http://brand.com` | Redirects to `https://brand.com` |
+| `https://www.brand.com` | Redirects to `https://brand.com` |
+| `https://brand.co` | Redirects to `https://brand.com` |
+| `https://getbrand.com` | Redirects to `https://brand.com` if it is not the public URL |
+| Common misspelling | Redirects to the canonical URL or stays parked intentionally |
+
+Do not leave alternates half alive.
+
+A defensive domain that shows registrar ads makes the brand look unfinished. A `www` host that loads the same page without redirecting can create duplicate URLs. A temporary launch domain that keeps accepting traffic after launch can split analytics and confuse people who saved the old link.
+
+For a brand-new site with only a homepage, root-to-root redirects may be enough. If pages already exist, preserve paths where it matters:
+
+| Old request | Better destination |
+| --- | --- |
+| `www.brand.com/pricing` | `brand.com/pricing` |
+| `brand.co/blog/name-checklist` | `brand.com/blog/name-checklist` |
+| `oldbrand.com/about` | `newbrand.com/about` |
+
+The goal is not to collect domains for the sake of it. The goal is to make every address either official, redirected, intentionally parked, or retired.
+
+## Make Launch Copy Obey The Same URL
+
+The canonical URL is only useful if the team stops improvising.
+
+Check every launch surface before announcement day:
+
+- Homepage navigation and footer.
+- Social profile bios.
+- Founder and team email signatures.
+- Press kit and media boilerplate.
+- Investor deck and customer PDF.
+- Product screenshots.
+- Waitlist confirmation emails.
+- Newsletter sender profile.
+- Ad destination URLs.
+- Help center, docs, and status page.
+- App marketplace or extension listings.
+
+This is where small inconsistencies become visible.
+
+The homepage may be correct, but the LinkedIn company page may still point to `www`. The press kit may link to the .co because that was the first domain purchased. The launch email may use a tracking URL that hides the public domain. The founder's signature may still include an old project URL.
+
+The [brand asset handoff sheet](/blog/brand-asset-handoff-sheet-before-launch) is a good place to track this because the canonical URL is not just copy. It affects domains, DNS, social accounts, email, analytics, and ownership.
+
+## Put Search Tools On The Canonical Property
+
+Search setup should reinforce the same decision.
+
+At minimum:
+
+- Verify the domain in Google Search Console.
+- Submit the sitemap for the canonical host.
+- Use canonical URLs in metadata.
+- Make internal links point to the canonical host or clean relative paths.
+- Keep Open Graph URLs and images aligned with the canonical domain.
+- Confirm analytics uses one main web stream or property view for the public site.
+
+The [Google Search Console setup guide](/blog/google-search-console-setup) is useful for the verification steps. For broader crawlability and launch SEO basics, use [SEO basics for new domains](/blog/seo-basics-new-domains).
+
+This is not about chasing a tiny ranking trick. It is about avoiding split signals while the site has no history.
+
+New domains are already starting from zero. Do not make search engines discover `brand.com`, `www.brand.com`, `brand.co`, and a staging host as if they were four separate versions of the same young brand.
+
+The same logic applies inside the site. When you build the [internal link map for a new brand site](/blog/internal-link-map-new-brand-site), make sure the links reinforce the canonical URL pattern instead of preserving whatever version someone copied first.
+
+## Test The Customer Path, Not Just DNS
+
+DNS can be correct while the customer path is still messy.
+
+Run the test like a person who just heard about the brand:
+
+| Test | What to look for |
+| --- | --- |
+| Type the clean name into the browser | Does it land on the canonical URL? |
+| Type the `www` version | Does it redirect cleanly? |
+| Search the brand name | Is the official site easy to identify? |
+| Click social bio links | Do they land on the canonical domain? |
+| Open links on mobile | Any warning, slow redirect, or broken preview? |
+| Share the URL in chat | Does the preview show the right title and image? |
+| Click an old waitlist link | Does it still reach the right page? |
+
+This pairs naturally with the [branded search dry run](/blog/branded-search-dry-run-before-launch). That dry run shows what people see in search. The canonical URL test checks whether every path people might follow resolves to the same official home.
+
+Do not rely on one browser session. Test in a private window, on a phone, and from at least one link copied from a public profile. Cached redirects, old social previews, and pasted staging links often hide until someone outside the team clicks.
+
+## Record The Decision Where The Team Will Use It
+
+The canonical URL should live somewhere more durable than a Slack message.
+
+Add a short section to your launch record:
+
+| Field | Example |
+| --- | --- |
+| Canonical public URL | `https://brand.com` |
+| Approved spoken form | `brand dot com` |
+| Email domain | `brand.com` |
+| Redirected domains | `brand.co`, `www.brand.com`, common typo |
+| Temporary URLs to remove | `brand-waitlist.hostingapp.com` |
+| Search Console property | Domain property verified |
+| Owner | Marketing ops |
+| Review date | One week after launch |
+
+If you keep a [brand name evidence file](/blog/brand-name-evidence-file), add the canonical URL decision there too. The evidence file explains why the name and domain plan were chosen. The handoff sheet explains who controls the assets. Both should agree on the address the public is supposed to use.
+
+This also helps with category language. If your name needs a descriptor in early search and launch copy, connect the URL decision to the [category language sheet](/blog/category-language-sheet-before-launch). The public should learn one name, one category phrase, and one URL pattern at the same time.
+
+## Review It After The First Public Week
+
+Launch will reveal mistakes.
+
+Within the first week, check:
+
+- Search Console impressions by URL.
+- Analytics landing pages and referral paths.
+- Server logs or redirect logs for alternate domains.
+- Social profile click destinations.
+- Email signature links.
+- Press mentions and partner links.
+- Support questions that mention the URL.
+
+You are looking for drift.
+
+Maybe a partner linked to the .co. Maybe a founder sent the staging URL in a forwarded intro. Maybe people keep typing the `www` version. Maybe an alternate domain gets more traffic than expected. Maybe a social platform cached the wrong preview image.
+
+Fix the source, not just the symptom. Update the profile, ask the partner to change the link, adjust redirects, refresh the social preview, and record the change in the handoff sheet.
+
+The first week is the cheapest time to correct URL confusion. After customers, search engines, partners, and screenshots repeat the wrong version, cleanup gets slower.
+
+## One URL Makes The Brand Easier To Trust
+
+A canonical brand URL is a small decision with a long shadow.
+
+It tells the team what to write. It tells profiles where to point. It tells redirects where to send people. It tells search tools which property matters. It tells customers which address is real.
+
+Choose it before launch copy spreads. Redirect the alternates. Remove temporary URLs. Align social bios, email signatures, search tools, and internal links. Record the decision where the team will keep seeing it.
+
+The brand does not need ten working versions of the website address.
+
+It needs one public URL that everyone can trust.
