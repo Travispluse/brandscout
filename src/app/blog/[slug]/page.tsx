@@ -119,9 +119,9 @@ export default async function BlogPostPage({ params }: { params: Params }) {
         ]} />
       </div>
       <div className="flex flex-col lg:flex-row gap-8 items-start">
-        <article className="max-w-2xl flex-1 min-w-0">
+        <article className="w-full max-w-2xl flex-1 min-w-0">
           <TableOfContents content={post.content} mode="mobile" />
-          <div className="prose prose-neutral max-w-none [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mt-8 [&_h2]:mb-3 [&_h3]:text-lg [&_h3]:font-medium [&_h3]:mt-6 [&_h3]:mb-2 [&_p]:mb-4 [&_p]:leading-relaxed [&_ul]:mb-4 [&_ul]:pl-5 [&_li]:mb-1 [&_strong]:font-semibold [&_ol]:mb-4 [&_ol]:pl-5 [&_h2]:scroll-mt-20 [&_h3]:scroll-mt-20">
+          <div className="prose prose-neutral max-w-none [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:mt-8 [&_h2]:mb-3 [&_h3]:text-lg [&_h3]:font-medium [&_h3]:mt-6 [&_h3]:mb-2 [&_p]:mb-4 [&_p]:leading-relaxed [&_ul]:mb-4 [&_ul]:pl-5 [&_li]:mb-1 [&_strong]:font-semibold [&_ol]:mb-4 [&_ol]:pl-5 [&_code]:break-words [&_h2]:scroll-mt-20 [&_h3]:scroll-mt-20">
             <MDXRemote source={post.content} components={{
               // Remap H1 in blog content to H2 (page already has an H1)
               h1: (props: React.ComponentProps<"h2">) => <h2 className="text-2xl font-bold mt-8 mb-4" {...props} />,
