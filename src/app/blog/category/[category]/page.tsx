@@ -22,8 +22,16 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     openGraph: {
       title: `${cat.label} Articles | BrandScout`,
       description: cat.description,
+      url: `/blog/category/${category}`,
       siteName: "BrandScout",
-      images: [{ url: "/og-image.png", width: 1024, height: 1024, alt: cat.label }],
+      type: "website",
+      images: [{ url: "/og-image.png", width: 1424, height: 752, alt: `${cat.label} Articles | BrandScout` }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${cat.label} Articles | BrandScout`,
+      description: cat.description,
+      images: ["/og-image.png"],
     },
   };
 }

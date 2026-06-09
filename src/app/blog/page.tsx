@@ -7,14 +7,27 @@ import type { Metadata } from "next";
 
 export const revalidate = 60;
 
+const blogTitle = "Blog | Brand Naming Tips & Domain Strategy";
+const blogDescription = "Expert tips and guides on choosing the perfect brand name, domain strategy, and securing your online presence across platforms.";
+const blogSocialDescription = "Expert tips and guides on brand naming, domain strategy, and building your online presence.";
+
 export const metadata: Metadata = {
-  title: "Blog | Brand Naming Tips & Domain Strategy",
-  description: "Expert tips and guides on choosing the perfect brand name, domain strategy, and securing your online presence across platforms.",
+  title: blogTitle,
+  description: blogDescription,
   alternates: { canonical: "/blog" },
   openGraph: {
     title: "Blog | BrandScout",
-    description: "Expert tips and guides on brand naming, domain strategy, and building your online presence.",
+    description: blogSocialDescription,
+    url: "/blog",
+    siteName: "BrandScout",
     type: "website",
+    images: [{ url: "/og-image.png", width: 1424, height: 752, alt: "BrandScout Blog" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog | BrandScout",
+    description: blogSocialDescription,
+    images: ["/og-image.png"],
   },
 };
 

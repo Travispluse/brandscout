@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 
 const siteName = "BrandScout";
 const ogImage = "/og-image.png";
+const ogImageWidth = 1424;
+const ogImageHeight = 752;
 
 interface PageMetadataOptions {
   title: string;
@@ -28,7 +30,7 @@ export function createPageMetadata({
       url: path,
       siteName,
       type: "website",
-      images: [{ url: ogImage, width: 1024, height: 1024, alt: socialTitle }],
+      images: [{ url: ogImage, width: ogImageWidth, height: ogImageHeight, alt: socialTitle }],
     },
     twitter: {
       card: "summary_large_image",
@@ -38,6 +40,6 @@ export function createPageMetadata({
     },
     robots: index
       ? { index: true, follow: true, googleBot: { index: true, follow: true } }
-      : { index: false, follow: false, googleBot: { index: false, follow: false } },
+      : { index: false, follow: true, googleBot: { index: false, follow: true } },
   };
 }
