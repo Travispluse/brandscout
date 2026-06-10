@@ -1,0 +1,280 @@
+---
+title: "Run a Brand Link Preview QA Before Launch"
+date: "2026-06-10"
+excerpt: "A practical check for making homepage, waitlist, press, and social link previews show the right name, URL, category, image, and next step before launch links spread."
+category: "seo"
+image_url: "/blog/brand-link-preview-qa-before-launch-hero.png"
+---
+
+# Run a Brand Link Preview QA Before Launch
+
+Your launch link will not only appear as a link.
+
+It will expand in Slack, LinkedIn, iMessage, Discord, email clients, investor threads, partner newsletters, private communities, press notes, and social posts. Before someone reads the page, they may see a preview card with a title, description, URL, and image. That card can make the brand feel official, or it can quietly expose the mess behind the launch.
+
+The homepage title says the final name. The link preview still says the beta name. The Open Graph image uses an old handle. The description explains the product with last month's category language. The card points to `www`, while the launch plan says the canonical domain is the non-`www` version. A private chat app caches yesterday's staging title and keeps showing it after the site is fixed.
+
+None of that is a dramatic website bug. It is a first-impression bug.
+
+A brand link preview QA pass is a short review of the cards people see when your most important launch URLs are pasted into public and private channels. It is narrower than a full [meta tags SEO checklist](/blog/meta-tags-seo-checklist) and more specific than a broad [launch copy QA pass](/blog/launch-copy-qa-before-launch). The job is simple: make every shared link teach the same brand name, URL, category, image, and next step before the outside world starts forwarding it.
+
+If the public URL is not settled, finish the [canonical brand URL checklist](/blog/canonical-brand-url-before-launch) first. If the name, category phrase, handle pattern, and CTA are still changing, pause here and fix those inputs. Preview QA only works when there is a standard to test against.
+
+## Start With The Links People Will Actually Share
+
+Do not start by auditing every page.
+
+Start with the URLs that will travel during launch week:
+
+| Link | Where it may appear |
+| --- | --- |
+| Homepage | Founder posts, investor notes, social bios, partner intros |
+| Waitlist or signup page | Launch email, ads, private communities, product pages |
+| Press or media page | Journalist outreach, partner announcements, podcasts |
+| Blog announcement | LinkedIn posts, newsletters, community threads |
+| Demo or contact page | Sales replies, partner decks, founder bios |
+| App store or marketplace listing | Product announcements, support docs, integration pages |
+| Help or status page | Confirmation emails, support replies, onboarding messages |
+
+This catches the surfaces that carry the brand before the homepage has a chance to explain itself.
+
+For many new brands, the homepage and waitlist page matter most. For a developer tool, the docs, GitHub organization, and package page may also matter. For a local service business, the booking page and Google Business Profile link may matter more than a blog post. For a creator-led launch, a newsletter landing page may be the first real link people forward.
+
+The test list should match the launch plan, not the sitemap.
+
+## Write The Preview Facts Before You Paste Anything
+
+A link preview card should obey the same facts as the rest of the brand.
+
+Write them down first:
+
+| Field | Approved answer |
+| --- | --- |
+| Public brand name | Northline |
+| Exact title pattern | `Northline | Scheduling Software for Home Service Teams` |
+| Canonical URL | `https://getnorthline.com` |
+| Primary category phrase | Scheduling software for home service teams |
+| Short description | Helps home service teams schedule crews and jobs |
+| Primary preview image | 1200 x 630 launch card |
+| Image rule | Current name, no staging URL, no old product screenshot |
+| Primary CTA | Join the waitlist |
+| Temporary links to remove | `northline-beta.vercel.app`, old Notion page |
+
+This table keeps preview QA from becoming a taste debate.
+
+The title does not need to match the homepage H1 exactly. The description does not need to copy the meta description word for word. But the card should not teach a different name, category, or URL pattern from the rest of the launch.
+
+If the category phrase is still fuzzy, use the [category language sheet](/blog/category-language-sheet-before-launch) before tuning preview copy. A link card is too small to carry vague positioning. It needs plain words a stranger can understand quickly.
+
+## Check The Homepage Card Like A Stranger
+
+Paste the homepage URL into the places where the launch link will be shared.
+
+Look at the preview before clicking.
+
+Ask:
+
+- Does the card show the exact public brand name?
+- Does the title explain what kind of company this is?
+- Does the visible URL match the canonical URL plan?
+- Does the description sound current, specific, and human?
+- Does the image look official at small sizes?
+- Does the image crop safely on desktop and mobile?
+- Does anything mention a staging host, old name, old handle, or temporary CTA?
+
+Do not grade this as the person who wrote the page. Grade it as someone seeing the brand in a group chat with no context.
+
+For example:
+
+| Weak preview | Better preview |
+| --- | --- |
+| `Northline Beta` | `Northline | Scheduling Software for Home Service Teams` |
+| `A modern platform for teams` | `Scheduling software that helps home service teams assign jobs and keep crews on time.` |
+| Generic abstract image | Product or brand card that still reads clearly when small |
+| `northline-beta.vercel.app` | `getnorthline.com` |
+
+The weak version may still lead to a working page. It just makes the brand look unfinished before the visitor arrives.
+
+## Make The Image Do One Clear Job
+
+Most bad preview images fail because they try to do too much.
+
+A launch preview image should work when it is cropped, compressed, and shown in a small card beside other messages. It should not rely on tiny text, a detailed product screenshot, or a busy collage.
+
+Use a simple image rule:
+
+| Image type | Works when | Risk |
+| --- | --- | --- |
+| Brand card | Name, mark, and category are legible at small size | Can feel generic if it says nothing about the product |
+| Product screenshot | Interface is clean and current | Exposes old URLs, fake data, or unreadable UI |
+| Editorial visual | Supports the category or launch story | Can become decorative and vague |
+| Founder photo | Useful for personal-brand launches | May not teach the product or company name |
+| Diagram or checklist | Good for guide pages | Small text may collapse in previews |
+
+For a new brand, the image should usually answer one of three questions:
+
+- What is the brand called?
+- What kind of product or service is this?
+- What page am I about to open?
+
+If it cannot answer one of those questions, it is probably decoration.
+
+Also check the image file itself. Social previews commonly expect a large horizontal image, and 1200 x 630 is a practical default. Avoid putting important words at the outer edges. Some platforms crop more aggressively than others. If the logo, face, product, or category cue disappears in a square crop, adjust the image before launch.
+
+Screenshots deserve extra caution. A screenshot can contain the old domain, an obsolete handle, a fake customer name, a beta badge, a draft logo, or a UI label the team stopped using. The [launch copy QA pass](/blog/launch-copy-qa-before-launch) covers screenshots more broadly. Link preview QA should treat the preview image as one of those public screenshots, not as a harmless asset.
+
+## Test Different Classes Of Sharing Surfaces
+
+Do not trust one preview.
+
+Different surfaces fetch, crop, cache, and display cards differently. You do not need a perfect matrix for every platform, but you should test the classes of places where the link will travel.
+
+| Surface class | What to watch |
+| --- | --- |
+| Team chat | Cached titles, stale images, staging URLs |
+| Social post composer | Cropped image, truncated title, wrong description |
+| Direct message | Missing image, ugly URL, old card from cache |
+| Email draft | Plain URL fallback, preview hidden on mobile |
+| Community forum | Markdown title, pasted URL behavior, blocked image |
+| Partner CMS | Imported title, image crop, canonical URL handling |
+| Mobile share | Tiny card, app-specific crop, description truncation |
+
+Paste the exact public URL, not a local preview URL. Use the same URL the launch copy will use, including the final protocol and host. If the plan says `https://getnorthline.com`, do not test `http://`, `www`, a staging host, or a short link and assume the results transfer.
+
+If a preview looks wrong, fix the source first. Update the page metadata, image, canonical URL, redirect, or launch copy. Shorteners and tracking links can be useful, but they should not be used to hide an unresolved brand pattern.
+
+## Separate Tracking From The Public Pattern
+
+Launch teams often add tracking parameters late.
+
+That is where clean previews can break.
+
+A URL like this may be analytically useful:
+
+```text
+https://getnorthline.com/?utm_source=linkedin&utm_medium=social&utm_campaign=launch
+```
+
+But the preview still needs to feel like the official brand. Check whether tracked links:
+
+- Resolve to the canonical domain.
+- Show the same title and image as the clean URL.
+- Avoid exposing a redirect host or shortener as the visible destination.
+- Preserve the intended path.
+- Do not create a separate preview for every messy parameter variant.
+
+The goal is not to ban UTMs. The goal is to keep measurement from becoming a public branding problem.
+
+This connects directly to the [canonical brand URL guide](/blog/canonical-brand-url-before-launch). Tracking parameters are temporary context. The domain and public path are brand memory. Do not let a campaign tool make the temporary part look more official than the brand itself.
+
+## Create A Small Paste-Test Sheet
+
+Use a table instead of scattered screenshots in chat.
+
+| URL | Surface | Expected preview | Actual issue | Owner | Status |
+| --- | --- | --- | --- | --- | --- |
+| Homepage | LinkedIn draft | Final name, category, hero image | Image crops out product cue | Design | Open |
+| Waitlist | Team chat | Waitlist title and canonical URL | Shows old beta title | Engineering | Fixed |
+| Press page | Email draft | Press title and media image | Missing image | Marketing | Open |
+| Blog post | Community forum | Article title and clean image | OK | Content | Done |
+
+Keep the issues concrete.
+
+"Preview feels off" is not useful. "Title says Northline Beta" is useful. "Image crops out the category phrase on mobile" is useful. "Pasted URL shows `northline-beta.vercel.app` after redirect" is useful.
+
+Severity should be practical:
+
+| Severity | Meaning |
+| --- | --- |
+| High | Wrong name, wrong domain, wrong page, old product, trust-breaking image |
+| Medium | Vague description, weak category phrase, poor crop, missing image |
+| Low | Minor truncation, less-than-perfect image, non-blocking polish |
+
+Fix high-severity issues before announcement day. Medium issues are worth fixing if the link is important. Low issues should not derail launch unless the card will be widely shared.
+
+## Refresh Cached Previews Deliberately
+
+Preview caches are easy to underestimate.
+
+You can fix the page and still see the old card because a chat app, social platform, or scraper cached the first version it saw. That is why preview QA should happen before the launch link spreads widely. The first scrape often becomes the version people keep seeing.
+
+When you update preview metadata or images:
+
+- Change the source page first.
+- Confirm the deployed page has the new metadata.
+- Re-test the exact public URL.
+- Use platform preview tools or refresh tools when available.
+- If a surface keeps a stale card, note it instead of pretending the fix failed everywhere.
+
+Avoid changing the URL just to force a new preview unless you understand the tradeoff. Adding random query parameters can create measurement noise and teach people a less clean link. Sometimes it is necessary for a specific post, but it should be a deliberate exception.
+
+The [branded search dry run](/blog/branded-search-dry-run-before-launch) has a similar lesson: early public surfaces tend to persist. Search results, profile bios, and shared-link cards all reward getting the basic brand facts right before they are copied around.
+
+## Match The Preview To The Page Intent
+
+Not every launch URL should use the same card.
+
+The homepage card should teach the overall brand. A waitlist card should make the next step obvious. A press page should look credible to journalists. A demo page should feel appropriate for buyers. A blog announcement should sell the article, not pretend to be the homepage.
+
+Use intent-specific rules:
+
+| Page | Preview should emphasize |
+| --- | --- |
+| Homepage | Brand name, category, official domain |
+| Waitlist | Brand name, value, signup action |
+| Demo page | Buyer problem, trust, next step |
+| Press page | Official company identity and media context |
+| Blog post | Article promise and topic relevance |
+| Help page | Official support route and product context |
+
+This prevents one common mistake: every page inherits the homepage title and image.
+
+That may be acceptable for a tiny site, but it becomes confusing during launch. If someone shares the waitlist page, the card should not make the link look like a generic homepage. If someone shares the press page, the card should not show a product screenshot with no company context. If someone shares a brand education article, the card should clearly identify the article.
+
+For a signup or checkout path, pair this with the [signup path brand QA](/blog/signup-path-brand-qa-before-launch). The preview sets the expectation. The signup flow has to keep that expectation alive after the click.
+
+## Check The Fallback Experience
+
+Some places will not show the card.
+
+Images may be blocked. Previews may be disabled. The link may be pasted as plain text. The app may only show the title. A recipient may see the URL first and the card later.
+
+Check the fallback:
+
+- Is the raw URL recognizable?
+- Is the path clean enough to trust?
+- Does the title still work without the image?
+- Does the description still explain the category without visual context?
+- Does the page itself make the next step obvious after the click?
+
+This is where domain strategy matters. A clean canonical URL does a lot of brand work when previews fail. `getnorthline.com/waitlist` is easier to trust than a long hosted-form URL with no brand cue. A readable path is easier to forward than a random campaign URL.
+
+The preview card is not a substitute for a clear domain, title, and page. It is reinforcement.
+
+## Review The First Real Shares After Launch
+
+Pre-launch QA reduces mistakes. It does not catch every surface.
+
+After announcement, check the first real shares:
+
+- Founder posts.
+- Company profile posts.
+- Partner announcements.
+- Newsletter mentions.
+- Community threads.
+- Investor or customer intros.
+- Press mentions.
+- Social DMs where people forward the link.
+
+Look for stale cards, unexpected crops, wrong URLs, and descriptions people quote back incorrectly. If a partner shared an old card, fix the partner source if possible. If a social platform cached an old image, refresh it where you can. If people keep sharing a non-canonical URL, update the page, redirect, bio link, or email that taught them to use it.
+
+This is a good input for the [brand signal triage after launch](/blog/brand-signal-triage-after-launch). Link previews are one of the first public signals a new brand creates. They show whether the outside world is meeting the same brand the team thought it launched.
+
+## Make The Shared Link Feel Official
+
+A link preview is small, but it carries a lot of trust.
+
+It tells people whether the name is final, whether the URL is official, whether the category is clear, whether the image is current, and whether the next step makes sense. It often appears in the exact places where people decide whether to click, forward, ignore, or ask, "Is this the right link?"
+
+Before launch, paste the important URLs where they will really travel. Check the card like a stranger. Fix wrong names, old domains, weak descriptions, stale images, and bad crops. Track issues like bugs. Refresh caches deliberately. Then launch with links that look as finished as the page behind them.
+
