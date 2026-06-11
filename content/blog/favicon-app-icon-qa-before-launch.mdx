@@ -1,0 +1,298 @@
+---
+title: "Run a Favicon and App Icon QA Before Launch"
+date: "2026-06-11"
+excerpt: "A practical check for making browser tabs, bookmarks, mobile home screen icons, app manifests, and tiny brand surfaces look current before launch."
+category: "branding-strategy"
+image_url: "/blog/favicon-app-icon-qa-before-launch-hero.png"
+---
+
+# Run a Favicon and App Icon QA Before Launch
+
+Tiny brand surfaces are easy to ignore because nobody holds a launch meeting for a 16 x 16 image.
+
+Then the product goes live.
+
+The homepage has the right name. The launch post is polished. The domain redirects correctly. But the browser tab still shows a framework default icon. The mobile home screen shortcut uses the old beta mark. The installed app says the repository name instead of the public brand. The authentication screen shows a temporary square icon. The favicon is so detailed that it turns into a smudge next to three competitor tabs.
+
+None of those details will ruin a launch by itself.
+
+Together, they make the brand feel less finished in the exact places where people rely on small trust signals: tabs, bookmarks, app switchers, saved shortcuts, password managers, form providers, and search results.
+
+A favicon and app icon QA is a short pre-launch check for the smallest public versions of the brand. It is not a full logo redesign. It is not the same as a [brand link preview QA](/blog/brand-link-preview-qa-before-launch), which checks the large cards people see when links are shared. This pass asks a narrower question: when the brand is reduced to an icon, tab label, shortcut, or installed app tile, does it still look current, official, and recognizable?
+
+If the mark itself is not settled, revisit the [connection between your brand name and visual identity](/blog/visual-identity-naming-connection) first. If launch copy still uses old names or URLs, run the [launch copy QA pass](/blog/launch-copy-qa-before-launch). This checklist starts after the name, domain, and basic visual direction are real enough that people are about to save, open, and return to the site.
+
+## List Every Tiny Surface The Brand Uses
+
+Do not start with the favicon file.
+
+Start with the places where a customer, buyer, investor, candidate, or teammate may see the brand at a tiny size.
+
+| Surface | What to check |
+| --- | --- |
+| Browser tab | Favicon, page title, active and inactive tab contrast |
+| Bookmark | Icon, saved title, destination URL |
+| Mobile home screen shortcut | Touch icon, shortcut name, background crop |
+| PWA install prompt | App name, short name, icon, theme color |
+| App switcher | Installed app icon and visible title |
+| Search result favicon | Whether the icon reinforces the official site |
+| Password manager | Site name and icon shown beside credentials |
+| Authentication provider | App icon, product name, redirect domain |
+| Checkout or billing provider | Icon, seller name, support route |
+| Help desk or form tool | Icon, favicon, page title, confirmation screen |
+| Docs or developer portal | Tab icon, organization avatar, package icon |
+| Marketplace listing | Small logo, app tile, publisher name |
+
+This list will be different for every brand.
+
+A simple waitlist site may only need browser tabs, bookmarks, and mobile home screen checks. A SaaS product may also need auth, billing, docs, status pages, and help center surfaces. A mobile app needs app store tiles and installed icons. A local business may care more about Google Business Profile, booking tools, and saved mobile shortcuts.
+
+The point is to catch the surfaces that feel official even when nobody planned them as brand assets.
+
+## Start From The Approved Icon Source
+
+Small icons often drift because teams export them casually.
+
+Someone grabs the logo from a slide. Someone else uses an old square from Figma. Engineering keeps the default icon because the real mark was not ready. A contractor uploads a cropped social avatar to a form provider. The result is not one brand system. It is a pile of almost-matching squares.
+
+Write the approved source before checking files:
+
+| Field | Approved answer |
+| --- | --- |
+| Public brand name | Northline |
+| Icon source file | `northline-icon-master.svg` |
+| Primary small mark | Single abstract route mark |
+| Background rule | Dark mark on light tile, light mark on dark tile |
+| Minimum clear space | No edge-to-edge crop |
+| Do not use | Full wordmark, beta badge, old compass mark |
+| Owner | Design or founder |
+| Export owner | Engineering |
+
+This does not need to be a formal brand book. It needs to answer the question, "Which small mark are we actually shipping?"
+
+The [brand asset handoff sheet](/blog/brand-asset-handoff-sheet-before-launch) is a good place to store this because icons are both design assets and technical assets. Designers may own the source mark. Engineers may own the app manifest, favicon tags, and deployed files. Marketing may own social avatars and marketplace tiles. QA fails when each owner assumes another owner has the small versions covered.
+
+## Judge The Icon At The Size People Actually See
+
+A logo can look excellent at 512 x 512 and fail at 16 x 16.
+
+Test the mark at several sizes:
+
+| Size | Practical use |
+| --- | --- |
+| 16 x 16 | Browser tab, dense bookmark list |
+| 32 x 32 | Browser UI, desktop shortcut |
+| 48 x 48 | Search result or small profile context |
+| 180 x 180 | Apple touch icon |
+| 192 x 192 | Android home screen and PWA icon |
+| 512 x 512 | App install surfaces and stores |
+
+At tiny sizes, detail is the enemy.
+
+Weak favicon choices include:
+
+- A full wordmark squeezed into a square.
+- A detailed illustration with thin lines.
+- A screenshot or product UI.
+- A logo with tiny text inside it.
+- A mark that relies on subtle gradients to be recognizable.
+- A letter that is too generic when separated from the name.
+
+Better choices are simpler:
+
+- A strong first letter with distinctive shape or color.
+- A simplified version of the logo mark.
+- A geometric symbol that survives low resolution.
+- A clean two-color tile with generous padding.
+- A dark and light variant tested against real browser chrome.
+
+This connects directly to [logo design after naming](/blog/logo-design-after-naming). A new brand does not need a complicated symbol to feel legitimate. It needs a small mark that stays recognizable when it is surrounded by other tiny marks.
+
+## Check The Browser Tab Like A Returning Visitor
+
+The browser tab is one of the first repeat-use brand surfaces.
+
+People open the product, switch to another tab, come back later, pin the tab, bookmark it, or keep it beside competitors. The tab is not decorative. It helps them find the right place again.
+
+Check:
+
+- Does the favicon load on the homepage?
+- Does it load on blog posts, docs, help pages, and app routes?
+- Does the icon still read when the tab is inactive?
+- Does the page title use the public brand name?
+- Does any route still show the repository name, beta name, or template title?
+- Does the icon disappear in dark browser chrome?
+- Does a pinned tab still look recognizable?
+- Does the bookmark title save cleanly?
+
+For a new brand, the tab title and favicon should work together.
+
+`Northline | Scheduling Software for Home Service Teams` plus a clean icon is useful. `Home` plus a vague icon is not. A tab that says `northline-beta` is worse because it actively teaches the wrong name.
+
+This is why favicon QA belongs near the [canonical brand URL checklist](/blog/canonical-brand-url-before-launch). The URL, title, and icon are often seen as one cluster. If any one of them points back to a temporary project, the official site feels less official.
+
+## Test Mobile Home Screen And PWA Install Surfaces
+
+Mobile shortcuts expose brand mistakes that desktop checks miss.
+
+Add the site to a phone home screen, or install the PWA if the product supports it. Then look at what appears outside the browser.
+
+Check:
+
+- App name.
+- Short name.
+- Icon crop.
+- Icon background color.
+- Splash screen color, if shown.
+- Status bar color.
+- Start URL.
+- Whether the app opens to the intended public page.
+- Whether the installed title uses the final brand name.
+
+The app manifest should not be treated as a technical afterthought. It may be the version of the brand a user sees every day.
+
+For example:
+
+| Weak installed surface | Better installed surface |
+| --- | --- |
+| App name says `northline-web` | App name says `Northline` |
+| Icon is a default framework logo | Icon uses the approved small mark |
+| Shortcut opens a staging path | Shortcut opens the public homepage or app |
+| Tile crops off the mark | Tile has padding and a tested background |
+| Theme color clashes with the site | Theme color matches the brand system |
+
+If signup, login, or checkout is part of the launch, connect this to the [signup path brand QA](/blog/signup-path-brand-qa-before-launch). A customer may start on a clean landing page and then see a different app name in the installed shortcut, auth screen, or payment flow. That split is small, but it is exactly the kind of split that makes people hesitate.
+
+## Inspect Third-Party Tools For Default Icons
+
+Many icon problems do not live on the main website.
+
+They live in the tools wrapped around the website:
+
+- Auth providers.
+- Form builders.
+- Help desks.
+- Booking tools.
+- Checkout providers.
+- Email preference centers.
+- Status pages.
+- Documentation hosts.
+- Community platforms.
+- App marketplaces.
+
+These tools often ship with their own favicon, default app icon, vendor title, or account name. That is fine while the team is building quietly. It looks unfinished once strangers arrive.
+
+Use a simple rule: if the tool asks for trust, it should identify the brand.
+
+A password reset page should not show a blank app tile. A support form should not use a vendor default icon. A checkout screen should not display an old legal name with no bridge to the public brand. A booking page should not use the founder's personal avatar if the CTA promised a company demo.
+
+Not every third-party surface needs the full visual system. It should at least pass the basics:
+
+| Field | Minimum acceptable answer |
+| --- | --- |
+| Name | Current public brand or clearly bridged legal name |
+| Icon | Approved mark or clean temporary brand tile |
+| URL | Official domain or an explained handoff |
+| Contact route | Brand email or monitored support route |
+| Owner | Person who can update the tool |
+
+This is where the icon QA overlaps with the [brand contact route map](/blog/brand-contact-route-map-before-launch). A contact path that looks unbranded creates doubt. The same route with the correct name, icon, sender, and reply path feels intentional.
+
+## Keep The Icon Different From The Link Preview Image
+
+A favicon is not a tiny Open Graph image.
+
+The link preview image can carry a product screenshot, category cue, editorial visual, or launch card. The favicon has to survive in a much smaller, more constrained place.
+
+Use separate jobs:
+
+| Asset | Job |
+| --- | --- |
+| Favicon | Help people recognize the site in tabs and browser UI |
+| Touch icon | Make a saved shortcut feel official on mobile |
+| PWA icon | Represent the installed product outside the browser |
+| Social avatar | Identify the profile in feeds and comments |
+| Open Graph image | Sell the page when a link is shared |
+
+They should look related, but they do not need to be identical.
+
+The favicon may be the simplest mark. The touch icon may need a padded square tile. The social avatar may use a slightly larger version of the same mark. The Open Graph image may be a full editorial composition.
+
+The mistake is using one asset everywhere without testing whether it works everywhere. A beautiful wide preview image will fail as a favicon. A tiny favicon will look empty as a launch link preview. Give each surface a job, then make the system feel related.
+
+## Build A Small Icon QA Sheet
+
+Do not run this pass from memory.
+
+Use a compact table:
+
+| Surface | Expected | Actual issue | Owner | Status |
+| --- | --- | --- | --- | --- |
+| Homepage browser tab | Current icon and `Northline` title | OK | Engineering | Done |
+| Blog post tab | Same favicon as site | Old beta icon | Engineering | Open |
+| iPhone home screen | Padded icon, `Northline` label | Label says `Northline App Beta` | Product | Open |
+| Auth screen | Current icon and public brand | Vendor default icon | Engineering | Open |
+| Checkout | Public brand plus legal bridge | Legal name only | Ops | Open |
+| Help desk | Current icon and support route | Old logo | Support | Fixed |
+
+Use severity to keep the pass practical:
+
+| Severity | Meaning |
+| --- | --- |
+| High | Old name, default framework icon, wrong product, broken trust surface |
+| Medium | Cropped mark, unreadable favicon, inconsistent tile color |
+| Low | Minor polish issue that does not confuse the brand |
+
+High issues should block the announcement if the surface is part of the public path. Medium issues are worth fixing if the surface will be seen often. Low issues should not turn into a last-minute logo redesign.
+
+The goal is not perfection. The goal is to remove the small signals that make the brand look accidental.
+
+## Test After Deploy, Not Only Locally
+
+Favicon and icon bugs hide behind caching.
+
+Your local browser may show the old icon because it cached it yesterday. A teammate may see the new icon because they opened the site for the first time. A mobile browser may keep a saved home screen icon until the shortcut is recreated. Search results may take longer to reflect a favicon update.
+
+Run a deployed test:
+
+- Open the public URL in a private window.
+- Test Chrome, Safari, and one mobile browser if they matter.
+- Create a fresh bookmark.
+- Add the site to a phone home screen.
+- Install the PWA if supported.
+- Open a deep route, not only the homepage.
+- Test the login, form, or checkout flow if public.
+- Ask one person outside the build environment to open the URL.
+
+If an icon is cached, do not panic. First confirm the deployed file and metadata are correct. Then decide whether the stale version is a cache delay or a real source problem.
+
+Avoid random file churn unless you need it. Versioning an icon path can help when the old asset is stubbornly cached, but the source of truth should still be clean. The [meta tags SEO checklist](/blog/meta-tags-seo-checklist) is useful here because icons, titles, descriptions, canonical URLs, and social tags all live in the same head-and-metadata neighborhood.
+
+## Decide What Can Ship
+
+Not every icon imperfection deserves a launch delay.
+
+Ship if:
+
+- The public brand name is correct.
+- The main favicon is current.
+- The mobile or installed app icon is not misleading.
+- Third-party trust surfaces do not show default or old branding.
+- The icon is recognizable enough at small sizes.
+- Owners know which issues are post-launch polish.
+
+Pause if:
+
+- A default framework icon appears on a public route.
+- The old brand name appears in the tab, app label, auth screen, or checkout flow.
+- The icon points to the wrong company, product, or legal entity.
+- A priority signup or payment path looks unbranded.
+- The saved app opens a staging URL or beta path.
+
+This is a small QA pass, but it saves public cleanup.
+
+People will forgive a young brand for being simple. They are less forgiving when the brand looks careless in places that ask for trust. A favicon, app icon, and tab title are tiny, but they are repeated constantly. They help people find the right tab, recognize the saved shortcut, trust the login screen, and return to the official site.
+
+Before announcement day, shrink the brand down and inspect it.
+
+If it still feels like the same company at the smallest size, the launch will feel more coherent everywhere else.
