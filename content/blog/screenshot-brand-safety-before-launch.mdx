@@ -1,0 +1,323 @@
+---
+title: "Run a Screenshot Brand Safety Pass Before Launch"
+date: "2026-06-14"
+excerpt: "A practical check for product screenshots, deck images, help docs, and social visuals so stale names, domains, handles, and test data do not leak into launch."
+category: "branding-strategy"
+image_url: "/blog/screenshot-brand-safety-before-launch-hero.png"
+---
+
+# Run a Screenshot Brand Safety Pass Before Launch
+
+Screenshots are launch copy with a longer half-life.
+
+They get pasted into decks, press kits, social posts, help docs, emails, marketplace listings, founder updates, investor notes, app store pages, and product pages. Then they get downloaded, forwarded, cropped, cached, and reused by people who were never in the final launch review.
+
+That is why screenshot mistakes travel so well.
+
+The homepage can be fixed in ten minutes. The wrong screenshot in a partner newsletter may sit in an inbox for years. The old beta URL baked into a deck image may keep showing up after the site redirects correctly. A fake customer name may look careless. A real customer name may create a trust problem. A temporary handle in a UI capture may teach people to tag the wrong account.
+
+A screenshot brand safety pass is a short review of every image that shows the product, site, profile, app, email, dashboard, listing, or launch experience before those images become public. It is not a full design critique. It is not a privacy legal review. It is a practical check for brand facts, sensitive details, stale UI, and awkward demo data.
+
+If you have not frozen the core facts yet, start with the [brand freeze date checklist](/blog/brand-freeze-date-before-launch). If you are reviewing all launch copy, use the broader [launch copy QA pass](/blog/launch-copy-qa-before-launch). This article is narrower: it treats screenshots as public evidence.
+
+## Inventory The Images That Will Travel
+
+Do not start by opening Figma or your screenshots folder.
+
+Start by listing the places images will be seen by people outside the team.
+
+| Surface | Screenshot risk |
+| --- | --- |
+| Homepage | Product UI may show old name, fake data, or staging URL |
+| Product page | Feature screenshot may preserve a rejected label |
+| Pricing page | Plan names may not match checkout or invoices |
+| Help docs | Steps may show beta UI, personal emails, or old support routes |
+| Launch email | Image may be downloaded and forwarded separately from the email |
+| Social post | Cropping can reveal or hide the wrong part of the UI |
+| Founder deck | Old screenshots often survive because the deck "still looks fine" |
+| Press kit | Journalists may reuse images without checking the current site |
+| App store or marketplace listing | Screenshots become part of first-impression trust |
+| Link preview image | Cached cards can keep stale visuals after the page is fixed |
+
+The important move is to review actual files, not generic tasks.
+
+"Screenshots done" is not a useful status. "Homepage product screenshot, launch deck slide 6, help center reset-password screenshot, LinkedIn launch image, and Product Hunt gallery approved" is useful.
+
+Give each image a file name, source location, public destination, owner, and approval status. If nobody can point to the exact exported file, the screenshot is not ready.
+
+## Decide What The Screenshot Is Supposed To Prove
+
+A launch screenshot should have a job.
+
+Teams get into trouble when they choose screenshots because they look busy, impressive, or "product-y." A busy dashboard can show lots of work and still teach the wrong thing. A clean screenshot with one clear claim is usually stronger.
+
+For each image, write the proof it is meant to provide:
+
+| Screenshot | Job |
+| --- | --- |
+| Homepage hero UI | Show what the product helps users understand at a glance |
+| Signup flow capture | Show that starting is simple and branded |
+| Integration listing | Show the partner context and official support route |
+| Help doc image | Show exactly where the user should click |
+| Launch deck screenshot | Make the product feel real without leaking internal data |
+| Social card | Give people one memorable visual cue for the launch |
+
+Once the job is clear, review becomes easier.
+
+If the screenshot is supposed to prove "setup is simple," do not use an admin screen with twelve tabs and four warning banners. If it is supposed to prove "the product is trustworthy," do not use `test@example.com`, `Acme Corp`, an expired trial banner, or a browser bar pointing to a temporary host.
+
+The screenshot should support the public story, not expose the internal workbench.
+
+## Check Brand Facts Inside The Image
+
+Screenshots often miss final QA because they are treated as images, not text.
+
+Read them like copy.
+
+Look for:
+
+- Public brand name.
+- Capitalization and spacing.
+- Product name versus company name.
+- Canonical URL.
+- `www` versus non-`www`.
+- Temporary hosts, preview deployments, or staging paths.
+- Social handle pattern.
+- Email sender or support address.
+- Category phrase.
+- Plan names.
+- CTA labels.
+- Logo, icon, and avatar.
+- Legal name where it appears in billing or account screens.
+
+This is where the screenshot pass connects directly to the [canonical brand URL checklist](/blog/canonical-brand-url-before-launch), the [social handle audit](/blog/social-handle-audit-before-launch), and the [branded email sender pattern](/blog/branded-email-sender-pattern-before-launch). If those decisions are not settled, the screenshot will capture uncertainty.
+
+Use a simple rule: if the screenshot contains a brand fact, that fact must match the frozen launch source.
+
+For example:
+
+| Image detail | Better launch rule |
+| --- | --- |
+| Browser bar shows `northline-beta.vercel.app` | Recapture from `getnorthline.com` |
+| Header says `NorthLine` | Recapture or update UI to `Northline` |
+| Footer shows `support@northlineapp.com` | Match the approved sender pattern |
+| Profile sidebar shows `@northlinebeta` | Replace with official handle or crop it out |
+| Plan card says `Pro Plus` | Match pricing and checkout labels |
+| App tile uses old icon | Refresh the app icon before export |
+
+Do not rely on "people will not notice." People notice inconsistencies when they are deciding whether a new brand is real.
+
+## Remove Demo Data That Changes The Story
+
+Bad demo data can make a good product look unserious.
+
+Most teams know not to expose real customer data. Fewer teams notice when fake data creates the wrong impression.
+
+Check for:
+
+- Real names, emails, phone numbers, addresses, order IDs, invoices, account IDs, API keys, or tokens.
+- Internal employee names used as customers.
+- Competitor names.
+- Joke names, filler names, and old project names.
+- `Test User`, `Lorem Ipsum`, `Acme`, or `Example Company` in places that should feel real.
+- Weirdly high revenue, impossible dates, or nonsensical activity.
+- Empty states that imply nobody uses the product.
+- Error banners, expired trials, unpaid invoices, or debug labels.
+
+The goal is not to make everything look artificially perfect. The goal is to make the screenshot believable and safe.
+
+Use demo data that matches the audience.
+
+For a product serving home service teams, "North Valley HVAC" is more useful than "Acme Corp." For a developer tool, realistic repository names and environment labels matter more than colorful charts. For a finance product, fake dollar amounts should be plausible enough not to distract. For a marketplace brand, listings should look like real inventory, not placeholder cards copied from a template.
+
+Write a tiny demo data rule:
+
+| Field | Rule |
+| --- | --- |
+| Customer names | Fictional, category-appropriate, no real customers |
+| Emails | Use owned example-style domains, not personal addresses |
+| Dates | Within the launch month or clearly evergreen |
+| Amounts | Plausible for the buyer and product category |
+| IDs and keys | Never visible |
+| Notes and comments | No jokes, profanity, internal shorthand, or personal data |
+
+This keeps every screenshot from becoming its own little fiction.
+
+## Treat Browser Chrome As A Brand Surface
+
+The browser bar is not neutral.
+
+If it appears in a screenshot, it tells people which address is official. If it shows a staging URL, a hosted form domain, an old `www` version, a shortener, or a long tracking URL, it weakens the brand pattern you worked to establish.
+
+Decide whether the browser chrome should appear at all.
+
+| Choice | Use when |
+| --- | --- |
+| Show the browser bar | The URL reinforces the official domain or page path |
+| Crop the browser bar | The UI matters more than the URL and the URL adds noise |
+| Use a framed mockup | You want context without teaching a specific address |
+| Recapture | The visible URL is wrong or temporary |
+
+Do not blur the address bar if the clean fix is to recapture the screenshot from the right domain. Blur draws attention. It also tells careful viewers that something was hidden.
+
+When the URL matters, make it the right URL. This pairs with the [link preview QA checklist](/blog/brand-link-preview-qa-before-launch): previews, screenshots, and pasted links all train people on the same public address.
+
+## Inspect The Unpolished States
+
+Launch screenshots usually show the happiest path.
+
+Customers often see the rougher states first.
+
+Check screenshots and screen captures from:
+
+- Signup.
+- Login.
+- Password reset.
+- Email confirmation.
+- Checkout.
+- Billing.
+- Empty state.
+- Loading state.
+- Error state.
+- Permission request.
+- Invite flow.
+- Support form.
+- Mobile browser.
+- App shortcut or installed PWA.
+
+These states can leak old names because nobody revisits them after the main UI changes. A password reset screen may still use the repository name. A checkout page may show the legal entity with no bridge to the public brand. An empty state may say "Create your first beta project." A mobile shortcut may use an old icon.
+
+The [signup path brand QA](/blog/signup-path-brand-qa-before-launch) covers the live flow in detail. The screenshot pass asks whether any image of that flow is about to be published.
+
+Also check small icon surfaces when they appear inside screenshots. A screenshot of a browser tab, mobile home screen, auth provider, or app switcher can expose icon problems that the main design review missed. If that shows up, use the [favicon and app icon QA](/blog/favicon-app-icon-qa-before-launch) before exporting final images.
+
+## Redact Only When Redaction Is The Right Fix
+
+Redaction is useful for private details.
+
+It is a weak fix for stale brand facts.
+
+Use this distinction:
+
+| Problem | Better fix |
+| --- | --- |
+| Real customer email visible | Redact or replace demo data |
+| API key visible | Do not publish; recapture after removing it |
+| Staging URL visible | Recapture from canonical domain |
+| Old product name visible | Fix the UI or recapture after update |
+| Debug banner visible | Remove from environment or crop if irrelevant |
+| Personal calendar link visible | Replace with official route and recapture |
+| Internal comment visible | Remove data or capture a clean demo account |
+
+A blurred rectangle over the old brand name does not make the screenshot feel trustworthy. It makes the launch feel unfinished.
+
+If you must redact, use a clean visual treatment:
+
+- Mask the whole sensitive field, not just a few characters.
+- Avoid partial blur that still reveals shape or length.
+- Keep the mask aligned with the UI.
+- Do not leave cursor selections or annotation handles visible.
+- Re-export at the final size so the redaction is part of the file, not an editable overlay.
+
+For high-risk material, the answer is simple: do not publish the screenshot. Build a clean demo account and capture it again.
+
+## Keep Source, Approved, And Rejected Images Separate
+
+Most screenshot drift happens because the team cannot tell which image is final.
+
+Someone downloads a screenshot from Slack. Someone else exports from an old Figma frame. A founder grabs an image from the pitch deck because it is already cropped. A contractor uploads whatever was attached to the last email.
+
+Make the approved path obvious.
+
+Use a structure like:
+
+| Folder or label | Purpose |
+| --- | --- |
+| `source-captures` | Raw screenshots, not for public use |
+| `needs-review` | Cropped or edited images awaiting QA |
+| `approved-launch` | Images allowed in public launch assets |
+| `rejected` | Images that should not be reused |
+| `archive-after-launch` | Historical captures kept for reference |
+
+Name files with enough context:
+
+- `homepage-product-ui-approved-2026-06-14.png`
+- `launch-deck-slide-06-approved-2026-06-14.png`
+- `help-doc-password-reset-recapture-needed.png`
+- `social-card-old-handle-rejected.png`
+
+This does not need to become a heavy asset system. It just needs to prevent the wrong file from being the easiest file to find.
+
+If you already keep a [brand asset handoff sheet](/blog/brand-asset-handoff-sheet-before-launch), add one small screenshot section. Record where approved screenshots live, who can replace them, and which surfaces must be updated when a screenshot changes.
+
+## Test The Final Crop Where It Will Appear
+
+A screenshot can pass full-size review and fail in the actual placement.
+
+Test the final crop in context:
+
+| Destination | What to check |
+| --- | --- |
+| Homepage hero | Does the important UI survive responsive cropping? |
+| Blog or launch post | Is the screenshot still legible at article width? |
+| Social feed | Does mobile crop hide the product or expose a bad edge? |
+| Link preview | Is the image useful at small card size? |
+| Press kit download | Does the filename and image match the current brand? |
+| App store gallery | Are captions, sequence, and UI states coherent? |
+| Sales deck | Does projection or PDF compression make details unreadable? |
+
+Do not design a screenshot that only works on a 27-inch monitor.
+
+Tiny text, dense dashboards, and delicate annotations often disappear in social crops. If the screenshot depends on a specific row label, it may be the wrong image for a launch card. If the domain appears only in a tiny browser bar, do not expect it to teach the canonical URL.
+
+The link preview pass is especially important because shared images get cached. If a platform stores the old crop, your correction may not appear immediately. Finalize the image before the first big share, not after.
+
+## Track Screenshot Fixes Like Bugs
+
+Do not run this review in a chat thread.
+
+Use a small table:
+
+| Issue | Image | Severity | Owner | Fix | Status |
+| --- | --- | --- | --- | --- | --- |
+| Staging URL in browser bar | Homepage hero UI | High | Engineering | Recapture from canonical domain | Open |
+| Old handle in sidebar | Launch deck slide 6 | High | Marketing | Update demo account and export | Fixed |
+| `Test User` visible | Help doc image | Medium | Support | Replace demo data | Open |
+| Old icon in tab | Social card | Medium | Design | Refresh icon export | Fixed |
+| Dense chart unreadable on mobile | Product page | Low | Product marketing | Use simpler crop | Backlog |
+
+Severity should be practical:
+
+- High: teaches the wrong name, URL, handle, email, account, or private data.
+- Medium: weakens trust but does not block launch.
+- Low: polish issue that can be improved without delaying public release.
+
+This keeps the pass from turning into taste review. If the screenshot is ugly but accurate, decide whether it is worth improving. If it is beautiful but shows the wrong URL, fix it before launch.
+
+## Recheck After The First Public Shares
+
+The first real audience will find things the internal team missed.
+
+After launch, check:
+
+- The first founder and company posts.
+- The link previews those posts generate.
+- Press or partner pages that copied your images.
+- Help docs or support replies that used screenshots.
+- Marketplace or app store galleries.
+- Search results that show image thumbnails.
+- Screenshots that customers post publicly.
+
+Look for copied mistakes, stale crops, old screenshots from cached docs, and places where people misunderstood the product because the image told the wrong story.
+
+Then fix the source, not just the symptom. Replace the approved image. Ask the partner to swap the file. Update the help doc. Refresh the social card where possible. Record the change in the same place that tracks your brand assets.
+
+## The Short Version
+
+Screenshots are not decoration during launch. They are public evidence.
+
+They tell people what the brand is called, where it lives, which handle is official, what the product does, how trustworthy the experience feels, and whether the team is careful with details.
+
+Before announcement day, inventory the images that will travel. Give each screenshot a job. Check every visible name, URL, handle, email, icon, CTA, and plan label. Replace unsafe demo data. Recapture instead of hiding stale facts. Keep approved files separate from drafts. Test the crop where the image will actually appear.
+
+The brand does not need perfect screenshots. It needs screenshots that do not accidentally argue with the launch.
