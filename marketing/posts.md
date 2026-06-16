@@ -1,7 +1,7 @@
 # BrandScout Marketing Posts
 
 > All drafts for https://brandscout.net
-> Last updated: 2026-06-15
+> Last updated: 2026-06-16
 
 ---
 
@@ -58,7 +58,7 @@ Just shipped BrandScout after months of on-and-off building.
 - Shareable result cards
 - Public API
 - PWA — install it on your phone
-- 292 blog posts on naming, branding, and SEO
+- 293 blog posts on naming, branding, and SEO
 
 It's 100% free, open source, no signup, no ads. I'm not monetizing this — just wanted to build something useful.
 
@@ -85,7 +85,7 @@ I built [BrandScout](https://brandscout.net) to solve this. One search tells you
 
 It's free, no signup required, no ads. Open source.
 
-I've also written 292 blog posts on naming strategy, SEO, and brand identity that might be useful if you're in the naming phase.
+I've also written 293 blog posts on naming strategy, SEO, and brand identity that might be useful if you're in the naming phase.
 
 Hope it saves someone the 3 hours I used to spend doing this manually.
 
@@ -147,7 +147,7 @@ I built [BrandScout](https://brandscout.net) — you type in a name and it insta
 - **AI name generator** — get suggestions based on your industry
 - **Shareable cards** — send results to your business partner
 
-It's completely free. No account needed, no ads, no hidden fees. I also have 292 blog posts on naming and branding strategy if you want to go deeper.
+It's completely free. No account needed, no ads, no hidden fees. I also have 293 blog posts on naming and branding strategy if you want to go deeper.
 
 🔗 https://brandscout.net
 
@@ -155,14 +155,14 @@ It's completely free. No account needed, no ads, no hidden fees. I also have 292
 
 ## r/SEO
 
-**Title:** BrandScout — free brand name checker with public API + 292 blog posts on naming/SEO
+**Title:** BrandScout — free brand name checker with public API + 293 blog posts on naming/SEO
 
 **Body:**
 
 Built a free tool that might be useful for anyone doing brand/naming research: [BrandScout](https://brandscout.net)
 
 **For SEO folks specifically:**
-- **292 blog posts** covering naming strategy, domain selection, brandability, and SEO implications of name choices — all indexed and driving organic traffic
+- **293 blog posts** covering naming strategy, domain selection, brandability, and SEO implications of name choices — all indexed and driving organic traffic
 - **Public API** — integrate availability checking into your own tools or workflows
 - **7 TLD checks** — quickly see which extensions are available for a brand name
 - **20 social platform checks** — verify handle availability (important for branded search and social signals)
@@ -243,7 +243,7 @@ BrandScout is a free, open-source tool for checking brand name availability. Ent
 ✅ Shareable result cards — collaborate with your team
 ✅ Public API — build on top of it
 ✅ PWA — install on any device
-✅ 292 blog posts on naming & branding
+✅ 293 blog posts on naming & branding
 
 No signup. No ads. No cost. Open source. Free forever.
 
@@ -284,7 +284,7 @@ BrandScout checks 7 TLDs and 20 social platforms in one search. It also has an A
 
 Built with Next.js, deployed as a PWA. Fully open source. No signup, no ads, free to use.
 
-I also wrote 292 blog posts covering naming strategy, domain selection, and branding — partly as a content experiment, partly because I kept learning things worth sharing.
+I also wrote 293 blog posts covering naming strategy, domain selection, and branding — partly as a content experiment, partly because I kept learning things worth sharing.
 
 Feedback on the tool or the approach is welcome.
 
@@ -347,7 +347,7 @@ The whole thing is open source.
 
 ## The Content Side
 
-I also wrote **292 blog posts** covering naming strategy, domain selection, SEO implications of brand names, and more. This started as an SEO experiment but turned into genuinely useful content.
+I also wrote **293 blog posts** covering naming strategy, domain selection, SEO implications of brand names, and more. This started as an SEO experiment but turned into genuinely useful content.
 
 ## Why Free?
 
@@ -384,7 +384,7 @@ Hey IH!
 - Shareable result cards
 - Public API
 - PWA
-- 292 blog posts on naming & branding
+- 293 blog posts on naming & branding
 
 **Business model:** None. It's free, open source, no ads, no signup. I built it for myself and decided to share it.
 
@@ -448,7 +448,7 @@ Brand consistency across platforms isn't just nice-to-have — it's a competitiv
 
 ### The Blog
 
-I've also published 292 articles on brandscout.net covering topics like:
+I've also published 293 articles on brandscout.net covering topics like:
 - How to choose an SEO-friendly brand name
 - The pros and cons of different domain extensions
 - Social media handle strategies
@@ -494,7 +494,7 @@ Features I'm most proud of:
 **Tweet 4:**
 It's also a PWA — install it on your phone and it works like a native app.
 
-Plus I've written 292 blog posts on naming strategy, domain selection, and branding.
+Plus I've written 293 blog posts on naming strategy, domain selection, and branding.
 
 All free. All on the site.
 
@@ -530,7 +530,7 @@ Features:
 
 It's completely free, open source, no signup required, and no ads.
 
-I also wrote 292 blog posts on naming strategy, domain selection, and brand identity — all available on the site.
+I also wrote 293 blog posts on naming strategy, domain selection, and brand identity — all available on the site.
 
 If you're starting something new or helping a client pick a name, this might save you a few hours.
 
@@ -560,7 +560,7 @@ I built a free tool called BrandScout that I think could save a lot of people ti
 • A/B compare — see two options side-by-side
 • Shareable result cards — great for team decisions
 • Public API
-• 292 blog posts on naming & branding strategy
+• 293 blog posts on naming & branding strategy
 
 It's 100% free. No signup, no ads, no catch. Open source.
 
