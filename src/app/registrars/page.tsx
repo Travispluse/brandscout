@@ -1,18 +1,12 @@
-import type { Metadata } from "next";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Domain Registrar Comparison",
   description:
     "Compare popular domain registrars by price, privacy, support, and tradeoffs before registering your brand domain.",
-  alternates: { canonical: "/registrars" },
-  openGraph: {
-    title: "Domain Registrar Comparison | BrandScout",
-    description:
-      "Compare popular domain registrars by price, privacy, support, and tradeoffs before registering your brand domain.",
-    type: "website",
-  },
-};
+  path: "/registrars",
+});
 
 const registrars = [
   {

@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Editorial Policy",
   description: "BrandScout's editorial policy covering accuracy, corrections, sources, and AI disclosure.",
-  alternates: { canonical: "/editorial-policy" },
-};
+  path: "/editorial-policy",
+});
 
 export default function EditorialPolicyPage() {
   return (

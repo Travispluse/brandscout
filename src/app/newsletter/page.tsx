@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
 import { NewsletterSignup } from "@/components/newsletter-signup";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Newsletter | Brand Naming Tips",
   description: "Subscribe to BrandScout's newsletter for expert brand naming tips, domain strategy, and social media handle advice.",
-  alternates: { canonical: "/newsletter" },
-};
+  path: "/newsletter",
+});
 
 export default function NewsletterPage() {
   return (

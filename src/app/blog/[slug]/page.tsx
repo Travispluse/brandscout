@@ -1,4 +1,4 @@
-import { getPostAsync, getLocalPostsAsync } from "@/lib/blog";
+import { getPostAsync, getLocalPostsAsync, type BlogPost } from "@/lib/blog";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
@@ -13,6 +13,45 @@ export const dynamicParams = true; // Allow dynamic slugs not in generateStaticP
 
 type Params = Promise<{ slug: string }>;
 
+const siteUrl = "https://brandscout.net";
+const siteName = "BrandScout";
+const titleSuffix = ` | ${siteName}`;
+const maxTitleLength = 60;
+const defaultBlogImage = "/og-image.png";
+
+function toAbsoluteUrl(url?: string) {
+  try {
+    return new URL(url || defaultBlogImage, siteUrl).toString();
+  } catch {
+    return new URL(defaultBlogImage, siteUrl).toString();
+  }
+}
+
+function truncateTitle(title: string) {
+  if (`${title}${titleSuffix}`.length <= maxTitleLength) return title;
+
+  const maxBaseLength = maxTitleLength - titleSuffix.length;
+  return `${title.slice(0, maxBaseLength - 3).trimEnd()}...`;
+}
+
+function stripMarkdown(content: string) {
+  return content
+    .replace(/```[\s\S]*?```/g, " ")
+    .replace(/[#*[\]()>`_~]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function getPostDescription(post: BlogPost) {
+  const description =
+    post.excerpt ||
+    stripMarkdown(post.content) ||
+    `Read about ${post.title} on ${siteName}.`;
+
+  if (description.length <= 160) return description;
+  return `${description.slice(0, 157).trimEnd()}...`;
+}
+
 export async function generateStaticParams() {
   // Pre-render checked-in MDX posts. Remote API posts remain available on-demand.
   const posts = await getLocalPostsAsync();
@@ -24,17 +63,9 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const post = await getPostAsync(slug);
   if (!post) return { title: "Not Found" };
   
-  // Generate description from content if excerpt is missing
-  const description = post.excerpt || post.content
-    ?.replace(/[#*\[\]()>`_~]/g, '')
-    .replace(/\s+/g, ' ')
-    .trim()
-    .slice(0, 155) + '...' || `Read about ${post.title} on BrandScout.`;
-  
-  // Truncate title if too long (Ahrefs flags >60 chars)
-  const pageTitle = post.title.length > 60 
-    ? post.title.slice(0, 57) + '...' 
-    : post.title;
+  const description = getPostDescription(post);
+  const pageTitle = truncateTitle(post.title);
+  const imageUrl = toAbsoluteUrl(post.image_url);
   
   return {
     title: pageTitle,
@@ -45,11 +76,11 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
       description,
       type: "article",
       publishedTime: post.date,
-      siteName: "BrandScout",
-      url: `https://brandscout.net/blog/${slug}`,
+      siteName,
+      url: `${siteUrl}/blog/${slug}`,
       images: [
         {
-          url: post.image_url || "/og-image.png",
+          url: imageUrl,
           width: 1200,
           height: 630,
           alt: pageTitle,
@@ -58,9 +89,9 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
     },
     twitter: {
       card: "summary_large_image",
-      title: `${pageTitle} | BrandScout`,
+      title: `${pageTitle}${titleSuffix}`,
       description,
-      images: [post.image_url || "/og-image.png"],
+      images: [imageUrl],
     },
   };
 }
@@ -74,15 +105,17 @@ export default async function BlogPostPage({ params }: { params: Params }) {
   const post = await getPostAsync(slug);
   if (!post) notFound();
 
+  const description = getPostDescription(post);
+  const imageUrl = toAbsoluteUrl(post.image_url);
   const blogPostingJsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.title,
     datePublished: post.date,
-    description: post.excerpt,
-    image: post.image_url || "/og-image.png",
-    url: `https://brandscout.net/blog/${slug}`,
-    author: { "@type": "Organization", name: "BrandScout Team", url: "https://brandscout.net" },
+    description,
+    image: imageUrl,
+    url: `${siteUrl}/blog/${slug}`,
+    author: { "@type": "Organization", name: "BrandScout Team", url: siteUrl },
   };
 
   return (
