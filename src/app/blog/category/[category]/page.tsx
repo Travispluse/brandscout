@@ -4,6 +4,7 @@ import { BlogPostsTable } from "@/components/blog-posts-table";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 
 type Params = Promise<{ category: string }>;
 
@@ -15,17 +16,11 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const { category } = await params;
   const cat = CATEGORIES[category];
   if (!cat) return { title: "Not Found" };
-  return {
+  return createPageMetadata({
     title: `${cat.label} Articles`,
     description: cat.description,
-    alternates: { canonical: `/blog/category/${category}` },
-    openGraph: {
-      title: `${cat.label} Articles | BrandScout`,
-      description: cat.description,
-      siteName: "BrandScout",
-      images: [{ url: "/og-image.png", width: 1024, height: 1024, alt: cat.label }],
-    },
-  };
+    path: `/blog/category/${category}`,
+  });
 }
 
 export default async function CategoryPage({ params }: { params: Params }) {

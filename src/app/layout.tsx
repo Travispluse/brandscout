@@ -5,9 +5,8 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { MobileMenu } from "@/components/mobile-menu";
 import { CookieConsent } from "@/components/cookie-consent";
 import { LeadCapturePopup } from "@/components/lead-capture";
+import { defaultOgImage, defaultOgImageHeight, defaultOgImageWidth, siteUrl } from "@/lib/metadata";
 import "./globals.css";
-
-const siteUrl = "https://brandscout.net";
 
 export const metadata: Metadata = {
   title: {
@@ -29,10 +28,10 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/og-image.png",
-        width: 1024,
-        height: 1024,
-        alt: "BrandScout — Check Brand Availability Instantly",
+        url: defaultOgImage,
+        width: defaultOgImageWidth,
+        height: defaultOgImageHeight,
+        alt: "BrandScout - Check Brand Availability Instantly",
       },
     ],
   },
@@ -41,7 +40,7 @@ export const metadata: Metadata = {
     title: "BrandScout | Free Domain & Username Availability Checker",
     description:
       "Check domain and username availability across platforms instantly. Free forever, no signup.",
-    images: ["/og-image.png"],
+    images: [{ url: defaultOgImage, alt: "BrandScout - Check Brand Availability Instantly" }],
   },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
   verification: {

@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Branding Tools",
   description: "Free branding tools: name availability checker, templates, glossary, and more. Everything you need to build your brand online.",
-  alternates: { canonical: "/tools" },
-};
+  path: "/tools",
+});
 
 const tools = [
   {

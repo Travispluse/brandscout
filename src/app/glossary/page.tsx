@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Branding Glossary — 50+ Terms Defined",
   description: "Comprehensive glossary of branding, domain, DNS, SEO, and social media terms. Learn key concepts for building your brand online.",
-  alternates: { canonical: "/glossary" },
-};
+  path: "/glossary",
+});
 
 interface Term { id: string; term: string; definition: string; }
 

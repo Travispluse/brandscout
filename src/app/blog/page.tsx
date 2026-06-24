@@ -3,20 +3,15 @@ import { toBlogTablePosts } from "@/lib/blog-table-posts";
 import { BlogPostsTable } from "@/components/blog-posts-table";
 import Link from "next/link";
 import Image from "next/image";
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/metadata";
 
 export const revalidate = 60;
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Blog | Brand Naming Tips & Domain Strategy",
   description: "Expert tips and guides on choosing the perfect brand name, domain strategy, and securing your online presence across platforms.",
-  alternates: { canonical: "/blog" },
-  openGraph: {
-    title: "Blog | BrandScout",
-    description: "Expert tips and guides on brand naming, domain strategy, and building your online presence.",
-    type: "website",
-  },
-};
+  path: "/blog",
+});
 
 export default async function BlogPage() {
   const posts = await getAllPostsAsync();

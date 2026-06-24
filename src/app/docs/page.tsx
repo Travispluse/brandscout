@@ -1,15 +1,12 @@
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { APISandbox } from "@/components/api-sandbox";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata = {
+export const metadata = createPageMetadata({
   title: "API Documentation | Developer & AI Integration Guide",
   description: "BrandScout API documentation for developers and AI agents. Free REST API to check domain and username availability programmatically. OpenAPI spec included.",
-  alternates: { canonical: "/docs" },
-  openGraph: {
-    title: "API Documentation | BrandScout",
-    description: "Free REST API to check domain and username availability. Docs, examples, and OpenAPI spec for developers and AI agents.",
-  },
-};
+  path: "/docs",
+});
 
 function CodeBlock({ children, title }: { children: string; title?: string }) {
   return (

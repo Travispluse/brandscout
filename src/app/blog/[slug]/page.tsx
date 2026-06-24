@@ -7,6 +7,13 @@ import { Breadcrumbs } from "@/components/breadcrumbs";
 import { TableOfContents } from "@/components/table-of-contents";
 import { NewsletterSignup } from "@/components/newsletter-signup";
 import { AuthorProfile } from "@/components/author-profile";
+import {
+  defaultOgImage,
+  defaultOgImageHeight,
+  defaultOgImageWidth,
+  siteUrl,
+  toAbsoluteUrl,
+} from "@/lib/metadata";
 
 export const revalidate = 60; // ISR: revalidate every 60 seconds
 export const dynamicParams = true; // Allow dynamic slugs not in generateStaticParams
@@ -35,6 +42,11 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const pageTitle = post.title.length > 60 
     ? post.title.slice(0, 57) + '...' 
     : post.title;
+  const imageUrl = post.image_url || defaultOgImage;
+  const defaultImageDimensions =
+    imageUrl === defaultOgImage
+      ? { width: defaultOgImageWidth, height: defaultOgImageHeight }
+      : {};
   
   return {
     title: pageTitle,
@@ -49,9 +61,8 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
       url: `https://brandscout.net/blog/${slug}`,
       images: [
         {
-          url: post.image_url || "/og-image.png",
-          width: 1200,
-          height: 630,
+          url: imageUrl,
+          ...defaultImageDimensions,
           alt: pageTitle,
         },
       ],
@@ -60,7 +71,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
       card: "summary_large_image",
       title: `${pageTitle} | BrandScout`,
       description,
-      images: [post.image_url || "/og-image.png"],
+      images: [{ url: imageUrl, alt: pageTitle }],
     },
   };
 }
@@ -73,6 +84,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
   const { slug } = await params;
   const post = await getPostAsync(slug);
   if (!post) notFound();
+  const imageUrl = post.image_url || defaultOgImage;
 
   const blogPostingJsonLd = {
     "@context": "https://schema.org",
@@ -80,9 +92,9 @@ export default async function BlogPostPage({ params }: { params: Params }) {
     headline: post.title,
     datePublished: post.date,
     description: post.excerpt,
-    image: post.image_url || "/og-image.png",
-    url: `https://brandscout.net/blog/${slug}`,
-    author: { "@type": "Organization", name: "BrandScout Team", url: "https://brandscout.net" },
+    image: toAbsoluteUrl(imageUrl),
+    url: `${siteUrl}/blog/${slug}`,
+    author: { "@type": "Organization", name: "BrandScout Team", url: siteUrl },
   };
 
   return (
