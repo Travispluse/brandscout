@@ -1,7 +1,7 @@
 # BrandScout Marketing Posts
 
 > All drafts for https://brandscout.net
-> Last updated: 2026-06-14
+> Last updated: 2026-06-23
 
 ---
 
