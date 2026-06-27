@@ -66,7 +66,7 @@ export function BlogPostsTable({ posts }: BlogPostsTableProps) {
           {table.getFilteredRowModel().rows.length} of {posts.length} articles
         </p>
       </div>
-      <div className="overflow-hidden rounded-md border border-gray-200 bg-white">
+      <div className="overflow-x-auto rounded-md border border-gray-200 bg-white">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
