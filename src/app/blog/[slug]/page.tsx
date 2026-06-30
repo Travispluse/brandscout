@@ -1,4 +1,4 @@
-import { getPostAsync, getLocalPostsAsync } from "@/lib/blog";
+import { getPostAsync, getLocalPostsAsync, type BlogPost } from "@/lib/blog";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
@@ -19,6 +19,30 @@ export const revalidate = 60; // ISR: revalidate every 60 seconds
 export const dynamicParams = true; // Allow dynamic slugs not in generateStaticParams
 
 type Params = Promise<{ slug: string }>;
+const MAX_META_DESCRIPTION_LENGTH = 160;
+
+function stripMarkdown(value: string) {
+  return value.replace(/[#*[\]()>`_~]/g, "").replace(/\s+/g, " ").trim();
+}
+
+function truncateDescription(value: string) {
+  const normalized = value.replace(/\s+/g, " ").trim();
+  if (normalized.length <= MAX_META_DESCRIPTION_LENGTH) return normalized;
+
+  const clipped = normalized
+    .slice(0, MAX_META_DESCRIPTION_LENGTH - 3)
+    .replace(/\s+\S*$/, "")
+    .trimEnd();
+
+  return `${clipped || normalized.slice(0, MAX_META_DESCRIPTION_LENGTH - 3)}...`;
+}
+
+function getPostDescription(post: BlogPost) {
+  const rawDescription =
+    post.excerpt || (post.content ? stripMarkdown(post.content) : "") || `Read about ${post.title} on BrandScout.`;
+
+  return truncateDescription(rawDescription);
+}
 
 export async function generateStaticParams() {
   // Pre-render checked-in MDX posts. Remote API posts remain available on-demand.
@@ -31,12 +55,7 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   const post = await getPostAsync(slug);
   if (!post) return { title: "Not Found" };
   
-  // Generate description from content if excerpt is missing
-  const description = post.excerpt || post.content
-    ?.replace(/[#*\[\]()>`_~]/g, '')
-    .replace(/\s+/g, ' ')
-    .trim()
-    .slice(0, 155) + '...' || `Read about ${post.title} on BrandScout.`;
+  const description = getPostDescription(post);
   
   // Truncate title if too long (Ahrefs flags >60 chars)
   const pageTitle = post.title.length > 60 
@@ -85,13 +104,14 @@ export default async function BlogPostPage({ params }: { params: Params }) {
   const post = await getPostAsync(slug);
   if (!post) notFound();
   const imageUrl = post.image_url || defaultOgImage;
+  const description = getPostDescription(post);
 
   const blogPostingJsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.title,
     datePublished: post.date,
-    description: post.excerpt,
+    description,
     image: toAbsoluteUrl(imageUrl),
     url: `${siteUrl}/blog/${slug}`,
     author: { "@type": "Organization", name: "BrandScout Team", url: siteUrl },
