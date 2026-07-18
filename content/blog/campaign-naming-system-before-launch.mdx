@@ -1,0 +1,255 @@
+---
+title: "Build a Campaign Naming System Before Launch"
+date: "2026-07-18"
+description: "A practical way to name launch campaigns, UTM values, promo codes, referral sources, and partner links so early demand stays readable."
+excerpt: "A practical way to name launch campaigns, UTM values, promo codes, referral sources, and partner links so early demand stays readable."
+category: "growth-marketing"
+image_url: "/blog/campaign-naming-system-before-launch-hero.png"
+---
+
+# Build a Campaign Naming System Before Launch
+
+The first week of a new brand creates a strange kind of mess.
+
+The founder posts one link on LinkedIn. A launch email uses another. A partner newsletter adds its own UTM parameters. Someone makes a promo code for a webinar. A paid ad account labels the campaign "Brand launch final." The Product Hunt link says `ph-launch`, the sales deck says `deck-cta`, and the analytics dashboard quietly splits one public moment into eight names nobody trusts.
+
+Nothing looks broken from the outside. People can still click, buy, book, or sign up.
+
+But inside the team, the launch story gets hard to read. Which channel worked? Which partner sent useful traffic? Which offer pulled in real buyers instead of curious visitors? Which campaign name should be used again next month?
+
+That is why a new brand needs a campaign naming system before launch. Not a heavy attribution model. Not a 40-page analytics policy. Just a small set of naming rules for UTMs, promo codes, referral labels, partner links, ad campaigns, email segments, and reports.
+
+This is different from a [launch link ledger](/blog/launch-link-ledger-before-announcement-day). The ledger records the exact public URLs and where they should point. The campaign naming system records the labels that help the team understand what happened after people clicked.
+
+Both matter. The public link should look trustworthy. The internal name should stay readable.
+
+## Start With The Questions You Need To Answer
+
+Do not start by debating whether the separator should be a dash or an underscore.
+
+Start with the questions the team will ask after launch week:
+
+| Question | Naming field that helps |
+| --- | --- |
+| Which channel created the most qualified visits? | Source and medium |
+| Which launch moment worked best? | Campaign name |
+| Which partner sent serious buyers? | Partner or referral label |
+| Which message earned the click? | Content or creative label |
+| Which discount or offer converted? | Promo code or offer label |
+| Which audience should we follow up with? | Segment or list name |
+
+If a name does not help answer one of those questions, keep it out of the system.
+
+New teams often over-label because analytics tools invite it. They create fields for persona, feature, funnel stage, creative direction, emotional angle, landing page, offer, owner, and date. Then nobody uses the data because every report is too fragmented.
+
+For most launches, four practical labels are enough:
+
+| Label | Example |
+| --- | --- |
+| Source | `linkedin`, `launch-email`, `partner-acme` |
+| Medium | `social`, `email`, `referral`, `paid`, `qr` |
+| Campaign | `public-launch-2026-07` |
+| Content | `founder-post`, `hero-cta`, `partner-blurb` |
+
+That is not perfect attribution. It is enough structure to keep the first readout useful.
+
+If analytics are not installed or conversions are not marked yet, fix that first with the [analytics setup guide for new brands](/blog/analytics-setup-new-brand). Clean names do not help if the basic events are missing.
+
+## Separate Public Brand Names From Internal Tracking Names
+
+A campaign name is not always a public brand name.
+
+Customers may see a promo code, referral code, short link, QR label, or email subject. They usually do not see the internal `utm_campaign` value unless they copy the URL, inspect a redirect, or receive a forwarded link. That difference matters.
+
+Use two standards:
+
+| Surface | Standard |
+| --- | --- |
+| Public-facing code or label | Short, readable, brand-safe |
+| Internal tracking value | Structured, lowercase, consistent |
+
+For example:
+
+| Use case | Public label | Internal value |
+| --- | --- | --- |
+| Launch discount | `NORTHLINE20` | `public-launch-2026-07` |
+| Partner newsletter | `Northline early access` | `partner-acme-launch-email` |
+| Founder post | Clean homepage link | `founder-linkedin-post` |
+| Event QR code | `Try Northline` on the sign | `field-service-expo-qr` |
+
+Do not let internal tracking names leak into customer language. A buyer should not see `q3_test_launch_a_variant` on a checkout page or in a confirmation email. A partner should not call the company by the modified domain because the tracking sheet used that shorthand.
+
+This is where a [brand alias list](/blog/brand-alias-list-before-launch) helps. It tells the team which versions of the name are approved, context-only, retired, or not allowed. Campaign names should follow that list instead of inventing a new brand vocabulary under pressure.
+
+## Use One Small UTM Pattern
+
+UTM parameters are useful because they travel across tools. They also create noise quickly.
+
+Choose a small pattern before anyone starts building links:
+
+| Field | Rule | Example |
+| --- | --- | --- |
+| `utm_source` | Platform, partner, or owned list | `linkedin`, `newsletter`, `partner-acme` |
+| `utm_medium` | Channel type from a short approved list | `social`, `email`, `referral`, `paid`, `qr` |
+| `utm_campaign` | The named launch moment | `public-launch-2026-07` |
+| `utm_content` | Optional placement or creative | `founder-post`, `bio-link`, `cta-button` |
+
+Then write the formatting rules down:
+
+- Use lowercase.
+- Use hyphens between words.
+- Do not use spaces.
+- Do not use "final," "test," or "new" in permanent campaign values.
+- Do not use private names, jokes, or internal project code names.
+- Do not create a new source when an approved source already exists.
+
+The boring part matters. `LinkedIn`, `linkedin`, `linked-in`, and `li` become four sources in many reports. `Launch`, `launch-2026`, `public-launch`, and `brand_launch_july` become four campaigns. A person can combine them later, but the whole point is to avoid needing cleanup before the team can learn.
+
+Keep the approved source and medium list small:
+
+| Source list | Medium list |
+| --- | --- |
+| `linkedin` | `social` |
+| `x` | `social` |
+| `instagram` | `social` |
+| `newsletter` | `email` |
+| `producthunt` | `referral` |
+| `partner-name` | `referral` |
+| `google` | `paid` |
+| `event-name` | `qr` |
+
+This system should sit beside the [canonical brand URL checklist](/blog/canonical-brand-url-before-launch). The canonical URL tells people the official address. The UTM pattern tells the team how temporary context gets added without making the address feel improvised.
+
+## Name Campaigns By Moment, Audience, And Offer
+
+Weak campaign names usually describe the team's mood.
+
+Strong campaign names describe what a future reviewer needs to know.
+
+| Weak name | Problem | Better direction |
+| --- | --- | --- |
+| `big-launch` | Vague after the day passes | `public-launch-2026-07` |
+| `q3-growth` | Internal planning label | `home-services-beta-invite` |
+| `founder-push` | Says who posted, not what happened | `founder-linkedin-public-launch` |
+| `launch-final` | Will age badly | `waitlist-open-2026-07` |
+| `new-offer` | Ambiguous after the next offer | `annual-plan-founder-offer` |
+
+A good campaign name usually includes one or two of these pieces:
+
+| Piece | Example |
+| --- | --- |
+| Moment | `public-launch`, `waitlist-open`, `demo-week` |
+| Audience | `founders`, `home-services`, `design-partners` |
+| Offer | `early-access`, `annual-plan`, `free-audit` |
+| Time period | `2026-07`, `summer-2026` |
+
+Do not include all four every time. `public-launch-2026-07` is clean. `public-launch-founders-early-access-july-2026-v3` is a filing cabinet, not a campaign name.
+
+The test is whether someone can read the name in a dashboard three months later and understand the decision it represents.
+
+## Keep Promo Codes Customer-Safe
+
+Promo codes are tracking names customers actually type, screenshot, forward, and remember.
+
+That makes them part of the brand experience.
+
+Use codes that are easy to say and hard to misread:
+
+| Risky code | Why it is weak | Better code |
+| --- | --- | --- |
+| `LAUNCH_Q3_FINAL` | Looks internal | `NORTHLINE20` |
+| `FNDROFFER` | Hard to read aloud | `FOUNDER20` |
+| `NL-ACME-07-X` | Feels like a test label | `ACME20` |
+| `TRYGETNORTHLINE` | Confuses brand and CTA | `TRYNORTHLINE` |
+
+Avoid characters that create support problems: `0` and `O`, `1` and `I`, unnecessary hyphens, long strings, and codes that look like coupon scraping spam.
+
+Also decide whether promo codes may use the public brand name, partner name, or offer name. A partner code can be useful, but it should not make the partner look like the product owner. `ACME20` is understandable for an Acme audience. `ACMENORTHLINEAPP2026` is too much.
+
+If the promo appears on receipts, invoices, transactional emails, or checkout pages, check it against the [billing descriptor brand QA](/blog/billing-descriptor-brand-qa-before-launch) and [transactional email brand QA](/blog/transactional-email-brand-qa-before-launch). Money pages amplify small naming confusion.
+
+## Give Partners Ready-Made Labels
+
+Partners should not have to invent your campaign naming system.
+
+If a launch partner, affiliate, investor, customer, podcast host, or community owner needs a tracked link, give them the final link and the naming rule behind it.
+
+Use a small partner block:
+
+| Field | Approved value |
+| --- | --- |
+| Partner display name | Acme Field Ops |
+| Public brand description | Northline is scheduling software for home service teams. |
+| Clean link | `https://getnorthline.com` |
+| Tracked launch link | `https://getnorthline.com/?utm_source=partner-acme&utm_medium=referral&utm_campaign=public-launch-2026-07` |
+| Promo code, if any | `ACME20` |
+| Do not use | Old beta URL, personal short link, unapproved category phrase |
+
+This pairs naturally with a [partner brand facts sheet](/blog/partner-brand-facts-sheet-before-launch). The facts sheet tells partners what to copy publicly. The campaign naming system keeps the hidden labels consistent when those partners drive traffic.
+
+Do not let every partner choose a different source format. `acme`, `acme-field-ops`, `partner-acme`, and `partner_acme` may all be obvious to the person who created them. They are not obvious in a dashboard at midnight.
+
+Pick one pattern, usually `partner-name`, and use it everywhere.
+
+## Decide What Never Goes In A Campaign Name
+
+Some information does not belong in campaign names, even if it feels useful in the moment.
+
+Do not put these in public or semi-public tracking labels:
+
+- Private customer names.
+- Investor names unless the campaign is explicitly partner-approved.
+- Personal email addresses.
+- Internal jokes.
+- Unannounced product names.
+- Old beta names.
+- Legal names that are not public brand names.
+- Claims the landing page does not support.
+- Sensitive audience labels.
+
+Campaign names travel farther than teams expect. They appear in exported reports, screenshots, CRM records, ad platforms, invoices, support tickets, partner recaps, and sometimes URLs.
+
+If a name would be awkward in a screenshot, do not use it.
+
+This is the same discipline as the [screenshot brand safety pass](/blog/screenshot-brand-safety-before-launch). Screenshots preserve whatever was on screen at the time. Campaign labels do the same thing inside reports.
+
+## Test The System Before Launch Week
+
+Do one dry run before the launch calendar gets crowded.
+
+Create five realistic links:
+
+| Scenario | Expected labels |
+| --- | --- |
+| Founder LinkedIn post | `linkedin`, `social`, `public-launch-2026-07`, `founder-post` |
+| Launch email button | `newsletter`, `email`, `public-launch-2026-07`, `hero-cta` |
+| Partner newsletter | `partner-acme`, `referral`, `public-launch-2026-07`, `partner-blurb` |
+| Paid branded search ad | `google`, `paid`, `public-launch-2026-07`, `brand-keyword` |
+| Event QR card | `field-service-expo`, `qr`, `public-launch-2026-07`, `table-card` |
+
+Click each link from a private browser. Confirm the page loads, the visible URL is acceptable, the conversion event fires, and the labels appear in analytics or your link tool the way you expect.
+
+If you plan to run branded paid search after launch, keep that campaign naming consistent with your broader system. The [paid advertising and brand keywords guide](/blog/paid-advertising-brand-keywords) covers the search strategy; this pass keeps the campaign labels from becoming a separate language.
+
+Also add the tested links to the launch link ledger. The naming system is not a substitute for testing destinations. A perfectly named broken link is still broken.
+
+## Keep The System Small After Launch
+
+The first version should be small enough that a teammate can use it without training.
+
+After launch, review the names that actually appeared:
+
+- Which sources were duplicated?
+- Which campaign names were too broad?
+- Which promo codes caused support questions?
+- Which partner labels need a standard?
+- Which internal labels leaked into public copy?
+- Which campaigns should be retired instead of reused?
+
+Then update the rule sheet.
+
+Do not rebuild the taxonomy every week. Tighten it. Add an approved source when a real new channel appears. Retire a campaign when the moment passes. Keep the format stable enough that month-one data and month-six data can still be compared.
+
+New brands need clear public memory: one name, one domain pattern, one set of official handles, one plain category. They also need clear internal memory. If the team cannot read its own launch data, it will repeat loud tactics instead of useful ones.
+
+Before announcement day, name the campaigns the way you want to read them later. Keep public labels customer-safe. Keep tracking labels structured. Give partners ready-made links. Then launch with a system the next report can actually explain.
