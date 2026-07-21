@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getAllPostsAsync, CATEGORIES } from "@/lib/blog";
+import { getAllPostsAsync, getCategoriesWithPosts } from "@/lib/blog";
 
 const siteUrl = "https://brandscout.net";
 
@@ -40,7 +40,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // Blog category pages
-  const categoryEntries = Object.keys(CATEGORIES).map((cat) => ({
+  const categoryEntries = getCategoriesWithPosts(posts).map((cat) => ({
     url: `${siteUrl}/blog/category/${cat}`,
     lastModified: new Date().toISOString(),
     changeFrequency: "weekly" as const,

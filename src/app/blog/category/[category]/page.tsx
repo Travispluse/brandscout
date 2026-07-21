@@ -1,4 +1,4 @@
-import { getPostsByCategoryAsync, CATEGORIES } from "@/lib/blog";
+import { getAllPostsAsync, getPostsByCategoryAsync, CATEGORIES, getCategoriesWithPosts } from "@/lib/blog";
 import { toBlogTablePosts } from "@/lib/blog-table-posts";
 import { BlogPostsTable } from "@/components/blog-posts-table";
 import { Breadcrumbs } from "@/components/breadcrumbs";
@@ -9,17 +9,20 @@ import { createPageMetadata } from "@/lib/metadata";
 type Params = Promise<{ category: string }>;
 
 export async function generateStaticParams() {
-  return Object.keys(CATEGORIES).map((category) => ({ category }));
+  const posts = await getAllPostsAsync();
+  return getCategoriesWithPosts(posts).map((category) => ({ category }));
 }
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { category } = await params;
   const cat = CATEGORIES[category];
   if (!cat) return { title: "Not Found" };
+  const posts = await getPostsByCategoryAsync(category);
   return createPageMetadata({
     title: `${cat.label} Articles`,
     description: cat.description,
     path: `/blog/category/${category}`,
+    index: posts.length > 0,
   });
 }
 

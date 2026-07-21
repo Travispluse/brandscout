@@ -184,6 +184,11 @@ export const CATEGORIES: Record<string, { label: string; description: string }> 
   "legal": { label: "Legal", description: "Legal aspects of brand naming." },
 };
 
+export function getCategoriesWithPosts(posts: Pick<BlogPost, "category">[]): string[] {
+  const categories = new Set(posts.map((post) => post.category));
+  return Object.keys(CATEGORIES).filter((category) => categories.has(category));
+}
+
 export function getPostsByCategory(category: string): BlogPost[] {
   if (!postsCache) return [];
   return postsCache.filter(p => p.category === category);

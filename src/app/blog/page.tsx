@@ -1,4 +1,4 @@
-import { getAllPostsAsync, CATEGORIES } from "@/lib/blog";
+import { getAllPostsAsync, CATEGORIES, getCategoriesWithPosts } from "@/lib/blog";
 import { toBlogTablePosts } from "@/lib/blog-table-posts";
 import { BlogPostsTable } from "@/components/blog-posts-table";
 import Link from "next/link";
@@ -16,6 +16,7 @@ export const metadata = createPageMetadata({
 export default async function BlogPage() {
   const posts = await getAllPostsAsync();
   const tablePosts = toBlogTablePosts(posts);
+  const categoriesWithPosts = getCategoriesWithPosts(posts);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -43,13 +44,13 @@ export default async function BlogPage() {
 
       <div className="mx-auto max-w-6xl px-4 py-10">
         <div className="mb-8 flex gap-2 overflow-x-auto pb-2 flex-nowrap sm:flex-wrap">
-          {Object.entries(CATEGORIES).map(([slug, cat]) => (
+          {categoriesWithPosts.map((slug) => (
             <Link
               key={slug}
               href={`/blog/category/${slug}`}
               className="shrink-0 rounded-md border border-gray-200 bg-white px-3 py-1.5 text-xs text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900"
             >
-              {cat.label}
+              {CATEGORIES[slug].label}
             </Link>
           ))}
         </div>
