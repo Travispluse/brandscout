@@ -1,0 +1,323 @@
+---
+title: "Developer Docs Brand QA Before Launch"
+date: "2026-07-21"
+description: "A practical QA sheet for API docs, SDK package names, GitHub repos, sample code, webhooks, error messages, and developer support routes before a technical brand launches."
+excerpt: "A practical QA sheet for API docs, SDK package names, GitHub repos, sample code, webhooks, error messages, and developer support routes before a technical brand launches."
+category: "technical"
+image_url: "/blog/developer-docs-brand-qa-before-launch-hero.png"
+---
+
+# Developer Docs Brand QA Before Launch
+
+Developer docs are not only instructions.
+
+For an API product, developer tool, data platform, integration marketplace, or AI startup, docs may be the first place a serious evaluator decides whether the brand is real enough to trust. A buyer skims the homepage. A developer opens the quickstart. An engineer checks the SDK package. A founder clicks the GitHub org. A partner copies the webhook example into an internal ticket.
+
+That is where brand drift gets expensive.
+
+The public site may say Northline. The docs may still say FieldOps Beta. The API base URL may use `api.northlineapp.io` while the homepage uses `getnorthline.com`. The npm package may be scoped to an old project name. The OpenAPI file may generate a page title nobody reviewed. The support link may send developers to a founder's personal inbox.
+
+Those details are not cosmetic. Developers copy what docs teach them.
+
+A developer docs brand QA pass checks whether the technical materials people copy, bookmark, install, and forward match the same brand, domain, category language, and support model the rest of the launch is using. It is narrower than a general [support docs launch audit](/blog/support-docs-launch-audit-new-brand). Support docs help customers answer questions. Developer docs become implementation evidence.
+
+## Start With The Copy-Paste Path
+
+Do not begin by reading every doc page from top to bottom.
+
+Start with the path a new technical evaluator is most likely to copy:
+
+| Step | What the developer sees | Brand risk |
+| --- | --- | --- |
+| Homepage to docs link | Docs URL, label, link preview | Docs look like a separate product |
+| Quickstart title | Product name, category, promise | Old positioning becomes the implementation story |
+| API base URL | Domain, subdomain, protocol | Developers build against a temporary or confusing endpoint |
+| Authentication example | App name, key label, OAuth wording | Trust breaks before access is granted |
+| SDK install command | Package name, scope, registry | Old namespace gets installed into customer projects |
+| First response example | Object names, sample data, links | Demo language contradicts the public brand |
+| Error path | Error page, status link, support route | Failures feel generic or abandoned |
+
+This path matters because it becomes sticky. A developer may paste the quickstart into a company wiki, create a ticket with your package name, add your base URL to an environment file, or share a docs link in Slack. If the first path teaches the wrong identity, cleanup spreads beyond your own site.
+
+Treat the first copy-paste path like a launch artifact. It should be checked with the same care as the homepage headline, pricing page, and signup route.
+
+## Write The Technical Name Sheet
+
+Before editing docs, create a short technical name sheet.
+
+Marketing teams often freeze the public brand name, tagline, and canonical URL. Technical teams also need approved answers for names developers touch directly.
+
+| Field | Approved answer |
+| --- | --- |
+| Public brand name | Northline |
+| Product or API name | Northline API |
+| Canonical website | `https://getnorthline.com` |
+| Docs URL | `https://docs.getnorthline.com` |
+| App URL | `https://app.getnorthline.com` |
+| API base URL | `https://api.getnorthline.com` |
+| Status URL | `https://status.getnorthline.com` |
+| GitHub organization | `getnorthline` |
+| Package scope | `@northline` |
+| Developer support route | `developers@getnorthline.com` or support category |
+| Retired names | FieldOps Beta, NorthLine AI, dispatch-lab |
+
+This is the technical companion to the [canonical brand URL checklist](/blog/canonical-brand-url-before-launch) and the [category language sheet](/blog/category-language-sheet-before-launch). The website tells people what the company is. The technical name sheet tells builders which names are safe to copy.
+
+If a technical namespace cannot match the public brand exactly, write the bridge in the sheet. For example, a GitHub organization might be `northline-labs` because the exact handle is unavailable. That may be fine. It becomes risky only when nobody documents why the exception exists or how developers should understand it.
+
+## Fix Base URLs Before They Become Habits
+
+Base URLs travel further than most launch copy.
+
+They show up in code snippets, API clients, environment variables, customer READMEs, Postman collections, SDK configuration, monitoring tools, support screenshots, partner implementation guides, and internal security reviews.
+
+Search the docs source and generated files for:
+
+| Pattern | Why to check it |
+| --- | --- |
+| `localhost` | A local dev example may have escaped into public docs |
+| `staging` or `preview` | Developers may build against the wrong environment |
+| `vercel.app`, `netlify.app`, or vendor preview domains | The brand looks unfinished and links may change |
+| Old domains | Customers may bookmark or whitelist the wrong host |
+| Mixed `www`, root, app, docs, and API URLs | The brand teaches too many addresses at once |
+| HTTP examples | Security reviewers may flag basic trust issues |
+
+Not every URL needs the same host. `docs.brand.com`, `api.brand.com`, and `app.brand.com` can all make sense. The problem is inconsistency without explanation.
+
+Use a simple rule:
+
+| Surface | Preferred URL pattern |
+| --- | --- |
+| Public website links | Canonical website |
+| API calls | Approved API base URL |
+| Auth callback examples | Production app or docs domain only |
+| Status and incidents | Official status URL |
+| Support contact | Branded route, not vendor inbox |
+| Beta-only instructions | Private docs, noindex page, or clearly labeled section |
+
+If the API will keep an older host for compatibility, say so once and make the preferred host clear. Do not let legacy support look like indecision.
+
+## Check The Names Developers Import
+
+Package names are brand surfaces.
+
+An SDK import can be more memorable to a developer than the homepage. If a company launches as Northline but asks people to install `@fieldops/scheduler`, every implementation starts by reviving the old name.
+
+Review every installable or copyable namespace:
+
+| Namespace | Examples to inspect |
+| --- | --- |
+| npm package | `@northline/sdk`, package title, README badges |
+| Python package | `northline`, import examples, PyPI metadata |
+| Ruby gem | Gem name, homepage, source links |
+| Docker image | Organization, image name, tags, description |
+| GitHub repo | Org name, repo slug, README title, topics |
+| CLI command | Binary name, help output, update prompt |
+| Terraform or IaC provider | Provider namespace, docs examples |
+| Postman collection | Collection name, environment variables |
+
+Sometimes a package cannot be renamed cleanly before launch. That is a product decision, not only a docs decision. If developers have already installed the old package, renaming may break workflows. If nobody public has installed it yet, the launch window may be the best time to fix it.
+
+Use a decision table:
+
+| Finding | Launch decision |
+| --- | --- |
+| Old package name with no public users | Rename before announcement |
+| Old package name with beta users | Keep temporarily, add migration note |
+| Exact brand package unavailable | Choose one stable modifier and document it |
+| Repo slug uses internal codename | Rename before public links spread |
+| CLI command is short but ambiguous | Keep if useful, explain relation to brand |
+
+This connects to the [brand citation starter list](/blog/brand-citation-starter-list), because developer namespaces can become citations. GitHub, package registries, Docker Hub, docs sites, and integration directories all teach search engines and customers which technical identity is official.
+
+## Audit Generated Metadata
+
+Many documentation mistakes do not live in the visible paragraph copy.
+
+They live in generated metadata: page titles, OpenAPI fields, package manifests, social previews, sidebar labels, search index snippets, RSS feeds, schema markup, docs configuration files, and hosted API client exports.
+
+Check these fields before launch:
+
+| Metadata source | Fields to review |
+| --- | --- |
+| OpenAPI spec | `info.title`, `info.description`, `servers`, `contact`, `termsOfService`, `externalDocs` |
+| Docs site config | Site title, logo alt text, navbar labels, footer links |
+| Package manifest | Name, description, homepage, repository, bugs, author |
+| GitHub README | H1, badges, install command, docs link |
+| Generated SDK docs | Class names, package scope, base URL |
+| Search metadata | Title tag, meta description, canonical URL |
+| Link previews | Open Graph title, description, image, URL |
+
+Generated docs can make a stale name look official because it appears everywhere. A single old `info.title` in an OpenAPI file can become the browser title, API reference heading, downloaded collection name, and generated SDK label.
+
+Pair this with the [brand link preview QA](/blog/brand-link-preview-qa-before-launch) if docs links will be shared in launch posts, support replies, partner guides, or sales decks. Technical links get pasted into public channels too.
+
+## Make Auth And Permission Copy Explainable
+
+Developer docs often include access steps before anyone talks to sales.
+
+That means auth copy becomes part of the brand trust path. A new developer may see API keys, OAuth scopes, workspace installs, redirect URIs, service accounts, SSO setup, and webhook signing secrets before they understand the company.
+
+Review the docs around access:
+
+| Access moment | Brand QA question |
+| --- | --- |
+| API key creation | Does the dashboard use the current product name? |
+| Key label examples | Do sample labels avoid `test`, `beta`, and old codenames? |
+| OAuth app setup | Does the app name match the consent screen? |
+| Scope explanation | Does the docs copy explain why access is needed? |
+| Redirect URI examples | Do they use production-safe domains? |
+| Workspace install | Does the integration name match the public brand? |
+| Revocation docs | Can a user remove access without guessing where to go? |
+
+The [OAuth consent screen checklist](/blog/oauth-consent-screen-checklist-new-brands) covers the actual third-party prompt. The developer-docs version checks the page before and after that prompt: do the setup steps explain the same brand, app name, domain, scope, and support route the consent screen shows?
+
+Avoid hiding behind protocol language. Developers are technical, but they still use trust signals. A permission explanation that says "Northline needs calendar availability to find open appointment slots" is better than a docs page that jumps straight to a broad scope with no context.
+
+## Treat Errors, Webhooks, And Logs As Brand Copy
+
+The first impression may happen when something fails.
+
+API brands often polish the quickstart and forget the failure path. Then a new developer sees:
+
+- An error page titled "Starter API."
+- A webhook retry email from an old domain.
+- A dashboard log labeled "dispatch beta event."
+- A status link to a vendor subdomain.
+- A support response that says "contact engineering."
+
+Review the surfaces developers see when implementation is not smooth:
+
+| Surface | What to check |
+| --- | --- |
+| API error messages | Product name, docs link, support route, tone |
+| Rate limit response | Clear limit language and current docs URL |
+| Webhook event names | Stable naming, no retired category words |
+| Webhook dashboard | Brand name, endpoint labels, retry copy |
+| Log exports | No old company names or unsafe sample data |
+| Status page links | Official URL and customer-readable component names |
+| Support auto-replies | Branded sender and developer route |
+
+This is where docs overlap with the [status page brand QA](/blog/status-page-brand-qa-before-launch) and [branded email sender pattern](/blog/branded-email-sender-pattern-before-launch). A developer who hits an error should still feel like they are dealing with the same company they evaluated on the homepage.
+
+Errors do not need to be charming. They need to be specific, current, and connected to a real path.
+
+## Separate Stable Docs From Beta Context
+
+Technical docs often contain useful beta history.
+
+That history can become confusing if it ranks for the public brand or sits beside the quickstart without a clear label. Migration notes, deprecated endpoints, private beta limitations, old package names, and partner-only setup instructions may all be legitimate. They should not look like the launch default.
+
+Classify docs before announcement day:
+
+| Docs type | Launch treatment |
+| --- | --- |
+| Quickstart | Public, indexable, current brand only |
+| API reference | Public if stable, current base URL first |
+| SDK install docs | Public if package names are final |
+| Beta migration note | Private, noindex, or clearly labeled |
+| Deprecated endpoint docs | Public only if existing users need them |
+| Partner-only integration guide | Private or gated if not broadly available |
+| Internal runbook | Never linked from public docs |
+
+Use the [indexation control sheet](/blog/indexation-control-sheet-before-launch) if search visibility matters. New technical brands do not have much authority yet. A stale beta migration page can outrank the clean quickstart if it is older, linked, and accidentally indexable.
+
+If old names must remain for migration, write them as history:
+
+```text
+Northline was previously available to beta partners as FieldOps Beta. New projects should use the Northline API base URL and @northline SDK packages.
+```
+
+That is better than pretending the old name vanished or leaving it unexplained in examples.
+
+## QA The Outside Developer Trail
+
+Developers rarely stay inside your docs site.
+
+They check GitHub. They search the package name. They read issues. They inspect examples. They paste your URL into a security review. They ask a peer whether the company looks real.
+
+Audit the outside trail:
+
+| Outside surface | What to verify |
+| --- | --- |
+| GitHub organization | Name, avatar, bio, pinned repos, website link |
+| Package registry page | Description, homepage, repository, owner |
+| Example repos | README title, env var names, sample domains |
+| Community profile | Current brand, support route, docs link |
+| Integration directory | Product name, logo, category, support URL |
+| Search result | Docs title and snippet match the public brand |
+| Social profile links | Docs URL is current and intentionally public |
+
+This is a practical extension of the [social handle audit](/blog/social-handle-audit-before-launch). For a developer product, GitHub, package registries, docs, and integration profiles may matter more than a perfect consumer social handle.
+
+Do not claim every technical surface just because it exists. Claim and complete the surfaces your audience will actually verify. An empty GitHub org with an old avatar can create more doubt than no public org at all.
+
+## Test As A Logged-Out Developer
+
+Do one full run as someone outside the team.
+
+Use a clean browser profile or private window. Start from the public homepage, not from an admin bookmark. Then move through the developer path:
+
+| Test | Pass condition |
+| --- | --- |
+| Find docs from the homepage | Link label and URL feel official |
+| Open the quickstart | Title, category, and examples use current brand |
+| Copy the base URL | Domain matches the technical name sheet |
+| Install the SDK | Package name is approved or clearly explained |
+| Create a test key | Dashboard labels match docs and product |
+| Trigger one error | Message links to current docs or support |
+| Open the status link | Status page uses official domain and labels |
+| Search the package name | Registry and GitHub results reinforce the brand |
+| Share the docs link | Preview does not show an old title or image |
+
+Do not rely only on the person who built the API. They know which names are old and which domains are temporary. A real evaluator does not.
+
+Ask the outside tester to write down the exact words that felt uncertain. "Why is the package called something else?" is a brand QA finding. "Which domain should we whitelist?" is a launch blocker if the docs do not answer it.
+
+## Assign Change Rules For Technical Names
+
+Developer docs decay because many systems can change them.
+
+An engineer edits an OpenAPI title. DevRel renames a quickstart. Product changes an endpoint label. A founder creates a new example repo. A support lead adds a workaround article. A partner asks for a marketplace description. Each change may be reasonable alone. Together, they can drift from the brand.
+
+Before launch, record ownership:
+
+| Asset | Owner | Change rule |
+| --- | --- | --- |
+| Docs site config | DevRel | Brand name, logo, nav, footer require launch owner review |
+| OpenAPI spec metadata | API lead | Public title, servers, contact, and external docs require review |
+| SDK packages | Engineering | Package names and scopes cannot change without migration plan |
+| GitHub org | Engineering manager | Avatar, bio, pinned repos, and website link reviewed monthly |
+| Example repos | DevRel | READMEs use current names, domains, and support links |
+| API status link | Engineering | Component labels remain customer-readable |
+| Developer support route | Support or DevRel | Monitored during launch week |
+
+Add these items to the [brand asset handoff sheet](/blog/brand-asset-handoff-sheet-before-launch). Technical names are brand assets when customers install them, whitelist them, monitor them, or cite them in procurement.
+
+The goal is not bureaucracy. The goal is to stop public implementation details from changing casually after people have started building on them.
+
+## The Minimum Developer Docs QA Sheet
+
+If launch is close, do the high-leverage pass.
+
+Use this sheet:
+
+| Check | Done |
+| --- | --- |
+| Technical name sheet exists with public name, docs URL, API URL, package scope, GitHub org, status URL, and support route |  |
+| Homepage-to-docs path works from a logged-out browser |  |
+| Quickstart uses current brand, category language, and production-safe base URL |  |
+| SDK install commands and package registry metadata use approved names |  |
+| OpenAPI `info`, `servers`, `contact`, and `externalDocs` fields are current |  |
+| GitHub org, example repos, and README files link to the canonical docs |  |
+| Auth, OAuth, API key, and webhook setup steps explain the same product identity |  |
+| Error messages, rate limits, and status links use current docs and support routes |  |
+| Beta migration or deprecated docs are private, noindex, or clearly labeled |  |
+| Link previews for the docs and quickstart do not show old names or images |  |
+| One outside tester can find docs, install the SDK, create a key, and recover from an error without brand confusion |  |
+
+That is enough to catch the mistakes that create real launch friction.
+
+Developer docs do not need to sound like a campaign. They need to be exact. The name developers import, the URL they call, the org they inspect, the support route they trust, and the error message they see under pressure should all point to the same company.
+
+When the technical trail is clean, the brand feels less like a landing page and more like something people can build on.
