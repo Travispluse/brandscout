@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     template: "%s | BrandScout",
   },
   description:
-    "Check domain and social media username availability for your brand name instantly. Search .com, .net, .io, .ai domains and GitHub, Reddit, Twitch, Pinterest handles in one click. Free forever, no signup required.",
+    "Check domain and social media username availability for your brand name instantly. Search popular TLDs and handles in one free, no-signup check.",
   metadataBase: new URL(siteUrl),
   alternates: { canonical: "/" },
   keywords: ["brand name checker", "domain availability", "username checker", "social media handle check", "domain search", "brand name search", "free domain checker"],

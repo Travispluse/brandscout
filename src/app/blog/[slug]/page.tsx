@@ -20,23 +20,40 @@ export const dynamicParams = true; // Allow dynamic slugs not in generateStaticP
 
 type Params = Promise<{ slug: string }>;
 
+const MAX_META_DESCRIPTION_LENGTH = 155;
+
 export async function generateStaticParams() {
   // Pre-render checked-in MDX posts. Remote API posts remain available on-demand.
   const posts = await getLocalPostsAsync();
   return posts.slice(0, 50).map((p) => ({ slug: p.slug }));
 }
 
+function cleanMetaText(value: string): string {
+  return value
+    .replace(/[#*[\]()>`_~]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function truncateMetaDescription(value: string): string {
+  const cleaned = cleanMetaText(value);
+  if (cleaned.length <= MAX_META_DESCRIPTION_LENGTH) return cleaned;
+
+  const clipped = cleaned.slice(0, MAX_META_DESCRIPTION_LENGTH - 3);
+  const lastSpace = clipped.lastIndexOf(" ");
+  const prefix = lastSpace > 80 ? clipped.slice(0, lastSpace) : clipped;
+
+  return `${prefix.replace(/[.,;:!?-]+$/, "")}...`;
+}
+
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { slug } = await params;
   const post = await getPostAsync(slug);
   if (!post) return { title: "Not Found" };
-  
-  // Generate description from content if excerpt is missing
-  const description = post.excerpt || post.content
-    ?.replace(/[#*\[\]()>`_~]/g, '')
-    .replace(/\s+/g, ' ')
-    .trim()
-    .slice(0, 155) + '...' || `Read about ${post.title} on BrandScout.`;
+
+  const description = truncateMetaDescription(
+    post.excerpt || post.content || `Read about ${post.title} on BrandScout.`
+  );
   
   // Truncate title if too long (Ahrefs flags >60 chars)
   const pageTitle = post.title.length > 60 
