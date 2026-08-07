@@ -20,12 +20,14 @@ function HomeSearchInner() {
   const [results, setResults] = useState<SearchResults | null>(null);
   const [loading, setLoading] = useState(false);
   const searchRef = useRef<SearchFormHandle>(null);
+  const lastSearchQueryRef = useRef("");
   const searchParams = useSearchParams();
 
   // Auto-search from URL param
   useEffect(() => {
-    const q = searchParams.get("q");
-    if (q && searchRef.current) {
+    const q = searchParams.get("q")?.trim();
+    if (q && searchRef.current && lastSearchQueryRef.current !== q) {
+      lastSearchQueryRef.current = q;
       searchRef.current.searchFor(q);
     }
   }, [searchParams]);
@@ -43,6 +45,8 @@ function HomeSearchInner() {
   }, []);
 
   const handleResults = (data: SearchResults) => {
+    const query = data.query.trim();
+    lastSearchQueryRef.current = query;
     setResults(data);
     if (hasCookieConsent()) {
       try {
@@ -63,8 +67,10 @@ function HomeSearchInner() {
     } catch { /* ignore */ }
 
     const url = new URL(window.location.href);
-    url.searchParams.set("q", data.query);
-    window.history.replaceState({}, "", url.toString());
+    if (url.searchParams.get("q") !== query) {
+      url.searchParams.set("q", query);
+      window.history.replaceState({}, "", url.toString());
+    }
   };
 
   return (
