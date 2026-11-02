@@ -1,0 +1,310 @@
+---
+title: "Name Launch Analytics Events Before Traffic Arrives"
+date: "2026-08-15"
+description: "A practical naming checklist for signup, demo, checkout, product, and support events so launch analytics stay readable after traffic arrives."
+excerpt: "A practical naming checklist for signup, demo, checkout, product, and support events so launch analytics stay readable after traffic arrives."
+category: "growth-marketing"
+image_url: "/blog/launch-analytics-event-naming-before-launch-hero.png"
+---
+
+# Name Launch Analytics Events Before Traffic Arrives
+
+Launch analytics usually break quietly.
+
+The homepage looks polished. The canonical domain is live. The launch links have UTMs. Then the first traffic arrives and the dashboard fills with events called `beta_submit`, `Form Completed`, `waitlist_cta_v2`, `signup_success_new`, and `oldco_demo_request`.
+
+Nothing is technically wrong. Clicks are tracked. Forms are firing. Dashboards have numbers.
+
+The problem is that nobody trusts the story.
+
+A founder wants to know whether the launch post brought real signups. Marketing wants to compare partner traffic. Sales wants to see demo requests. Product wants to know whether new users reached the first useful action. Support wants to know whether failed invites are creating confusion. If the event names are inconsistent, old, vague, or tied to internal build work, the first readout turns into cleanup instead of decision-making.
+
+This checklist is not a full analytics implementation. If tracking is not installed yet, start with the [analytics setup guide for new brands](/blog/analytics-setup-new-brand). It is also different from a [campaign naming system](/blog/campaign-naming-system-before-launch), which handles UTMs, promo codes, partner links, and campaign labels. Launch analytics event naming starts one layer deeper: what do you call the actions people take after they land?
+
+Use it before public traffic arrives, while event names are still cheap to change.
+
+## List The Events That Will Define Launch Week
+
+Do not start by exporting every event your analytics tool has seen.
+
+Start with the questions the team will ask during the first few days:
+
+| Launch question | Event that should answer it |
+| --- | --- |
+| Did visitors understand the main offer? | Primary CTA clicked |
+| Did they join the waitlist or create an account? | Signup completed |
+| Did serious buyers ask for a demo? | Demo requested |
+| Did a customer reach checkout? | Checkout started |
+| Did payment succeed? | Subscription started or purchase completed |
+| Did invited users accept? | Invite accepted |
+| Did new users reach the first product value moment? | First workspace created, first project saved, or first report exported |
+| Did support friction appear? | Support contact opened or help article viewed |
+
+The goal is not to name every hover, scroll, modal, and tooltip. The goal is to name the actions that will shape launch decisions.
+
+For most early brands, ten to twenty well-named events are more useful than two hundred noisy events. You can add depth later. On launch day, you need a small set of signals that a tired person can read quickly.
+
+If you are also creating a dated snapshot of search, social, citations, and measurement readiness, pair this with the [brand visibility baseline](/blog/brand-visibility-baseline-before-launch). The baseline records the starting state. The event list names the actions you expect to watch once people arrive.
+
+## Separate Public Actions From Internal Implementation
+
+Event names often leak the way a feature was built.
+
+That creates drift.
+
+| Internal event | Why it is weak | Better direction |
+| --- | --- | --- |
+| `beta_form_submit` | Preserves an old launch stage | `waitlist_joined` |
+| `new_homepage_button_v3` | Tied to a design version | `primary_cta_clicked` |
+| `stripe_session_done` | Names the vendor, not the customer outcome | `checkout_completed` |
+| `calendly_redirect` | Names a tool instead of intent | `demo_requested` |
+| `northline_ai_signup` | Adds an unapproved product phrase | `account_created` |
+| `hubspot_mql_created` | Describes a CRM side effect | `sales_inquiry_submitted` |
+
+Internal names can stay in code, task trackers, and vendor dashboards when they are useful. The launch event name should describe the customer action or business event in language the team expects to keep using.
+
+This is the same discipline as a [brand name style sheet](/blog/brand-name-style-sheet-before-launch), but applied to data. The event taxonomy should not become a secret place where old brand names, codenames, temporary modifiers, or inflated product claims keep living.
+
+Write both versions when needed:
+
+| Field | Example |
+| --- | --- |
+| Internal implementation | Auth provider emits `user_signed_up` |
+| Public analytics event | `account_created` |
+| Business definition | A new account has completed the required signup step |
+| Surfaces using it | Launch dashboard, weekly report, CRM handoff |
+| Names to avoid | beta signup, old product name, temporary waitlist label |
+
+This table gives engineering, marketing, product, and sales a shared translation layer. It also prevents a tool default from becoming the name people quote in launch reports.
+
+## Choose One Small Naming Pattern
+
+Analytics event names do not need to be clever. They need to be predictable.
+
+Pick one format before launch traffic arrives:
+
+```text
+noun_action
+```
+
+Examples:
+
+| Event | Meaning |
+| --- | --- |
+| `cta_clicked` | A tracked call-to-action was clicked |
+| `waitlist_joined` | A visitor joined the waitlist |
+| `account_created` | A user completed account creation |
+| `demo_requested` | A visitor submitted a demo request |
+| `checkout_started` | A buyer entered checkout |
+| `checkout_completed` | Payment or order completion succeeded |
+| `workspace_created` | A user created the first workspace |
+| `report_exported` | A user exported a report |
+| `support_contact_opened` | A visitor opened the support route |
+
+Then write the rules down:
+
+- Use lowercase.
+- Use underscores or hyphens, but not both. Many teams use underscores for events and hyphens for campaign values.
+- Use past tense for completed actions: `account_created`, not `create_account`.
+- Use one event for the same action across surfaces when the business meaning is the same.
+- Put placement, page, plan, campaign, and variant details in properties, not in the event name.
+- Avoid "new," "test," "final," "v2," and old launch labels in permanent events.
+
+The event name should survive the page design changing.
+
+If the homepage button moves from the hero to the header, `hero_signup_button_clicked` becomes stale. `cta_clicked` with properties for `page`, `placement`, and `cta_label` can keep working.
+
+## Name Conversions By Decisions, Not Widgets
+
+Conversion events should name the decision a person made, not the widget they touched.
+
+| Widget-centered | Decision-centered |
+| --- | --- |
+| `modal_submit` | `demo_requested` |
+| `form_complete` | `waitlist_joined` |
+| `button_click` | `checkout_started` |
+| `calendar_loaded` | `demo_booking_started` |
+| `stripe_success` | `subscription_started` |
+| `typeform_submit` | `sales_inquiry_submitted` |
+
+This matters because launch funnels often change quickly. A waitlist form might become a signup form. A demo form might move from a third-party embed to a first-party page. A checkout provider might change. The decision is more stable than the implementation.
+
+Use widget details as properties:
+
+| Property | Example |
+| --- | --- |
+| `page` | `/pricing` |
+| `placement` | `hero`, `header`, `pricing-card`, `footer` |
+| `cta_label` | `join-waitlist`, `book-demo`, `start-trial` |
+| `plan` | `starter`, `team`, `pro` |
+| `source_context` | `launch-email`, `partner-page`, `producthunt` |
+
+This keeps the event readable while preserving useful detail.
+
+If the signup path itself is not trustworthy yet, fix that first with the [signup path brand QA](/blog/signup-path-brand-qa-before-launch). A clean conversion event will not save a path where the confirmation page uses the wrong name, the email comes from an odd sender, or the next step is unclear.
+
+## Keep Properties Brand-Safe
+
+Event properties travel farther than teams expect.
+
+They show up in dashboards, exports, screenshots, CRM records, investor updates, support investigations, automation rules, and customer success notes. Treat them like semi-public labels, even if customers never see them directly.
+
+Avoid putting these into event names or properties unless there is a clear operational reason:
+
+- Rejected brand names.
+- Internal project codenames.
+- Private customer names.
+- Personal email addresses.
+- Investor names.
+- Unannounced feature names.
+- Sensitive audience labels.
+- Jokes or temporary launch-room shorthand.
+- Claims the page copy does not support.
+
+Use stable, approved values instead:
+
+| Risky property value | Better value |
+| --- | --- |
+| `northline-ai-beta` | `public-launch` |
+| `maya-hot-leads` | `founder-referral` |
+| `acme-secret-list` | `partner-acme` if partner-approved, or `partner-referral` |
+| `oldco-pricing-test` | `pricing-page` |
+| `cheap-plan` | `starter` |
+
+This overlaps with the [retire rejected brand names before launch](/blog/retire-rejected-brand-names-before-launch) cleanup. Old names do not only survive in copy and screenshots. They also survive inside data labels that get exported and reused long after launch week.
+
+## Connect Events To Campaign Labels Without Mixing Them
+
+Campaign labels and event names answer different questions.
+
+Campaign labels explain where attention came from. Event names explain what people did.
+
+Do not collapse them into one string.
+
+| Problem pattern | Why it hurts reporting | Better structure |
+| --- | --- | --- |
+| `linkedin_signup` | Creates a new event for every source | Event `account_created`, property `utm_source=linkedin` |
+| `partner_acme_demo_request` | Blends partner and action | Event `demo_requested`, property `utm_source=partner-acme` |
+| `producthunt_waitlist_submit` | Hard to compare waitlist joins across sources | Event `waitlist_joined`, property `utm_source=producthunt` |
+| `email_pricing_button_clicked` | Makes placement and source permanent | Event `cta_clicked`, properties for source and placement |
+
+This is where the event plan should sit beside the [launch link ledger](/blog/launch-link-ledger-before-announcement-day) and [campaign naming system](/blog/campaign-naming-system-before-launch). The ledger records the exact links. The campaign naming system controls source, medium, campaign, and content values. The event naming plan keeps customer actions consistent after the click.
+
+A simple launch record might look like this:
+
+| Field | Value |
+| --- | --- |
+| Event | `demo_requested` |
+| Source | `partner-acme` |
+| Medium | `referral` |
+| Campaign | `public-launch-2026-08` |
+| Page | `/demo` |
+| Placement | `partner-blurb` |
+| Segment | `home-services` |
+
+That record is easy to read. It also avoids creating a one-off event for every channel.
+
+## Check Dashboards, Alerts, And Saved Reports
+
+The event name is only part of the experience.
+
+Launch teams make decisions from dashboards, alerts, spreadsheets, screenshots, and summaries. Those surfaces need the same naming cleanup.
+
+Review:
+
+| Surface | What to check |
+| --- | --- |
+| Launch dashboard | Chart names, metric labels, funnel step names |
+| Realtime view | Event names appear in the expected order |
+| Conversion report | Key actions are marked and named plainly |
+| CRM handoff | Lead source and action names match campaign rules |
+| Slack or email alerts | Alert title uses the current brand and action |
+| Investor update | Metric labels are understandable without tool context |
+| Support view | Events help diagnose account or checkout issues |
+| Exported CSV | Column names do not preserve old names or codenames |
+
+This is not cosmetic. A chart called "Beta Signup V2" in the launch dashboard can keep an old name alive inside every recap. A funnel step called "Calendly Redirect" can make demo demand look like a tool problem instead of a buyer action. A CSV column called `oldco_plan` can confuse the person cleaning data next month.
+
+Use report names that a new teammate can understand:
+
+| Weak dashboard label | Better label |
+| --- | --- |
+| Launch test board | Public launch conversions |
+| Signup v3 | Account creation |
+| PH traffic thing | Product Hunt launch traffic |
+| Stripe done | Checkout completed |
+| Waitlist old form | Waitlist joins |
+
+If the first readout will be screenshotted, shared with investors, or posted in a team update, run it through the same standard as the [screenshot brand safety pass](/blog/screenshot-brand-safety-before-launch). Labels become evidence.
+
+## Test One Real Visitor Path
+
+Before announcement day, run one complete path from a clean browser.
+
+Use a test visitor who comes from a realistic launch link:
+
+```text
+Partner post -> landing page -> primary CTA -> signup or demo -> confirmation -> email or next product step
+```
+
+For each step, verify:
+
+| Step | What to confirm |
+| --- | --- |
+| Landing page | URL, title, and campaign parameters are expected |
+| CTA click | `cta_clicked` fires with page and placement properties |
+| Signup or demo | `waitlist_joined`, `account_created`, or `demo_requested` fires once |
+| Confirmation | Event timestamp matches the actual action |
+| Email or redirect | Follow-up event uses the same brand language |
+| Dashboard | The action appears under the approved event name |
+| Report | Campaign labels and event names remain separate |
+
+Do not test only in the browser console. Look where the launch team will actually look: analytics realtime, dashboard, CRM, alert channel, spreadsheet export, or reporting view.
+
+The question is simple: can someone who did not implement tracking explain what happened?
+
+If not, rename before the launch.
+
+## Decide What Gets Retired After Launch
+
+Some launch events should keep running. Others should expire.
+
+Write the retirement rule before the first week gets busy:
+
+| Event or property | Keep or retire | Rule |
+| --- | --- | --- |
+| `account_created` | Keep | Core lifecycle event |
+| `demo_requested` | Keep | Sales conversion event |
+| `waitlist_joined` | Retire or redefine | Retire when waitlist closes |
+| `public-launch-2026-08` campaign | Keep as historical label | Do not reuse for future campaigns |
+| `founder-post` content value | Keep as historical label | Use new value for the next post |
+| `launch-banner` placement | Retire | Remove when banner is gone |
+
+This prevents a common reporting problem: launch labels become permanent because nobody wants to break dashboards.
+
+Historical data should stay understandable, but future data should not pretend the launch is still happening. When the waitlist becomes open signup, rename the conversion path intentionally. When the hero CTA changes from "Join the waitlist" to "Start trial," decide whether the event definition changes or only the `cta_label` property changes.
+
+If the product is also shipping named updates during this period, use the [product update naming system](/blog/product-update-naming-before-launch) so feature names, changelog names, and analytics labels do not split into different languages.
+
+## A Short Prelaunch Event Naming Checklist
+
+Before traffic arrives, confirm:
+
+- The launch-critical events are listed and owned.
+- Event names describe customer or business actions, not widgets or vendors.
+- Old brand names, beta labels, and internal codenames are removed.
+- Conversion events use stable names that can survive design changes.
+- Properties carry page, placement, plan, campaign, and variant details.
+- UTM values follow the campaign naming system.
+- Dashboards and alerts use the approved event names.
+- One real launch path has been tested from link click to report.
+- Temporary launch labels have a retirement rule.
+- Someone is responsible for the first 24-hour readout.
+
+Clean event names will not make a launch successful by themselves.
+
+They make the launch easier to understand.
+
+When the first wave of traffic arrives, the team should be asking better questions, not decoding its own data. Which message worked? Which channel brought serious people? Which step caused friction? Which naming decision created search or signup confusion?
+
+Name the events before the launch teaches your tools a messy version of the brand.

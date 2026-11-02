@@ -1,0 +1,233 @@
+---
+title: "Plan a DNS Change Window Before Launch"
+date: "2026-07-12"
+description: "A practical launch-window plan for DNS changes so the website, email, redirects, analytics, and verification records keep working when a new brand goes live."
+excerpt: "A practical launch-window plan for DNS changes so the website, email, redirects, analytics, and verification records keep working when a new brand goes live."
+category: "domain-strategy"
+image_url: "/blog/dns-change-window-before-launch-hero.png"
+---
+
+# Plan a DNS Change Window Before Launch
+
+DNS changes rarely look dramatic in a launch plan.
+
+Someone has to point the domain at the new website. Someone has to add a verification record. Someone has to connect email. Someone has to make `www` behave the same way as the root domain. The work sounds small enough to fit between "final copy pass" and "schedule the announcement post."
+
+That is how small launches create large confusion.
+
+A DNS change window is a planned block of time for the records, redirects, ownership checks, and verification steps that make a new brand domain actually work. It is not a deep networking exercise. It is an operating plan for the moment when the domain moves from idea to public infrastructure.
+
+If you need the vocabulary first, start with [DNS basics for brand owners](/blog/dns-basics-for-brand-owners). This guide assumes you already know the rough difference between A, CNAME, MX, and TXT records. The question here is narrower: when the launch is close, how do you change DNS without breaking the website, email, search signals, or customer trust?
+
+## Start With The Exact Change, Not The Dashboard
+
+Do not open the DNS panel and start editing.
+
+Write the change in plain language first:
+
+| Change | Plain-language goal |
+| --- | --- |
+| Root domain record | Make `brand.com` load the public website |
+| `www` record | Make `www.brand.com` resolve or redirect correctly |
+| MX records | Make mail sent to `@brand.com` arrive at the right inboxes |
+| SPF, DKIM, DMARC | Help receiving mail providers trust official senders |
+| Verification TXT records | Prove ownership to search, email, ad, app, or analytics tools |
+| Redirect records or rules | Send old domains and variants to the canonical URL |
+
+This is not busywork. DNS panels vary. Website builders give incomplete instructions. Registrars sometimes mix forwarding, nameservers, and DNS records in the same interface. If the team starts in the tool, the tool becomes the plan.
+
+Start with the outcome instead. For each record, name the system it supports and the person who can confirm it works. A CNAME for a help center is not just "that CNAME from the docs." It is the record that makes `help.brand.com` load the support site. An MX record is not just email plumbing. It is the path for invoices, password resets, support replies, and founder outreach.
+
+If the canonical website address is still unsettled, stop and finish the [canonical brand URL checklist](/blog/canonical-brand-url-before-launch) first. DNS should enforce the public URL decision, not become the place where the decision is quietly made.
+
+## Pick A Window That Leaves Room For Human Checks
+
+A DNS change window needs a start time, an owner, and a verification period.
+
+For a small brand launch, a good window is usually 24 to 72 hours before public announcement. That gives the team time to catch wrong records, cached previews, broken email, missing SSL certificates, and old redirects before customers arrive. It also keeps the work close enough to launch that people remember why the setup exists.
+
+Avoid these windows:
+
+| Bad timing | Why it hurts |
+| --- | --- |
+| Friday afternoon | Support desks, vendors, and teammates may be offline |
+| One hour before launch | No room for propagation, SSL, or email checks |
+| During a sales call or live event | The team cannot calmly test and roll back |
+| While moving registrars | Too many variables if something fails |
+| During website copy edits | Hard to tell whether the issue is DNS, deploy, or content |
+
+If you are also changing registrars, keep that as a separate project when possible. Use the [domain registrar migration checklist](/blog/domain-registrar-migration-checklist) first, preserve nameservers, verify the transfer, then schedule any DNS changes later. Combining registrar transfer, DNS migration, email setup, and launch announcement in one afternoon creates a troubleshooting maze.
+
+The change window should be visible in the launch plan. Put it on the same calendar as the announcement, email send, press outreach, ad launch, and social profile updates. A domain cutover is part of the brand launch, not an invisible IT chore.
+
+## Freeze Unrelated DNS Changes
+
+During the window, only make changes tied to the launch.
+
+That sounds obvious until a teammate says, "While we are in here, can we also clean up old TXT records?" or "Should we switch the newsletter sender today too?" Maybe those are good tasks. They do not belong in the same window unless they directly support launch.
+
+Freeze anything not required for the public launch:
+
+- Registrar transfers
+- DNS provider migrations
+- Email provider migrations
+- Old record cleanup
+- New subdomains not used at launch
+- Experimental tracking tools
+- Unrelated CDN or firewall changes
+
+Fewer changes make failures easier to diagnose. If the homepage does not load after the cutover, you want two possible causes, not twelve.
+
+Cleanup can happen later. The launch window is for making the brand reachable, trustworthy, and verifiable.
+
+## Lower TTLs Where It Actually Matters
+
+TTL means time to live. It tells DNS resolvers how long they may cache a record before asking for a fresh answer.
+
+Lowering TTL before a known change can help updates spread faster. It is not magic. It only helps if the current authoritative DNS provider honors the shorter TTL and if you lower it before the change, not after the mistake.
+
+Use TTL intentionally:
+
+| Record type | When a shorter TTL helps |
+| --- | --- |
+| Website A or CNAME | You are switching the domain to a new host |
+| `www` CNAME | You are changing the preferred host behavior |
+| MX | You are moving email providers |
+| Important verification TXT | You need fast confirmation from a launch-critical tool |
+
+For many small launches, a five minute or fifteen minute TTL during the change period is reasonable if the provider supports it. After the launch stabilizes, you can raise TTLs again where appropriate.
+
+Do not lower every record without understanding it. Some managed platforms control TTL for you. Some records are not changing. Some old caches will still take time. The goal is not perfect instant propagation. The goal is to reduce avoidable waiting on records that matter during the window.
+
+## Make A Before And After Record Sheet
+
+Before editing anything, capture the current DNS state.
+
+At minimum, record:
+
+- Host or name
+- Type
+- Value
+- TTL
+- Provider or dashboard
+- Purpose
+- Whether it should exist after launch
+
+Then write the intended after state beside it.
+
+| Host | Type | Current value | Launch value | Purpose | Verify with |
+| --- | --- | --- | --- | --- | --- |
+| `@` | A or CNAME | Old website target | New website target | Public homepage | Browser and HTTP check |
+| `www` | CNAME | Old host | Canonical host or redirect target | Common typed URL | Browser and redirect check |
+| `@` | MX | Current mail provider | Same or new provider | Inbound email | Send and receive test |
+| `_dmarc` | TXT | Current policy | Launch policy | Email authentication | Email auth checker |
+| `google-site-verification` | TXT | Missing | Verification value | Search Console | Search Console |
+
+Screenshots help, but a sheet with purpose is better. Six months from now, nobody will remember which TXT record was for Search Console, which was for the email provider, and which was for an abandoned tool.
+
+This pairs well with a [domain ownership handoff checklist](/blog/domain-ownership-handoff-checklist). Ownership answers who controls the domain. The DNS sheet answers what that control is being used for.
+
+## Treat Website, Email, And Redirects As Separate Systems
+
+A common launch mistake is saying, "The domain is working," after the homepage loads.
+
+The website can work while email is broken. Email can work while `www` fails. The root domain can load while old launch links point to the wrong place. DNS is not one switch.
+
+Verify each system separately:
+
+| System | What to test |
+| --- | --- |
+| Website | Root domain, `www`, HTTPS, key landing pages, mobile browser |
+| Email | Inbound mail, outbound mail, reply-to path, spam placement, sender display |
+| Redirects | Old domain, alternate TLDs, `www`, HTTP to HTTPS, campaign URLs |
+| Search | Canonical tags, sitemap host, Search Console verification |
+| Analytics | Live visit appears under the correct domain and property |
+| Product or app | Login callbacks, password reset links, app subdomains |
+
+If sender names or email domains are part of launch, connect the DNS work to the [branded email sender pattern](/blog/branded-email-sender-pattern-before-launch). Sender trust is half technical and half visible identity. SPF, DKIM, and DMARC help prove the mail is authorized. The sender name, reply route, and domain tell the customer whether it feels official.
+
+## Prepare A Rollback Path Before You Need It
+
+Rollback does not mean panic. It means knowing what you will do if the new records do not work.
+
+Write the rollback plan before the change:
+
+- Which record can be restored?
+- What was the previous value?
+- Who is allowed to restore it?
+- What customer-facing message is needed if email or signup is affected?
+- Which verification steps prove the rollback worked?
+- When will the team try again?
+
+Rollback is easiest when the old system still exists. Do not delete the old hosting project, email inboxes, redirect rules, or verification records before the new path has been tested. Leave the previous path intact until the launch setup is stable.
+
+This matters for modified or temporary launch domains too. If the brand is moving from `getbrand.com` to `brand.com`, keep the old launch domain controlled and redirecting. The [launch link ledger](/blog/launch-link-ledger-before-announcement-day) should show which links still use the old domain and where they should land.
+
+## Assign One Changer And One Verifier
+
+DNS changes should not be edited by committee.
+
+Use two roles:
+
+| Role | Job |
+| --- | --- |
+| Changer | Makes the planned DNS edits and records the exact time |
+| Verifier | Tests website, email, redirects, search, analytics, and app paths |
+
+The changer should not be the only verifier. People tend to see what they expect after they make a change. A second person catches plain mistakes: copied value includes a trailing space, wrong host field, `www` works but root does not, email receives but cannot send, redirect lands on the old waitlist page.
+
+For a solo founder, split the roles by time and checklist. Make the change, step away from the dashboard, then verify from a clean browser, a phone, and a real inbox.
+
+## Test Like A Customer, Not Like A DNS Tool
+
+DNS lookup tools are useful, but the customer does not use a DNS lookup tool.
+
+During the verification period, test the surfaces people will actually touch:
+
+- Type the domain into a browser without `https://`.
+- Try both `brand.com` and `www.brand.com`.
+- Click the homepage link from social profile drafts.
+- Open the launch email draft and click every button.
+- Send email to `hello@`, `support@`, or whatever routes will be public.
+- Reply to an automated email.
+- Search the brand name in a private browser after pages are live.
+- Paste the URL into chat to inspect the link preview.
+- Test signup, checkout, booking, or login flows that rely on the domain.
+
+If search visibility is part of the launch, compare the DNS change to the [indexation control sheet](/blog/indexation-control-sheet-before-launch). The domain can resolve correctly while the wrong host still appears in sitemap entries, canonical tags, robots rules, or launch links.
+
+## Keep A Change Log
+
+Record what actually happened.
+
+A useful DNS change log is short:
+
+| Time | Change | Owner | Verification |
+| --- | --- | --- | --- |
+| 9:05 AM | Updated root domain target | Maya | Homepage loads over HTTPS |
+| 9:12 AM | Added `www` CNAME | Theo | `www` redirects to root |
+| 9:20 AM | Added Search Console TXT | Maya | Property verified |
+| 9:35 AM | Confirmed MX unchanged | Theo | Test email received |
+| 10:10 AM | Checked launch links | Maya | Social bio, email CTA, and deck links work |
+
+This log helps if something breaks later. It also prevents repeat debates. If someone asks why `www` redirects or when Search Console was verified, the answer is written down.
+
+## Do The Boring Cleanup After Launch
+
+Once the launch is stable, schedule a cleanup pass.
+
+Review:
+
+- Temporary low TTLs that should be raised
+- Verification records for tools no longer used
+- Old launch domains that should redirect
+- Staging hosts that should be protected
+- Email authentication records that need stricter policies
+- DNS access for contractors or agencies
+- Documentation for the final domain setup
+
+Do not confuse cleanup with the launch window. Cleanup is important, but it is safer after the public path works and the team has real evidence.
+
+A good DNS launch is not impressive. The brand domain loads. Email arrives. Redirects behave. Search tools verify. Customers never see the work. That is the point.
+
+Before you fall in love with a name, use [BrandScout](/) to check whether the domain and social handles are actually available. After you choose the name, give the DNS change the same respect. A brand is not launched when the logo is exported. It is launched when people can reliably find, trust, email, and share the domain.

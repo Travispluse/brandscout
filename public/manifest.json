@@ -1,0 +1,44 @@
+{
+  "name": "BrandScout",
+  "short_name": "BrandScout",
+  "description": "Check domain and social media username availability for your brand name instantly.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#111827",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "form_factor": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Bulk Check",
+      "short_name": "Bulk",
+      "url": "/bulk",
+      "description": "Check multiple brand names at once"
+    },
+    {
+      "name": "Compare Names",
+      "short_name": "Compare",
+      "url": "/compare",
+      "description": "A/B test brand names side by side"
+    },
+    {
+      "name": "AI Generator",
+      "short_name": "Generator",
+      "url": "/ai-generator",
+      "description": "Generate brand names and taglines"
+    }
+  ]
+}

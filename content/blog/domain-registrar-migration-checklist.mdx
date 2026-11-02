@@ -1,0 +1,172 @@
+---
+title: "Domain Registrar Migration Checklist for Small Businesses"
+date: "2026-07-10"
+description: "A practical checklist for moving a business domain to a new registrar without breaking the website, email, DNS, renewals, or vendor access."
+excerpt: "A practical checklist for moving a business domain to a new registrar without breaking the website, email, DNS, renewals, or vendor access."
+category: "domain-strategy"
+---
+
+# Domain Registrar Migration Checklist for Small Businesses
+
+Moving a domain to a new registrar sounds simple until the business depends on that domain for everything.
+
+The domain controls the website, email, customer logins, payment links, support inboxes, analytics, ads, app redirects, and sometimes internal tools. A registrar transfer that is handled casually can create a week of confusion. A registrar transfer that is handled carefully can be boring, which is exactly what you want.
+
+This checklist is for small businesses that want to move a domain from one registrar to another because of price, support, account ownership, security, consolidation, or vendor cleanup. It is also useful when an agency registered the domain years ago and the business wants direct control.
+
+## Decide Why You Are Moving
+
+Do not move a domain only because another registrar has a cheap first year coupon. Renewal price, support quality, security controls, and DNS features matter more than a promotional transfer price.
+
+Good reasons to move include:
+
+- The current account is controlled by a former employee, freelancer, or agency
+- Renewal pricing is unclear or much higher than alternatives
+- The registrar has poor support or confusing billing
+- You want stronger two factor authentication and account roles
+- Your domains are scattered across several accounts
+- The registrar bundles domain control with hosting in a way that creates lock-in
+- You want cleaner access for an internal team or long term vendor
+
+Bad reasons include chasing a one time discount, moving without checking email records, or assuming a website builder account is the same thing as a registrar account.
+
+Before you start, write down the business reason. It helps prevent unnecessary changes during the transfer.
+
+## Audit the Current Domain Setup
+
+Create a simple transfer worksheet before touching settings. The goal is to know what exists today so you can confirm nothing changed unexpectedly.
+
+Record these items:
+
+- Domain name and current registrar
+- Expiration date and auto-renew status
+- Registrant organization and contact email
+- Admin contact email
+- Nameservers
+- DNS provider, if different from the registrar
+- Website host
+- Email provider
+- Key DNS records, including A, CNAME, MX, TXT, SPF, DKIM, DMARC, and verification records
+- Current transfer lock status
+- Privacy protection status
+- Any premium renewal price or special TLD rules
+
+Take screenshots of the current nameserver page, DNS records, renewal page, and contact details. Screenshots are not a substitute for good documentation, but they are helpful if someone later asks, "What changed?"
+
+## Confirm DNS Will Not Move by Accident
+
+The biggest practical risk in a registrar migration is not the transfer itself. It is accidentally changing DNS hosting.
+
+A registrar is where the domain is registered. DNS is where the domain points. They may be the same company, but they do not have to be. If your domain uses Cloudflare, Vercel, Netlify, Shopify, Squarespace, Wix, Google Workspace, Microsoft 365, or another platform for DNS, moving the registrar should usually leave nameservers unchanged.
+
+Before transfer, identify whether DNS is currently hosted at:
+
+- The current registrar
+- Cloudflare or another dedicated DNS provider
+- The website platform
+- The email provider
+- A managed agency account
+
+If DNS is hosted at the old registrar, decide whether to keep it there temporarily, recreate records at the new registrar, or move DNS to a dedicated provider first. Do not combine a registrar transfer, DNS migration, email migration, and website launch in the same afternoon unless you have a very good reason.
+
+## Check Transfer Eligibility
+
+Most generic domains cannot be transferred during the first 60 days after registration or a previous transfer. Some contact changes can also trigger a transfer lock. Country code domains may have different rules.
+
+Check these before you schedule the move:
+
+- The domain is older than 60 days
+- The domain was not transferred in the last 60 days
+- The domain is not expired or deep into a redemption period
+- The domain is not under dispute
+- The admin email can receive messages
+- The TLD supports transfer through your chosen registrar
+- The new registrar supports any special requirements for that extension
+
+If the domain expires soon, renew it before transfer or confirm the new registrar process adds a renewal year during transfer. Do not start a transfer two days before expiration unless you fully understand the risk.
+
+## Prepare the Destination Account
+
+Set up the new registrar account before unlocking anything. Use a business-controlled email address, not a personal inbox. For an important company domain, a shared role address such as domains@, admin@, or operations@ is usually better than a single employee address.
+
+Before transfer, configure:
+
+- Strong password stored in the company password manager
+- Two factor authentication
+- Backup recovery codes
+- Billing method owned by the business
+- Billing contact email
+- Additional admin user, if the registrar supports roles
+- Notification settings for renewal and security alerts
+
+If the destination registrar supports delegated access, use it. Vendors should not need the master password to help with DNS or domain settings.
+
+## Unlock the Domain and Get the Authorization Code
+
+Most transfers require the current registrar to unlock the domain and provide an authorization code, sometimes called an EPP code or transfer code.
+
+When you request the code, watch for two common problems. First, some registrars send it to the admin contact email, which may be old. Second, some registrars hide the option behind retention screens or support prompts.
+
+Do this in order:
+
+1. Confirm the admin email is accessible.
+2. Disable transfer lock.
+3. Request the authorization code.
+4. Save the code in the transfer worksheet.
+5. Start the transfer at the destination registrar.
+6. Approve any confirmation emails from both registrars.
+
+Do not post the authorization code in Slack channels, email threads, or project management comments. Treat it like a temporary key to the domain.
+
+## Keep Nameservers Stable During Transfer
+
+During the destination registrar checkout, look carefully for any setting that changes nameservers. Many registrars offer to use their default DNS. That may be fine for a new unused domain, but it can break an existing business site if accepted casually.
+
+In most migrations, the safest choice is to preserve current nameservers until the transfer is complete. After the domain lands in the new account, you can decide whether DNS should move later.
+
+For the transfer window, avoid unrelated changes. Do not launch a new website, switch email providers, rewrite DNS records, or change tracking verification unless it is necessary. Fewer changes make troubleshooting easier.
+
+## Verify Website and Email After Transfer
+
+Once the transfer completes, verify that the live services still work. Do not rely only on the registrar dashboard saying "complete."
+
+Check:
+
+- The homepage loads over HTTPS
+- Important landing pages return 200 status codes
+- The www and non-www versions behave correctly
+- Email can send and receive
+- MX records still point to the right provider
+- SPF, DKIM, and DMARC records are still present
+- App login, checkout, booking, or customer portal links still work
+- Redirects from old campaigns still resolve
+- Search Console, analytics, and ad verification records are still present
+
+If the transfer preserved nameservers, most of these should not change. Still, verify them. A five minute check is cheaper than discovering email failures from a customer complaint.
+
+## Set Renewal and Ownership Controls
+
+After the transfer, clean up the boring but important administrative layer.
+
+Confirm:
+
+- Auto-renew is on for the main domain
+- The renewal price is documented
+- The payment method is correct
+- Renewal emails go to a monitored inbox
+- Domain privacy is enabled where appropriate
+- Transfer lock is back on
+- Two factor authentication is active
+- Recovery codes are stored
+- The old registrar account no longer controls the domain
+- Vendors have delegated access instead of shared passwords
+
+Also update your internal brand asset sheet. The domain entry should show the registrar, account owner, DNS provider, renewal date, billing owner, and emergency contact.
+
+## Make the Migration Boring on Purpose
+
+A domain registrar migration is not a branding moment. It is infrastructure maintenance. The best version is planned, documented, verified, and uneventful.
+
+Move one important domain at a time. Keep DNS stable unless you have a separate DNS migration plan. Verify email carefully. Use business-owned accounts. Turn transfer lock back on. Record the final setup so the next person does not have to rediscover it during an emergency.
+
+If you are choosing a new name or preparing a launch, check the domain, social handles, and ownership path before you buy. A clean registrar setup is not just an IT detail. It is part of making the brand ownable, recoverable, and ready to grow.

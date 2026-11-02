@@ -1,0 +1,188 @@
+---
+title: "Build a Launch Link Ledger Before Announcement Day"
+date: "2026-06-17"
+excerpt: "A practical way to control canonical URLs, UTMs, short links, QR codes, social bio links, and redirect destinations before a new brand goes public."
+category: "seo"
+image_url: "/blog/launch-link-ledger-before-announcement-day-hero.png"
+---
+
+# Build a Launch Link Ledger Before Announcement Day
+
+Launch links look small until they start moving.
+
+A homepage URL gets pasted into a founder post. A tracked pricing link goes into an email. A QR code lands on a conference card. A short link goes into a partner newsletter. A Product Hunt maker comment points to a demo page. A social bio link gets updated at midnight by someone on a phone.
+
+Then people copy those links into places your team does not control.
+
+That is why launch links deserve their own check before announcement day. Not a vague "links are ready" status. A ledger: one source of truth for every public URL, where it points, who owns it, whether it is tracked, and what should happen if the destination changes.
+
+If you already have a [canonical brand URL](/blog/canonical-brand-url-before-launch), an [alternate TLD redirect map](/blog/alternate-tld-redirect-map), and a [launch copy QA pass](/blog/launch-copy-qa-before-launch), this is the operational layer that connects them. It keeps the right address from getting lost inside UTMs, QR codes, short links, social bios, and partner copy.
+
+## Start With The Link That Should Survive
+
+Before listing every campaign link, decide the clean URL you would be comfortable seeing in a search result, customer email, screenshot, sales deck, or investor memo six months from now.
+
+That is usually the canonical homepage:
+
+`https://brand.com`
+
+It may also include a small set of stable public pages:
+
+| Page | Durable URL |
+| --- | --- |
+| Homepage | `https://brand.com` |
+| Signup | `https://brand.com/signup` |
+| Pricing | `https://brand.com/pricing` |
+| Press kit | `https://brand.com/press` |
+| Help center | `https://brand.com/help` |
+| Launch offer | `https://brand.com/launch` |
+
+These are not the same as tracked campaign links. They are the clean destinations that should keep working after launch week. If the team cannot name them quickly, people will invent their own versions.
+
+That is how a brand ends up with `getbrand.com`, `brand.com/home`, `trybrand.com`, `brand.com?ref=linkedin`, and `brand.link/launch` all presented as if they are the main address.
+
+The ledger starts by protecting the stable path.
+
+## Inventory Every Link People Will Publish
+
+Do not build the ledger from analytics after the launch. Build it from the surfaces where the links will appear.
+
+Make a row for each public placement:
+
+| Surface | Example link risk |
+| --- | --- |
+| Founder LinkedIn post | Uses a long tracked URL that wraps badly |
+| Company social bios | One profile points to the old launch domain |
+| Launch email | Button link differs from plain-text footer link |
+| Product Hunt listing | Maker comment uses a different signup path |
+| Press kit | PDF includes a short link nobody owns |
+| Partner newsletter | Partner adds their own UTM pattern |
+| QR code | Printed card points to a temporary redirect |
+| Paid ad | Destination uses staging or preview host |
+| Directory listing | Listing uses the homepage when category page is better |
+| Sales deck | Deck links to a private demo path |
+
+The point is not to make the spreadsheet beautiful. The point is to catch links before they get copied into public channels.
+
+Use columns like these:
+
+| Column | What to write |
+| --- | --- |
+| Placement | Where the link will appear |
+| Public URL | The exact URL that will be published |
+| Clean destination | The durable page it should resolve to |
+| Tracking | UTM, referral code, or none |
+| Owner | Person who can approve changes |
+| Status | Draft, tested, frozen, live |
+| Fallback | What happens if the page changes |
+| Notes | Partner rules, character limits, print deadline |
+
+This catches small launch mistakes early. For example, the Twitter bio may need the clean homepage, while the launch email can use a tracked signup link. A QR code on a printed card should not depend on a temporary link shortener. A partner post may need its own UTM source, but not its own landing page.
+
+## Keep Tracking Useful, Not Messy
+
+Tracking is valuable. Messy tracking is brand debt.
+
+For a new brand, keep UTM rules plain enough that a teammate can create a correct link without asking an analyst.
+
+Use a short convention:
+
+| Field | Rule |
+| --- | --- |
+| `utm_source` | The platform or partner, lowercase: `linkedin`, `producthunt`, `partnername` |
+| `utm_medium` | The channel type: `social`, `email`, `referral`, `paid`, `qr` |
+| `utm_campaign` | The launch campaign: `launch_2026_06` |
+| `utm_content` | Optional placement detail: `founder_post`, `bio`, `cta_button` |
+
+Then stop.
+
+Do not make every link a custom sculpture. `utm_campaign=brand_launch_june_17_final_final` is not more useful than a clean campaign name. It is just harder to audit.
+
+Also decide where tracking does not belong. Permanent social bio links, homepage links in press boilerplate, and customer support links often work better as clean URLs. They are not one-week campaign links. They are public brand facts.
+
+If a clean link and a tracked link both exist, the ledger should say which one belongs on which surface.
+
+## Treat Short Links And QR Codes Like Public Infrastructure
+
+Short links and QR codes are easy to create and surprisingly easy to neglect.
+
+Before launch, check:
+
+- Who owns the short-link account.
+- Whether the short domain fits the brand.
+- Whether the destination can be edited after publishing.
+- Whether analytics depend on a paid plan.
+- Whether the QR code points to a durable redirect, not a preview URL.
+- Whether the printed asset deadline happens before final page approval.
+
+A QR code is just a link with worse editability. Once it is printed, shipped, posted, or photographed, the destination needs to keep working.
+
+For launch week, a safer pattern is:
+
+`QR code -> branded redirect URL -> final destination`
+
+That gives you a controlled middle layer. If the landing page changes from `/launch` to `/signup`, you update the redirect rather than reprinting the asset.
+
+The same logic applies to short links. A random third-party short link may be fine for a one-off internal share. It is a weak choice for a public launch asset that may outlive the campaign.
+
+## Test Links From The Real Surface
+
+Do not approve links from the spreadsheet alone.
+
+Test them from the surface where people will click or scan them:
+
+- Click the launch email button and the plain-text footer link.
+- Open each social profile while logged out.
+- Scan QR codes from a phone on cellular, not only office Wi-Fi.
+- Click partner links from their draft preview.
+- Test links inside PDFs after export.
+- Open short links in a private browser window.
+- Check that mobile redirects do not drop tracking.
+- Confirm the destination page has the right title, favicon, and share card.
+
+That last point is where this ledger touches the [brand link preview QA](/blog/brand-link-preview-qa-before-launch). A link can resolve correctly and still look wrong when pasted into Slack, LinkedIn, iMessage, or Discord. If the preview shows an old name, missing image, or temporary domain, people may not click.
+
+The practical test is simple: copy the exact public URL from the ledger, paste it into the place where users will see it, and inspect the result.
+
+## Freeze The Ledger Before Copy Freezes
+
+The ledger should freeze before public copy freezes.
+
+If copywriters, founders, partners, and agencies start drafting from unstable links, the cleanup gets noisy fast. People will paste old URLs into docs, re-export assets, and ask whether the "new new link" is the final one.
+
+Use a short status flow:
+
+| Status | Meaning |
+| --- | --- |
+| Draft | Link is proposed but not approved |
+| Built | Destination exists and resolves |
+| Tracked | UTM or referral pattern is applied |
+| Surface tested | Link was tested from the real placement |
+| Frozen | Approved for public copy |
+| Live | Published externally |
+| Retired | Kept only for redirects or historical tracking |
+
+The freeze does not mean links can never change. It means any change has a visible owner and a reason. That is what prevents quiet link drift.
+
+For a small team, this can live in a spreadsheet. For a technical team, it can live in a markdown file in the repo. The format matters less than the habit: every public launch link gets one row, one owner, and one tested destination.
+
+## What A Good Launch Link Ledger Prevents
+
+A good ledger will not make a launch successful by itself. It prevents avoidable confusion at the exact moment attention is hardest to earn.
+
+It prevents:
+
+- Social profiles pointing to different domains.
+- Ads sending paid clicks to a page with stale brand copy.
+- QR codes pointing to a temporary preview deployment.
+- Partner posts using a noncanonical URL.
+- Press PDFs linking to a page that later moves.
+- Tracking links hiding the clean brand URL.
+- Short links owned by the wrong person.
+- Search and analytics reports splitting launch demand across needless URL variants.
+
+This is not a large-company process. It is a small-company control point.
+
+New brands do not get many first impressions. When someone clicks, scans, copies, shares, or cites your launch link, the brand should feel settled. The URL should resolve. The page should match the promise. The tracking should help without making the brand look improvised.
+
+Before announcement day, build the ledger. Then launch from that, not from memory.

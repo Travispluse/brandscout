@@ -1,0 +1,133 @@
+---
+title: "Build an Alternate TLD Redirect Map Before You Launch"
+date: "2026-06-14"
+description: "A practical guide to choosing, buying, and redirecting alternate domain extensions so your brand stays clear, protected, and easy to find."
+excerpt: "A practical guide to choosing, buying, and redirecting alternate domain extensions so your brand stays clear, protected, and easy to find."
+category: "domain-strategy"
+---
+
+# Build an Alternate TLD Redirect Map Before You Launch
+
+Buying the perfect .com is still the cleanest domain move for most brands. It is familiar, trusted, easy to say out loud, and less likely to leak traffic when someone guesses your URL from memory. But many teams launch without the exact .com. Others buy the .com and still need a plan for .co, .net, .io, .ai, country domains, common misspellings, and campaign domains.
+
+The problem is not owning alternate domains. The problem is owning them casually.
+
+A founder buys `getbrand.com` because `brand.com` is unavailable. The product team uses `brand.ai` in a demo deck. Someone registers `trybrand.com` for ads. A customer types `brand.co` and lands on a parked page. The company later buys the .com, but old links still point to the launch domain. None of this feels urgent when the business is small. Over time, it becomes a messy trail of half-connected brand signals.
+
+An alternate TLD redirect map solves this before launch. It is a short document that says which domains you own, why each one exists, where each one points, and which domain is the canonical home of the brand.
+
+## Start With One Canonical Domain
+
+Before buying defensive domains, decide the one address you want people, search engines, partners, and social profiles to treat as the source of truth. This is your canonical domain.
+
+For most small businesses, the best hierarchy is simple:
+
+1. Exact brand .com if you can get it
+2. A clean modifier .com, such as `getbrand.com`, `trybrand.com`, or `brandhq.com`
+3. A relevant alternate TLD, such as `.co`, `.io`, `.ai`, or a local country code
+4. A longer descriptive .com only if it is still memorable and credible
+
+The canonical domain should appear in your homepage metadata, Google Business Profile, social bios, email signatures, sales deck, directory listings, press notes, and ads. Alternate domains can help protect the brand, but they should not create competing homes unless there is a clear reason.
+
+If your team cannot answer "what is our real URL?" in one sentence, you are not ready to launch public links.
+
+## Decide Which Alternates Are Worth Buying
+
+You do not need every TLD. You need the domains that reduce confusion, protect real demand, or support a specific market.
+
+Consider buying these first:
+
+- The exact .com, if your canonical domain is a modifier .com or alternate TLD
+- The most common typo of your domain if it is easy to misspell
+- The singular or plural version if both are natural
+- The .co or .net if customers are likely to guess them
+- The country code domain if you sell mainly in one country
+- The industry-signaling TLD if it fits your market, such as `.ai` for an AI product or `.app` for an app
+
+Skip vanity purchases that only feel strategic in the checkout cart. Owning 30 domains sounds protective, but it creates renewal costs, DNS chores, and more places to misconfigure. A good rule: buy an alternate domain only if you can name the risk it reduces.
+
+Examples:
+
+- `northline.com` redirects to `getnorthline.com` because users may omit the modifier
+- `northline.co` redirects to `getnorthline.com` because people may confuse .co and .com
+- `northlines.com` redirects to `getnorthline.com` because the plural is natural
+- `northline.ai` is not purchased because the product is not AI-related and the audience will not expect it
+
+That is a strategy. "We bought every extension because the registrar suggested it" is not.
+
+## Make A Redirect Map
+
+Your redirect map can be a spreadsheet, markdown file, Notion page, or GitHub issue. Keep it boring and specific.
+
+Use columns like these:
+
+| Domain | Role | Redirect target | Redirect type | Owner | Renewal date | Notes |
+| --- | --- | --- | --- | --- | --- | --- |
+| `brand.com` | Canonical | None | None | Ops | May 12 | Main site |
+| `getbrand.com` | Old launch domain | `https://brand.com` | 301 | Ops | May 12 | Keep indefinitely |
+| `brand.co` | Defensive typo | `https://brand.com` | 301 | Ops | May 12 | Common .co mistake |
+| `brandapp.com` | Campaign legacy | `https://brand.com/app` | 301 | Growth | Aug 3 | Used in old ads |
+
+The important part is the intent. When every domain has a role, future decisions get easier. You know which domains can expire, which must be renewed, and which ones need monitoring.
+
+## Use 301 Redirects For Permanent Brand Paths
+
+If an alternate domain should permanently send people to the canonical domain, use a 301 redirect. A 301 tells browsers and search engines that the move is permanent.
+
+Common 301 redirect cases:
+
+- Old launch domain to new canonical domain
+- Alternate TLD to canonical .com
+- Typo domain to canonical domain
+- `www` to non-`www`, or non-`www` to `www`
+- HTTP to HTTPS
+
+Avoid temporary 302 redirects for core brand domains unless you truly plan to change the destination soon. Temporary redirects can create weaker signals and make the domain setup harder to reason about later.
+
+Also redirect to the closest useful page. If `brandapp.com` was printed on a flyer for the mobile app, redirect it to `/app`, not just the homepage. If a typo domain exists only to catch mistakes, the homepage is usually fine.
+
+## Keep Email Separate From Web Redirects
+
+A domain redirect does not automatically handle email. If you buy `brand.co` and redirect its website to `brand.com`, someone could still email `support@brand.co` and hit a dead end unless you configure mail records or catch-all forwarding.
+
+For important alternate domains, decide whether email should work. You may want forwarding for:
+
+- Common typo domains
+- Old domains used by customers
+- Domains printed on packaging, invoices, or contracts
+- Domains that sales reps may say out loud
+
+You do not need email on every defensive domain, but you should make the decision intentionally. Silent email failure is worse than a missed web visit because the sender usually thinks the message went through.
+
+## Check Social Handles Against The Same Pattern
+
+Alternate domains and social handles should support the same naming pattern. If the canonical domain is `getnorthline.com`, but every social profile is `northlinehq`, customers receive two different hints about what the brand is called.
+
+That does not mean the domain and handle must match perfectly. It means the modifier logic should be consistent. Pick one pattern and use it wherever possible:
+
+- `getbrand` for the domain and handles
+- `brandhq` for the domain and handles
+- `trybrand` for the domain and launch campaigns
+- Exact brand for handles, modifier only for the domain
+
+Before you settle, run a quick [BrandScout](/) check across domains and usernames. If the .com is unavailable and every major handle is also taken, the name may need more work before you build around it.
+
+## Review The Map Before Every Major Launch
+
+A redirect map is not just a launch artifact. Review it before rebrands, funding announcements, product launches, paid campaigns, conference sponsorships, podcast appearances, and local advertising pushes.
+
+Ask five questions:
+
+1. Does every public domain redirect to the right place?
+2. Does the canonical domain match our social bios and metadata?
+3. Are important old domains still renewed?
+4. Do high-risk typo domains handle email if needed?
+5. Are any domains parked, expired, or pointing to outdated pages?
+
+This review can take 20 minutes. It can also prevent years of confusing links, lost leads, and scattered authority.
+
+## The Simple Rule
+
+Treat alternate TLDs as routing infrastructure, not as collectibles. Buy the few that protect real behavior. Redirect them cleanly. Track renewals. Keep one canonical domain at the center.
+
+A brand does not look stronger because it owns a pile of domains. It looks stronger when every path a customer might try leads to the same clear place.

@@ -1,0 +1,274 @@
+---
+title: "Create an Indexation Control Sheet Before Launch"
+date: "2026-06-25"
+excerpt: "A practical page-by-page sheet for deciding what should index, redirect, canonicalize, or stay private before search engines discover the wrong version of a new brand."
+category: "seo"
+image_url: "/blog/indexation-control-sheet-before-launch-hero.png"
+---
+
+# Create an Indexation Control Sheet Before Launch
+
+Search engines do not wait for your brand team to feel finished.
+
+If a staging URL is linked in a founder bio, Google can find it. If the beta homepage has no password, a customer can share it. If the old waitlist page still returns `200 OK`, it can keep showing up after the real site launches. If every alternate domain loads the same content without a canonical, a new brand can start its public life with four versions of the homepage competing with each other.
+
+Most launch teams think about SEO after the announcement. That is too late for one specific job: deciding which URLs search engines should treat as real.
+
+An indexation control sheet is a small launch document that lists every page, host, preview URL, redirect, and private surface that could be discovered before launch. For each one, it says whether the page should be indexed, noindexed, redirected, canonicalized, blocked, or removed.
+
+It is not a full SEO strategy. It is the search version of operational cleanup. If you already have a [canonical brand URL checklist](/blog/canonical-brand-url-before-launch), a [launch link ledger](/blog/launch-link-ledger-before-announcement-day), and a [brand link preview QA](/blog/brand-link-preview-qa-before-launch), the indexation sheet tells search engines which of those launch URLs are supposed to count.
+
+## Start With Every Reachable URL, Not Just The Homepage
+
+The homepage is usually checked. The trouble is everything around it.
+
+A new brand might have:
+
+| Surface | Example |
+| --- | --- |
+| Public homepage | `https://northline.com` |
+| `www` version | `https://www.northline.com` |
+| Old launch domain | `https://getnorthline.com` |
+| Waitlist page | `https://northline.com/waitlist` |
+| Product preview | `https://app.northline.com/beta` |
+| Staging host | `https://northline-preview.vercel.app` |
+| Help center | `https://help.northline.com` |
+| Blog or launch article | `https://northline.com/blog/launch` |
+| Signup confirmation | `https://northline.com/thanks` |
+| Partner landing page | `https://northline.com/partners/acme` |
+
+Do not start by deciding what Google should do. Start by finding what exists.
+
+Pull URLs from the launch plan, sitemap, CMS, app routes, preview deployments, old decks, email drafts, social bios, partner pages, analytics, and browser history. Ask the practical question: "Could someone outside the team reach or link to this?"
+
+If the answer is yes, it belongs in the sheet.
+
+This overlaps with the [launch link ledger](/blog/launch-link-ledger-before-announcement-day), but the goal is different. The ledger tracks where links are used. The indexation sheet decides how each reachable URL should behave when a crawler finds it.
+
+## Give Each URL One Search State
+
+Every URL needs a clear search state. Avoid vague notes like "check SEO later" or "probably private." Those are not instructions.
+
+Use a simple set of states:
+
+| State | Meaning |
+| --- | --- |
+| Index | This page should appear in search results |
+| Noindex | Crawlers may access it, but it should not appear in search results |
+| Redirect | This URL should send visitors and crawlers to another URL |
+| Canonical | This page may load, but another URL is the preferred version |
+| Block | Crawlers should not access this area |
+| Remove | The page should not exist at launch |
+
+Then add the reason:
+
+| URL | Search state | Reason |
+| --- | --- | --- |
+| `https://northline.com` | Index | Public homepage |
+| `https://www.northline.com` | Redirect | Non-canonical host |
+| `https://getnorthline.com` | Redirect | Old launch domain |
+| `https://northline.com/waitlist` | Redirect | Replaced by signup page |
+| `https://northline.com/thanks` | Noindex | Confirmation page, not a search landing page |
+| `https://northline-preview.vercel.app` | Block or require login | Staging host |
+| `https://northline.com/blog/launch` | Index | Public launch article |
+| `https://northline.com/pricing?ref=partner` | Canonical | Parameter version of pricing page |
+
+This table keeps the conversation concrete. The founder may want the waitlist page preserved for nostalgia. The SEO person may want it redirected. The engineer may want to delete it. The sheet forces the team to decide what search engines and customers should see.
+
+## Do Not Use Robots.txt As A Trash Can
+
+Robots rules, `noindex` tags, password protection, redirects, and deletes solve different problems.
+
+A common mistake is blocking a page in `robots.txt` and assuming that means it will disappear from search. That can backfire. If a URL is blocked, Google may not be able to crawl the page and see a `noindex` tag. The URL can still appear in search with limited information if other pages link to it.
+
+Use the right control for the job:
+
+| Problem | Better control |
+| --- | --- |
+| A public confirmation page should not rank | `noindex, follow` |
+| A staging area should not be accessible | Login, password, or network restriction |
+| An old URL has a current replacement | 301 redirect |
+| A parameter URL duplicates a clean page | Canonical tag to the clean URL |
+| A page was published by mistake and has no replacement | Remove it and let it 404 or 410 |
+| A private admin area should not be crawled | Authentication plus robots rules as a backup |
+
+For a new brand, the most dangerous exposed pages are not always sensitive. They are often just confusing: a beta title, old category language, abandoned domain, or preview route that looks official enough to be copied.
+
+If the issue is brand confusion, fix it at the URL level. Do not hide it behind a robots file and hope nobody sees it.
+
+## Separate Staging, Beta, And Public Preview URLs
+
+Staging URLs create a specific kind of brand damage because they look accidental.
+
+A customer who sees `northline-preview.vercel.app` in search does not think, "The indexing controls were misconfigured." They think the company is unfinished. A partner who copies a preview URL into a directory listing may accidentally make that preview host part of the brand's public footprint.
+
+List every non-public host:
+
+| Host | Launch rule |
+| --- | --- |
+| `northline-preview.vercel.app` | Require login or deployment protection |
+| `northline-staging.webflow.io` | Unpublish or block before launch |
+| `beta.northline.com` | Redirect to public app page after beta closes |
+| `northline.framer.website` | Remove when custom domain goes live |
+| `northline-old.squarespace.com` | Disable public access |
+
+Do not rely on obscurity. Preview URLs leak through screenshots, browser autocomplete, forwarded emails, analytics referrers, chat previews, and contractor notes.
+
+This is why the [screenshot brand safety pass](/blog/screenshot-brand-safety-before-launch) matters. A screenshot can leak a staging host, and a staging host can become a link. Treat non-public URLs as launch assets that need ownership, not as temporary clutter.
+
+## Make Canonical Rules Match The Brand URL Decision
+
+Canonical tags are easy to treat as a technical detail. For a new brand, they are part of the identity system.
+
+If the brand has chosen `https://northline.com`, then the indexation sheet should make the surrounding decisions line up:
+
+| Variant | Expected behavior |
+| --- | --- |
+| `http://northline.com` | Redirect to `https://northline.com` |
+| `https://www.northline.com` | Redirect to `https://northline.com` |
+| `https://getnorthline.com` | Redirect to `https://northline.com` |
+| `https://northline.co` | Redirect to `https://northline.com` |
+| `https://northline.com/?utm_source=launch` | Canonical to clean homepage |
+
+Do not let alternate domains, `www`, HTTP, campaign parameters, and old waitlist domains behave like separate official websites.
+
+If you have not made the canonical URL decision yet, pause and finish the [canonical brand URL checklist](/blog/canonical-brand-url-before-launch). The indexation sheet should enforce the public URL decision, not reopen it.
+
+## Keep The Sitemap Boring
+
+Your sitemap should include the pages you actually want discovered.
+
+For launch, that usually means:
+
+- Homepage.
+- Core product or service pages.
+- Pricing, if public.
+- About page, if useful for trust.
+- Launch blog post or guide, if public.
+- Help or docs pages that are ready for customers.
+- Local or category pages that are complete enough to rank.
+
+It should not include:
+
+- Staging pages.
+- Thank-you pages.
+- Internal search results.
+- Filter combinations with no unique value.
+- UTM or partner parameter URLs.
+- Old waitlist pages that now redirect.
+- Thin placeholder pages.
+- Private beta routes.
+
+This sounds basic, but launch sitemaps often inherit whatever the site builder or framework can find. A route exists, so it lands in the sitemap. A CMS entry is published, so it appears in the XML. A hidden page is hidden from navigation, but not from the sitemap.
+
+The sheet should have a column for sitemap inclusion:
+
+| URL | Index state | In sitemap? |
+| --- | --- | --- |
+| `/` | Index | Yes |
+| `/pricing` | Index | Yes |
+| `/waitlist` | Redirect | No |
+| `/thanks` | Noindex | No |
+| `/partners/acme` | Index or noindex by decision | Only if public and evergreen |
+| `/beta` | Noindex or login | No |
+
+If a page is not ready to represent the brand in search, keep it out of the sitemap.
+
+## Connect Indexation To Internal Links
+
+Search engines discover pages through links, not only sitemaps.
+
+That means the indexation sheet should match the site's internal link structure. If a page is marked noindex but linked from the homepage, ask why. If a launch guide should rank but no page links to it, add it to the internal link plan. If an old waitlist page is still in the footer, the redirect may work, but the brand signal is messy.
+
+Use the [internal link map for a new brand site](/blog/internal-link-map-new-brand-site) as the companion artifact. The internal link map says how visitors and crawlers should move through the public site. The indexation sheet says which destinations are allowed to become search results.
+
+Look especially at:
+
+- Header and footer links.
+- Blog cards and related articles.
+- Signup buttons.
+- Pricing CTAs.
+- Help center links.
+- Old navigation items.
+- XML sitemap links.
+- Canonical URLs in page metadata.
+
+If the link structure and indexation rules disagree, the launch will feel inconsistent even if each individual page is technically valid.
+
+## Verify With A Small Launch Crawl
+
+Before launch, do a small crawl of the public site. You do not need enterprise SEO software for this first pass. A lightweight crawler, framework build output, sitemap review, browser checks, and Search Console URL inspection can catch most launch mistakes.
+
+For each important URL, verify:
+
+| Check | What you want |
+| --- | --- |
+| Status code | Public pages return `200`, replaced pages redirect, removed pages do not load |
+| Robots meta | Public pages are indexable, private utility pages are noindexed |
+| Canonical | Points to the final public URL |
+| Sitemap | Includes only pages meant to be discovered |
+| Internal links | Point to final URLs, not staging or old domains |
+| Link preview | Shows the current name, description, image, and URL |
+| Redirect chain | One clean hop where possible |
+| Mobile render | The public page can actually be read and used |
+
+This is where the [brand link preview QA](/blog/brand-link-preview-qa-before-launch) fits. Link previews do not control indexing directly, but they expose the same stale metadata: old titles, wrong domains, and images that no longer match the launch story.
+
+If you are doing a broader launch pass, pair this with the [website launch SEO checklist](/blog/website-launch-seo-checklist). The indexation sheet is narrower. It answers: should this URL be discoverable, and if so, under which version?
+
+## Check Search Console After The First Crawl
+
+The sheet is not finished when the site goes live.
+
+After launch, set up or review [Google Search Console](/blog/google-search-console-setup) and watch what Google actually discovers. New brands should look for:
+
+- Staging hosts that received impressions.
+- Excluded pages that should be indexed.
+- Indexed pages that should be noindexed.
+- Duplicate pages with unexpected canonical choices.
+- Old URLs that are still being crawled.
+- Sitemap URLs that do not match the public site.
+- Branded search results showing the wrong title or URL.
+
+Do not panic over every warning. A young site will have normal discovery noise. The point is to catch brand-confusing signals early, before partners, customers, and search engines start copying them.
+
+If wrong external pages start ranking or copying stale facts, move those into the [brand correction queue](/blog/brand-correction-queue-after-launch). The indexation sheet handles your own URLs. The correction queue handles the outside surfaces you need to request, claim, or fix.
+
+## A Simple Sheet Template
+
+Use a spreadsheet or project table with these columns:
+
+| Column | Example |
+| --- | --- |
+| URL | `https://northline.com/waitlist` |
+| Surface type | Waitlist page |
+| Owner | Marketing |
+| Launch state | Replaced |
+| Search state | Redirect |
+| Destination or canonical | `https://northline.com/signup` |
+| Robots meta | None, because it redirects |
+| In sitemap? | No |
+| Internal links updated? | Yes |
+| Preview checked? | Yes |
+| Verified date | June 25, 2026 |
+| Notes | Old launch emails may still contain this URL |
+
+The owner column matters. Indexation mistakes often sit between marketing, engineering, SEO, and design. If nobody owns a URL, nobody verifies it.
+
+For a very small launch, the sheet might only have 15 rows. That is fine. The goal is not documentation theater. The goal is to avoid the avoidable moment when the first branded search result shows the beta site, the old domain, or a thank-you page.
+
+## The Launch Rule
+
+Before announcement day, every reachable URL should have one answer:
+
+Should this become part of the public search footprint for the brand?
+
+If yes, make it indexable, canonical, linked, and presentable.
+
+If no, redirect it, noindex it, protect it, remove it, or keep it out of the sitemap.
+
+That decision is small, but it protects the first version of the brand that search engines learn. A new brand does not have much history yet. Do not spend the first month teaching Google, partners, and customers which URLs were temporary.
+
+Give each page a search state. Verify the final URL. Keep staging private. Submit a clean sitemap. Watch the first crawl.
+
+That is how a brand launch starts with one public website instead of a trail of almost-finished versions.

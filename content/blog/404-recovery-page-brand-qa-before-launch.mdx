@@ -1,0 +1,269 @@
+---
+title: "Run a 404 Recovery Page Brand QA Before Launch"
+date: "2026-07-24"
+description: "A practical prelaunch QA pass for 404 pages, broken launch links, redirect decisions, support routes, and recovery copy so lost visitors still recognize the brand."
+excerpt: "A practical prelaunch QA pass for 404 pages, broken launch links, redirect decisions, support routes, and recovery copy so lost visitors still recognize the brand."
+category: "seo"
+image_url: "/blog/404-recovery-page-brand-qa-before-launch-hero.png"
+---
+
+# Run a 404 Recovery Page Brand QA Before Launch
+
+New brands plan for the happy path.
+
+They check the homepage. They review the launch email. They paste the main URL into social drafts. They test signup once from a clean browser tab.
+
+Then launch traffic arrives from places nobody rehearsed.
+
+A founder copied yesterday's waitlist path. A partner newsletter added a trailing slash to a URL that does not exist. A QR code points to the old `/beta` page. Someone types the brand name plus "pricing" before pricing is public. A journalist clicks a press kit link from an older deck. A customer follows a social bio that was updated on mobile and lost half the path.
+
+Some of those clicks will break. The question is what the broken click teaches.
+
+A 404 recovery page is the page people see when your brand cannot find the exact URL they requested. Before launch, it should do more than say "page not found." It should confirm the visitor is still in the right place, give them a clean path back to the launch intent, and help your team discover which public links need fixing.
+
+This is narrower than a [default text audit](/blog/default-text-audit-before-launch), which checks generic system messages across forms, emails, and tools. It is also different from a [launch link ledger](/blog/launch-link-ledger-before-announcement-day), which tries to prevent broken links before they ship. A 404 recovery QA assumes at least a few people will get lost anyway and prepares the brand to handle that moment well.
+
+## Treat Lost Traffic As Launch Traffic
+
+Do not think of the 404 page as an engineering edge case.
+
+During a launch, a broken URL may come from a high-intent visitor:
+
+| Source | Why the visitor matters |
+| --- | --- |
+| Founder post | They already trust the person enough to click |
+| Investor intro | They may be evaluating credibility quickly |
+| Partner newsletter | They arrived with borrowed trust |
+| Press kit | They may quote or screenshot what they find |
+| Social bio | They are checking whether the brand is real |
+| QR code | They may be on a phone with little patience |
+| Old beta invite | They may be an early user or advocate |
+| Search result | They may be comparing you with similar names |
+
+That is not throwaway traffic. It is attention you already paid for with reputation, coordination, or launch effort.
+
+The recovery page should respect that. It should make the visitor feel oriented within two seconds:
+
+- This is the current brand.
+- The requested page is not available.
+- Here are the most likely places you meant to go.
+- Here is a real route if you still need help.
+
+That is enough. A 404 page does not need jokes, mascot copy, or a full site map. It needs to recover intent.
+
+## List The Paths Most Likely To Break
+
+Start with the links that will exist around announcement day, not every theoretical route in the app.
+
+Make a short broken-path risk list:
+
+| Path pattern | Common cause | Better recovery |
+| --- | --- | --- |
+| `/beta` | Old waitlist or private preview | Redirect or link to current signup |
+| `/launch` | Campaign page moved after copy froze | Link to current announcement or homepage |
+| `/pricing` | People expect pricing before it is live | Explain status and offer contact route |
+| `/demo` | Sales deck or founder bio shortcut | Link to demo request or contact page |
+| `/press` | Press kit path changed | Link to media page or press contact |
+| `/docs` | Technical evaluator guesses the URL | Link to docs, API page, or support route |
+| `/login` | Early users guess the app path | Link to app sign-in if public |
+| Old domain path | Rebrand, modifier, or TLD change | Preserve path when useful, otherwise recover |
+
+If you already built a [canonical brand URL](/blog/canonical-brand-url-before-launch), use it as the starting point. The 404 QA is not the time to reopen whether the public site is `brand.com`, `www.brand.com`, or `getbrand.com`. It is the time to make every failed request clearly point back to the chosen public home.
+
+Also check how people naturally guess URLs. A new brand with a public demo offer should expect `/demo`, `/book-demo`, and `/contact` guesses. A developer tool should expect `/docs`, `/api`, `/github`, and `/status`. A local service business should expect `/services`, `/areas`, `/reviews`, and `/book`.
+
+Guessed paths are not always mistakes. They are clues about what visitors expected your brand to provide.
+
+## Decide Redirect, 404, Or Gone
+
+Not every missing page should behave the same way.
+
+A lazy launch pattern is to redirect every unknown URL to the homepage. That hides the error from analytics, but it can confuse visitors. They clicked a pricing link and landed on a generic homepage with no explanation. Now they have to guess whether pricing exists, moved, or was never real.
+
+Use a small decision table:
+
+| Situation | Best response |
+| --- | --- |
+| Page moved and there is a clear replacement | 301 redirect to the replacement |
+| Campaign URL is temporary but still public | Redirect to a relevant current page |
+| Visitor guessed a likely page | Show a helpful 404 with relevant links |
+| Page was published by mistake and has no replacement | 404 or 410, then remove public references |
+| Old brand URL still has users | Redirect with a clear current-brand destination |
+| Sensitive or private path | Return a plain 404, not hints about private content |
+
+This overlaps with the [indexation control sheet](/blog/indexation-control-sheet-before-launch). Search engines need clear signals, but so do people. A missing private beta page should not become a mysterious soft 404 that still looks indexable. A retired launch page should not keep ranking with stale copy. A mistyped public path should help a real visitor continue.
+
+The practical rule: redirect when the intent is obvious. Show a recovery page when the intent is uncertain. Use gone or removal behavior when the page should not exist publicly.
+
+## Make The Page Confirm The Brand
+
+The 404 page should look and sound like the site it belongs to.
+
+Check these elements:
+
+| Element | Brand QA question |
+| --- | --- |
+| Page title | Does the browser tab use the current brand name? |
+| Heading | Does it explain the missing page without sounding broken? |
+| URL pattern | Is the visitor still on the canonical domain? |
+| Logo or name | Is the current name visible enough to orient the visitor? |
+| Navigation | Can they return to the homepage, signup, docs, or contact route? |
+| Voice | Is the copy plain, specific, and calm? |
+| Mobile layout | Can a phone visitor recover without pinching or hunting? |
+| Metadata | Does the page avoid stale titles, old descriptions, or indexable junk? |
+
+A good version might say:
+
+```text
+We could not find that page.
+You are still on Northline. Try the homepage, request a demo, or contact support if someone sent you this link.
+```
+
+A weak version says:
+
+```text
+404
+The requested resource could not be found.
+```
+
+The weak version may be technically correct. It does not help a launch visitor understand whether the brand is current, official, or reachable.
+
+Keep the recovery copy short. This is not the place for a brand manifesto. The visitor has already experienced friction. Give them a steady handrail.
+
+## Offer The Right Recovery Routes
+
+Most 404 pages fail because they offer generic links.
+
+"Go home" is useful, but it is rarely enough during launch. The recovery routes should match the places launch traffic is likely trying to reach.
+
+For a small startup launch, consider:
+
+| Link | When to include it |
+| --- | --- |
+| Homepage | Always |
+| Signup or waitlist | If launch traffic has a conversion path |
+| Demo or contact | If sales traffic is expected |
+| Press page | If journalists, partners, or creators are being contacted |
+| Help or support | If customers or beta users may hit old links |
+| Docs or API | If the product has technical evaluators |
+| Status page | If reliability links are already public |
+
+Do not include everything by default. A crowded 404 page creates a second problem: visitors still have to choose from a menu built for insiders.
+
+Pick three to five routes. Label them by task, not by internal department. "Request a demo" is better than "Sales." "Read the launch notes" is better than "Updates." "Contact support" is better than "Help resources" if the route leads to a real support inbox.
+
+If the recovery page sends people into support docs, make sure those docs passed the [support docs launch audit](/blog/support-docs-launch-audit-new-brand). A polished 404 page that links to stale help articles only moves the brand problem one click deeper.
+
+## Keep Old Names Out Of Recovery
+
+Broken paths often come from old launch materials. That makes the 404 page a risky place for old names to survive.
+
+Search the page, templates, metadata, and analytics labels for:
+
+| Search term | Why it matters |
+| --- | --- |
+| Old brand name | Confirms the broken link came from a retired identity |
+| Old domain | Makes the wrong URL feel official |
+| `beta` | Can make the public launch feel unfinished |
+| `staging` or `preview` | Exposes internal workflow |
+| Framework defaults | Makes the page feel unattended |
+| Vendor support route | Sends people away from the brand |
+| Legal-only name | May confuse visitors unless explained |
+
+Some old-name context may be necessary during a rebrand. If so, write the bridge deliberately:
+
+```text
+Northline was previously shared as FieldOps Beta. You are in the right place. Start at the current Northline homepage.
+```
+
+Use that only when it helps real visitors. Do not revive an old codename just because the internal team recognizes it.
+
+This connects to the [brand alias list](/blog/brand-alias-list-before-launch). If there are approved aliases, legal names, old names, or modifier domains, the recovery page should follow that list instead of improvising.
+
+## Test From Real Broken Links
+
+Do not test the 404 page by typing a random nonsense path and calling it done.
+
+Test the paths that could actually appear in public:
+
+| Test | What to verify |
+| --- | --- |
+| Old waitlist URL | Does it redirect or recover to the current signup path? |
+| Mistyped homepage path | Does the page confirm the current brand? |
+| Old deck link | Does it reach the intended replacement? |
+| Partner draft URL | Does it preserve useful tracking if redirected? |
+| Mobile social bio click | Is the recovery usable on a phone? |
+| QR code scan | Does the page load quickly and offer the right next step? |
+| Search result path | Is the missing page noindexed or handled cleanly? |
+| Private beta path | Does it avoid revealing private information? |
+
+Open these from private browsing sessions and phones, not only from a logged-in development account. Launch traffic will not have your cookies, admin permissions, or local redirects.
+
+After testing, paste the broken URL into the channels where it might travel. The [brand link preview QA](/blog/brand-link-preview-qa-before-launch) still matters. A missing page should not generate a stale preview card with the old brand name, an unrelated image, or a description that makes the broken path look like a real public page.
+
+## Log What The 404 Page Finds
+
+A good recovery page does two jobs.
+
+It helps the visitor, and it tells the team what to fix.
+
+At minimum, log:
+
+| Field | Why to capture it |
+| --- | --- |
+| Requested path | Shows which links are breaking |
+| Referrer | Identifies the source, when available |
+| Device type | Finds mobile-only link or QR problems |
+| Timestamp | Helps connect spikes to launch posts |
+| Destination clicked | Shows what recovery route worked |
+| Query string | Reveals broken UTM or partner patterns |
+
+Keep the logging respectful. You do not need to collect personal details to know that `/book-demo` is getting traffic from LinkedIn or that `/press-kit` is being guessed by journalists.
+
+Review the log during launch week. If a missing path gets real traffic, decide quickly:
+
+| Signal | Action |
+| --- | --- |
+| Many visits to one guessed path | Create the page or redirect it |
+| Traffic from one partner | Ask the partner to update the link |
+| Traffic from an old deck | Replace the deck and add a redirect |
+| Traffic from search | Check indexing and canonical signals |
+| Repeated support clicks | Add clearer recovery copy or route |
+
+This is where the 404 page becomes operational. It is not just a nicer error. It is a sensor for public link drift.
+
+## Add It To Launch Day Checks
+
+Put the recovery page into the same launch checklist as metadata, redirects, email senders, and social profiles.
+
+A practical prelaunch pass looks like this:
+
+| Check | Pass condition |
+| --- | --- |
+| Canonical host | 404 page appears on the official domain |
+| Page identity | Current brand name, no old logo or framework default |
+| Recovery routes | Homepage plus three to five launch-relevant routes |
+| Redirect rules | Moved pages redirect to the best replacement |
+| No sensitive hints | Private paths do not reveal hidden pages |
+| Mobile view | Buttons, links, and copy are usable on a phone |
+| Metadata | Noindex if appropriate, clean title, no stale preview |
+| Analytics | Missing paths are visible without collecting unnecessary data |
+| Owner | Someone can fix broken paths during launch week |
+
+Pair this with the [signup path brand QA](/blog/signup-path-brand-qa-before-launch) if the main risk is conversion traffic. Pair it with the [launch link ledger](/blog/launch-link-ledger-before-announcement-day) if the main risk is partner, press, QR, or campaign links.
+
+The key is ownership. If nobody watches broken paths after announcement day, the 404 page becomes a nicer dead end. Give one person permission to add redirects, update copy, contact partners, or publish small recovery pages when the data shows a real need.
+
+## Make Lost Visitors Feel Expected
+
+A new brand does not need every possible URL to exist on day one.
+
+It does need broken paths to feel handled.
+
+When someone reaches a missing page during launch, they should not wonder whether the company is abandoned, whether they clicked a fake link, whether the brand changed names again, or whether support exists. They should know they are still on the official site and have a short path forward.
+
+That is the standard.
+
+Build the 404 recovery page before launch traffic arrives. Test it from the messy links people will actually copy. Watch what it catches. Then fix the public sources that created the confusion.
+
+The best recovery page is one most visitors never see. The second-best recovery page turns a broken click into a clean next step.
