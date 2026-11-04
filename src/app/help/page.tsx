@@ -67,6 +67,7 @@ export default function HelpPage() {
         value={search}
         onChange={(e) => { setSearch(e.target.value); setOpenIndex(null); }}
         placeholder="Search help articles..."
+        aria-label="Search help articles"
         className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white text-sm mb-8"
       />
 

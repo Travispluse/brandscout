@@ -175,6 +175,7 @@ export const SearchForm = forwardRef<SearchFormHandle, SearchFormProps>(function
             onBlur={handleBlur}
             onKeyDown={handleKeyDown}
             placeholder='Enter a business name or domain... (press "/" to focus)'
+            aria-label="Business name or domain to check"
             className="h-12 text-base rounded-xl border-gray-200 bg-gray-50 pr-10"
           />
           {query && (

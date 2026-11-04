@@ -230,6 +230,7 @@ export default function AIGeneratorPage() {
               <div>
                 <label className="text-sm font-medium mb-1 block">Industry</label>
                 <Input
+                  aria-label="Industry"
                   value={industry}
                   onChange={(e) => setIndustry(e.target.value)}
                   placeholder="e.g. Technology, Food, Health, Finance, Education"
@@ -239,6 +240,7 @@ export default function AIGeneratorPage() {
               <div>
                 <label className="text-sm font-medium mb-1 block">Keywords (comma-separated)</label>
                 <Input
+                  aria-label="Keywords (comma-separated)"
                   value={keywordsInput}
                   onChange={(e) => setKeywordsInput(e.target.value)}
                   placeholder="e.g. cloud, sync, fast"
@@ -291,6 +293,7 @@ export default function AIGeneratorPage() {
               <div>
                 <label className="text-sm font-medium mb-1 block">Brand Name</label>
                 <Input
+                  aria-label="Brand name"
                   value={brandName}
                   onChange={(e) => setBrandName(e.target.value)}
                   placeholder="e.g. Acme"
@@ -300,6 +303,7 @@ export default function AIGeneratorPage() {
               <div>
                 <label className="text-sm font-medium mb-1 block">Industry</label>
                 <Input
+                  aria-label="Industry"
                   value={tagIndustry}
                   onChange={(e) => setTagIndustry(e.target.value)}
                   placeholder="e.g. Technology, Food, Health"

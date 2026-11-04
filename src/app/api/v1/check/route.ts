@@ -78,7 +78,7 @@ async function handleCheck(query: string, tldFilter?: string[], platformFilter?:
       pronunciation: { rating: pronunciation.rating, details: pronunciation.details },
       nameStrength: { badge: nameStrength.badge, score: nameStrength.score, reasons: nameStrength.reasons },
       sentiment: { rating: sentiment.rating, details: sentiment.details },
-      trademarkRisk: { level: trademarkRisk.level, warnings: trademarkRisk.warnings, searchUrl: trademarkRisk.searchUrl },
+      trademarkRisk: { level: trademarkRisk.level, warnings: trademarkRisk.warnings, searchUrl: trademarkRisk.searchUrl, disclaimer: "Automated word-pattern estimate only. Not a trademark search, not a clearance opinion and not legal advice." },
       scoreBreakdown: {
         domainAvailable: scoreBreakdown.domainAvailable,
         domainTotal: scoreBreakdown.domainTotal,

@@ -113,6 +113,7 @@ const spec = {
                   level: { type: "string", enum: ["Low", "Medium", "High"] },
                   warnings: { type: "array", items: { type: "string" } },
                   searchUrl: { type: "string", description: "USPTO trademark search URL" },
+                  disclaimer: { type: "string", description: "Word-pattern estimate only; not a trademark search or legal advice" },
                 },
               },
               scoreBreakdown: {

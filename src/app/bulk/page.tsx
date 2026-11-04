@@ -60,6 +60,7 @@ function AdvancedSearch({ onProcess, disabled }: { onProcess: (names: string[]) 
           </p>
           <div className="flex gap-2">
             <input
+              aria-label="Name pattern"
               value={pattern}
               onChange={e => setPattern(e.target.value)}
               placeholder={mode === "wildcard" ? "my*app" : mode === "pattern" ? "??tech" : "cool OR awesome + brand"}
