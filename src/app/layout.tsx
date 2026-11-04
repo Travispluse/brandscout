@@ -3,7 +3,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 // Theme toggle removed — white mode only
 // TextSizeToggle moved to dashboard/settings to reduce header clutter
 import { MobileMenu } from "@/components/mobile-menu";
-import { CookieConsent } from "@/components/cookie-consent";
+import { CookieConsent, CookieSettingsLink } from "@/components/cookie-consent";
 import { LeadCapturePopup } from "@/components/lead-capture";
 import { defaultOgImage, defaultOgImageHeight, defaultOgImageWidth, siteUrl } from "@/lib/metadata";
 import "./globals.css";
@@ -52,13 +52,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="light" suppressHydrationWarning>
       <head>
-        {/* Google Analytics */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-G2EKY15D8R" />
-        <script dangerouslySetInnerHTML={{ __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-G2EKY15D8R');` }} />
-        {/* Microsoft Clarity */}
-        <script dangerouslySetInnerHTML={{ __html: `(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","vivwtse9is");` }} />
-        {/* Ahrefs Analytics */}
-        <script src="https://analytics.ahrefs.com/analytics.js" data-key="Em0aeVaZxe5tcWGBrzZTlw" async />
+        {/* Google Analytics, Microsoft Clarity and Ahrefs load only after the visitor
+            taps "Allow" — see src/components/cookie-consent.tsx. */}
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
           rel="stylesheet"
@@ -107,6 +102,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <a href="/glossary" className="hover:text-gray-900 transition-colors">Glossary</a>
                 <a href="/editorial-policy" className="hover:text-gray-900 transition-colors">Editorial Policy</a>
                 <a href="/privacy-settings" className="hover:text-gray-900 transition-colors">Privacy Settings</a>
+                <CookieSettingsLink className="hover:text-gray-900 transition-colors" />
+                <a href="/accessibility" className="hover:text-gray-900 transition-colors">Accessibility</a>
                 <a href="/feed" className="hover:text-gray-900 transition-colors">RSS Feed</a>
                 <a href="/sitemap.xml" className="hover:text-gray-900 transition-colors">Sitemap</a>
               </div>

@@ -172,6 +172,7 @@ export default function DashboardPage() {
             <label className="block text-sm text-gray-500 mb-1">Company Name</label>
             <input
               type="text"
+              aria-label="Company name"
               value={brand.companyName}
               onChange={(e) => setBrand({ ...brand, companyName: e.target.value })}
               className="w-full px-3 py-2 rounded-lg border border-gray-200 bg-white text-sm"
@@ -182,6 +183,7 @@ export default function DashboardPage() {
             <label className="block text-sm text-gray-500 mb-1">Logo URL</label>
             <input
               type="url"
+              aria-label="Logo URL"
               value={brand.logoUrl}
               onChange={(e) => setBrand({ ...brand, logoUrl: e.target.value })}
               className="w-full px-3 py-2 rounded-lg border border-gray-200 bg-white text-sm"
@@ -193,6 +195,7 @@ export default function DashboardPage() {
               <label className="block text-sm text-gray-500 mb-1">Primary Color</label>
               <input
                 type="color"
+                aria-label="Primary color"
                 value={brand.primaryColor}
                 onChange={(e) => setBrand({ ...brand, primaryColor: e.target.value })}
                 className="w-full h-10 rounded border border-gray-200 cursor-pointer"
@@ -202,6 +205,7 @@ export default function DashboardPage() {
               <label className="block text-sm text-gray-500 mb-1">Secondary Color</label>
               <input
                 type="color"
+                aria-label="Secondary color"
                 value={brand.secondaryColor}
                 onChange={(e) => setBrand({ ...brand, secondaryColor: e.target.value })}
                 className="w-full h-10 rounded border border-gray-200 cursor-pointer"

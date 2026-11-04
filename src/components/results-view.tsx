@@ -411,7 +411,7 @@ function TrademarkRiskSection({ name }: { name: string }) {
   return (
     <div className="p-4 rounded-lg bg-gray-50">
       <div className="flex items-center gap-2 mb-2">
-        <span className="text-sm font-medium">⚖️ Trademark Risk: <span className={color}>{analysis.level}</span></span>
+        <span className="text-sm font-medium">⚖️ Name pattern risk (estimate): <span className={color}>{analysis.level}</span></span>
       </div>
       {analysis.warnings.map((w, i) => (
         <p key={i} className="text-xs text-gray-500">• {w}</p>
@@ -425,6 +425,12 @@ function TrademarkRiskSection({ name }: { name: string }) {
       >
         Search USPTO Database →
       </a>
+      <p className="text-xs text-gray-600 mt-3 border-t border-gray-200 pt-2">
+        <strong>Not legal advice.</strong> BrandScout does not search trademark registers and cannot tell you whether a
+        name is free to use or register. A &ldquo;Low&rdquo; rating only means the name avoids a few common patterns.
+        Domain and username availability says nothing about trademark rights. Talk to a trademark attorney before you
+        commit to a name.
+      </p>
     </div>
   );
 }
@@ -711,6 +717,7 @@ export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults;
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3">
               <FilterBar value={domainFilter} onChange={setDomainFilter} />
               <select
+                aria-label="Sort domains"
                 value={domainSort}
                 onChange={(e) => setDomainSort(e.target.value as DomainSort)}
                 className="text-xs bg-gray-50 border border-gray-200 rounded-lg px-2 py-1"
@@ -752,6 +759,7 @@ export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults;
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3">
               <FilterBar value={usernameFilter} onChange={setUsernameFilter} />
               <select
+                aria-label="Sort usernames"
                 value={usernameSort}
                 onChange={(e) => setUsernameSort(e.target.value as UsernameSort)}
                 className="text-xs bg-gray-50 border border-gray-200 rounded-lg px-2 py-1"
@@ -817,7 +825,7 @@ export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults;
       {/* Trademark Risk */}
       <Card className="rounded-xl">
         <CardHeader>
-          <CardTitle className="text-lg">Trademark Analysis</CardTitle>
+          <CardTitle className="text-lg">Trademark Considerations (not legal advice)</CardTitle>
         </CardHeader>
         <CardContent>
           <TrademarkRiskSection name={data.name} />
@@ -826,7 +834,7 @@ export function ResultsView({ data, onSearchSuggestion }: { data: SearchResults;
 
       {/* Disclaimer */}
       <p className="text-xs text-gray-500 text-center px-4">
-        Availability can change quickly. Some platforms restrict automated checks; statuses marked &ldquo;Unknown&rdquo; require manual confirmation.
+        Availability can change quickly. Some platforms restrict automated checks; statuses marked &ldquo;Unknown&rdquo; require manual confirmation. Results are informational only and are not legal advice or a trademark clearance.
       </p>
       <p className="text-xs text-gray-500/60 text-center px-4">
         Registration links may earn us a small commission at no extra cost to you.

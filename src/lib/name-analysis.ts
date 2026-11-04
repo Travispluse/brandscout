@@ -143,10 +143,10 @@ export function analyzeTrademarkRisk(name: string): { level: "Low" | "Medium" | 
   }
 
   if (warnings.length === 0) {
-    warnings.push("No obvious trademark concerns detected");
+    warnings.push("No word-pattern red flags found — this is not a trademark search");
   }
 
-  warnings.push("Always verify with a trademark attorney before registering");
+  warnings.push("This is an automated word-pattern check, not a search of trademark records and not legal advice. Search the USPTO and state records and consult a trademark attorney before using or filing a name");
 
   const searchUrl = `https://www.uspto.gov/trademarks/search`;
 

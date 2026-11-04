@@ -44,6 +44,7 @@ export function NewsletterSignup() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="you@example.com"
+          aria-label="Email address"
           className="flex-1 h-10 px-3 rounded-lg border border-gray-200 bg-white text-sm"
         />
         <button

@@ -58,6 +58,7 @@ export function BlogPostsTable({ posts }: BlogPostsTableProps) {
       <div className="flex flex-col gap-3 pb-4 sm:flex-row sm:items-center sm:justify-between">
         <Input
           placeholder="Filter articles by topic, category, or date..."
+          aria-label="Filter articles"
           value={globalFilter}
           onChange={(event) => setGlobalFilter(event.target.value)}
           className="h-9 max-w-sm bg-white"

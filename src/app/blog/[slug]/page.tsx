@@ -156,6 +156,12 @@ export default async function BlogPostPage({ params }: { params: Params }) {
               h1: (props: React.ComponentProps<"h2">) => <h2 className="text-2xl font-bold mt-8 mb-4" {...props} />,
             }} />
           </div>
+          {post.category === "business-legal" && (
+            <p className="mt-8 rounded-lg border border-gray-200 bg-gray-50 p-4 text-sm text-gray-600">
+              <strong>Not legal advice.</strong> This article is general information, not legal advice, and may not reflect
+              current law or fees. Talk to a qualified trademark or business attorney about your situation.
+            </p>
+          )}
           <hr className="my-8 border-gray-200" />
           <AuthorProfile />
           <hr className="my-8 border-gray-200" />

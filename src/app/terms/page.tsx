@@ -12,7 +12,7 @@ export default function TermsPage() {
     <div className="max-w-3xl mx-auto px-4 py-12 prose prose-neutral">
       <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Terms of Service" }]} />
       <h1 className="text-3xl font-bold tracking-tight mb-8">Terms of Service</h1>
-      <p className="text-gray-500 text-sm mb-8">Last updated: February 2026</p>
+      <p className="text-gray-500 text-sm mb-8">Last updated: November 4, 2026</p>
 
       <h2 className="text-xl font-semibold mt-8 mb-4">1. Acceptance of Terms</h2>
       <p className="text-gray-500 leading-relaxed">
@@ -27,6 +27,15 @@ export default function TermsPage() {
       <h2 className="text-xl font-semibold mt-8 mb-4">3. Accuracy of Results</h2>
       <p className="text-gray-500 leading-relaxed">
         We make reasonable efforts to provide accurate availability information, but we cannot guarantee the accuracy, completeness, or timeliness of any results. Domain and username availability can change at any time. Always verify availability directly with the registrar or platform before making purchasing decisions.
+      </p>
+
+      <h2 className="text-xl font-semibold mt-8 mb-4">3a. Not Legal Advice</h2>
+      <p className="text-gray-500 leading-relaxed">
+        BrandScout is not a law firm and does not provide legal advice. The Service does not search trademark registers, and
+        its &ldquo;trademark risk&rdquo; ratings, scores, suggestions, blog articles and templates are general information
+        based on simple word patterns. Availability of a domain name or username does not mean a name is free to use or
+        register as a trademark. Using the Service does not create an attorney-client relationship. Consult a qualified
+        trademark attorney before adopting, registering or investing in a name.
       </p>
 
       <h2 className="text-xl font-semibold mt-8 mb-4">4. Acceptable Use</h2>
