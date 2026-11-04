@@ -1,7 +1,6 @@
 "use client";
 
-// Analytics consent for BrandScout (same pattern as 1agaragedoors.net
-// analytics-consent.js).
+// Analytics consent for BrandScout.
 //
 // Google Analytics, Microsoft Clarity (session replay) and Ahrefs Analytics are
 // third parties, so none of their scripts load and nothing is sent to them until
