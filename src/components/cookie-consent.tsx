@@ -8,10 +8,17 @@
 // answer yet all mean they never load. Search history in localStorage is a
 // first-party convenience and keeps its existing opt-in (same "Allow" choice).
 // Keep /privacy (src/app/privacy/page.tsx) in step with this file.
+//
+// Consent is versioned. The pre-November-2026 banner ("brandscout-cookies") only
+// asked about cookies for search history and never mentioned analytics, so a
+// legacy "accepted" value is NOT analytics consent: it still enables local search
+// history, but those visitors see the new banner and no tracker loads until they
+// tap "Allow" on it. Only CONSENT_KEY below can turn analytics on.
 
 import { useEffect, useState } from "react";
 
-const CONSENT_KEY = "brandscout-cookies";
+const CONSENT_KEY = "brandscout-consent-v2"; // {"analytics": true|false, "ts": ISO date}
+const LEGACY_KEY = "brandscout-cookies"; // old banner: search history only
 const GA_MEASUREMENT_ID = "G-G2EKY15D8R";
 const CLARITY_PROJECT_ID = "vivwtse9is";
 const AHREFS_KEY = "Em0aeVaZxe5tcWGBrzZTlw";
@@ -39,21 +46,34 @@ function gpcEnabled(): boolean {
   }
 }
 
-function readConsent(): Consent {
+// The visitor's answer on the current banner, ignoring GPC. null = not asked yet.
+function storedChoice(): Consent {
   if (typeof window === "undefined") return null;
-  if (gpcEnabled()) return "declined";
   try {
-    const stored = window.localStorage.getItem(CONSENT_KEY);
-    if (stored === "accepted" || stored === "declined") return stored;
+    const raw = window.localStorage.getItem(CONSENT_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as { analytics?: unknown };
+    if (parsed && parsed.analytics === true) return "accepted";
+    if (parsed && parsed.analytics === false) return "declined";
   } catch {
-    /* Storage blocked: treat as no answer yet. */
+    /* Storage blocked or malformed: treat as no answer yet. */
   }
   return null;
 }
 
+// Analytics consent: GPC always wins; legacy values never count.
+function readConsent(): Consent {
+  if (typeof window === "undefined") return null;
+  if (gpcEnabled()) return "declined";
+  return storedChoice();
+}
+
 function saveConsent(value: "accepted" | "declined") {
   try {
-    window.localStorage.setItem(CONSENT_KEY, value);
+    window.localStorage.setItem(
+      CONSENT_KEY,
+      JSON.stringify({ analytics: value === "accepted", ts: new Date().toISOString() })
+    );
   } catch {
     /* Private browsing: the choice lasts for this page view. */
   }
@@ -108,9 +128,19 @@ function loadTrackers() {
   addScript("https://analytics.ahrefs.com/analytics.js", { "data-key": AHREFS_KEY });
 }
 
-/** True only when the visitor tapped "Allow" (and GPC is not on). */
+/**
+ * Whether recent searches may be kept in this browser (first-party only).
+ * A choice on the current banner decides; otherwise an "accepted" answer on the
+ * old banner, which asked about exactly this, still counts.
+ */
 export function hasCookieConsent(): boolean {
-  return readConsent() === "accepted";
+  const choice = storedChoice();
+  if (choice !== null) return choice === "accepted";
+  try {
+    return window.localStorage.getItem(LEGACY_KEY) === "accepted";
+  } catch {
+    return false;
+  }
 }
 
 /** "Change cookie choices" link for the footer and privacy page. */
@@ -138,6 +168,7 @@ export function CookieConsent() {
     const onReset = () => {
       try {
         window.localStorage.removeItem(CONSENT_KEY);
+        window.localStorage.removeItem(LEGACY_KEY);
       } catch {
         /* ignore */
       }
