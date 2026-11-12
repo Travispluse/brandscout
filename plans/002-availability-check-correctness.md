@@ -181,7 +181,7 @@ If `npm run typecheck` or `npm test` does not exist, plan 001 has not landed. ST
 
 In `src/lib/domain-check.ts` `checkDNS`, change the catch block so that:
 - `ENOTFOUND` returns `"available"` (unchanged),
-- `ENODATA` returns `"taken"`, with a comment: `// ENODATA: the name exists in DNS but has no A record, so it is registered`,
+- `ENODATA` returns `"taken"`, with the comment `// ENODATA: the name exists in DNS but has no A record, so it is registered` **on its own line directly above** the `if` (not trailing on the same line, or the Verify grep below won't see the `if`),
 - anything else returns `"unknown"` (unchanged).
 
 **Verify**: `grep -n 'ENODATA' src/lib/domain-check.ts | grep -v '//'` prints exactly one line, `if (code === "ENODATA") return "taken";`. `grep -nE 'ENOTFOUND.*ENODATA|ENODATA.*ENOTFOUND' src/lib/domain-check.ts` prints nothing.
