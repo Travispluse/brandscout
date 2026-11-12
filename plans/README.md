@@ -8,15 +8,15 @@ conditions, and update your row when done.
 **Selection default (non-interactive run):** no maintainer was available to
 pick findings, so plans were written for the top findings by leverage, as the
 workflow specifies. All other vetted findings are listed in the backlog table
-below; any of them can become a plan on request. Some findings were reported to
-the maintainer privately and are intentionally not listed in this public file.
+below; any of them can become a plan on request. Some findings are tracked
+privately and are intentionally not listed in this public file.
 
 ## Execution order & status
 
 | Plan | Title | Priority | Effort | Depends on | Status |
 |------|-------|----------|--------|------------|--------|
 | [001](001-verification-baseline.md) | One-command test suite + PR CI (Vitest, typecheck, build) | P1 | S | — | TODO |
-| [002](002-availability-check-correctness.md) | Availability checks never report a false "available"; "unknown" is retryable | P1 | S | 001 | TODO |
+| [002](002-availability-check-correctness.md) | DNS ENODATA / LinkedIn 999 no longer read as "available"; "unknown" is retryable; empty names rejected | P1 | S | 001 | TODO |
 
 Status values: TODO | IN PROGRESS | DONE | BLOCKED (with a one-line reason) | REJECTED (with a one-line rationale)
 
@@ -52,11 +52,11 @@ Ordered by leverage. Every row was checked against the cited code by the advisor
 | B9 | 27 pre-existing ESLint errors (10× `react-hooks/set-state-in-effect`, 6× `no-unescaped-entities`, 5× `no-html-link-for-pages`, 3× `no-explicit-any`, 2× `error-boundaries`, 1× `immutability`) | dx | Lint can't gate CI (plan 001 runs it non-blocking) | M | MED (hook-ordering fixes can change behavior) | `npm run lint` |
 | B10 | Dashboard reads `localStorage` during render (`getStreak()`, `getUnlocked()`), causing a server/client hydration mismatch; `JSON.parse` of storage without try/catch | bug | Hydration errors; one corrupted key breaks the page | S | LOW | `src/app/dashboard/page.tsx:23,30,98,102` |
 | B11 | Readability/length heuristics are implemented 4 times and can disagree on the same card; the `/api/search` fetch + result-mapping code is copy-pasted in 5 client files with differing error handling | tech-debt | Contradictory badges; bugs like B1 recur | M | MED | `src/lib/scoring.ts:25-41`, `src/lib/name-analysis.ts:16-56,180-191`, `src/components/results-view.tsx:183-215`; fetch copies in `search-form.tsx:66`, `results-view.tsx:599,614`, `bulk/page.tsx:103`, `compare/page.tsx:64`, `saved/page.tsx:52` |
-| B12 | Per-row "Retry" re-runs the *entire* search (all TLDs and platforms) to refresh one cell | perf | Each retry costs ~26 upstream lookups | M | MED | `src/components/results-view.tsx:597-625` |
+| B12 | Per-row "Retry" re-runs the *entire* search (all TLDs and platforms) to refresh one cell | perf | Slow retries; one cell's refresh waits on every other check | M | MED | `src/components/results-view.tsx:597-625` |
 | B13 | Blog taxonomy drift: the generator allows 9 categories, `add-categories.mjs` maps to 13, `CATEGORIES` defines 19, with near-duplicates (`legal`/`business-legal`, `social-media`/`social-handles`) | tech-debt | Thin, duplicate category pages | M | LOW | `scripts/generate-daily-blog.mjs:25-35`, `scripts/add-categories.mjs:7-21`, `src/lib/blog.ts:165-185` |
 | B14 | DX gaps: the daily workflow runs on Node 20 (EOL); `dotenv` is a dependency but never imported, so the README's local `npm run blog:generate` does not read `.env`; `BLOG_API_URL` is undocumented; `.gitignore`'s `.env*` also blocks a committed `.env.example` | dx | Onboarding friction; README instructions fail | S | LOW | `.github/workflows/daily-blog.yml:28`, `package.json` (`dotenv`), `scripts/generate-daily-blog.mjs:10`, `src/lib/blog.ts:5`, `.gitignore` (`.env*`) |
 | B15 | *Investigate*: newest post in `content/blog` is dated 2026-08-19 although the generator is scheduled daily; the workflow has no failure notification | dx | Content automation may have been silently failing for ~12 weeks | S | LOW | `grep -h '^date:' content/blog/*.mdx \| sort \| tail -1`; `.github/workflows/daily-blog.yml:4-5` |
-| B16 | *Investigate*: the home page may search twice per query (an effect on `searchParams` + `history.replaceState` setting `?q=`) | perf | Doubled upstream load and achievement counts | S | LOW | `src/components/home-search.tsx:26-31,65-67` (MED confidence; not observed at runtime) |
+| B16 | *Investigate*: the home page may search twice per query (an effect on `searchParams` + `history.replaceState` setting `?q=`) | perf | Duplicate work per query; achievement/search counts double | S | LOW | `src/components/home-search.tsx:26-31,65-67` (MED confidence; not observed at runtime) |
 
 ## Direction (options for the maintainer, not ranked against bugs)
 

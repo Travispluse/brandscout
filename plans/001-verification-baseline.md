@@ -11,6 +11,11 @@
 > If any in-scope file changed since this plan was written, compare the
 > "Current state" excerpts against the live code before proceeding; on a
 > mismatch, treat it as a STOP condition.
+> **Permitted predecessor changes (not drift):** `package.json` / `package-lock.json` may already show
+> version bumps of existing dependencies (e.g. `next`, `eslint-config-next`, `zod`) from an approved
+> dependency update. That is expected. Proceed if the `scripts` block still matches the excerpt below
+> and `npm run build` passes before you start. Re-measure the lint baseline (Step 6 command) before
+> changing anything, and use that number in place of 27 if it differs.
 
 ## Status
 
@@ -207,7 +212,7 @@ The default branch is `main` (confirmed with `git remote show origin` at plannin
 - `npm run typecheck` → exit 0
 - `npm test` → exit 0
 - `npm run build` → exit 0
-- `npm run lint 2>&1 | tail -1` → still reports `27 errors` (or fewer). It must not report more.
+- `npm run lint 2>&1 | grep -E '[0-9]+ problems'` → prints `✖ 46 problems (27 errors, 19 warnings)` or a line with **≤ 27 errors**. It must not report more. (Don't use `tail -1`: ESLint ends its output with a blank line.)
 
 ## Test plan
 
@@ -224,7 +229,7 @@ ALL must hold:
 - [ ] `npm run typecheck` exits 0
 - [ ] `npm test` exits 0 and reports 3 test files, ≥18 tests, 0 failed
 - [ ] `npm run build` exits 0
-- [ ] `npm run lint` reports ≤27 errors
+- [ ] `npm run lint 2>&1 | grep -E '[0-9]+ problems'` shows ≤27 errors
 - [ ] `node -e "const p=require('./package.json');process.exit(p.scripts.test&&p.scripts.typecheck&&p.devDependencies.vitest?0:1)"` exits 0
 - [ ] `test -f .github/workflows/ci.yml && grep -q 'npm test' .github/workflows/ci.yml` succeeds
 - [ ] `git status --porcelain` lists only in-scope files and `plans/README.md`
@@ -235,7 +240,7 @@ ALL must hold:
 Stop and report back (do not improvise) if:
 
 - Any characterization value in Step 2 or Step 3 does not match. The code has drifted, or the advisor's numbers are wrong. Report the actual value; do not just update the expectation.
-- `npm install --save-dev vitest@^3.2.4` changes the version of any existing dependency in `package-lock.json` (check `git diff package-lock.json | grep '"version"'` for entries outside `vitest`/`@vitest/*`/`vite`/their transitive deps).
+- `npm install --save-dev vitest@^3.2.4` changes the version of any package **listed in `package.json` `dependencies` or `devDependencies`** (other than adding `vitest`). Check with `git diff package.json`: the only change should be the new `vitest` devDependency and the new scripts. Version moves in shared *transitive* packages in `package-lock.json` are expected and allowed. For example, resolving `vitest@^3.2.4` against the `c7dca7c` lockfile bumps `@types/estree` 1.0.8 → 1.0.10.
 - `npm run typecheck` fails after adding `vitest.config.mts` or test files and the fix would need edits to `tsconfig.json`.
 - `npm run build` fails on a clean checkout before you change anything. That is a pre-existing break; report it.
 

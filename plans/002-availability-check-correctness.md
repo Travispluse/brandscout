@@ -1,4 +1,4 @@
-# Plan 002: Availability checks never report a false "available" and "unknown" results are retryable
+# Plan 002: DNS ENODATA and LinkedIn bot-blocks no longer read as "available", "unknown" results are retryable, and empty names are rejected
 
 > **Executor instructions**: Follow this plan step by step. Run every
 > verification command and confirm the expected result before moving to the
@@ -11,6 +11,11 @@
 > If any in-scope file changed since this plan was written, compare the
 > "Current state" excerpts against the live code before proceeding; on a
 > mismatch, treat it as a STOP condition.
+> **Permitted predecessor changes (not drift):** other maintainer-approved
+> changes may already have added lines near the top of the route handlers in
+> `src/app/api/search/route.ts` and `src/app/api/v1/check/route.ts`. If the
+> `parseInput(...)` call sites and the `src/lib/*` excerpts quoted below are
+> unchanged, proceed. Stop only on changes to those quoted lines.
 
 ## Status
 
@@ -22,6 +27,10 @@
 - **Planned at**: commit `c7dca7c`, 2026-11-11
 
 ## Why this matters
+
+Scope note: this plan fixes the four specific defects below. It does not
+re-validate every platform's heuristic against live sites. Those remain as
+they are.
 
 BrandScout's whole value is telling users whether a name is free. Four defects
 in the check pipeline make it report wrong answers:
@@ -175,7 +184,7 @@ In `src/lib/domain-check.ts` `checkDNS`, change the catch block so that:
 - `ENODATA` returns `"taken"`, with a comment: `// ENODATA: the name exists in DNS but has no A record, so it is registered`,
 - anything else returns `"unknown"` (unchanged).
 
-**Verify**: `grep -n 'ENODATA' src/lib/domain-check.ts` shows exactly one line, which is not combined with ENOTFOUND in an `||`.
+**Verify**: `grep -n 'ENODATA' src/lib/domain-check.ts | grep -v '//'` prints exactly one line, `if (code === "ENODATA") return "taken";`. `grep -nE 'ENOTFOUND.*ENODATA|ENODATA.*ENOTFOUND' src/lib/domain-check.ts` prints nothing.
 
 ### Step 2: Map LinkedIn 999 to "unknown"
 
@@ -218,7 +227,7 @@ created (for example `src/lib/scoring.test.ts`). In every test file call
 `cache.clear()` (import `{ cache }` from `./cache`) in `beforeEach`, so cached
 results do not leak between tests.
 
-`src/lib/domain-check.test.ts`: mock DNS with `vi.mock("dns/promises", () => ({ default: { resolve: vi.fn() } }))`, and mock `fetch` with `vi.stubGlobal("fetch", vi.fn())`. Restore with `vi.unstubAllGlobals()` / `vi.resetAllMocks()` in `afterEach`.
+`src/lib/domain-check.test.ts`: mock DNS with `vi.mock("dns/promises", () => ({ default: { resolve: vi.fn() } }))`, then `import dns from "dns/promises";` and drive it with, for example, `vi.mocked(dns.resolve).mockRejectedValue(Object.assign(new Error("x"), { code: "ENODATA" }))` or `.mockResolvedValue(["1.2.3.4"] as never)`. Mock `fetch` with `const fetchMock = vi.fn(); vi.stubGlobal("fetch", fetchMock);`, and build RDAP replies with `new Response(null, { status: 404 })` (statuses 200–599 are fine with `new Response`). Restore with `vi.unstubAllGlobals()` and `vi.resetAllMocks()` in `afterEach`. Use a distinct name per `it` block (or rely on `cache.clear()` in `beforeEach`) so cached results never leak between cases.
 - RDAP 404 → `status: "available"`, `source: "rdap"`.
 - RDAP 200 → `"taken"`.
 - RDAP 500, DNS resolves → `"taken"`, `source: "dns"`.
@@ -228,12 +237,13 @@ results do not leak between tests.
 - No caching of "unknown": RDAP 500 and DNS `ETIMEOUT` on the first call, then RDAP 404 on a second `checkDomain("x", ".com")` call → the second result is `"available"`, and `fetch` was called twice.
 - Caching of known results: two calls with RDAP 404 → `fetch` called once.
 
-`src/lib/username-check.test.ts`: mock the HTTP layer with `vi.mock("./http-client", () => ({ smartFetch: vi.fn() }))`, so tests skip the real 200–500 ms throttling. Use `checkSinglePlatform("LinkedIn", "acme")` and build responses with `new Response(null, { status: N })`.
-- LinkedIn 999 → `"unknown"`. **Regression test.**
+`src/lib/username-check.test.ts`: mock the HTTP layer with `vi.mock("./http-client", () => ({ smartFetch: vi.fn() }))`, so tests skip the real 200–500 ms throttling. Use `checkSinglePlatform("LinkedIn", "acme")`. Get at the mock with `import { smartFetch } from "./http-client";` and `vi.mocked(smartFetch).mockResolvedValueOnce(...)`.
+**Important:** Node's `Response` constructor only accepts statuses 200–599, so `new Response(null, { status: 999 })` throws `RangeError` inside the test. For 999, use a stub: `({ status: 999, ok: false } as Response)`. For 200 and 404, `new Response(null, { status: 200 })` / `{ status: 404 }` is fine (LinkedIn uses HEAD, so the body is never read).
+- LinkedIn 999 (stub) → `"unknown"`. **Regression test.**
 - LinkedIn 404 → `"available"`.
 - LinkedIn 200 → `"taken"`.
-- No caching of "unknown": a first call returning 999 and a second returning 200 → second result `"taken"`, and `smartFetch` was called twice.
-- GitHub (default check) 404 → `"available"`; 200 → `"taken"`.
+- No caching of "unknown": first call returns the 999 stub, second returns `new Response(null, { status: 200 })` → second result `"taken"`, and `smartFetch` was called twice.
+- GitHub (default check) 404 → `"available"`; GitHub 200 → `"taken"`. Put these in **separate `it` blocks**, because the cache would otherwise serve the first result to the second call.
 
 `src/lib/input-parser.test.ts`:
 - `hasCheckableName("")` → false; `("---")` → false; `("acme")` → true; `("a1")` → true.
